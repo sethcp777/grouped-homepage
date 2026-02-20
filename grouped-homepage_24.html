@@ -192,7 +192,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 300px 1fr;
   gap: 40px;
-  align-items: center;
+  align-items: start;
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 100px 40px 0;
@@ -295,8 +295,6 @@ body {
   align-items: center;
   gap: 10px;
   padding: 12px 14px;
-  cursor: pointer;
-  user-select: none;
 }
 
 .hero-powers-feature-icon {
@@ -320,30 +318,10 @@ body {
   flex: 1;
 }
 
-.hero-powers-feature-chevron {
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gray-500);
-  transition: transform 0.3s, color 0.3s;
-  flex-shrink: 0;
-}
-.hero-powers-feature.open .hero-powers-feature-chevron {
-  transform: rotate(180deg);
-  color: var(--gold);
-}
-
 .hero-powers-feature-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1), padding 0.35s;
-  padding: 0 14px;
-}
-.hero-powers-feature.open .hero-powers-feature-body {
-  max-height: 120px;
-  padding: 0 14px 14px;
+  max-height: none;
+  overflow: visible;
+  padding: 0 14px 14px 14px;
 }
 
 .hero-powers-feature-desc {
@@ -2270,11 +2248,6 @@ body {
           <p class="hero-step-copy">
             Most artists earn fans and lose them in the same week. Grouped keeps curious listeners engaged between releases without you having to become a content creator. You make music. The relationship keeps building on its own.
           </p>
-          <div class="hero-step-features">
-            <div class="hero-step-feat">Smart Feed auto-populates from your existing activity</div>
-            <div class="hero-step-feat">Push notifications with 85%+ open rates</div>
-            <div class="hero-step-feat">Fan profiling that builds with every interaction</div>
-          </div>
         </div>
 
         <!-- Step 3 text -->
@@ -2284,11 +2257,6 @@ body {
           <p class="hero-step-copy">
             When you're ready to move, your audience is already warm. Tour dates, merch drops, new music: you're reaching people who never stopped paying attention. And the next time? They're still there. Every release compounds on the last.
           </p>
-          <div class="hero-step-features">
-            <div class="hero-step-feat">Email, push, your choice. No platform in between.</div>
-            <div class="hero-step-feat">Sell music, merch, and experiences directly</div>
-            <div class="hero-step-feat">Fans who engage early get the next first listen</div>
-          </div>
         </div>
       </div>
 
@@ -2374,13 +2342,11 @@ body {
         <!-- Powers 1: Moments -->
         <div class="hero-powers-panel" id="powers-0">
           <div class="hero-powers-label">Powered by Grouped</div>
-          <p class="hero-powers-intro">Most moments evaporate. Grouped captures every moment someone discovers you and turns it into a relationship.</p>
 
-          <div class="hero-powers-feature open">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="hero-powers-feature">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128279;</div>
               <div class="hero-powers-feature-name">Swaps</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Every link captures fan data instantly. They get early access, you get their info.</div>
@@ -2388,10 +2354,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#127911;</div>
               <div class="hero-powers-feature-name">First Listens &amp; Premieres</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Drop music to your people before it hits streaming. Know exactly who showed up.</div>
@@ -2399,10 +2364,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128229;</div>
               <div class="hero-powers-feature-name">Import Your Lists</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Bring your existing audience with you. Build on what you already have.</div>
@@ -2413,13 +2377,10 @@ body {
         <!-- Powers 2: Momentum -->
         <div class="hero-powers-panel" id="powers-1">
           <div class="hero-powers-label">Powered by Grouped</div>
-          <p class="hero-powers-intro">Between releases, most artists go silent. Fans forget. Grouped keeps working while you're making music.</p>
-
-          <div class="hero-powers-feature open">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="hero-powers-feature">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128225;</div>
               <div class="hero-powers-feature-name">Smart Feed</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Connects to Spotify, YouTube, and Instagram during setup. Auto-populates with your activity. Zero maintenance.</div>
@@ -2427,10 +2388,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128276;</div>
               <div class="hero-powers-feature-name">Push Notifications</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Reach fans through wallet-based passes with 85%+ open rates. Direct to their phone, no app download required.</div>
@@ -2438,10 +2398,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128100;</div>
               <div class="hero-powers-feature-name">Fan Profiling</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Every interaction teaches you more about who your fans are and what they care about.</div>
@@ -2452,13 +2411,10 @@ body {
         <!-- Powers 3: Career -->
         <div class="hero-powers-panel" id="powers-2">
           <div class="hero-powers-label">Powered by Grouped</div>
-          <p class="hero-powers-intro">Your fans are the fuel. Grouped is the growth engine. You're at the wheel.</p>
-
-          <div class="hero-powers-feature open">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+          <div class="hero-powers-feature">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128227;</div>
               <div class="hero-powers-feature-name">Direct Reach</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Email, push, your choice. No algorithm decides who sees it. No platform stands between you and your fans.</div>
@@ -2466,10 +2422,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#127873;</div>
               <div class="hero-powers-feature-name">Automatic Rewards</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Fans who engage early get the next first listen. Grouped handles the timing.</div>
@@ -2477,10 +2432,9 @@ body {
           </div>
 
           <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header" onclick="this.parentElement.classList.toggle('open')">
+            <div class="hero-powers-feature-header">
               <div class="hero-powers-feature-icon">&#128176;</div>
               <div class="hero-powers-feature-name">Built-in Sales</div>
-              <div class="hero-powers-feature-chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
             </div>
             <div class="hero-powers-feature-body">
               <div class="hero-powers-feature-desc">Sell music, merch, and experiences directly. The revenue stays yours.</div>
