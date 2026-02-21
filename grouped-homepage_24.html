@@ -75,13 +75,13 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* GroupedFont must never be italicized or bolded */
-.hero-headline, .hero-step-title, .hero-closing p,
+.hero-headline, .hero-step-title, .hero-closing-headline,
 .fj-headline, .fj-dest-headline, .fj-closer-headline,
 .feat-headline, .feat-card-name,
 .results-headline, .cases-headline, .case-card-name,
 .final-headline, .stat-card-number,
 .ps-title, .nav-logo-text, .fj-cloud-closing,
-.hero-headline em, .hero-step-title em, .hero-closing p em,
+.hero-headline em, .hero-step-title em, .hero-closing-headline em,
 .fj-headline em, .fj-dest-headline em, .fj-closer-headline em,
 .feat-headline em, .feat-card-name em,
 .results-headline em, .cases-headline em, .case-card-name em,
@@ -653,15 +653,71 @@ section[id] { scroll-margin-top: 80px; }
 .hero-closing.active {
   opacity: 1;
   transform: translateY(-50%) scale(1);
+  pointer-events: auto;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
 }
 
-.hero-closing p {
+.hero-closing-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-closing-headline {
   font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(26px, 3.5vw, 42px);
   color: var(--gold);
-  line-height: 1.25;
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.hero-closing-subline {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: rgba(255,255,255,0.55);
+  line-height: 1.72;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+
+.hero-closing-subline strong {
+  color: rgba(255,255,255,0.88);
+  font-weight: 600;
+}
+
+.hero-closing-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: left;
+}
+
+.hero-closing-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 32px 28px;
+  transition: border-color 0.3s;
+}
+
+.hero-closing-card:hover {
+  border-color: rgba(255,255,255,0.12);
+}
+
+.hero-closing-card-title {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.hero-closing-card-desc {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
 }
 
 /* ============================================
@@ -1407,81 +1463,6 @@ section[id] { scroll-margin-top: 80px; }
   transition-delay: 0.1s;
 }
 
-/* Closer / Growth Engine */
-.fj-closer-section {
-  padding: var(--section-padding) 40px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-.fj-closer-header {
-  text-align: center;
-  margin-bottom: 56px;
-}
-
-.fj-closer-headline {
-  font-family: var(--font-display);
-  font-size: clamp(26px, 3.5vw, 42px);
-  color: var(--gold);
-  line-height: 1.2;
-  margin-bottom: 18px;
-}
-
-.fj-closer-subline {
-  font-family: var(--font-body);
-  font-size: clamp(15px, 1.4vw, 17px);
-  color: rgba(255,255,255,0.55);
-  line-height: 1.72;
-  max-width: 640px;
-  margin: 0 auto;
-}
-
-.fj-closer-subline strong {
-  color: rgba(255,255,255,0.88);
-  font-weight: 600;
-}
-
-.fj-engine-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.fj-engine-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 6px;
-  padding: 32px 28px;
-  transition: border-color 0.3s;
-}
-
-.fj-engine-card:hover {
-  border-color: rgba(255,255,255,0.12);
-}
-
-.fj-engine-card-title {
-  font-family: var(--font-body);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--gold);
-  margin-bottom: 12px;
-  line-height: 1.3;
-}
-
-.fj-engine-card-desc {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.7;
-}
-
-@media (max-width: 768px) {
-  .fj-engine-cards {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-}
-
 /* ============================================
    FEATURES (horizontal scroll + stacking rings)
    ============================================ */
@@ -2084,6 +2065,11 @@ section[id] { scroll-margin-top: 80px; }
   .hero-step-copy { margin-left: auto; margin-right: auto; }
   .fader-experience .hero-step-features { align-items: center; }
   .fader-experience .hero-powers { display: none; }
+  .hero-closing { padding: 0 20px; }
+  .hero-closing-cards { grid-template-columns: 1fr; gap: 14px; }
+  .hero-closing-card { padding: 24px 20px; }
+  .hero-closing-headline { font-size: clamp(22px, 5vw, 32px); }
+  .hero-closing-subline { font-size: 15px; margin-bottom: 32px; }
   .feat-section { height: 300vh; }
   .feat-header { padding: 0 20px 30px; }
   .feat-body { padding: 0 20px; gap: 30px; flex-direction: column; align-items: flex-start; }
@@ -2543,35 +2529,29 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
 
-        <!-- Closing line (spans full width when all faders up) -->
+        <!-- Closing (spans full width when all faders up) -->
         <div class="hero-closing" id="hero-closing">
-          <p>The growth engine for lifelong music careers.</p>
+          <div class="hero-closing-inner">
+            <h2 class="hero-closing-headline">The growth engine for lifelong music careers.</h2>
+            <p class="hero-closing-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome Grouped.</strong></p>
+            <div class="hero-closing-cards">
+              <div class="hero-closing-card">
+                <div class="hero-closing-card-title">A fanbase that remembers.</div>
+                <p class="hero-closing-card-desc">The people who showed up for your first single are still there for your album. Nothing leaks. Nothing resets. Every release builds on the last.</p>
+              </div>
+              <div class="hero-closing-card">
+                <div class="hero-closing-card-title">Success that actually feels like success.</div>
+                <p class="hero-closing-card-desc">Not follower counts. Fans who buy tickets, share your music with friends, and drive hours to see you play. Revenue that grows. Progress you can feel.</p>
+              </div>
+              <div class="hero-closing-card">
+                <div class="hero-closing-card-title">A career you actually own.</div>
+                <p class="hero-closing-card-desc">No algorithm decides your reach. No platform takes a cut of your relationship. Your data, your audience, your future. You built this. It belongs to you.</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
-
-  <!-- Growth Engine Closer -->
-  <div class="fj-closer-section">
-    <div class="fj-closer-header">
-      <h2 class="fj-closer-headline">The growth engine for lifelong music careers.</h2>
-      <p class="fj-closer-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome Grouped.</strong></p>
-    </div>
-
-    <div class="fj-engine-cards">
-      <div class="fj-engine-card">
-        <div class="fj-engine-card-title">A fanbase that remembers.</div>
-        <p class="fj-engine-card-desc">The people who showed up for your first single are still there for your album. Nothing leaks. Nothing resets. Every release builds on the last.</p>
-      </div>
-      <div class="fj-engine-card">
-        <div class="fj-engine-card-title">Success that actually feels like success.</div>
-        <p class="fj-engine-card-desc">Not follower counts. Fans who buy tickets, share your music with friends, and drive hours to see you play. Revenue that grows. Progress you can feel.</p>
-      </div>
-      <div class="fj-engine-card">
-        <div class="fj-engine-card-title">A career you actually own.</div>
-        <p class="fj-engine-card-desc">No algorithm decides your reach. No platform takes a cut of your relationship. Your data, your audience, your future. You built this. It belongs to you.</p>
-      </div>
     </div>
   </div>
 
