@@ -74,6 +74,20 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* GroupedFont must never be italicized or bolded */
+.hero-headline, .hero-step-title, .hero-closing p,
+.fj-headline, .fj-dest-headline, .fj-closer-headline,
+.feat-headline, .feat-card-name,
+.results-headline, .cases-headline, .case-card-name,
+.final-headline, .stat-card-number, .fj-channel-name,
+.ps-title,
+.hero-headline em, .hero-step-title em, .hero-closing p em,
+.fj-headline em, .fj-dest-headline em, .fj-closer-headline em,
+.feat-headline em, .feat-card-name em,
+.results-headline em, .cases-headline em, .case-card-name em,
+.final-headline em, .stat-card-number em, .fj-channel-name em,
+.ps-title em { font-weight: normal; font-style: normal; }
+
 html {
   scroll-behavior: smooth;
   font-size: 16px;
@@ -101,7 +115,7 @@ body {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 600;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 24px;
@@ -159,7 +173,7 @@ body {
   background: var(--gold);
   color: var(--bg-deep);
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -174,17 +188,21 @@ body {
    HERO + FADER SECTION (merged)
    ============================================ */
 .hero {
-  height: 420vh;
+  height: auto;
+  min-height: 100vh;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   overflow: hidden;
+  width: 100%;
 }
 
 .hero-main {
@@ -195,7 +213,7 @@ body {
   align-items: start;
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 100px 40px 0;
+  padding: 0 40px;
   width: 100%;
   position: relative;
   z-index: 2;
@@ -206,20 +224,21 @@ body {
   z-index: 2;
 }
 
-/* When opener is visible, span all 3 columns */
-.hero-main.in-opener {
-  grid-template-columns: 1fr 1fr;
+.fader-experience .hero-content {
+  min-height: 380px;
 }
-.hero-main.in-opener .hero-phone-wrapper {
-  grid-column: 2;
-  grid-row: 1;
+
+/* Hero simplified — always in opener state (single column centered) */
+.hero-main.in-opener {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  text-align: center;
+  flex: 0;
+  align-self: center;
 }
 .hero-main.in-opener .hero-content {
   grid-column: 1;
   grid-row: 1;
-}
-.hero-main.in-opener .hero-powers {
-  display: none;
 }
 
 /* Right column: Powered by Grouped */
@@ -237,8 +256,9 @@ body {
   left: 0;
   right: 0;
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.45s, transform 0.45s;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
@@ -247,13 +267,15 @@ body {
   transform: translateY(0);
   pointer-events: auto;
   position: relative;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s,
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
 }
 
 .hero-powers-label {
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 2.5px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 16px;
@@ -278,15 +300,15 @@ body {
 
 .hero-powers-feature {
   margin-bottom: 8px;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 4px;
   background: rgba(255,255,255,0.02);
   overflow: hidden;
   transition: border-color 0.3s, background 0.3s;
 }
 .hero-powers-feature:last-child { margin-bottom: 0; }
 .hero-powers-feature:hover {
-  border-color: rgba(212,148,58,0.15);
+  border-color: rgba(255,255,255,0.12);
   background: rgba(255,255,255,0.03);
 }
 
@@ -303,7 +325,7 @@ body {
   justify-content: center;
   width: 30px;
   height: 30px;
-  border-radius: 8px;
+  border-radius: 4px;
   background: rgba(212,148,58,0.1);
   color: var(--gold);
   font-size: 15px;
@@ -363,7 +385,6 @@ body {
 .hero-rotating-word {
   display: inline-block;
   color: var(--gold);
-  font-style: italic;
   position: relative;
 }
 
@@ -380,7 +401,6 @@ body {
 .hero-rotating-result {
   display: inline-block;
   color: var(--gold);
-  font-style: italic;
 }
 
 .hero-rotating-result .word {
@@ -399,6 +419,8 @@ body {
   line-height: 1.65;
   margin-bottom: 36px;
   max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .hero-sub strong {
@@ -410,6 +432,7 @@ body {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* --- Step text overlay (replaces opener during scroll) --- */
@@ -417,9 +440,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.45s, transform 0.45s;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 
@@ -427,12 +452,14 @@ body {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
 .hero-step-label {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 16px;
@@ -486,24 +513,26 @@ body {
   top: 50%;
   left: 0;
   right: 0;
-  transform: translateY(-50%);
+  transform: translateY(-50%) scale(0.95);
   text-align: center;
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
   padding: 0 40px;
   z-index: 10;
-  grid-column: 1 / -1;
 }
 
 .hero-closing.active {
   opacity: 1;
+  transform: translateY(-50%) scale(1);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
 }
 
 .hero-closing p {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.5vw, 44px);
-  font-style: italic;
   color: var(--gold);
   line-height: 1.25;
 }
@@ -536,6 +565,7 @@ body {
 
 .speaker-ring.visible {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .speaker-ring.visible.pulse {
@@ -596,11 +626,6 @@ body {
   animation-delay: 1.1s;
 }
 
-/* Phase-based scale targets */
-.speaker-ring.visible {
-  transform: translate(-50%, -50%) scale(1);
-}
-
 @keyframes ringPulse {
   0%, 100% {
     transform: translate(-50%, -50%) scale(1);
@@ -611,218 +636,6 @@ body {
     opacity: 0.7;
   }
 }
-/* ============================================
-   FADER STRIP — Swiss minimalism / 70s console
-   ============================================ */
-/* Full-width fader background */
-.fader-bar {
-  flex-shrink: 0;
-  background: rgba(10, 12, 20, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,0.07);
-  position: relative;
-  z-index: 3;
-  transition: opacity 0.5s, transform 0.5s;
-}
-
-.fader-bar.hidden {
-  opacity: 0;
-  transform: translateY(100%);
-  pointer-events: none;
-}
-
-.fader-strip {
-  height: 170px;
-  display: flex;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 0;
-  padding: 0 40px;
-  position: relative;
-  max-width: var(--container-width);
-  margin: 0 auto;
-  width: 100%;
-}
-
-.fader-channels {
-  display: flex;
-  align-items: stretch;
-  gap: 0;
-}
-
-/* Fine horizontal scan lines — CRT / vintage console texture */
-.fader-bar::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(255,255,255,0.006) 2px,
-    rgba(255,255,255,0.006) 3px
-  );
-  pointer-events: none;
-}
-
-.fader-channel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 130px;
-  position: relative;
-  padding: 16px 0 14px;
-  cursor: pointer;
-  user-select: none;
-  border-right: 1px solid rgba(255,255,255,0.03);
-  transition: background 0.3s;
-}
-
-.fader-channel:last-child {
-  border-right: none;
-}
-
-.fader-channel:hover {
-  background: rgba(255,255,255,0.015);
-}
-
-.fader-channel:hover .fader-channel-name {
-  color: var(--gray-400);
-}
-
-.fader-channel.active:hover .fader-channel-name {
-  color: var(--gold-light);
-}
-
-.fader-channel-name {
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.18);
-  transition: color 0.5s;
-  margin-bottom: 10px;
-  white-space: nowrap;
-  font-family: var(--font-body);
-}
-
-.fader-channel.active .fader-channel-name {
-  color: var(--gold);
-}
-
-.fader-track {
-  flex: 1;
-  width: 3px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 1.5px;
-  position: relative;
-  overflow: visible;
-}
-
-/* Tick marks — Swiss grid, clean and precise */
-.fader-ticks {
-  position: absolute;
-  top: 2px;
-  bottom: 2px;
-  left: -16px;
-  right: -16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  pointer-events: none;
-}
-
-.fader-tick {
-  height: 1px;
-  background: rgba(255,255,255,0.035);
-  width: 100%;
-  position: relative;
-}
-
-/* Alternating tick lengths for dB meter feel */
-.fader-tick:nth-child(odd)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 35%;
-  height: 1px;
-  background: rgba(255,255,255,0.05);
-}
-
-/* The fill that rises */
-.fader-fill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 0%;
-  background: linear-gradient(180deg, var(--gold) 0%, rgba(212,148,58,0.12) 100%);
-  border-radius: 1.5px;
-  transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.fader-channel.active .fader-fill {
-  height: 100%;
-  box-shadow: 0 0 10px rgba(212,148,58,0.15);
-}
-
-/* The knob — flat, wide, vintage slider cap */
-.fader-knob {
-  position: absolute;
-  bottom: 0%;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  width: 28px;
-  height: 8px;
-  background: #2A2D3A;
-  border-radius: 1.5px;
-  border: 1px solid rgba(255,255,255,0.05);
-  transition: bottom 0.8s cubic-bezier(0.22, 1, 0.36, 1), background 0.5s, box-shadow 0.5s, border-color 0.5s;
-  z-index: 2;
-}
-
-/* Center line on knob */
-.fader-knob::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 14px;
-  height: 1px;
-  background: rgba(255,255,255,0.08);
-}
-
-.fader-channel.active .fader-knob {
-  bottom: 100%;
-  background: var(--gold);
-  border-color: var(--gold);
-  box-shadow: 0 0 6px rgba(212,148,58,0.3);
-}
-
-.fader-channel.active .fader-knob::before {
-  background: rgba(0,0,0,0.2);
-}
-
-/* Bottom label — understated */
-.fader-step-label {
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 400;
-  letter-spacing: 0.3px;
-  color: rgba(255,255,255,0.12);
-  transition: color 0.5s;
-  margin-top: auto;
-  padding-top: 10px;
-  white-space: nowrap;
-}
-
-.fader-channel.active .fader-step-label {
-  color: rgba(255,255,255,0.45);
-}
-
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -831,7 +644,7 @@ body {
   background: var(--gold);
   color: var(--bg-deep);
   border: none;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -840,8 +653,6 @@ body {
 
 .btn-primary:hover {
   background: var(--gold-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(212, 148, 58, 0.25);
 }
 
 .btn-secondary {
@@ -852,7 +663,7 @@ body {
   background: transparent;
   color: var(--gray-300);
   border: 1px solid var(--gray-700);
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -860,7 +671,7 @@ body {
 }
 
 .btn-secondary:hover {
-  border-color: var(--gold-dim);
+  border-color: rgba(255,255,255,0.2);
   color: var(--white);
 }
 
@@ -877,13 +688,11 @@ body {
   width: 260px;
   height: 540px;
   background: #111422;
-  border-radius: 42px;
-  border: 2px solid rgba(255,255,255,0.07);
+  border-radius: 28px;
+  border: 1px solid rgba(255,255,255,0.06);
   position: relative;
   overflow: hidden;
-  box-shadow:
-    0 30px 60px rgba(0,0,0,0.4),
-    0 0 0 1px rgba(255,255,255,0.03) inset;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -899,17 +708,6 @@ body {
   z-index: 5;
 }
 
-/* Subtle highlight along top edge */
-.phone-frame::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 10%;
-  right: 10%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-  z-index: 6;
-}
 
 .phone-screen {
   width: 100%;
@@ -924,14 +722,17 @@ body {
   display: flex;
   flex-direction: column;
   padding: 36px 16px 16px;
-  transition: opacity 0.5s, transform 0.5s;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(12px);
 }
 
 .phone-screen-slide.active {
   opacity: 1;
   transform: translateY(0);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
 }
 
 /* Phone Screen Content Styles */
@@ -959,7 +760,7 @@ body {
 
 .ps-card {
   background: var(--bg-card);
-  border-radius: 12px;
+  border-radius: 4px;
   padding: 16px;
   margin-bottom: 10px;
   border: 1px solid rgba(255,255,255,0.05);
@@ -986,7 +787,7 @@ body {
 .ps-stat {
   flex: 1;
   background: var(--bg-card);
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 12px 10px;
   text-align: center;
   border: 1px solid rgba(255,255,255,0.05);
@@ -1012,7 +813,7 @@ body {
   color: var(--bg-deep);
   text-align: center;
   padding: 12px;
-  border-radius: 10px;
+  border-radius: 4px;
   font-size: 13px;
   font-weight: 600;
   margin-top: 12px;
@@ -1059,7 +860,7 @@ body {
   background: var(--gold);
   color: var(--bg-deep);
   padding: 12px 14px;
-  border-radius: 12px;
+  border-radius: 4px;
   margin-bottom: 10px;
   display: flex;
   gap: 10px;
@@ -1088,571 +889,343 @@ body {
 /* (3-step section removed — merged into hero fader) */
 
 /* ============================================
-   PROBLEM + SILENT BLOCKER
+   FAN JOURNEY — DISCOVERY → GROUPED
    ============================================ */
-.problem-section {
-  padding: var(--section-padding) 0;
+.fan-journey {
   background: var(--bg-deep);
+  overflow: visible;
+  position: relative;
 }
 
-.problem-content {
+.fj-intro {
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
+  padding: var(--section-padding) 0 80px;
 }
 
-.problem-headline {
+.fj-headline {
   font-family: var(--font-display);
-  font-size: clamp(38px, 4.5vw, 58px);
+  font-size: clamp(34px, 4.5vw, 56px);
   line-height: 1.1;
   margin-bottom: 24px;
 }
 
-.problem-sub {
+.fj-headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.fj-sub {
   font-size: 18px;
   color: var(--gray-300);
   line-height: 1.65;
-  margin-bottom: 48px;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.problem-points {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 80px;
-}
-
-.problem-point {
-  background: var(--bg-card);
-  border-radius: 16px;
-  padding: 32px 24px;
-  border: 1px solid rgba(255,255,255,0.05);
-  text-align: left;
-  transition: all 0.3s;
-}
-
-.problem-point:hover {
-  border-color: rgba(212, 148, 58, 0.15);
-  transform: translateY(-2px);
-}
-
-.problem-point-title {
-  font-family: var(--font-display);
-  font-size: 22px;
-  margin-bottom: 12px;
-  color: var(--white);
-}
-
-.problem-point-text {
-  font-size: 15px;
-  color: var(--gray-500);
-  line-height: 1.6;
-}
-
-/* Silent Blocker */
-.silent-blocker {
-  max-width: 700px;
+  max-width: 620px;
   margin: 0 auto;
-  text-align: center;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  padding-top: 60px;
 }
 
-.blocker-headline {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 42px);
-  line-height: 1.2;
-  margin-bottom: 20px;
-}
-
-.blocker-headline em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.blocker-sub {
-  font-size: 18px;
-  color: var(--gray-300);
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-
-.blocker-micro {
-  font-family: var(--font-display);
-  font-size: 28px;
-  font-style: italic;
-  color: var(--gold);
-  margin-top: 20px;
-}
-
-/* ============================================
-   GAP VISUALIZATION
-   ============================================ */
-.gap-section {
-  padding: var(--section-padding) 0;
-  background: var(--bg-primary);
-  overflow: hidden;
-}
-
-.gap-visual {
+/* Discovery channels */
+.fj-channels {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 0;
-  max-width: 900px;
-  margin: 0 auto 60px;
-  position: relative;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 960px;
+  margin: 0 auto 48px;
+  padding: 0 40px;
 }
 
-.gap-col {
-  padding: 40px 28px;
-  text-align: center;
-  position: relative;
-}
-
-.gap-col-left {
+.fj-channel {
   background: var(--bg-card);
-  border-radius: 16px 0 0 16px;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-right: none;
-}
-
-.gap-col-middle {
-  background: transparent;
-  border-top: 1px dashed rgba(232, 90, 79, 0.3);
-  border-bottom: 1px dashed rgba(232, 90, 79, 0.3);
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 220px;
-}
-
-.gap-col-middle.filled {
-  background: rgba(212, 148, 58, 0.08);
-  border-color: rgba(212, 148, 58, 0.3);
-  border-style: solid;
-}
-
-.gap-col-right {
-  background: var(--bg-card);
-  border-radius: 0 16px 16px 0;
-  border: 1px solid rgba(255,255,255,0.05);
-  border-left: none;
-}
-
-.gap-stage-name {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.gap-col-left .gap-stage-name { color: var(--gray-500); }
-.gap-col-right .gap-stage-name { color: var(--gray-500); }
-.gap-col-middle .gap-stage-name { color: var(--red-soft); }
-.gap-col-middle.filled .gap-stage-name { color: var(--gold); }
-
-.gap-platforms {
-  font-size: 14px;
-  color: var(--gray-500);
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-
-.gap-status {
-  font-size: 13px;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 20px;
-  display: inline-block;
-}
-
-.gap-col-left .gap-status,
-.gap-col-right .gap-status {
-  background: rgba(79, 191, 126, 0.1);
-  color: var(--green-soft);
-}
-
-.gap-col-middle .gap-status {
-  background: rgba(232, 90, 79, 0.1);
-  color: var(--red-soft);
-}
-
-.gap-empty-state {
-  transition: opacity 0.5s;
-}
-
-.gap-filled-state {
-  opacity: 0;
-  transition: opacity 0.5s;
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-}
-
-.gap-col-middle.filled .gap-empty-state { opacity: 0; }
-.gap-col-middle.filled .gap-filled-state { opacity: 1; }
-.gap-col-middle.filled .gap-status {
-  background: rgba(212, 148, 58, 0.15);
-  color: var(--gold);
-}
-
-.gap-filled-logo {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--white);
-  margin-bottom: 8px;
-  letter-spacing: -0.5px;
-}
-
-.gap-filled-logo span { color: var(--gold); }
-
-.gap-filled-tagline {
-  font-size: 13px;
-  color: var(--gray-300);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.gap-lose-label {
-  font-size: 12px;
-  color: var(--red-soft);
-  margin-top: 10px;
-  font-weight: 500;
-}
-
-/* Solution reveal */
-.solution-reveal {
-  max-width: 750px;
-  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 6px;
+  padding: 28px 20px;
   text-align: center;
   opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.7s ease;
+  transform: translateY(24px);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.solution-reveal.visible {
+.fj-channel.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.solution-headline {
-  font-family: var(--font-display);
-  font-size: clamp(30px, 3.5vw, 44px);
-  line-height: 1.15;
-  margin-bottom: 16px;
-}
+.fj-channel:nth-child(1) { transition-delay: 0s; }
+.fj-channel:nth-child(2) { transition-delay: 0.1s; }
+.fj-channel:nth-child(3) { transition-delay: 0.15s; }
+.fj-channel:nth-child(4) { transition-delay: 0.2s; }
 
-.solution-headline em {
-  font-style: italic;
-  color: var(--gold);
-}
-
-.solution-sub {
-  font-size: 17px;
-  color: var(--gray-300);
-  line-height: 1.6;
-  margin-bottom: 48px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.solution-points {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 48px;
-}
-
-.solution-point {
-  text-align: center;
-  padding: 24px;
-}
-
-.solution-point-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: var(--gold-glow);
+.fj-channel-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  margin: 0 auto 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 16px;
   font-size: 22px;
 }
 
-.solution-point-title {
+.fj-channel-icon.spotify { background: rgba(30, 215, 96, 0.12); color: #1ed760; }
+.fj-channel-icon.tiktok { background: rgba(255, 0, 80, 0.1); color: #ff0050; }
+.fj-channel-icon.instagram { background: rgba(225, 48, 108, 0.1); color: #e1306c; }
+.fj-channel-icon.youtube { background: rgba(255, 0, 0, 0.1); color: #ff0000; }
+
+.fj-channel-name {
   font-family: var(--font-display);
-  font-size: 22px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: var(--white);
 }
 
-.solution-point-text {
-  font-size: 14px;
+.fj-channel-desc {
+  font-size: 13px;
   color: var(--gray-500);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-.solution-closer {
-  font-family: var(--font-display);
-  font-size: clamp(24px, 3vw, 36px);
-  font-style: italic;
-  color: var(--gold);
-  padding-top: 20px;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-/* ============================================
-   HOW IT WORKS
-   ============================================ */
-.how-section {
-  padding: 0;
-  background: var(--bg-deep);
-}
-
-/* Each phase is a full-bleed row */
-.phase-row {
+/* Flow lines converging */
+.fj-flow {
   position: relative;
+  height: 120px;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.fj-flow-lines {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  padding: 100px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
 }
-.phase-row:last-child { border-bottom: none; }
 
-/* Concentric rings behind the phone */
-.phase-rings {
+.fj-flow-line {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 640px;
-  height: 640px;
-  pointer-events: none;
+  bottom: 0;
+  width: 2px;
+  height: 0;
+  background: linear-gradient(to bottom, transparent, var(--gold));
+  transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.4;
 }
-.phase-rings-circle {
+
+.fj-flow.visible .fj-flow-line { height: 100%; }
+
+.fj-flow-line:nth-child(1) { left: 12.5%; transition-delay: 0.2s; }
+.fj-flow-line:nth-child(2) { left: 37.5%; transition-delay: 0.1s; }
+.fj-flow-line:nth-child(3) { left: 62.5%; transition-delay: 0.15s; }
+.fj-flow-line:nth-child(4) { left: 87.5%; transition-delay: 0.05s; }
+
+.fj-flow-dot {
   position: absolute;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.04);
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  background: var(--gold);
+  bottom: 0;
+  opacity: 0;
 }
-.phase-rings-circle:nth-child(1) { width: 260px; height: 260px; }
-.phase-rings-circle:nth-child(2) { width: 380px; height: 380px; }
-.phase-rings-circle:nth-child(3) { width: 500px; height: 500px; }
-.phase-rings-circle:nth-child(4) { width: 620px; height: 620px; }
 
-/* 3-column grid */
-.phase-grid {
+.fj-flow.visible .fj-flow-dot {
+  animation: flowDot 2.4s ease-in-out infinite;
+}
+
+.fj-flow-dot:nth-child(5) { left: calc(12.5% - 2px); animation-delay: 0s; }
+.fj-flow-dot:nth-child(6) { left: calc(37.5% - 2px); animation-delay: 0.6s; }
+.fj-flow-dot:nth-child(7) { left: calc(62.5% - 2px); animation-delay: 0.3s; }
+.fj-flow-dot:nth-child(8) { left: calc(87.5% - 2px); animation-delay: 0.9s; }
+
+@keyframes flowDot {
+  0%   { opacity: 0; transform: translateY(-100px); }
+  30%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(10px); }
+}
+
+/* Grouped destination */
+.fj-destination {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 60px 40px 0;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fj-destination.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fj-dest-logo {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.fj-dest-logo span { color: var(--gold); }
+
+.fj-dest-line {
+  width: 40px;
+  height: 2px;
+  background: var(--gold);
+  margin: 16px auto 24px;
+  opacity: 0.5;
+}
+
+.fj-dest-headline {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.fj-dest-headline em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.fj-dest-sub {
+  font-size: 17px;
+  color: var(--gray-300);
+  line-height: 1.65;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Fader experience (scroll-driven, embedded in fan journey) */
+.fader-wrapper {
+  height: 420vh;
+  position: relative;
+  margin-top: 80px;
+}
+
+.fader-wrapper-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.fader-experience {
+  flex: 1;
   display: grid;
-  grid-template-columns: 1fr 320px 1fr;
+  grid-template-columns: 1fr 300px 1fr;
   gap: 40px;
   align-items: center;
   max-width: var(--container-width);
   margin: 0 auto;
   padding: 0 40px;
+  width: 100%;
   position: relative;
   z-index: 2;
 }
 
-/* Left: Phase info */
-.phase-left {
-  max-width: 360px;
+/* Closing phase — fade out all 3 columns */
+.fader-experience .hero-content,
+.fader-experience .hero-phone-wrapper,
+.fader-experience .hero-powers {
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.phase-label {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2px;
+.fader-experience.in-closing .hero-content {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
-.phase-number {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--gray-500);
-  margin-bottom: 20px;
+.fader-experience.in-closing .hero-phone-wrapper {
+  opacity: 0;
+  transform: scale(0.97);
+  transition-delay: 0.05s;
 }
 
-.phase-headline {
+.fader-experience.in-closing .hero-powers {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition-delay: 0.1s;
+}
+
+/* Closer / Growth Engine */
+.fj-closer-section {
+  padding: var(--section-padding) 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.fj-closer-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.fj-closer-headline {
   font-family: var(--font-display);
-  font-size: clamp(32px, 3.5vw, 48px);
-  line-height: 1.1;
-  color: var(--white);
-  margin-bottom: 16px;
+  font-size: clamp(26px, 3.5vw, 42px);
+  color: var(--gold);
+  line-height: 1.2;
+  margin-bottom: 18px;
 }
 
-.phase-desc {
-  font-size: 15px;
-  color: var(--gray-300);
-  line-height: 1.7;
-  margin-bottom: 28px;
-}
-
-.phase-ctas {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.phase-cta-primary {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 24px;
-  border: 1px solid var(--gold);
-  border-radius: 8px;
+.fj-closer-subline {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: rgba(255,255,255,0.55);
+  line-height: 1.72;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.fj-closer-subline strong {
+  color: rgba(255,255,255,0.88);
   font-weight: 600;
-  color: var(--bg-primary);
-  background: var(--gold);
-  cursor: pointer;
-  transition: opacity 0.2s;
-  text-decoration: none;
-}
-.phase-cta-primary:hover { opacity: 0.85; }
-
-.phase-cta-secondary {
-  display: inline-flex;
-  align-items: center;
-  padding: 12px 24px;
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gray-300);
-  background: rgba(255,255,255,0.04);
-  cursor: pointer;
-  transition: border-color 0.2s;
-  text-decoration: none;
-}
-.phase-cta-secondary:hover { border-color: rgba(255,255,255,0.2); }
-
-/* Center: Phone */
-.phase-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 3;
 }
 
-.how-phone {
-  width: 260px;
-  height: 530px;
-  background: #1A1A2E;
-  border-radius: 32px;
-  border: 3px solid #2A2D3E;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  position: relative;
+.fj-engine-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
-.how-phone-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 110px;
-  height: 26px;
-  background: #1A1A2E;
-  border-radius: 0 0 16px 16px;
-  z-index: 5;
-}
-
-.how-phone-content {
-  padding: 38px 16px 16px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Right: Powered by Grouped */
-.phase-right {
-  max-width: 380px;
-  justify-self: end;
-}
-
-.phase-powers-label {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.phase-powers-label::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.phase-powers-intro {
-  font-size: 15px;
-  color: var(--gray-300);
-  line-height: 1.65;
-  margin-bottom: 28px;
-}
-
-.phase-feature {
-  margin-bottom: 22px;
-}
-.phase-feature:last-child { margin-bottom: 0; }
-
-.phase-feature-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
+.fj-engine-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
   border-radius: 6px;
-  background: rgba(212,148,58,0.1);
-  color: var(--gold);
-  font-size: 14px;
-  margin-bottom: 6px;
+  padding: 32px 28px;
+  transition: border-color 0.3s;
 }
 
-.phase-feature-name {
+.fj-engine-card:hover {
+  border-color: rgba(255,255,255,0.12);
+}
+
+.fj-engine-card-title {
   font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 4px;
+  font-weight: 700;
+  color: var(--gold);
+  margin-bottom: 12px;
+  line-height: 1.3;
 }
 
-.phase-feature-desc {
+.fj-engine-card-desc {
+  font-family: var(--font-body);
   font-size: 14px;
-  color: var(--gray-400);
-  line-height: 1.55;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
 }
 
-/* ============================================
-   WHAT MAKES US DIFFERENT
-   ============================================ */
+@media (max-width: 768px) {
+  .fj-engine-cards {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
 /* ============================================
    FEATURES (horizontal scroll + stacking rings)
    ============================================ */
@@ -1778,7 +1351,7 @@ body {
   height: 260px;
   background: var(--bg-card);
   border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 16px;
+  border-radius: 6px;
   padding: 28px;
   display: flex;
   flex-direction: column;
@@ -1788,7 +1361,7 @@ body {
 
 .feat-card.active {
   opacity: 1;
-  border-color: rgba(212,148,58,0.2);
+  border-color: rgba(255,255,255,0.12);
 }
 
 .feat-card.past {
@@ -1800,7 +1373,7 @@ body {
   font-size: 11px;
   font-weight: 600;
   color: var(--gold);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 16px;
   opacity: 0.6;
 }
@@ -1860,24 +1433,22 @@ body {
 
 .stat-card {
   background: var(--bg-card);
-  border-radius: 16px;
+  border-radius: 6px;
   padding: 32px 24px;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.03);
   transition: all 0.35s;
   cursor: default;
 }
 
 .stat-card:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(212, 148, 58, 0.2);
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.10);
 }
 
 .stat-card-number {
   font-family: var(--font-display);
-  font-size: 40px;
+  font-size: 36px;
   color: var(--gold);
   margin-bottom: 8px;
 }
@@ -1887,6 +1458,12 @@ body {
   color: var(--gray-300);
   line-height: 1.4;
 }
+
+/* Inline style replacements */
+.ps-card-sub-spaced { margin-top: 6px; }
+.ps-card-highlight { border-left: 3px solid var(--gold); margin-top: auto; }
+.ps-card-success { color: var(--green-soft); font-weight: 600; }
+.btn-primary-lg { font-size: 18px; padding: 16px 40px; }
 
 /* ============================================
    CASE STUDIES
@@ -1923,15 +1500,14 @@ body {
 
 .case-card {
   background: var(--bg-card);
-  border-radius: 16px;
+  border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.03);
   transition: all 0.3s;
 }
 
 .case-card:hover {
-  border-color: rgba(212, 148, 58, 0.15);
-  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.10);
 }
 
 .case-card-image {
@@ -1955,13 +1531,13 @@ body {
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold), #8B5E2B);
+  background: rgba(212, 148, 58, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 28px;
   font-weight: 700;
-  color: var(--bg-deep);
+  color: var(--gold);
   z-index: 2;
 }
 
@@ -2030,7 +1606,7 @@ body {
 }
 
 .final-headline em {
-  font-style: italic;
+  font-style: normal;
   color: var(--gold);
 }
 
@@ -2129,7 +1705,7 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
-  .hero { height: 380vh; }
+  .hero { height: auto; min-height: 100vh; }
   .hero-main, .hero-main.in-opener {
     grid-template-columns: 1fr;
     text-align: center;
@@ -2138,21 +1714,29 @@ body {
   }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-ctas { justify-content: center; }
-  .hero-phone-wrapper { order: -1; padding-top: 0; }
+  /* Fan journey mobile */
+  .fj-channels { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .fj-flow-line:nth-child(1) { left: 25%; }
+  .fj-flow-line:nth-child(2) { left: 75%; }
+  .fj-flow-line:nth-child(3) { left: 25%; }
+  .fj-flow-line:nth-child(4) { left: 75%; }
+  .fj-flow-dot:nth-child(5) { left: calc(25% - 2px); }
+  .fj-flow-dot:nth-child(6) { left: calc(75% - 2px); }
+  .fj-flow-dot:nth-child(7) { left: calc(25% - 2px); }
+  .fj-flow-dot:nth-child(8) { left: calc(75% - 2px); }
+  /* Fader experience mobile */
+  .fader-wrapper { height: 380vh; }
+  .fader-experience {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding-top: 80px;
+    gap: 30px;
+  }
+  .fader-experience .hero-phone-wrapper { order: -1; padding-top: 0; }
   .phone-frame { width: 220px; height: 460px; }
   .hero-step-copy { margin-left: auto; margin-right: auto; }
-  .hero-powers { display: none; }
-  .fader-strip { height: 140px; padding: 0 20px; }
-  .fader-channel { width: 100px; }
-  .problem-points { grid-template-columns: 1fr; }
-  .gap-visual { grid-template-columns: 1fr; }
-  .gap-col-left { border-radius: 16px 16px 0 0; border-right: 1px solid rgba(255,255,255,0.05); }
-  .gap-col-right { border-radius: 0 0 16px 16px; border-left: 1px solid rgba(255,255,255,0.05); }
-  .gap-col-middle { min-height: 180px; }
-  .solution-points { grid-template-columns: 1fr; }
-  .how-pane { grid-template-columns: 1fr; }
-  .how-pane.reverse { direction: ltr; }
-  .replaces-grid { grid-template-columns: 1fr; }
+  .fader-experience .hero-step-features { align-items: center; }
+  .fader-experience .hero-powers { display: none; }
   .feat-section { height: 300vh; }
   .feat-header { padding: 0 20px 30px; }
   .feat-body { padding: 0 20px; gap: 30px; flex-direction: column; align-items: flex-start; }
@@ -2189,26 +1773,20 @@ body {
 <!-- ============================================
      HERO + FADER (merged)
      ============================================ -->
+<!-- ============================================
+     HERO (static — headline + CTA)
+     ============================================ -->
 <section class="hero" id="hero">
   <div class="hero-sticky">
 
-    <!-- Speaker rings (background) -->
-    <div class="speaker-rings" id="speaker-rings">
-      <div class="speaker-ring" data-phase="0"></div>
-      <div class="speaker-ring" data-phase="0"></div>
-      <div class="speaker-ring" data-phase="0"></div>
-      <div class="speaker-ring" data-phase="1"></div>
-      <div class="speaker-ring" data-phase="1"></div>
-      <div class="speaker-ring" data-phase="1"></div>
-      <div class="speaker-ring" data-phase="2"></div>
-      <div class="speaker-ring" data-phase="2"></div>
-      <div class="speaker-ring" data-phase="2"></div>
+    <div class="speaker-rings" id="speaker-rings-hero">
+      <div class="speaker-ring visible pulse" data-phase="0"></div>
+      <div class="speaker-ring visible pulse" data-phase="0"></div>
+      <div class="speaker-ring visible pulse" data-phase="0"></div>
     </div>
 
     <div class="hero-main in-opener" id="hero-main">
       <div class="hero-content">
-
-        <!-- Opening state (visible on load, fades on scroll) -->
         <div class="hero-opener" id="hero-opener">
           <div class="hero-headline">
             <span class="hero-static">Turn every</span>
@@ -2223,399 +1801,328 @@ body {
           </p>
           <div class="hero-ctas">
             <a href="#start" class="btn-primary">Start your next release</a>
-            <a href="#how-it-works" class="btn-secondary">See how it works</a>
-          </div>
-        </div>
-
-        <!-- Step 1 text -->
-        <div class="hero-step-text" id="step-text-0">
-          <div class="hero-step-label">01 / Moments</div>
-          <h2 class="hero-step-title">Own a Direct Line to Your Fans</h2>
-          <p class="hero-step-copy">
-            Your music is already creating fans. Grouped captures that first spark of interest and turns it into a connection you control. One release, one link, a fan base that starts building itself.
-          </p>
-          <div class="hero-step-features">
-            <div class="hero-step-feat">Every link captures fan data instantly</div>
-            <div class="hero-step-feat">Fans get early access, you get their info</div>
-            <div class="hero-step-feat">Import existing lists so you build on what you have</div>
-          </div>
-        </div>
-
-        <!-- Step 2 text -->
-        <div class="hero-step-text" id="step-text-1">
-          <div class="hero-step-label">02 / Momentum</div>
-          <h2 class="hero-step-title">Keep Every Fan You Earn</h2>
-          <p class="hero-step-copy">
-            Most artists earn fans and lose them in the same week. Grouped keeps curious listeners engaged between releases without you having to become a content creator. You make music. The relationship keeps building on its own.
-          </p>
-        </div>
-
-        <!-- Step 3 text -->
-        <div class="hero-step-text" id="step-text-2">
-          <div class="hero-step-label">03 / Career</div>
-          <h2 class="hero-step-title">Activate and Reactivate on Your Terms</h2>
-          <p class="hero-step-copy">
-            When you're ready to move, your audience is already warm. Tour dates, merch drops, new music: you're reaching people who never stopped paying attention. And the next time? They're still there. Every release compounds on the last.
-          </p>
-        </div>
-      </div>
-
-      <!-- Phone (center column) -->
-      <div class="hero-phone-wrapper">
-        <div class="phone-frame">
-          <div class="phone-notch"></div>
-          <div class="phone-screen" id="hero-phone-screen">
-
-            <!-- Screen 1: Swap Builder -->
-            <div class="phone-screen-slide active" data-screen="0">
-              <div class="ps-header">Smart Swap</div>
-              <div class="ps-title">Early Access: "Midnight"</div>
-              <div class="ps-subtitle">Single dropping March 1</div>
-              <div class="ps-card">
-                <div class="ps-card-title">Fans trade contact info for:</div>
-                <div class="ps-card-sub" style="margin-top:6px;">&#127925; Early access to your music</div>
-                <div class="ps-card-sub">&#127381; Exclusive unreleased content</div>
-                <div class="ps-card-sub">&#127775; Insider access before anyone else</div>
-              </div>
-              <div class="ps-stat-row">
-                <div class="ps-stat">
-                  <div class="ps-stat-num">847</div>
-                  <div class="ps-stat-label">New fans</div>
-                </div>
-                <div class="ps-stat">
-                  <div class="ps-stat-num">92%</div>
-                  <div class="ps-stat-label">Opt-in rate</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Screen 2: Keep -->
-            <div class="phone-screen-slide" data-screen="1">
-              <div class="ps-header">Your Group</div>
-              <div class="ps-title">Smart Feed</div>
-              <div class="ps-subtitle">Syncs automatically. Zero effort.</div>
-              <div class="ps-card">
-                <div class="ps-card-title">New track: "Midnight"</div>
-                <div class="ps-card-sub">From Spotify &middot; 2h ago</div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-card-title">Studio session BTS</div>
-                <div class="ps-card-sub">From Instagram &middot; 5h ago</div>
-              </div>
-              <div class="ps-card">
-                <div class="ps-card-title">Tour dates announced</div>
-                <div class="ps-card-sub">From your website &middot; 1d ago</div>
-              </div>
-            </div>
-
-            <!-- Screen 3: Activate -->
-            <div class="phone-screen-slide" data-screen="2">
-              <div class="ps-header">Activate</div>
-              <div class="ps-title">Direct Reach</div>
-              <div class="ps-subtitle">Your fans, your terms, every time</div>
-              <div class="ps-stat-row">
-                <div class="ps-stat">
-                  <div class="ps-stat-num">4.2K</div>
-                  <div class="ps-stat-label">Reachable fans</div>
-                </div>
-                <div class="ps-stat">
-                  <div class="ps-stat-num">89%</div>
-                  <div class="ps-stat-label">Open rate</div>
-                </div>
-              </div>
-              <div class="ps-notification">
-                <div class="ps-notif-icon">&#127925;</div>
-                <div class="ps-notif-text">"Midnight" is LIVE. You heard it first.<span class="ps-notif-time">Push &middot; 89% opened</span></div>
-              </div>
-              <div class="ps-card" style="border-left: 3px solid var(--gold); margin-top: auto;">
-                <div class="ps-card-sub" style="color: var(--green-soft); font-weight:600;">Every fan, every time. No gatekeepers.</div>
-              </div>
-            </div>
-
+            <a href="#fan-journey" class="btn-secondary">See how it works</a>
           </div>
         </div>
       </div>
-
-      <!-- Powers (right column) -->
-      <div class="hero-powers" id="hero-powers">
-
-        <!-- Powers 1: Moments -->
-        <div class="hero-powers-panel" id="powers-0">
-          <div class="hero-powers-label">Powered by Grouped</div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128279;</div>
-              <div class="hero-powers-feature-name">Swaps</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Every link captures fan data instantly. They get early access, you get their info.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#127911;</div>
-              <div class="hero-powers-feature-name">First Listens &amp; Premieres</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Drop music to your people before it hits streaming. Know exactly who showed up.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128229;</div>
-              <div class="hero-powers-feature-name">Import Your Lists</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Bring your existing audience with you. Build on what you already have.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Powers 2: Momentum -->
-        <div class="hero-powers-panel" id="powers-1">
-          <div class="hero-powers-label">Powered by Grouped</div>
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128225;</div>
-              <div class="hero-powers-feature-name">Smart Feed</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Connects to Spotify, YouTube, and Instagram during setup. Auto-populates with your activity. Zero maintenance.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128276;</div>
-              <div class="hero-powers-feature-name">Push Notifications</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Reach fans through wallet-based passes with 85%+ open rates. Direct to their phone, no app download required.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128100;</div>
-              <div class="hero-powers-feature-name">Fan Profiling</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Every interaction teaches you more about who your fans are and what they care about.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Powers 3: Career -->
-        <div class="hero-powers-panel" id="powers-2">
-          <div class="hero-powers-label">Powered by Grouped</div>
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128227;</div>
-              <div class="hero-powers-feature-name">Direct Reach</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Email, push, your choice. No algorithm decides who sees it. No platform stands between you and your fans.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#127873;</div>
-              <div class="hero-powers-feature-name">Automatic Rewards</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Fans who engage early get the next first listen. Grouped handles the timing.</div>
-            </div>
-          </div>
-
-          <div class="hero-powers-feature">
-            <div class="hero-powers-feature-header">
-              <div class="hero-powers-feature-icon">&#128176;</div>
-              <div class="hero-powers-feature-name">Built-in Sales</div>
-            </div>
-            <div class="hero-powers-feature-body">
-              <div class="hero-powers-feature-desc">Sell music, merch, and experiences directly. The revenue stays yours.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Closing line (appears when all 3 faders are up) -->
-      <div class="hero-closing" id="hero-closing">
-        <p>Turn moments into momentum into compounding growth.</p>
-      </div>
-    </div>
-
-    <!-- FADER STRIP -->
-    <div class="fader-bar">
-    <div class="fader-strip">
-
-      <div class="fader-channels">
-        <div class="fader-channel" id="fader-0">
-          <div class="fader-channel-name">Capture</div>
-          <div class="fader-track">
-            <div class="fader-ticks">
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-            </div>
-            <div class="fader-fill"></div>
-            <div class="fader-knob"></div>
-          </div>
-          <div class="fader-step-label">Swaps</div>
-        </div>
-
-        <div class="fader-channel" id="fader-1">
-          <div class="fader-channel-name">Keep</div>
-          <div class="fader-track">
-            <div class="fader-ticks">
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-            </div>
-            <div class="fader-fill"></div>
-            <div class="fader-knob"></div>
-          </div>
-          <div class="fader-step-label">Smart Feed</div>
-        </div>
-
-        <div class="fader-channel" id="fader-2">
-          <div class="fader-channel-name">Activate</div>
-          <div class="fader-track">
-            <div class="fader-ticks">
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-              <div class="fader-tick"></div>
-            </div>
-            <div class="fader-fill"></div>
-            <div class="fader-knob"></div>
-          </div>
-          <div class="fader-step-label">Direct Reach</div>
-        </div>
-      </div>
-
-    </div>
     </div>
 
   </div>
 </section>
 
 <!-- ============================================
-     PROBLEM + SILENT BLOCKER
+     FAN JOURNEY — DISCOVERY → GROUPED → FADER EXPERIENCE
      ============================================ -->
-<section class="problem-section" id="problem">
-  <div class="container">
-    <div class="problem-content">
-      <div class="section-label">The Problem</div>
-      <h2 class="problem-headline fade-up">You're overwhelmed.</h2>
-      <p class="problem-sub fade-up">
-        You're trying to communicate with your existing fans while simultaneously trying to get discovered and build new ones. You're posting on platforms you don't control, paying for reach that disappears, and starting over with every release.
-      </p>
-    </div>
+<section class="fan-journey" id="fan-journey">
 
-    <div class="problem-points">
-      <div class="problem-point fade-up">
-        <div class="problem-point-title">Every release feels like a reset.</div>
-        <p class="problem-point-text">You drop music, post about it, and hope the algorithm picks it up. If it doesn't, you start over. No compounding. No ownership. No momentum.</p>
-      </div>
-      <div class="problem-point fade-up fade-up-delay-1">
-        <div class="problem-point-title">Your audience is rented.</div>
-        <p class="problem-point-text">Instagram, TikTok, and Spotify can change their algorithms overnight. Organic reach has collapsed below 5%. You built a following on land you don't own.</p>
-      </div>
-      <div class="problem-point fade-up fade-up-delay-2">
-        <div class="problem-point-title">The tools weren't built for you.</div>
-        <p class="problem-point-text">CRMs cost $30K+ per send at scale. Community platforms demand daily content. Superfan tools alienate 99% of your fans. Nothing connects the whole picture.</p>
-      </div>
-    </div>
+  <!-- Intro -->
+  <div class="fj-intro">
+    <div class="section-label">The Fan Journey</div>
+    <h2 class="fj-headline fade-up">Fans are already <em>finding you.</em></h2>
+    <p class="fj-sub fade-up">Every stream, every scroll, every share — people are discovering your music across every platform, every day. The question isn't whether they'll find you. It's whether you'll keep them.</p>
+  </div>
 
-    <div class="silent-blocker fade-up">
-      <h3 class="blocker-headline">All you need is <em>1,000 true fans</em> to build a career.</h3>
-      <p class="blocker-sub">But fans don't just fall into your lap. You have to build them. And the right tool to find and reach them has never existed.</p>
-      <div class="blocker-micro">Until now.</div>
+  <!-- Discovery channels -->
+  <div class="fj-channels" id="fj-channels">
+    <div class="fj-channel">
+      <div class="fj-channel-icon spotify">&#9835;</div>
+      <div class="fj-channel-name">Spotify</div>
+      <div class="fj-channel-desc">Playlists, Discover Weekly, algorithmic radio</div>
+    </div>
+    <div class="fj-channel">
+      <div class="fj-channel-icon tiktok">&#9836;</div>
+      <div class="fj-channel-name">TikTok</div>
+      <div class="fj-channel-desc">Viral sounds, creator posts, For You page</div>
+    </div>
+    <div class="fj-channel">
+      <div class="fj-channel-icon instagram">&#10070;</div>
+      <div class="fj-channel-name">Instagram</div>
+      <div class="fj-channel-desc">Reels, stories, explore page, DMs</div>
+    </div>
+    <div class="fj-channel">
+      <div class="fj-channel-icon youtube">&#9654;</div>
+      <div class="fj-channel-name">YouTube</div>
+      <div class="fj-channel-desc">Music videos, shorts, recommended</div>
     </div>
   </div>
-</section>
 
-<!-- ============================================
-     GAP + SOLUTION
-     ============================================ -->
-<section class="gap-section" id="solution">
-  <div class="container">
-    <div class="section-label" style="text-align:center;">The Missing Layer</div>
-
-    <div class="gap-visual" id="gap-visual">
-      <div class="gap-col gap-col-left fade-up">
-        <div class="gap-stage-name">Discovery</div>
-        <div class="gap-platforms">Spotify, TikTok,<br>Instagram, YouTube</div>
-        <div class="gap-status">Platforms for this &#10003;</div>
-      </div>
-
-      <div class="gap-col gap-col-middle" id="gap-middle">
-        <div class="gap-empty-state">
-          <div class="gap-stage-name">Engaged Followers</div>
-          <div class="gap-platforms">Fans who like your music<br>but aren't ready to pay</div>
-          <div class="gap-status">Nothing for this &#10005;</div>
-          <div class="gap-lose-label">This is where you lose the most fans.</div>
-        </div>
-        <div class="gap-filled-state">
-          <div class="gap-stage-name" style="color: var(--gold);">Grouped</div>
-          <div class="gap-filled-logo">grouped<span>.</span></div>
-          <div class="gap-filled-tagline">The missing layer between<br>streaming and superfans.</div>
-          <div class="gap-status" style="margin-top: 12px;">Grouped fills this &#10003;</div>
-        </div>
-      </div>
-
-      <div class="gap-col gap-col-right fade-up fade-up-delay-2">
-        <div class="gap-stage-name">Devoted Fans</div>
-        <div class="gap-platforms">Patreon, merch,<br>fan clubs, shows</div>
-        <div class="gap-status">Tools for this &#10003;</div>
-      </div>
-    </div>
-
-    <div class="solution-reveal" id="solution-reveal">
-      <h2 class="solution-headline">Grouped is the missing layer between <em>streaming and superfans.</em></h2>
-      <p class="solution-sub">Between discovery and true fandom, there's a space where most artists lose their people. Grouped lives in that space.</p>
-
-      <div class="solution-points">
-        <div class="solution-point">
-          <div class="solution-point-icon">&#9965;</div>
-          <div class="solution-point-title">Capture</div>
-          <p class="solution-point-text">Identify fans the moment they discover you.</p>
-        </div>
-        <div class="solution-point">
-          <div class="solution-point-icon">&#9829;</div>
-          <div class="solution-point-title">Connect</div>
-          <p class="solution-point-text">Give them a reason to stay between releases.</p>
-        </div>
-        <div class="solution-point">
-          <div class="solution-point-icon">&#8635;</div>
-          <div class="solution-point-title">Compound</div>
-          <p class="solution-point-text">Every release builds on the last. Your fanbase grows instead of resetting.</p>
-        </div>
-      </div>
-
-      <p class="solution-closer">Capture the moment. Keep the momentum. Build the career.</p>
+  <!-- Flow lines converging -->
+  <div class="fj-flow" id="fj-flow">
+    <div class="fj-flow-lines">
+      <div class="fj-flow-line"></div>
+      <div class="fj-flow-line"></div>
+      <div class="fj-flow-line"></div>
+      <div class="fj-flow-line"></div>
+      <div class="fj-flow-dot"></div>
+      <div class="fj-flow-dot"></div>
+      <div class="fj-flow-dot"></div>
+      <div class="fj-flow-dot"></div>
     </div>
   </div>
+
+  <!-- Grouped destination -->
+  <div class="fj-destination" id="fj-destination">
+    <div class="fj-dest-logo">grouped<span>.</span></div>
+    <div class="fj-dest-line"></div>
+    <h2 class="fj-dest-headline">One place to <em>own it all.</em></h2>
+    <p class="fj-dest-sub">Every fan that discovers you across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
+  </div>
+
+  <!-- PLACEHOLDER: Circular rotation visualization (logo-based — coming soon) -->
+
+  <!-- ============================================
+       FADER EXPERIENCE (scroll-driven, embedded)
+       ============================================ -->
+  <div class="fader-wrapper" id="fader-wrapper">
+    <div class="fader-wrapper-sticky">
+
+      <div class="speaker-rings" id="speaker-rings-fader">
+        <div class="speaker-ring" data-phase="0"></div>
+        <div class="speaker-ring" data-phase="0"></div>
+        <div class="speaker-ring" data-phase="0"></div>
+        <div class="speaker-ring" data-phase="1"></div>
+        <div class="speaker-ring" data-phase="1"></div>
+        <div class="speaker-ring" data-phase="1"></div>
+        <div class="speaker-ring" data-phase="2"></div>
+        <div class="speaker-ring" data-phase="2"></div>
+        <div class="speaker-ring" data-phase="2"></div>
+      </div>
+
+      <div class="fader-experience" id="fader-experience">
+        <div class="hero-content">
+
+          <div class="hero-step-text active" id="step-text-0">
+            <div class="hero-step-label">01 / Capture</div>
+            <h2 class="hero-step-title">Own a Direct Line to Your Fans</h2>
+            <p class="hero-step-copy">
+              Your music is already creating fans. Grouped captures that first spark of interest and turns it into a connection you control. One release, one link, a fan base that starts building itself.
+            </p>
+            <div class="hero-step-features">
+              <div class="hero-step-feat">Every link captures fan data instantly</div>
+              <div class="hero-step-feat">Fans get early access, you get their info</div>
+              <div class="hero-step-feat">Import existing lists so you build on what you have</div>
+            </div>
+          </div>
+
+          <div class="hero-step-text" id="step-text-1">
+            <div class="hero-step-label">02 / Keep</div>
+            <h2 class="hero-step-title">Keep Every Fan You Earn</h2>
+            <p class="hero-step-copy">
+              Most artists earn fans and lose them in the same week. Grouped keeps curious listeners engaged between releases without you having to become a content creator. You make music. The relationship keeps building on its own.
+            </p>
+          </div>
+
+          <div class="hero-step-text" id="step-text-2">
+            <div class="hero-step-label">03 / Compound</div>
+            <h2 class="hero-step-title">Activate and Reactivate on Your Terms</h2>
+            <p class="hero-step-copy">
+              When you're ready to move, your audience is already warm. Tour dates, merch drops, new music: you're reaching people who never stopped paying attention. And the next time? They're still there. Every release compounds on the last.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Phone (center column) -->
+        <div class="hero-phone-wrapper">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen" id="hero-phone-screen">
+
+              <div class="phone-screen-slide active" data-screen="0">
+                <div class="ps-header">Smart Swap</div>
+                <div class="ps-title">Early Access: "Midnight"</div>
+                <div class="ps-subtitle">Single dropping March 1</div>
+                <div class="ps-card">
+                  <div class="ps-card-title">Fans trade contact info for:</div>
+                  <div class="ps-card-sub ps-card-sub-spaced">&#127925; Early access to your music</div>
+                  <div class="ps-card-sub">&#127381; Exclusive unreleased content</div>
+                  <div class="ps-card-sub">&#127775; Insider access before anyone else</div>
+                </div>
+                <div class="ps-stat-row">
+                  <div class="ps-stat">
+                    <div class="ps-stat-num">847</div>
+                    <div class="ps-stat-label">New fans</div>
+                  </div>
+                  <div class="ps-stat">
+                    <div class="ps-stat-num">92%</div>
+                    <div class="ps-stat-label">Opt-in rate</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="phone-screen-slide" data-screen="1">
+                <div class="ps-header">Your Group</div>
+                <div class="ps-title">Smart Feed</div>
+                <div class="ps-subtitle">Syncs automatically. Zero effort.</div>
+                <div class="ps-card">
+                  <div class="ps-card-title">New track: "Midnight"</div>
+                  <div class="ps-card-sub">From Spotify &middot; 2h ago</div>
+                </div>
+                <div class="ps-card">
+                  <div class="ps-card-title">Studio session BTS</div>
+                  <div class="ps-card-sub">From Instagram &middot; 5h ago</div>
+                </div>
+                <div class="ps-card">
+                  <div class="ps-card-title">Tour dates announced</div>
+                  <div class="ps-card-sub">From your website &middot; 1d ago</div>
+                </div>
+              </div>
+
+              <div class="phone-screen-slide" data-screen="2">
+                <div class="ps-header">Activate</div>
+                <div class="ps-title">Direct Reach</div>
+                <div class="ps-subtitle">Your fans, your terms, every time</div>
+                <div class="ps-stat-row">
+                  <div class="ps-stat">
+                    <div class="ps-stat-num">4.2K</div>
+                    <div class="ps-stat-label">Reachable fans</div>
+                  </div>
+                  <div class="ps-stat">
+                    <div class="ps-stat-num">89%</div>
+                    <div class="ps-stat-label">Open rate</div>
+                  </div>
+                </div>
+                <div class="ps-notification">
+                  <div class="ps-notif-icon">&#127925;</div>
+                  <div class="ps-notif-text">"Midnight" is LIVE. You heard it first.<span class="ps-notif-time">Push &middot; 89% opened</span></div>
+                </div>
+                <div class="ps-card ps-card-highlight">
+                  <div class="ps-card-sub ps-card-success">Every fan, every time. No gatekeepers.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Powers (right column) -->
+        <div class="hero-powers" id="hero-powers">
+          <div class="hero-powers-panel active" id="powers-0">
+            <div class="hero-powers-label">Powered by Grouped</div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128279;</div>
+                <div class="hero-powers-feature-name">Swaps</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Every link captures fan data instantly. They get early access, you get their info.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#127911;</div>
+                <div class="hero-powers-feature-name">First Listens &amp; Premieres</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Drop music to your people before it hits streaming. Know exactly who showed up.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128229;</div>
+                <div class="hero-powers-feature-name">Import Your Lists</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Bring your existing audience with you. Build on what you already have.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-powers-panel" id="powers-1">
+            <div class="hero-powers-label">Powered by Grouped</div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128225;</div>
+                <div class="hero-powers-feature-name">Smart Feed</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Connects to Spotify, YouTube, and Instagram during setup. Auto-populates with your activity. Zero maintenance.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128276;</div>
+                <div class="hero-powers-feature-name">Push Notifications</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Reach fans through wallet-based passes with 85%+ open rates. Direct to their phone, no app download required.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128100;</div>
+                <div class="hero-powers-feature-name">Fan Profiling</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Every interaction teaches you more about who your fans are and what they care about.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-powers-panel" id="powers-2">
+            <div class="hero-powers-label">Powered by Grouped</div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128227;</div>
+                <div class="hero-powers-feature-name">Direct Reach</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Email, push, your choice. No algorithm decides who sees it. No platform stands between you and your fans.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#127873;</div>
+                <div class="hero-powers-feature-name">Automatic Rewards</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Fans who engage early get the next first listen. Grouped handles the timing.</div>
+              </div>
+            </div>
+            <div class="hero-powers-feature">
+              <div class="hero-powers-feature-header">
+                <div class="hero-powers-feature-icon">&#128176;</div>
+                <div class="hero-powers-feature-name">Built-in Sales</div>
+              </div>
+              <div class="hero-powers-feature-body">
+                <div class="hero-powers-feature-desc">Sell music, merch, and experiences directly. The revenue stays yours.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Closing line (spans full width when all faders up) -->
+        <div class="hero-closing" id="hero-closing">
+          <p>The bridge between fans finding you and never losing them.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Growth Engine Closer -->
+  <div class="fj-closer-section">
+    <div class="fj-closer-header">
+      <h2 class="fj-closer-headline">The growth engine for lifelong music careers.</h2>
+      <p class="fj-closer-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome Grouped.</strong></p>
+    </div>
+
+    <div class="fj-engine-cards">
+      <div class="fj-engine-card">
+        <div class="fj-engine-card-title">A fanbase that remembers.</div>
+        <p class="fj-engine-card-desc">The people who showed up for your first single are still there for your album. Nothing leaks. Nothing resets. Every release builds on the last.</p>
+      </div>
+      <div class="fj-engine-card">
+        <div class="fj-engine-card-title">Success that actually feels like success.</div>
+        <p class="fj-engine-card-desc">Not follower counts. Fans who buy tickets, share your music with friends, and drive hours to see you play. Revenue that grows. Progress you can feel.</p>
+      </div>
+      <div class="fj-engine-card">
+        <div class="fj-engine-card-title">A career you actually own.</div>
+        <p class="fj-engine-card-desc">No algorithm decides your reach. No platform takes a cut of your relationship. Your data, your audience, your future. You built this. It belongs to you.</p>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ============================================
@@ -2830,7 +2337,7 @@ body {
     <div class="section-label">Ready?</div>
     <h2 class="final-headline fade-up">Stop dropping music.<br>Start creating <em>moments.</em></h2>
     <p class="final-sub fade-up">Free to start. Build your first release in minutes.</p>
-    <a href="#" class="btn-primary" style="font-size:18px; padding: 16px 40px;">Start your next release</a>
+    <a href="#" class="btn-primary btn-primary-lg">Start your next release</a>
   </div>
 </section>
 
@@ -2892,10 +2399,9 @@ function rotateHero() {
 
 heroRotationInterval = setInterval(rotateHero, 3000);
 
-// ---- FADER SCROLL LOGIC ----
-const heroSection = document.getElementById('hero');
-const heroMain = document.getElementById('hero-main');
-const heroOpener = document.getElementById('hero-opener');
+// ---- PARALLAX SCROLL LOGIC (drives off fader-wrapper in fan journey) ----
+const faderWrapper = document.getElementById('fader-wrapper');
+const faderExperience = document.getElementById('fader-experience');
 const heroClosing = document.getElementById('hero-closing');
 const heroPhoneScreen = document.getElementById('hero-phone-screen');
 const phoneSlides = heroPhoneScreen.querySelectorAll('.phone-screen-slide');
@@ -2909,125 +2415,61 @@ const powersPanels = [
   document.getElementById('powers-1'),
   document.getElementById('powers-2')
 ];
-const faders = [
-  document.getElementById('fader-0'),
-  document.getElementById('fader-1'),
-  document.getElementById('fader-2')
-];
-const speakerRings = document.querySelectorAll('.speaker-ring');
-const phoneFrame = document.querySelector('.hero .phone-frame');
-const heroPowers = document.getElementById('hero-powers');
-const faderBar = document.querySelector('.fader-bar');
+const speakerRings = document.querySelectorAll('#speaker-rings-fader .speaker-ring');
 
 let lastPhase = -1;
 
-function updateHeroFaders() {
-  const rect = heroSection.getBoundingClientRect();
-  const sectionHeight = heroSection.offsetHeight;
+function updateFaderScroll() {
+  const rect = faderWrapper.getBoundingClientRect();
+  const sectionHeight = faderWrapper.offsetHeight;
   const scrolled = -rect.top;
   const scrollable = sectionHeight - window.innerHeight;
   const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
   // Phases:
-  // 0.00 - 0.12: Opening headline (no faders)
-  // 0.12 - 0.35: Fader 1 (Capture / Moments)
-  // 0.35 - 0.58: Fader 2 (Keep / Momentum)
-  // 0.58 - 0.81: Fader 3 (Activate / Career)
-  // 0.81 - 1.00: Closing line (all faders up)
+  // 0.00 - 0.25: Capture
+  // 0.25 - 0.50: Keep
+  // 0.50 - 0.75: Compound
+  // 0.75 - 1.00: Closing line
 
   let phase;
-  if (progress < 0.12) phase = -1;       // opener
-  else if (progress < 0.35) phase = 0;   // capture
-  else if (progress < 0.58) phase = 1;   // keep
-  else if (progress < 0.81) phase = 2;   // activate
-  else phase = 3;                         // closing
+  if (progress < 0.25) phase = 0;
+  else if (progress < 0.50) phase = 1;
+  else if (progress < 0.75) phase = 2;
+  else phase = 3;
 
   if (phase === lastPhase) return;
   lastPhase = phase;
 
-  // Opener visibility + grid layout switch
-  const inOpener = phase === -1;
-  heroOpener.classList.toggle('hidden', !inOpener);
-  heroMain.classList.toggle('in-opener', inOpener);
-
-  if (inOpener && !heroRotationInterval) {
-    heroRotationInterval = setInterval(rotateHero, 3000);
-  } else if (!inOpener && heroRotationInterval) {
-    clearInterval(heroRotationInterval);
-    heroRotationInterval = null;
-  }
+  const isClosing = phase === 3;
 
   // Step texts (left column)
-  stepTexts.forEach((el, i) => {
-    el.classList.toggle('active', phase === i);
-  });
+  stepTexts.forEach((el, i) => el.classList.toggle('active', phase === i));
 
   // Powers panels (right column)
-  powersPanels.forEach((el, i) => {
-    el.classList.toggle('active', phase === i);
-  });
+  powersPanels.forEach((el, i) => el.classList.toggle('active', phase === i));
 
   // Phone screens (center column)
-  if (phase >= 0 && phase <= 2) {
+  if (!isClosing) {
     phoneSlides.forEach((s, i) => s.classList.toggle('active', i === phase));
   }
 
-  // Faders: each fader activates and STAYS active
-  faders.forEach((f, i) => {
-    f.classList.toggle('active', phase >= i && phase !== -1);
-  });
-
-  // Speaker rings: reveal by phase, stay visible once shown
+  // Speaker rings: reveal progressively, stay visible once shown
   speakerRings.forEach(ring => {
     const ringPhase = parseInt(ring.dataset.phase);
-    if ((phase >= ringPhase && phase !== -1) || phase === 3) {
+    if (phase >= ringPhase || isClosing) {
       ring.classList.add('visible');
-      setTimeout(() => ring.classList.add('pulse'), 1000);
-    } else {
-      ring.classList.remove('visible', 'pulse');
+      setTimeout(() => ring.classList.add('pulse'), 800 + ringPhase * 300);
     }
   });
 
-  // Closing line
-  heroClosing.classList.toggle('active', phase === 3);
-
-  // Fader bar: hide during closing
-  faderBar.classList.toggle('hidden', phase === 3);
-
-  // Hide all 3 columns during closing
-  const heroContent = document.querySelector('.hero-content');
-  const phoneWrapper = document.querySelector('.hero-phone-wrapper');
-  if (phase === 3) {
-    heroContent.style.opacity = '0';
-    heroContent.style.transition = 'opacity 0.5s';
-    phoneWrapper.style.opacity = '0';
-    phoneWrapper.style.transition = 'opacity 0.5s';
-    heroPowers.style.opacity = '0';
-    heroPowers.style.transition = 'opacity 0.5s';
-  } else {
-    heroContent.style.opacity = '1';
-    phoneWrapper.style.opacity = '1';
-    heroPowers.style.opacity = '1';
-  }
+  // Closing: toggle class on experience container (CSS handles transitions)
+  faderExperience.classList.toggle('in-closing', isClosing);
+  heroClosing.classList.toggle('active', isClosing);
 }
 
-window.addEventListener('scroll', updateHeroFaders, { passive: true });
-updateHeroFaders();
-
-// ---- FADER CLICK-TO-PHASE ----
-faders.forEach((fader, i) => {
-  fader.addEventListener('click', () => {
-    const sectionTop = heroSection.offsetTop;
-    const sectionHeight = heroSection.offsetHeight;
-    const scrollable = sectionHeight - window.innerHeight;
-
-    // Phase centers: 0 = 0.235, 1 = 0.465, 2 = 0.695
-    const phaseCenters = [0.235, 0.465, 0.695];
-    const targetScroll = sectionTop + (scrollable * phaseCenters[i]);
-
-    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-  });
-});
+window.addEventListener('scroll', updateFaderScroll, { passive: true });
+updateFaderScroll();
 
 // ---- FEATURES: HORIZONTAL SCROLL + STACKING RINGS ----
 const featSection = document.querySelector('.feat-section');
@@ -3081,28 +2523,40 @@ function updateFeatures() {
   }
 }
 
-// ---- GAP FILL ANIMATION ----
-const gapMiddle = document.getElementById('gap-middle');
-const solutionReveal = document.getElementById('solution-reveal');
+// ---- FAN JOURNEY SCROLL ANIMATIONS ----
+const fjChannels = document.querySelectorAll('.fj-channel');
+const fjFlow = document.getElementById('fj-flow');
+const fjDestination = document.getElementById('fj-destination');
 
-function checkGapFill() {
-  const rect = gapMiddle.getBoundingClientRect();
-  const trigger = window.innerHeight * 0.6;
+function checkFanJourney() {
+  const wh = window.innerHeight;
 
-  if (rect.top < trigger) {
-    gapMiddle.classList.add('filled');
+  fjChannels.forEach(ch => {
+    const rect = ch.getBoundingClientRect();
+    if (rect.top < wh * 0.82) {
+      ch.classList.add('visible');
+    }
+  });
+
+  if (fjFlow) {
+    const fRect = fjFlow.getBoundingClientRect();
+    if (fRect.top < wh * 0.75) {
+      fjFlow.classList.add('visible');
+    }
   }
 
-  const solRect = solutionReveal.getBoundingClientRect();
-  if (solRect.top < window.innerHeight * 0.75) {
-    solutionReveal.classList.add('visible');
+  if (fjDestination) {
+    const dRect = fjDestination.getBoundingClientRect();
+    if (dRect.top < wh * 0.72) {
+      fjDestination.classList.add('visible');
+    }
   }
 }
 
-window.addEventListener('scroll', checkGapFill);
+window.addEventListener('scroll', checkFanJourney, { passive: true });
 window.addEventListener('scroll', updateFeatures, { passive: true });
 updateFeatures();
-checkGapFill();
+checkFanJourney();
 
 // ---- FADE-UP INTERSECTION OBSERVER ----
 const fadeEls = document.querySelectorAll('.fade-up');
