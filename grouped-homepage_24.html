@@ -80,7 +80,7 @@
 .feat-headline, .feat-card-name,
 .results-headline, .cases-headline, .case-card-name,
 .final-headline, .stat-card-number, .fj-channel-name,
-.ps-title,
+.ps-title, .nav-logo-text,
 .hero-headline em, .hero-step-title em, .hero-closing p em,
 .fj-headline em, .fj-dest-headline em, .fj-closer-headline em,
 .feat-headline em, .feat-card-name em,
@@ -101,6 +101,8 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
+
+section[id] { scroll-margin-top: 80px; }
 
 .container {
   max-width: var(--container-width);
@@ -130,59 +132,145 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 16px 0;
-  transition: background 0.3s, backdrop-filter 0.3s;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
 }
 
 .nav.scrolled {
-  background: rgba(8, 11, 20, 0.9);
+  background: rgba(17, 20, 32, 0.92);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(212, 148, 58, 0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav.past-hero {
-  background: rgba(8, 11, 20, 0.95);
+  background: rgba(17, 20, 32, 0.98);
   backdrop-filter: blur(24px);
-  border-bottom: 1px solid rgba(212, 148, 58, 0.2);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-.nav .container {
+.nav-inner {
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+}
+
+.nav-logo-panel {
+  display: flex;
   align-items: center;
-}
-
-.nav-logo {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 22px;
-  color: var(--white);
+  gap: 10px;
+  padding: 0 24px;
+  background: rgba(32, 46, 58, 0.29);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   text-decoration: none;
-  letter-spacing: -0.5px;
+  transition: background 0.4s, border-color 0.4s;
 }
 
-.nav-logo span {
+.nav-logo-mark {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-logo-text {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
   color: var(--gold);
+  line-height: 1;
 }
 
-.nav-cta {
+.nav-links {
+  display: flex;
+  align-items: stretch;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: color 0.25s, border-color 0.4s;
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-spacer {
+  flex: 1;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: border-color 0.4s;
+}
+
+.nav-login {
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.25s;
+}
+
+.nav-login:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.nav-signup {
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  padding: 10px 24px;
   background: var(--gold);
   color: var(--bg-deep);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  letter-spacing: 2px;
   text-decoration: none;
-  transition: all 0.25s;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: background 0.25s;
 }
 
-.nav-cta:hover {
+.nav-signup:hover {
   background: var(--gold-light);
-  transform: translateY(-1px);
 }
+
+/* Transparent state — hide internal borders + logo panel bg */
+.nav:not(.scrolled):not(.past-hero) .nav-logo-panel {
+  background: transparent;
+  border-right-color: transparent;
+}
+.nav:not(.scrolled):not(.past-hero) .nav-link {
+  border-right-color: transparent;
+}
+.nav:not(.scrolled):not(.past-hero) .nav-spacer {
+  border-right-color: transparent;
+}
+
+/* Hamburger + mobile menu — hidden on desktop */
+.nav-hamburger { display: none; }
+.nav-mobile-menu { display: none; }
 
 /* ============================================
    HERO + FADER SECTION (merged)
@@ -208,12 +296,12 @@ body {
 .hero-main {
   flex: 1;
   display: grid;
-  grid-template-columns: 1fr 300px 1fr;
-  gap: 40px;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 60px;
   align-items: start;
-  max-width: var(--container-width);
+  max-width: 1340px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 140px 40px 0;
   width: 100%;
   position: relative;
   z-index: 2;
@@ -228,17 +316,62 @@ body {
   min-height: 380px;
 }
 
-/* Hero simplified — always in opener state (single column centered) */
-.hero-main.in-opener {
-  grid-template-columns: 1fr;
-  max-width: 800px;
-  text-align: center;
-  flex: 0;
-  align-self: center;
+/* Hero pill tag */
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: #111620;
+  border-radius: 33px;
+  margin-bottom: 24px;
 }
-.hero-main.in-opener .hero-content {
-  grid-column: 1;
-  grid-row: 1;
+
+.hero-pill-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+
+.hero-pill-text {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 0.16px;
+  line-height: 1;
+}
+
+/* Hero demo placeholder (right column) */
+.hero-demo-placeholder {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: 40px;
+  z-index: 2;
+}
+
+.hero-demo-frame {
+  width: 320px;
+  height: 580px;
+  background: rgba(17, 20, 34, 0.6);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+
+/* CircleUnion background */
+.hero-bg-union {
+  position: absolute;
+  right: -15%;
+  top: 200px;
+  width: 80%;
+  height: auto;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Right column: Powered by Grouped */
@@ -372,14 +505,8 @@ body {
   color: var(--white);
 }
 
-.hero-headline .hero-static {
+.hero-line {
   display: block;
-}
-
-.hero-headline .hero-rotating-line {
-  display: block;
-  position: relative;
-  min-height: 1.15em;
 }
 
 .hero-rotating-word {
@@ -418,10 +545,11 @@ body {
   color: var(--gray-300);
   line-height: 1.65;
   margin-bottom: 36px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 464px;
 }
+
+.hero-sub p { margin: 0; }
+.hero-sub p + p { margin-top: 16px; }
 
 .hero-sub strong {
   color: var(--white);
@@ -432,7 +560,6 @@ body {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 /* --- Step text overlay (replaces opener during scroll) --- */
@@ -543,7 +670,7 @@ body {
 .speaker-rings {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 38%;
   transform: translate(-50%, -50%);
   width: 100%;
   height: 100%;
@@ -644,7 +771,7 @@ body {
   background: var(--gold);
   color: var(--bg-deep);
   border: none;
-  border-radius: 4px;
+  border-radius: 34px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -663,7 +790,7 @@ body {
   background: transparent;
   color: var(--gray-300);
   border: 1px solid var(--gray-700);
-  border-radius: 4px;
+  border-radius: 0;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s;
@@ -1705,15 +1832,101 @@ body {
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
+  /* Nav mobile */
+  .nav-links, .nav-spacer, .nav-login, .nav-signup { display: none; }
+  .nav-logo-panel {
+    background: transparent !important;
+    border-right-color: transparent !important;
+  }
+  .nav-hamburger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    margin-right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--white);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(6.5px) rotate(45deg);
+  }
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-6.5px) rotate(-45deg);
+  }
+  .nav-mobile-menu {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(17, 20, 32, 0.96);
+    backdrop-filter: blur(24px);
+    flex-direction: column;
+    padding: 40px 24px;
+    z-index: 999;
+  }
+  .nav-mobile-menu.open {
+    display: flex;
+  }
+  .nav-mobile-link {
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    transition: color 0.2s;
+  }
+  .nav-mobile-link:hover { color: rgba(255, 255, 255, 0.9); }
+  .nav-mobile-cta {
+    display: inline-block;
+    margin-top: 24px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--bg-deep);
+    background: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    text-align: center;
+    transition: background 0.25s;
+  }
+  .nav-mobile-cta:hover { background: var(--gold-light); }
+  body.nav-open { overflow: hidden; }
   .hero { height: auto; min-height: 100vh; }
-  .hero-main, .hero-main.in-opener {
+  .hero-main {
     grid-template-columns: 1fr;
     text-align: center;
-    padding-top: 80px;
+    padding-top: 100px;
     gap: 30px;
   }
   .hero-sub { margin-left: auto; margin-right: auto; }
   .hero-ctas { justify-content: center; }
+  .hero-demo-placeholder { display: none; }
+  .hero-bg-union { display: none; }
+  .hero-pill { margin-left: auto; margin-right: auto; }
   /* Fan journey mobile */
   .fj-channels { grid-template-columns: repeat(2, 1fr); gap: 14px; }
   .fj-flow-line:nth-child(1) { left: 25%; }
@@ -1764,9 +1977,36 @@ body {
      NAVIGATION
      ============================================ -->
 <nav class="nav" id="nav">
-  <div class="container">
-    <a href="#" class="nav-logo">grouped<span>.</span></a>
-    <a href="#start" class="nav-cta">Start your next release</a>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo-panel">
+      <div class="nav-logo-mark">
+        <!-- Placeholder: user will provide SVG -->
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#D4943A" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">Grouped</span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="nav-link">Artist Tools</a>
+      <a href="#cases" class="nav-link">Case studies</a>
+      <a href="#" class="nav-link">Pricing</a>
+      <a href="#" class="nav-link">Resources</a>
+    </div>
+    <div class="nav-spacer"></div>
+    <a href="#" class="nav-login">Log in</a>
+    <a href="#start" class="nav-signup">Sign up for free &#x2197;</a>
+  </div>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-mobile-menu" id="nav-mobile-menu">
+    <a href="#features" class="nav-mobile-link">Artist Tools</a>
+    <a href="#cases" class="nav-mobile-link">Case studies</a>
+    <a href="#" class="nav-mobile-link">Pricing</a>
+    <a href="#" class="nav-mobile-link">Resources</a>
+    <a href="#" class="nav-mobile-link">Log in</a>
+    <a href="#start" class="nav-mobile-cta">Sign up for free &#x2197;</a>
   </div>
 </nav>
 
@@ -1779,30 +2019,32 @@ body {
 <section class="hero" id="hero">
   <div class="hero-sticky">
 
-    <div class="speaker-rings" id="speaker-rings-hero">
-      <div class="speaker-ring visible pulse" data-phase="0"></div>
-      <div class="speaker-ring visible pulse" data-phase="0"></div>
-      <div class="speaker-ring visible pulse" data-phase="0"></div>
-    </div>
+    <img src="CircleUnion.svg" class="hero-bg-union" alt="" aria-hidden="true">
 
-    <div class="hero-main in-opener" id="hero-main">
+    <div class="hero-main" id="hero-main">
       <div class="hero-content">
         <div class="hero-opener" id="hero-opener">
-          <div class="hero-headline">
-            <span class="hero-static">Turn every</span>
-            <span class="hero-rotating-line">
-              <span class="hero-rotating-word"><span class="word" id="hero-word-1">release</span></span>
-              into a
-              <span class="hero-rotating-result"><span class="word" id="hero-word-2">growth engine.</span></span>
-            </span>
+          <div class="hero-pill">
+            <span class="hero-pill-dot"></span>
+            <span class="hero-pill-text">direct-to-fan growth engine</span>
           </div>
-          <p class="hero-sub">
-            For artists who want to grow with every release. <strong>Own the moment between distribution and release day.</strong> Build a fanbase that compounds.
-          </p>
+          <div class="hero-headline">
+            <span class="hero-line">Turn every <span class="hero-rotating-word"><span class="word" id="hero-word-1">release</span></span></span>
+            <span class="hero-line">into a <span class="hero-rotating-result"><span class="word" id="hero-word-2">growth engine.</span></span></span>
+          </div>
+          <div class="hero-sub">
+            <p>Grouped captures every fan your music creates and keeps them engaged between releases. When you're ready to move, they're already there.</p>
+            <p>You make the music. The growth takes care of itself.</p>
+          </div>
           <div class="hero-ctas">
             <a href="#start" class="btn-primary">Start your next release</a>
             <a href="#fan-journey" class="btn-secondary">See how it works</a>
           </div>
+        </div>
+      </div>
+      <div class="hero-demo-placeholder">
+        <div class="hero-demo-frame">
+          <!-- Placeholder: user will provide product demo video -->
         </div>
       </div>
     </div>
@@ -2372,6 +2614,22 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 60);
   const heroBottom = document.getElementById('hero').offsetTop + document.getElementById('hero').offsetHeight;
   nav.classList.toggle('past-hero', window.scrollY > heroBottom - 100);
+});
+
+// ---- NAV MOBILE TOGGLE ----
+const navHamburger = document.getElementById('nav-hamburger');
+const navMobileMenu = document.getElementById('nav-mobile-menu');
+navHamburger.addEventListener('click', () => {
+  navHamburger.classList.toggle('open');
+  navMobileMenu.classList.toggle('open');
+  document.body.classList.toggle('nav-open');
+});
+navMobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navHamburger.classList.remove('open');
+    navMobileMenu.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  });
 });
 
 // ---- HERO WORD ROTATION (opening state only) ----
