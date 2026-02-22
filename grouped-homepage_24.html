@@ -77,7 +77,8 @@
 /* GroupedFont must never be italicized or bolded */
 .hero-headline, .hero-step-title, .hero-closing-headline,
 .grow-step-title, .grow-panel-headline, .grow-panel-brand,
-.grow-closing-headline, .fj-own-it-brand, .fj-own-it-headline,
+.grow-closing-headline, .overview-brand, .overview-headline,
+.overview-tag-title,
 .fj-headline, .fj-dest-headline, .fj-closer-headline,
 .feat-headline, .feat-card-name,
 .results-headline, .cases-headline, .case-card-name,
@@ -1297,40 +1298,236 @@ section[id] { scroll-margin-top: 80px; }
   margin: 0 auto;
 }
 
-/* "One place to own it all" standalone block */
-.fj-own-it {
-  text-align: center;
-  max-width: 640px;
+/* ============================================
+   OVERVIEW SECTION — "One place to own it all"
+   ============================================ */
+.overview-section {
+  position: relative;
+  background: var(--bg-deep);
+  padding: clamp(80px, 10vw, 120px) 0;
+  overflow: hidden;
+}
+
+.overview-stage {
+  position: relative;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: clamp(80px, 10vw, 140px) 40px clamp(40px, 5vw, 60px);
-  box-sizing: border-box;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.fj-own-it-brand {
+/* Background rings */
+.overview-rings {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 575px;
+  height: 575px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.overview-rings svg {
+  width: 100%;
+  height: 100%;
+}
+
+.overview-ring {
+  fill: #2A3036;
+  transition: fill-opacity 0.6s ease;
+}
+
+.overview-ring-outer { fill-opacity: 0.18; }
+.overview-ring-middle { fill-opacity: 0.28; }
+.overview-ring-inner { fill-opacity: 0.42; }
+.overview-g-logo { fill: #F1F0EE; fill-opacity: 0.06; }
+
+/* Subtle speaker pulse on each ring */
+.overview-ring-outer { animation: ringPulseOuter 4s ease-in-out infinite; }
+.overview-ring-middle { animation: ringPulseMiddle 4s ease-in-out infinite 0.6s; }
+.overview-ring-inner { animation: ringPulseInner 4s ease-in-out infinite 1.2s; }
+
+@keyframes ringPulseOuter {
+  0%, 100% { fill-opacity: 0.18; }
+  50% { fill-opacity: 0.24; }
+}
+@keyframes ringPulseMiddle {
+  0%, 100% { fill-opacity: 0.28; }
+  50% { fill-opacity: 0.36; }
+}
+@keyframes ringPulseInner {
+  0%, 100% { fill-opacity: 0.42; }
+  50% { fill-opacity: 0.52; }
+}
+
+/* Center text block */
+.overview-center {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 560px;
+  padding: 0 40px;
+}
+
+.overview-brand {
   font-family: var(--font-display);
-  font-size: clamp(14px, 1.6vw, 18px);
+  font-size: clamp(16px, 1.8vw, 22px);
   font-weight: normal;
-  color: rgba(255,255,255,0.35);
-  letter-spacing: 6px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 5px;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
-.fj-own-it-headline {
+.overview-headline {
   font-family: var(--font-display);
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(34px, 4.5vw, 60px);
   font-weight: normal;
   color: var(--gold);
-  line-height: 1.1;
+  line-height: 1.08;
   margin-bottom: 16px;
 }
 
-.fj-own-it-sub {
+.overview-sub {
   font-family: var(--font-body);
   font-size: clamp(14px, 1.3vw, 17px);
   color: rgba(255,255,255,0.5);
   line-height: 1.65;
+  margin-bottom: 0;
 }
+
+/* Bottom CTA below rings */
+.overview-bottom {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto 0;
+  padding: 0 40px;
+}
+
+.overview-bottom-line {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.overview-bottom-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 20px;
+}
+
+.overview-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  cursor: pointer;
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+.overview-cta:hover { gap: 12px; }
+.overview-cta svg { width: 16px; height: 16px; }
+
+/* Step tags positioned around rings */
+.overview-tags {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overview-tag {
+  position: absolute;
+  pointer-events: auto;
+  cursor: default;
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 0.55;
+}
+
+.overview-tag:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.overview-tag-label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.overview-tag-title {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: normal;
+  color: var(--white);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+/* Gold connector line from tag to ring edge */
+.overview-tag-line {
+  position: absolute;
+  height: 2px;
+  background: var(--gold);
+  opacity: 0.35;
+  transition: opacity 0.3s;
+}
+
+.overview-tag:hover .overview-tag-line {
+  opacity: 0.7;
+}
+
+/* Dot at ring edge */
+.overview-tag-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.5;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.overview-tag:hover .overview-tag-dot {
+  opacity: 1;
+  transform: scale(1.3);
+}
+
+/* Individual tag positions (matching mockup layout) */
+.overview-tag--00 { top: 10%; left: 6%; }
+.overview-tag--00 .overview-tag-line { top: 100%; left: 100%; width: 200px; margin-top: 8px; }
+.overview-tag--00 .overview-tag-dot { top: 100%; left: calc(100% + 200px); margin-top: 3px; }
+
+.overview-tag--01 { top: 34%; left: 4%; }
+.overview-tag--01 .overview-tag-line { top: 50%; left: 100%; width: 180px; margin-left: 12px; }
+.overview-tag--01 .overview-tag-dot { top: 50%; left: calc(100% + 192px); margin-top: -5px; }
+
+.overview-tag--02 { bottom: 16%; left: 4%; }
+.overview-tag--02 .overview-tag-line { top: 50%; left: 100%; width: 220px; margin-left: 12px; }
+.overview-tag--02 .overview-tag-dot { top: 50%; left: calc(100% + 232px); margin-top: -5px; }
+
+.overview-tag--03 { bottom: 14%; right: 4%; text-align: right; }
+.overview-tag--03 .overview-tag-line { top: 50%; right: 100%; width: 180px; margin-right: 12px; }
+.overview-tag--03 .overview-tag-dot { top: 50%; right: calc(100% + 192px); margin-top: -5px; }
+
+.overview-tag--04 { top: 14%; right: 4%; text-align: right; }
+.overview-tag--04 .overview-tag-line { top: 100%; right: 100%; width: 160px; margin-top: 8px; }
+.overview-tag--04 .overview-tag-dot { top: 100%; right: calc(100% + 160px); margin-top: 3px; }
 
 .fj-cloud-closing {
   text-align: center;
@@ -2018,6 +2215,11 @@ section[id] { scroll-margin-top: 80px; }
   .hero-demo-placeholder { display: none; }
   .hero-bg-union { display: none; }
   .hero-pill { margin-left: auto; margin-right: auto; }
+  /* Overview mobile */
+  .overview-stage { min-height: 500px; }
+  .overview-rings { width: 360px; height: 360px; }
+  .overview-tags { display: none; }
+  .overview-headline { font-size: clamp(28px, 7vw, 42px); }
   /* Fan journey mobile */
   .fj-cloud { max-width: 100%; width: 100%; height: 340px; padding: 0 10px; }
   .fj-node-xl { width: 58px; height: 58px; }
@@ -2157,6 +2359,76 @@ section[id] { scroll-margin-top: 80px; }
 </section>
 
 <!-- ============================================
+     OVERVIEW — "One place to own it all" (step map)
+     ============================================ -->
+<section class="overview-section" id="overview">
+  <div class="overview-stage">
+
+    <!-- Background rings with speaker pulse -->
+    <div class="overview-rings">
+      <svg width="575" height="575" viewBox="0 0 575 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="overview-ring overview-ring-outer" d="M287.5 574.994C128.969 574.994 0 446.025 0 287.506C0 128.987 128.969 0 287.5 0C446.031 0 575 128.975 575 287.506C575 446.037 446.031 575 287.5 575V574.994ZM287.5 49.9484C156.513 49.9484 49.9484 156.513 49.9484 287.506C49.9484 418.499 156.513 525.052 287.5 525.052C418.487 525.052 525.052 418.487 525.052 287.506C525.052 156.525 418.481 49.9484 287.5 49.9484Z"/>
+        <path class="overview-ring overview-ring-middle" d="M287.5 500C170.326 500 75 404.675 75 287.509C75 170.342 170.326 75 287.5 75C404.674 75 500 170.331 500 287.503C500 404.675 404.674 499.994 287.5 499.994V500ZM287.5 124.93C197.86 124.93 124.931 197.859 124.931 287.503C124.931 377.147 197.86 450.064 287.5 450.064C377.14 450.064 450.069 377.136 450.069 287.503C450.069 197.87 377.14 124.93 287.5 124.93Z"/>
+        <path class="overview-ring overview-ring-inner" d="M287.5 425C250.775 425 216.242 410.695 190.273 384.727C164.305 358.758 150 324.225 150 287.5C150 250.775 164.305 216.242 190.273 190.273C216.242 164.305 250.775 150 287.5 150C324.225 150 358.758 164.305 384.727 190.273C410.695 216.242 425 250.775 425 287.5C425 324.225 410.695 358.758 384.727 384.727C358.758 410.695 324.225 425 287.5 425ZM287.5 199.892C239.193 199.892 199.892 239.193 199.892 287.5C199.892 335.807 239.193 375.108 287.5 375.108C335.807 375.108 375.108 335.807 375.108 287.5C375.108 239.193 335.807 199.892 287.5 199.892Z"/>
+        <path class="overview-ring overview-g-logo" d="M338.114 284.049H287.999C285.544 284.049 283.548 286.04 283.548 288.5C283.548 290.961 285.538 292.952 287.999 292.952H302.979C301.056 299.406 295.072 304.129 287.999 304.129C279.034 304.129 271.807 296.537 272.407 287.443C272.926 279.598 279.362 273.273 287.22 272.896C291.344 272.698 295.269 274.083 298.317 276.766C298.744 277.143 299.381 277.125 299.783 276.723L304.562 271.944C304.994 271.511 304.982 270.8 304.525 270.392C299.993 266.25 294.169 263.987 287.993 263.987C274.447 263.987 263.257 275.356 263.467 288.902C263.677 302.244 274.595 313.038 287.993 313.038C299.999 313.038 310.008 304.364 312.104 292.964H316.624C314.478 306.837 302.453 317.49 287.987 317.49C271.98 317.49 258.966 304.451 259.01 288.438C259.053 273.032 271.368 260.203 286.756 259.566C294.49 259.245 301.866 261.959 307.529 267.146C307.95 267.536 308.605 267.511 309.007 267.097L313.743 262.274C314.169 261.842 314.144 261.143 313.699 260.729C306.608 254.157 297.421 250.577 287.727 250.639C267.399 250.775 250.657 267.177 250.119 287.505C249.557 308.847 266.762 326.392 287.98 326.392C307.362 326.392 323.387 311.759 325.594 292.964H330.052C327.826 314.213 309.804 330.831 287.98 330.831C264.561 330.831 245.526 311.715 245.668 288.265C245.798 265.959 263.486 247.393 285.767 246.256C297.507 245.656 308.698 249.823 317.149 257.872C317.576 258.28 318.243 258.28 318.658 257.86L323.418 253.081C323.838 252.661 323.838 251.968 323.412 251.554C313.959 242.441 301.613 237.409 288.494 237.285C260.351 237.025 237.062 259.851 236.784 287.987C236.506 316.476 259.597 339.716 287.999 339.716C305.557 339.716 321.087 330.844 330.318 317.335V335.27C330.318 337.725 332.308 339.722 334.769 339.722C337.223 339.722 339.22 337.731 339.22 335.27V285.156C339.22 284.55 338.726 284.055 338.12 284.055L338.114 284.049Z"/>
+      </svg>
+    </div>
+
+    <!-- Step tags around the rings -->
+    <div class="overview-tags">
+      <div class="overview-tag overview-tag--00">
+        <div class="overview-tag-label">00 | Moments</div>
+        <div class="overview-tag-title">Fan discovers you</div>
+        <div class="overview-tag-line"></div>
+        <div class="overview-tag-dot"></div>
+      </div>
+      <div class="overview-tag overview-tag--01">
+        <div class="overview-tag-label">01 | Capture</div>
+        <div class="overview-tag-title">Pull them in</div>
+        <div class="overview-tag-line"></div>
+        <div class="overview-tag-dot"></div>
+      </div>
+      <div class="overview-tag overview-tag--02">
+        <div class="overview-tag-label">02 | Keep</div>
+        <div class="overview-tag-title">Reward them</div>
+        <div class="overview-tag-line"></div>
+        <div class="overview-tag-dot"></div>
+      </div>
+      <div class="overview-tag overview-tag--03">
+        <div class="overview-tag-label">03 | Activate &amp; Reactivate</div>
+        <div class="overview-tag-title">Moments of discovery</div>
+        <div class="overview-tag-line"></div>
+        <div class="overview-tag-dot"></div>
+      </div>
+      <div class="overview-tag overview-tag--04">
+        <div class="overview-tag-label">04 | Watch it grow</div>
+        <div class="overview-tag-title">Moments of discovery</div>
+        <div class="overview-tag-line"></div>
+        <div class="overview-tag-dot"></div>
+      </div>
+    </div>
+
+    <!-- Centered text on rings -->
+    <div class="overview-center">
+      <div class="overview-brand">Grouped</div>
+      <h2 class="overview-headline">One place to own it all.</h2>
+      <p class="overview-sub">Every fan that discovers you, across every channel, flows into one place you control.</p>
+    </div>
+
+  </div>
+
+  <!-- Bottom CTA -->
+  <div class="overview-bottom">
+    <div class="overview-bottom-line">Your fans, your data, your career at your fingertips.</div>
+    <div class="overview-bottom-sub">Everything a music career needs, nothing you don't.</div>
+    <a href="#fan-journey" class="overview-cta">
+      See how it works
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================
      FAN JOURNEY — DISCOVERY → GROUPED → FADER EXPERIENCE
      ============================================ -->
 <section class="fan-journey" id="fan-journey">
@@ -2279,13 +2551,6 @@ section[id] { scroll-margin-top: 80px; }
         <path class="fj-flow-path" d="M1140,0 C1140,70 600,35 600,120"/>
       </svg>
     </div>
-  </div>
-
-  <!-- "One place to own it all" — standalone block above closing -->
-  <div class="fj-own-it fade-up">
-    <div class="fj-own-it-brand">Grouped</div>
-    <h2 class="fj-own-it-headline">One place to own it all</h2>
-    <p class="fj-own-it-sub">Every fan across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
   </div>
 
   <!-- Closing sentence -->
