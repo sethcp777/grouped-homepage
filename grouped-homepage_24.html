@@ -1417,7 +1417,33 @@ section[id] { scroll-margin-top: 80px; }
 
 /* (Step tags removed — clean centered single-column layout) */
 
-/* (old fj-cloud-closing / fj-scroll-hint / fj-flow-svg / fj-flow-path removed — replaced by discovery-*) */
+/* ============================================
+   SNAKE-LINE TRANSITION: Discovery → Grow
+   ============================================ */
+.snake-transition {
+  position: relative;
+  width: 100%;
+  height: clamp(200px, 25vh, 320px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.snake-transition svg {
+  width: 100%;
+  height: 100%;
+}
+
+.snake-path {
+  transition: stroke-dashoffset 0.05s linear;
+}
+
+/* Gold glow on outer ring once snake energy arrives */
+.grow-stage.snake-arrived .grow-ring-outer {
+  fill: #D4943A !important;
+  fill-opacity: 0.22 !important;
+  filter: blur(1.5px);
+  transition: fill 1.2s ease, fill-opacity 1.2s ease, filter 1.2s ease;
+}
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
 .grow-wrapper {
@@ -2036,6 +2062,8 @@ section[id] { scroll-margin-top: 80px; }
   .discovery-headline { font-size: clamp(22px, 6vw, 34px); }
   .discovery-closing { text-align: center; }
   .discovery-closing-headline { text-align: center; font-size: clamp(18px, 4.5vw, 26px); }
+  /* Snake transition mobile */
+  .snake-transition { height: clamp(120px, 18vh, 200px); }
   /* Grow experience mobile */
   .grow-wrapper { height: 380vh; }
   .grow-rings-wrap { width: 320px; height: 320px; }
@@ -2270,7 +2298,44 @@ section[id] { scroll-margin-top: 80px; }
     </div><!-- /discovery-layout -->
   </div><!-- /discovery-section -->
 
-  <!-- (old fj-node / fj-flow / fj-scroll-hint HTML removed — replaced by discovery section above) -->
+  <!-- ============================================
+       SNAKE-LINE TRANSITION: Discovery → Grow
+       3 curved lines converging, gold gradient leads eye
+       ============================================ -->
+  <div class="snake-transition" id="snake-transition">
+    <svg viewBox="0 0 1200 300" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="snake-grad-l" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
+          <stop offset="0.35" stop-color="#D4943A" stop-opacity="0.45"/>
+          <stop offset="0.65" stop-color="#D4943A" stop-opacity="0.25"/>
+          <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
+        </linearGradient>
+        <linearGradient id="snake-grad-c" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
+          <stop offset="0.3" stop-color="#D4943A" stop-opacity="0.35"/>
+          <stop offset="0.6" stop-color="#D4943A" stop-opacity="0.2"/>
+          <stop offset="1" stop-color="#2A3036" stop-opacity="0.35"/>
+        </linearGradient>
+        <linearGradient id="snake-grad-r" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
+          <stop offset="0.35" stop-color="#D4943A" stop-opacity="0.45"/>
+          <stop offset="0.65" stop-color="#D4943A" stop-opacity="0.25"/>
+          <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
+        </linearGradient>
+      </defs>
+      <!-- Left snake: wide start, curves inward -->
+      <path class="snake-path" d="M380,0 C380,50 340,90 360,140 C385,195 510,240 560,300"
+            stroke="url(#snake-grad-l)" stroke-width="14" stroke-linecap="round"/>
+      <!-- Center snake: gentle S-curve, stays centered -->
+      <path class="snake-path" d="M600,0 C600,55 575,100 595,155 C615,210 605,255 600,300"
+            stroke="url(#snake-grad-c)" stroke-width="11" stroke-linecap="round" opacity="0.65"/>
+      <!-- Right snake: wide start, curves inward -->
+      <path class="snake-path" d="M820,0 C820,50 860,90 840,140 C815,195 690,240 640,300"
+            stroke="url(#snake-grad-r)" stroke-width="14" stroke-linecap="round"/>
+    </svg>
+  </div>
+
   <!-- ============================================
        FADER EXPERIENCE (scroll-driven, embedded)
        ============================================ -->
@@ -2285,8 +2350,8 @@ section[id] { scroll-margin-top: 80px; }
             <svg viewBox="0 0 575 600" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="feed-fade" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#2A3036" stop-opacity="0"/>
-                  <stop offset="0.5" stop-color="#2A3036" stop-opacity="0.25"/>
+                  <stop offset="0" stop-color="#2A3036" stop-opacity="0.4"/>
+                  <stop offset="0.4" stop-color="#2A3036" stop-opacity="0.35"/>
                   <stop offset="1" stop-color="#2A3036" stop-opacity="0.5"/>
                 </linearGradient>
               </defs>
@@ -2995,9 +3060,48 @@ function checkOverviewTransition() {
 }
 
 window.addEventListener('scroll', checkOverviewTransition, { passive: true });
+
+// ---- SNAKE-LINE TRANSITION (Discovery → Grow) ----
+const snakeSection = document.getElementById('snake-transition');
+const snakePaths = document.querySelectorAll('.snake-path');
+const growStageEl = document.getElementById('grow-stage');
+let snakePathLengths = [];
+
+// Pre-compute path lengths and set initial dash state
+snakePaths.forEach(path => {
+  const len = path.getTotalLength();
+  snakePathLengths.push(len);
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+});
+
+function checkSnakeTransition() {
+  if (!snakeSection || !snakePaths.length) return;
+  const rect = snakeSection.getBoundingClientRect();
+  const wh = window.innerHeight;
+  // Progress: 0 when top of snake enters viewport bottom, 1 when bottom leaves viewport top
+  const progress = Math.max(0, Math.min(1, 1 - (rect.top / (wh * 0.8))));
+
+  snakePaths.forEach((path, i) => {
+    const len = snakePathLengths[i];
+    path.style.strokeDashoffset = len * (1 - progress);
+  });
+
+  // When snake lines finish, light up the outer grow ring gold
+  if (growStageEl) {
+    if (progress >= 0.85) {
+      growStageEl.classList.add('snake-arrived');
+    } else {
+      growStageEl.classList.remove('snake-arrived');
+    }
+  }
+}
+
+window.addEventListener('scroll', checkSnakeTransition, { passive: true });
 window.addEventListener('scroll', updateFeatures, { passive: true });
 updateFeatures();
 checkOverviewTransition();
+checkSnakeTransition();
 
 // ---- FADE-UP INTERSECTION OBSERVER ----
 const fadeEls = document.querySelectorAll('.fade-up');
