@@ -77,7 +77,7 @@
 /* GroupedFont must never be italicized or bolded */
 .hero-headline, .hero-step-title, .hero-closing-headline,
 .grow-step-title, .grow-panel-headline, .grow-panel-brand,
-.grow-closing-headline,
+.grow-closing-headline, .fj-own-it-brand, .fj-own-it-headline,
 .fj-headline, .fj-dest-headline, .fj-closer-headline,
 .feat-headline, .feat-card-name,
 .results-headline, .cases-headline, .case-card-name,
@@ -780,34 +780,29 @@ section[id] { scroll-margin-top: 80px; }
   transition: fill-opacity 0.8s ease, clip-path 0.8s ease;
 }
 
-/* State 0 (default / dormant): gray rings */
+/* State 0 (default / Capture): gray dormant rings */
 .grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
 .grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
 .grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
 .grow-g-logo { fill: #F1F0EE; fill-opacity: 0.1; clip-path: inset(0 0 0 0); }
 
-/* State 1 — Capture: same gray, feed lines appear (handled separately) */
-[data-grow-state="1"] .grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
-[data-grow-state="1"] .grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
-[data-grow-state="1"] .grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
+/* State 1 — Keep: gold starts emerging */
+[data-grow-state="1"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.2; }
+[data-grow-state="1"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.35; }
+[data-grow-state="1"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.55; }
+[data-grow-state="1"] .grow-g-logo { fill-opacity: 0.15; }
 
-/* State 2 — Keep: gold starts emerging */
-[data-grow-state="2"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.2; }
-[data-grow-state="2"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.35; }
-[data-grow-state="2"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.55; }
-[data-grow-state="2"] .grow-g-logo { fill-opacity: 0.15; }
+/* State 2 — Grow: fully gold */
+[data-grow-state="2"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.45; }
+[data-grow-state="2"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.65; }
+[data-grow-state="2"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.85; }
+[data-grow-state="2"] .grow-g-logo { fill: #F9A81A; fill-opacity: 0.25; }
 
-/* State 3 — Grow: fully gold */
-[data-grow-state="3"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.45; }
-[data-grow-state="3"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.65; }
-[data-grow-state="3"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.85; }
-[data-grow-state="3"] .grow-g-logo { fill: #F9A81A; fill-opacity: 0.25; }
-
-/* State 4 — Skyrocket: full logo reveal */
-[data-grow-state="4"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.62; }
-[data-grow-state="4"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.81; }
-[data-grow-state="4"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.96; }
-[data-grow-state="4"] .grow-g-logo { fill: #F9A81A; fill-opacity: 1; clip-path: inset(0 0 0 0); }
+/* State 3 — Skyrocket: full logo reveal */
+[data-grow-state="3"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.62; }
+[data-grow-state="3"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.81; }
+[data-grow-state="3"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.96; }
+[data-grow-state="3"] .grow-g-logo { fill: #F9A81A; fill-opacity: 1; clip-path: inset(0 0 0 0); }
 
 /* Logo mask reveal (bottom half unclips progressively) */
 .grow-g-mask {
@@ -815,8 +810,8 @@ section[id] { scroll-margin-top: 80px; }
   clip-path: inset(0 0 100% 0);
 }
 
-[data-grow-state="3"] .grow-g-mask { clip-path: inset(0 0 50% 0); }
-[data-grow-state="4"] .grow-g-mask { clip-path: inset(0 0 0 0); }
+[data-grow-state="2"] .grow-g-mask { clip-path: inset(0 0 50% 0); }
+[data-grow-state="3"] .grow-g-mask { clip-path: inset(0 0 0 0); }
 
 /* Feed lines (intake channels entering outer ring from top) */
 .grow-feed-lines {
@@ -837,7 +832,7 @@ section[id] { scroll-margin-top: 80px; }
 }
 
 /* Feed lines fade when logo fully reveals */
-[data-grow-state="4"] .grow-feed-lines { opacity: 0.3; }
+[data-grow-state="3"] .grow-feed-lines { opacity: 0.3; }
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1302,6 +1297,41 @@ section[id] { scroll-margin-top: 80px; }
   margin: 0 auto;
 }
 
+/* "One place to own it all" standalone block */
+.fj-own-it {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(80px, 10vw, 140px) 40px clamp(40px, 5vw, 60px);
+  box-sizing: border-box;
+}
+
+.fj-own-it-brand {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.6vw, 18px);
+  font-weight: normal;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.fj-own-it-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: normal;
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.fj-own-it-sub {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+}
+
 .fj-cloud-closing {
   text-align: center;
   font-family: var(--font-display);
@@ -1391,7 +1421,7 @@ section[id] { scroll-margin-top: 80px; }
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
 .grow-wrapper {
-  height: 520vh;
+  height: 420vh;
   position: relative;
   margin-top: 0;
 }
@@ -2004,7 +2034,7 @@ section[id] { scroll-margin-top: 80px; }
   .fj-flow-wrap { max-width: 100%; height: 120px; }
   .fj-cloud-closing { font-size: clamp(20px, 5vw, 28px); padding: 0 20px; max-width: 90%; margin: 0 auto; }
   /* Grow experience mobile */
-  .grow-wrapper { height: 480vh; }
+  .grow-wrapper { height: 380vh; }
   .grow-rings-wrap { width: 320px; height: 320px; }
   .grow-feed-lines { width: 320px; }
   .grow-panel-cols {
@@ -2251,6 +2281,13 @@ section[id] { scroll-margin-top: 80px; }
     </div>
   </div>
 
+  <!-- "One place to own it all" — standalone block above closing -->
+  <div class="fj-own-it fade-up">
+    <div class="fj-own-it-brand">Grouped</div>
+    <h2 class="fj-own-it-headline">One place to own it all</h2>
+    <p class="fj-own-it-sub">Every fan across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
+  </div>
+
   <!-- Closing sentence -->
   <p class="fj-cloud-closing fade-up">Turn every follower into a fan<br><em>at the moment they care</em></p>
 
@@ -2307,19 +2344,8 @@ section[id] { scroll-margin-top: 80px; }
           </svg>
         </div>
 
-        <!-- ===== STATE 0: One place to own it all (centered) ===== -->
-        <div class="grow-panel grow-panel-centered active" id="grow-panel-0">
-          <div class="grow-panel-brand">Grouped</div>
-          <h2 class="grow-panel-headline">One place to own it all</h2>
-          <p class="grow-panel-sub">Every fan across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
-          <div class="grow-panel-cta">
-            See how it works
-            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-        </div>
-
-        <!-- ===== STATE 1: Capture (3-column) ===== -->
-        <div class="grow-panel" id="grow-panel-1">
+        <!-- ===== STATE 0: Capture (3-column) ===== -->
+        <div class="grow-panel active" id="grow-panel-0">
           <div class="grow-panel-cols">
             <div class="grow-step-left">
               <div class="grow-step-label">01 / Capture</div>
@@ -2386,8 +2412,8 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
 
-        <!-- ===== STATE 2: Keep (3-column) ===== -->
-        <div class="grow-panel" id="grow-panel-2">
+        <!-- ===== STATE 1: Keep (3-column) ===== -->
+        <div class="grow-panel" id="grow-panel-1">
           <div class="grow-panel-cols">
             <div class="grow-step-left">
               <div class="grow-step-label">02 / Keep</div>
@@ -2442,8 +2468,8 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
 
-        <!-- ===== STATE 3: Grow (3-column) ===== -->
-        <div class="grow-panel" id="grow-panel-3">
+        <!-- ===== STATE 2: Grow (3-column) ===== -->
+        <div class="grow-panel" id="grow-panel-2">
           <div class="grow-panel-cols">
             <div class="grow-step-left">
               <div class="grow-step-label">03 / Grow</div>
@@ -2503,8 +2529,8 @@ section[id] { scroll-margin-top: 80px; }
           </div>
         </div>
 
-        <!-- ===== STATE 4: Skyrocket (centered, full logo reveal + cards) ===== -->
-        <div class="grow-panel grow-panel-centered" id="grow-panel-4">
+        <!-- ===== STATE 3: Skyrocket (centered, full logo reveal + cards) ===== -->
+        <div class="grow-panel grow-panel-centered" id="grow-panel-3">
           <h2 class="grow-closing-headline">The growth engine for lifelong music careers.</h2>
           <p class="grow-closing-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome to Grouped.</strong></p>
           <div class="grow-closing-cards">
@@ -2826,8 +2852,7 @@ const growPanels = [
   document.getElementById('grow-panel-0'),
   document.getElementById('grow-panel-1'),
   document.getElementById('grow-panel-2'),
-  document.getElementById('grow-panel-3'),
-  document.getElementById('grow-panel-4')
+  document.getElementById('grow-panel-3')
 ];
 const growReveal = document.querySelector('.grow-g-reveal');
 
@@ -2842,19 +2867,17 @@ function updateGrowScroll() {
   const scrollable = sectionHeight - window.innerHeight;
   const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
-  // 5 states across scroll:
-  // 0.00 - 0.20: State 0 — "One place to own it all"
-  // 0.20 - 0.40: State 1 — Capture
-  // 0.40 - 0.60: State 2 — Keep
-  // 0.60 - 0.80: State 3 — Grow
-  // 0.80 - 1.00: State 4 — Skyrocket (full logo reveal)
+  // 4 states across scroll:
+  // 0.00 - 0.25: State 0 — Capture
+  // 0.25 - 0.50: State 1 — Keep
+  // 0.50 - 0.75: State 2 — Grow
+  // 0.75 - 1.00: State 3 — Skyrocket (full logo reveal)
 
   let state;
-  if (progress < 0.20) state = 0;
-  else if (progress < 0.40) state = 1;
-  else if (progress < 0.60) state = 2;
-  else if (progress < 0.80) state = 3;
-  else state = 4;
+  if (progress < 0.25) state = 0;
+  else if (progress < 0.50) state = 1;
+  else if (progress < 0.75) state = 2;
+  else state = 3;
 
   if (state === lastGrowState) return;
   lastGrowState = state;
@@ -2867,9 +2890,9 @@ function updateGrowScroll() {
     if (panel) panel.classList.toggle('active', i === state);
   });
 
-  // Full logo reveal (State 4)
+  // Full logo reveal (State 3)
   if (growReveal) {
-    growReveal.style.opacity = state === 4 ? '1' : '0';
+    growReveal.style.opacity = state === 3 ? '1' : '0';
   }
 }
 
