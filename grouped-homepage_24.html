@@ -1101,20 +1101,35 @@ section[id] { scroll-margin-top: 80px; }
 }
 
 /* ---- DISCOVERY SECTION ---- */
-.discovery-section {
-  position: relative;
-  padding: clamp(40px, 5vw, 60px) 0 clamp(60px, 8vw, 100px);
+/* Discovery overlay — inside overview sticky, fades in as overview fades out */
+.discovery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity 0.1s linear;
 }
 
-.discovery-layout {
+.discovery-overlay-layout {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: 0 clamp(24px, 3vw, 48px);
+  grid-template-columns: 1fr clamp(300px, 38vw, 460px) 1fr;
+  gap: 0 clamp(16px, 2vw, 40px);
   max-width: 1200px;
   width: 92%;
-  margin: 0 auto;
   align-items: center;
-  min-height: 480px;
+}
+
+.discovery-overlay-center {
+  /* Transparent spacer where the rings show through */
+}
+
+/* Discovery spacer (anchor for snake transition) */
+.discovery-section {
+  position: relative;
 }
 
 .discovery-text {
@@ -1271,7 +1286,7 @@ section[id] { scroll-margin-top: 80px; }
    Scroll-driven: rings stay centered, text fades
    ============================================ */
 .overview-wrapper {
-  height: 200vh;
+  height: 300vh;
   position: relative;
   background: var(--bg-deep);
 }
@@ -2069,14 +2084,15 @@ section[id] { scroll-margin-top: 80px; }
   .hero-bg-union { display: none; }
   .hero-pill { margin-left: auto; margin-right: auto; }
   /* Overview mobile */
-  .overview-wrapper { height: 160vh; }
+  .overview-wrapper { height: 260vh; }
   .overview-rings { width: 300px; height: 300px; }
   .overview-headline { font-size: clamp(28px, 7vw, 42px); }
   .overview-sub br { display: none; }
-  /* Discovery section mobile */
-  .discovery-layout { grid-template-columns: 1fr; gap: 32px 0; text-align: center; }
-  .discovery-text { text-align: center; }
-  .discovery-cloud { width: clamp(260px, 70vw, 320px); margin: 0 auto; }
+  /* Discovery overlay mobile */
+  .discovery-overlay-layout { grid-template-columns: 1fr; gap: 20px 0; text-align: center; padding: 0 20px; }
+  .discovery-overlay-layout .discovery-text { text-align: center; }
+  .discovery-overlay-layout .discovery-closing { text-align: center; }
+  .discovery-overlay-layout .discovery-closing-headline { text-align: center; font-size: clamp(18px, 4.5vw, 26px); }
   .discovery-icon { width: 40px; height: 40px; }
   .discovery-icon svg { width: 18px; height: 18px; }
   .discovery-icon--lg { width: 48px; height: 48px; }
@@ -2228,7 +2244,7 @@ section[id] { scroll-margin-top: 80px; }
       </svg>
     </div>
 
-    <!-- Centered text on rings -->
+    <!-- Centered text on rings (phase 1: visible, fades out) -->
     <div class="overview-center">
       <div class="overview-brand">Grouped</div>
       <h2 class="overview-headline">One place to<br>own it all.</h2>
@@ -2237,7 +2253,24 @@ section[id] { scroll-margin-top: 80px; }
 
   </div>
 
-  <!-- Bottom CTA -->
+  <!-- Discovery overlay (phase 2: hidden, fades in over rings) -->
+  <div class="discovery-overlay" id="discovery-overlay">
+    <div class="discovery-overlay-layout">
+      <div class="discovery-text">
+        <div class="discovery-label">00 &nbsp;|&nbsp; Discovery</div>
+        <h2 class="discovery-headline">Fans are already <em>finding you.</em></h2>
+        <p class="discovery-body">Every stream, every scroll, every share. People are discovering your music across every platform, every day.</p>
+        <p class="discovery-body" style="margin-top:12px">The question isn't whether they'll find you...</p>
+      </div>
+      <div class="discovery-overlay-center"></div>
+      <div class="discovery-closing">
+        <p class="discovery-closing-sub">...It's whether you'll keep them</p>
+        <h3 class="discovery-closing-headline">Turn every follower into a fan, <em>at the moment they care.</em></h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom CTA (fades out with overview text) -->
   <div class="overview-bottom">
     <div class="overview-bottom-line">Your fans, your data, your career at your fingertips.</div>
     <div class="overview-bottom-sub">Everything a music career needs, nothing you don't.</div>
@@ -2254,73 +2287,9 @@ section[id] { scroll-margin-top: 80px; }
      ============================================ -->
 <section class="fan-journey" id="fan-journey">
 
-  <!-- ============================================
-       DISCOVERY SECTION — 2-column layout
-       ============================================ -->
-  <div class="discovery-section" id="discovery">
-    <div class="discovery-layout">
-
-      <!-- Left: text column -->
-      <div class="discovery-text">
-        <div class="discovery-label">00 &nbsp;|&nbsp; Discovery</div>
-        <h2 class="discovery-headline fade-up">Fans are already <em>finding you.</em></h2>
-        <p class="discovery-body fade-up">Every stream, every scroll, every share. People are discovering your music across every platform, every day.</p>
-        <p class="discovery-body fade-up" style="margin-top:12px">The question isn't whether they'll find you...</p>
-      </div>
-
-      <!-- Center: cloud — visually replaces overview rings -->
-      <div class="discovery-cloud">
-        <div class="discovery-glow"></div>
-
-        <!-- Apple Music — top center -->
-        <div class="discovery-icon discovery-icon--lg discovery-icon--apple">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.994 6.124a9.23 9.23 0 00-.24-2.19c-.317-1.31-1.062-2.31-2.18-3.043A5.022 5.022 0 0019.7.282a10.16 10.16 0 00-1.564-.183C17.636.042 17.137.022 15.985.01 14.717 0 13.449.003 12.18.003c-1.268 0-2.536-.003-3.804.007-1.15.012-1.65.032-2.15.089A10.088 10.088 0 004.662.282a5.02 5.02 0 00-1.874.6C1.67 1.567.922 2.567.606 3.877a9.229 9.229 0 00-.24 2.19c-.057.5-.077 1-.088 2.15C.268 9.486.265 10.754.265 12.022c0 1.268-.003 2.535.007 3.803.011 1.15.031 1.65.088 2.15.063.773.16 1.484.24 2.19.317 1.31 1.062 2.31 2.18 3.043.593.395 1.22.663 1.874.782.554.096 1.038.153 1.564.183.5.057 1 .077 2.15.088 1.268.01 2.536.007 3.804.007 1.268 0 2.536.003 3.804-.007 1.15-.011 1.65-.031 2.15-.088a10.16 10.16 0 001.564-.183 5.022 5.022 0 001.874-.782c1.118-.733 1.863-1.733 2.18-3.043.08-.706.177-1.417.24-2.19.057-.5.077-1 .088-2.15.01-1.268.007-2.535.007-3.803 0-1.268.003-2.536-.007-3.804-.011-1.15-.031-1.65-.088-2.15zM17.884 17.49c0 .538-.214.856-.642 1.069-.285.143-.543.176-.825.107-.281-.068-.482-.249-.613-.505-.164-.32-.232-.67-.27-1.028-.058-.584-.058-1.17-.058-1.756V9.617c0-.204.007-.408.03-.611.043-.384.153-.748.386-1.066.249-.34.583-.518.992-.54.245-.013.483.026.704.136.418.207.636.56.636 1.02v6.56c0 .79 0 1.58-.003 2.374zm-5.72.007c0 .538-.214.856-.642 1.069-.285.143-.543.176-.825.107-.281-.068-.482-.249-.613-.505-.164-.32-.232-.67-.27-1.028-.058-.584-.058-1.17-.058-1.756V8.13c0-.34.02-.679.098-1.012.14-.59.498-.98 1.085-1.131.297-.076.584-.05.856.075.419.193.636.545.636 1.006v8.05c0 .79 0 1.58-.003 2.374l.736.004z"/></svg>
-        </div>
-
-        <!-- YouTube — top right -->
-        <div class="discovery-icon discovery-icon--lg discovery-icon--youtube">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </div>
-
-        <!-- Spotify — center right -->
-        <div class="discovery-icon discovery-icon--lg discovery-icon--spotify">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-        </div>
-
-        <!-- SoundCloud — bottom right -->
-        <div class="discovery-icon discovery-icon--sm discovery-icon--soundcloud">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.057-.049-.1-.1-.1m-.899.828c-.06 0-.091.038-.1.1L0 14.479l.176 1.32c.009.06.04.098.1.098.058 0 .091-.038.1-.098l.204-1.32-.204-1.326c-.009-.06-.042-.098-.1-.098m1.818-1.154c-.064 0-.11.05-.116.11l-.213 2.57.213 2.513c.006.06.052.107.116.107.063 0 .11-.047.116-.107l.24-2.513-.24-2.57c-.006-.062-.053-.11-.116-.11m.893-.476c-.068 0-.118.051-.124.118l-.197 3.044.197 2.904c.006.068.056.118.124.118s.118-.05.125-.118l.22-2.904-.22-3.044c-.007-.067-.057-.118-.125-.118m.895-.377c-.073 0-.124.058-.13.13l-.18 3.422.18 3.084c.006.072.057.13.13.13.072 0 .123-.058.13-.13l.2-3.084-.2-3.421c-.008-.073-.059-.13-.13-.13m.93-.554c-.06 0-.122.06-.13.134l-.164 3.975.163 3.233c.008.075.07.133.131.133.063 0 .122-.058.13-.133l.183-3.233-.183-3.975c-.008-.075-.067-.134-.13-.134m.862 0c-.082 0-.142.066-.148.144l-.148 3.975.147 3.213c.006.082.066.143.148.143.082 0 .143-.061.148-.143l.167-3.213-.167-3.975c-.005-.078-.066-.144-.148-.144m.922-.202c-.085 0-.155.07-.16.155l-.13 4.176.13 3.182c.005.085.075.152.16.152s.153-.067.16-.152l.146-3.182-.147-4.176c-.006-.085-.075-.155-.16-.155m.88.05c-.09 0-.166.076-.172.166l-.115 3.96.115 3.15c.006.09.082.163.172.163.088 0 .165-.073.17-.163l.13-3.15-.13-3.96c-.005-.09-.082-.166-.17-.166m.94-.152c-.094 0-.174.08-.18.176l-.098 4.11.098 3.122c.006.094.086.173.18.173s.174-.08.18-.173l.11-3.122-.11-4.11c-.006-.096-.086-.176-.18-.176m.896.22c-.098 0-.18.087-.184.187l-.098 3.904.098 3.092c.004.097.086.182.184.182.096 0 .18-.085.182-.182l.11-3.092-.11-3.904c-.003-.1-.086-.187-.182-.187m1.97-1.932a3.56 3.56 0 00-1.632.393c-.085 0-.17.087-.178.187l-.082 5.09.08 3.065c.008.098.093.18.182.18.087 0 .168-.082.176-.18l.11-3.065-.11-5.09c-.004-.1-.084-.187-.178-.187-.096 0-.176.085-.18.182l-.098 5.095.098 3.07c.004.097.084.18.18.18.094 0 .176-.083.18-.18l.11-3.07-.11-5.095c-.004-.097-.086-.182-.18-.182m2.175-.598c-1.085 0-2.077.398-2.845 1.048-.24.198-.276.424-.276.658v8.292c0 .24.18.452.423.476H24v-10.474h-.004z"/></svg>
-        </div>
-
-        <!-- Instagram — bottom center -->
-        <div class="discovery-icon discovery-icon--lg discovery-icon--instagram">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </div>
-
-        <!-- Facebook — bottom left -->
-        <div class="discovery-icon discovery-icon--sm discovery-icon--facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </div>
-
-        <!-- Bandcamp — center left -->
-        <div class="discovery-icon discovery-icon--sm discovery-icon--bandcamp">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>
-        </div>
-
-        <!-- TikTok — top left -->
-        <div class="discovery-icon discovery-icon--lg discovery-icon--tiktok">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.82a4.84 4.84 0 01-1-.13z"/></svg>
-        </div>
-      </div><!-- /discovery-cloud -->
-
-      <!-- Right: closing text -->
-      <div class="discovery-closing">
-        <p class="discovery-closing-sub fade-up">...It's whether you'll keep them</p>
-        <h3 class="discovery-closing-headline fade-up">Turn every follower into a fan, <em>at the moment they care.</em></h3>
-      </div>
-
-    </div><!-- /discovery-layout -->
-  </div><!-- /discovery-section -->
+  <!-- Discovery section is now embedded in the overview sticky scroll above.
+       This spacer provides an anchor for the snake transition. -->
+  <div class="discovery-section" id="discovery"></div>
 
   <!-- ============================================
        SNAKE-LINE TRANSITION: Discovery → Grow
@@ -3039,19 +3008,25 @@ const ovRingInner = document.querySelector('.overview-ring-inner');
 const ovGLogo = document.querySelector('.overview-g-logo');
 const ovCenter = document.querySelector('.overview-center');
 const ovBottom = document.querySelector('.overview-bottom');
-const discCloud = document.querySelector('.discovery-cloud');
-const discText = document.querySelector('.discovery-text');
-const discClosing = document.querySelector('.discovery-closing');
+const discOverlay = document.getElementById('discovery-overlay');
 
 function checkOverviewTransition() {
   if (!overviewWrapper) return;
   const rect = overviewWrapper.getBoundingClientRect();
   const wh = window.innerHeight;
-  // progress 0 → 1 as user scrolls through the 200vh wrapper
-  // The first 100vh is the visible section; the remaining 100vh is the transition zone
+  // Total transition zone = 200vh (300vh wrapper - 100vh sticky)
   const scrolledPast = -rect.top;
-  const transitionZone = rect.height - wh; // = 100vh
+  const transitionZone = rect.height - wh; // = 200vh
   const progress = Math.max(0, Math.min(1, scrolledPast / transitionZone));
+
+  // Split into two phases:
+  // Phase 1 (progress 0→0.5): overview text fades out, rings dissolve
+  // Phase 2 (progress 0.5→1): discovery content fades in
+  const phase1 = Math.min(1, progress * 2);         // 0→1 over first half
+  const phase2 = Math.max(0, (progress - 0.4) / 0.6); // 0→1 over second 60%
+
+  const ease1 = phase1 * phase1 * (3 - 2 * phase1); // smoothstep
+  const ease2 = phase2 * phase2 * (3 - 2 * phase2);
 
   if (progress <= 0) {
     // Fully visible — default state
@@ -3061,39 +3036,43 @@ function checkOverviewTransition() {
     if (ovGLogo) ovGLogo.style.fillOpacity = '';
     if (ovCenter) ovCenter.style.opacity = '';
     if (ovBottom) ovBottom.style.opacity = '';
+    if (discOverlay) discOverlay.style.opacity = '0';
     return;
   }
 
-  // Ease the progress for smoother feel
-  const ease = progress * progress * (3 - 2 * progress); // smoothstep
-
-  // Text fades out faster (fully gone by 50% progress)
-  const textOpacity = Math.max(0, 1 - ease * 2.5);
+  // ---- PHASE 1: Overview fades out ----
+  const textOpacity = Math.max(0, 1 - ease1 * 2.2);
   if (ovCenter) ovCenter.style.opacity = textOpacity;
   if (ovBottom) ovBottom.style.opacity = textOpacity;
 
   // Inner ring fades first
-  const innerOp = Math.max(0, 0.42 * (1 - ease * 1.8));
+  const innerOp = Math.max(0, 0.42 * (1 - ease1 * 1.6));
   if (ovRingInner) { ovRingInner.style.fillOpacity = innerOp; ovRingInner.style.animation = 'none'; }
 
   // Middle ring fades slightly after
-  const middleOp = Math.max(0, 0.28 * (1 - ease * 1.5));
+  const middleOp = Math.max(0, 0.28 * (1 - ease1 * 1.4));
   if (ovRingMiddle) { ovRingMiddle.style.fillOpacity = middleOp; ovRingMiddle.style.animation = 'none'; }
 
   // G logo fades
-  if (ovGLogo) ovGLogo.style.fillOpacity = Math.max(0, 0.06 * (1 - ease * 2));
+  if (ovGLogo) ovGLogo.style.fillOpacity = Math.max(0, 0.06 * (1 - ease1 * 2));
 
-  // Outer ring transitions to gold glow
+  // Outer ring: gray → gold glow, then fades to subtle
   if (ovRingOuter) {
     ovRingOuter.style.animation = 'none';
-    // Interpolate from gray (#2A3036) to gold (#D4943A)
-    const r = Math.round(42 + (212 - 42) * ease);
-    const g = Math.round(48 + (148 - 48) * ease);
-    const b = Math.round(54 + (58 - 54) * ease);
+    const r = Math.round(42 + (212 - 42) * ease1);
+    const g = Math.round(48 + (148 - 48) * ease1);
+    const b = Math.round(54 + (58 - 54) * ease1);
     ovRingOuter.style.fill = `rgb(${r},${g},${b})`;
-    // Opacity goes from 0.18 down to a subtle 0.1
-    ovRingOuter.style.fillOpacity = 0.18 - (0.06 * ease);
-    ovRingOuter.style.filter = `blur(${ease * 2}px)`;
+    // Peaks at mid-transition, then fades for discovery
+    const outerOp = ease1 < 0.6 ? 0.18 + (0.08 * ease1) : 0.22 * (1 - (ease1 - 0.6) / 0.4 * 0.6);
+    ovRingOuter.style.fillOpacity = Math.max(0.04, outerOp);
+    ovRingOuter.style.filter = `blur(${ease1 * 3}px)`;
+  }
+
+  // ---- PHASE 2: Discovery fades in ----
+  if (discOverlay) {
+    discOverlay.style.opacity = ease2;
+    discOverlay.style.pointerEvents = ease2 > 0.5 ? 'auto' : 'none';
   }
 }
 
