@@ -769,32 +769,58 @@ section[id] { scroll-margin-top: 80px; }
   height: 100%;
 }
 
-/* Ring paths — continuous scroll-driven animation (JS controls fill + opacity) */
+/* Ring paths — class-based transitions (Swiss minimalism: flat color, no glow) */
 .grow-ring-outer,
 .grow-ring-middle,
 .grow-ring-inner {
   transform-origin: 287.5px 287.5px;
-  will-change: transform, fill, fill-opacity, filter;
+  transition: fill 1.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              fill-opacity 1.2s cubic-bezier(0.25, 0.1, 0.25, 1),
+              transform 1.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .grow-g-logo {
-  will-change: fill, fill-opacity;
+  transition: fill 1.2s ease, fill-opacity 1.2s ease;
 }
 
-/* Initial state (before JS takes over): gray dormant rings */
-.grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
-.grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
-.grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
-.grow-g-logo { fill: #F1F0EE; fill-opacity: 0.1; clip-path: inset(0 0 0 0); }
+/* State 0 (default): gray dormant */
+.grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; transform: rotate(0deg); }
+.grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; transform: rotate(0deg); }
+.grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; transform: rotate(0deg); }
+.grow-g-logo { fill: #F1F0EE; fill-opacity: 0.1; }
 
-/* Logo mask reveal (bottom half unclips progressively) */
+/* State 1 — Capture: warm gray, outer ring begins turning */
+.grow-stage.ring-state-1 .grow-ring-outer { fill: #6B5A3A; fill-opacity: 0.28; transform: rotate(22deg); }
+.grow-stage.ring-state-1 .grow-ring-middle { fill: #5A4E3A; fill-opacity: 0.45; transform: rotate(15deg); }
+.grow-stage.ring-state-1 .grow-ring-inner { fill: #4A4238; fill-opacity: 0.7; transform: rotate(8deg); }
+.grow-stage.ring-state-1 .grow-g-logo { fill-opacity: 0.18; }
+
+/* State 2 — Keep: gold emerging */
+.grow-stage.ring-state-2 .grow-ring-outer { fill: #D4943A; fill-opacity: 0.3; transform: rotate(45deg); }
+.grow-stage.ring-state-2 .grow-ring-middle { fill: #C4883A; fill-opacity: 0.5; transform: rotate(30deg); }
+.grow-stage.ring-state-2 .grow-ring-inner { fill: #B87E3A; fill-opacity: 0.75; transform: rotate(18deg); }
+.grow-stage.ring-state-2 .grow-g-logo { fill: #D4943A; fill-opacity: 0.3; }
+
+/* State 3 — Grow: fully gold */
+.grow-stage.ring-state-3 .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.45; transform: rotate(68deg); }
+.grow-stage.ring-state-3 .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.65; transform: rotate(45deg); }
+.grow-stage.ring-state-3 .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.85; transform: rotate(28deg); }
+.grow-stage.ring-state-3 .grow-g-logo { fill: #F9A81A; fill-opacity: 0.5; }
+
+/* State 4 — Skyrocket: peak gold, full rotation */
+.grow-stage.ring-state-4 .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.62; transform: rotate(90deg); }
+.grow-stage.ring-state-4 .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.81; transform: rotate(60deg); }
+.grow-stage.ring-state-4 .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.96; transform: rotate(35deg); }
+.grow-stage.ring-state-4 .grow-g-logo { fill: #F9A81A; fill-opacity: 1; }
+
+/* Logo mask reveal */
 .grow-g-mask {
   transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
   clip-path: inset(0 0 100% 0);
 }
 
-[data-grow-state="2"] .grow-g-mask { clip-path: inset(0 0 50% 0); }
-[data-grow-state="3"] .grow-g-mask { clip-path: inset(0 0 0 0); }
+.grow-stage.ring-state-3 .grow-g-mask { clip-path: inset(0 0 50% 0); }
+.grow-stage.ring-state-4 .grow-g-mask { clip-path: inset(0 0 0 0); }
 
 /* Feed lines (intake channels entering outer ring from top) */
 .grow-feed-lines {
@@ -806,7 +832,7 @@ section[id] { scroll-margin-top: 80px; }
   height: calc(50vh + 12px);
   pointer-events: none;
   opacity: 1;
-  transition: opacity 0.8s ease;
+  transition: opacity 1.2s ease;
 }
 
 .grow-feed-lines svg {
@@ -1418,14 +1444,13 @@ section[id] { scroll-margin-top: 80px; }
 
 /* ============================================
    SNAKE-LINE TRANSITION: Discovery → Grow
-   Thick glowing lines that physically connect
-   to the outer ring — zero gap
+   Clean lines that add color — Swiss minimalism
    ============================================ */
 .snake-transition {
   position: relative;
   width: 100%;
-  height: clamp(280px, 35vh, 480px);
-  margin-bottom: -2px;
+  height: clamp(200px, 28vh, 380px);
+  margin-bottom: -1px;
   overflow: visible;
   pointer-events: none;
   z-index: 1;
@@ -1437,36 +1462,16 @@ section[id] { scroll-margin-top: 80px; }
   overflow: visible;
 }
 
-/* Main visible stroke */
+/* Clean stroke reveal */
 .snake-path {
-  transition: stroke-dashoffset 0.02s linear;
+  transition: stroke-dashoffset 0.03s linear;
 }
 
-/* Duplicate glow layer behind each path */
-.snake-glow {
-  transition: stroke-dashoffset 0.02s linear;
-  filter: blur(8px);
+/* Feed lines — JS toggles classes for opacity */
+.grow-feed-lines {
+  transition: opacity 1s ease;
 }
-
-/* Flow arcs: gold energy veins tracing ring circumferences */
-.grow-inner-flow {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-.grow-inner-flow svg {
-  width: 100%;
-  height: 100%;
-}
-.grow-flow-arc {
-  fill: none;
-  stroke: #D4943A;
-  stroke-linecap: round;
-  opacity: 0;
-  transform-origin: 287.5px 287.5px;
-  will-change: stroke-dashoffset, opacity, transform;
-}
+.grow-stage.ring-state-4 .grow-feed-lines { opacity: 0.2; }
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
 .grow-wrapper {
@@ -2282,40 +2287,21 @@ section[id] { scroll-margin-top: 80px; }
   <div class="snake-transition" id="snake-transition">
     <svg viewBox="0 0 1200 500" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <!-- Core stroke gradient: fades in from transparent → gold → settles to warm gray -->
+        <!-- Clean flat gradient: transparent → gold -->
         <linearGradient id="snake-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
-          <stop offset="0.15" stop-color="#D4943A" stop-opacity="0.15"/>
-          <stop offset="0.4" stop-color="#D4943A" stop-opacity="0.55"/>
-          <stop offset="0.7" stop-color="#D4943A" stop-opacity="0.7"/>
-          <stop offset="0.9" stop-color="#D4943A" stop-opacity="0.5"/>
-          <stop offset="1" stop-color="#D4943A" stop-opacity="0.35"/>
-        </linearGradient>
-        <!-- Glow layer gradient: softer, wider bloom -->
-        <linearGradient id="snake-glow-grad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
-          <stop offset="0.2" stop-color="#D4943A" stop-opacity="0.06"/>
-          <stop offset="0.45" stop-color="#D4943A" stop-opacity="0.2"/>
-          <stop offset="0.75" stop-color="#D4943A" stop-opacity="0.3"/>
-          <stop offset="1" stop-color="#D4943A" stop-opacity="0.15"/>
+          <stop offset="0.35" stop-color="#D4943A" stop-opacity="0.35"/>
+          <stop offset="1" stop-color="#D4943A" stop-opacity="0.5"/>
         </linearGradient>
       </defs>
 
-      <!-- GLOW LAYERS (behind — blurred, thicker) -->
-      <path class="snake-glow" d="M360,0 C360,80 300,140 340,220 C385,310 530,380 565,500"
-            stroke="url(#snake-glow-grad)" stroke-width="50" stroke-linecap="round"/>
-      <path class="snake-glow" d="M600,0 C600,80 570,150 590,240 C615,340 605,420 600,500"
-            stroke="url(#snake-glow-grad)" stroke-width="40" stroke-linecap="round" opacity="0.5"/>
-      <path class="snake-glow" d="M840,0 C840,80 900,140 860,220 C815,310 670,380 635,500"
-            stroke="url(#snake-glow-grad)" stroke-width="50" stroke-linecap="round"/>
-
-      <!-- CORE STROKES (sharp, thick) -->
+      <!-- 3 clean lines — flat color, no glow -->
       <path class="snake-path" d="M360,0 C360,80 300,140 340,220 C385,310 530,380 565,500"
-            stroke="url(#snake-grad)" stroke-width="22" stroke-linecap="round"/>
+            stroke="url(#snake-grad)" stroke-width="3" stroke-linecap="round"/>
       <path class="snake-path" d="M600,0 C600,80 570,150 590,240 C615,340 605,420 600,500"
-            stroke="url(#snake-grad)" stroke-width="18" stroke-linecap="round" opacity="0.6"/>
+            stroke="url(#snake-grad)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
       <path class="snake-path" d="M840,0 C840,80 900,140 860,220 C815,310 670,380 635,500"
-            stroke="url(#snake-grad)" stroke-width="22" stroke-linecap="round"/>
+            stroke="url(#snake-grad)" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </div>
 
@@ -2333,22 +2319,14 @@ section[id] { scroll-margin-top: 80px; }
             <svg viewBox="0 0 575 600" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="feed-fade" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#D4943A" stop-opacity="0.25"/>
-                  <stop offset="0.3" stop-color="#D4943A" stop-opacity="0.15"/>
-                  <stop offset="0.6" stop-color="#2A3036" stop-opacity="0.3"/>
-                  <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
-                </linearGradient>
-                <linearGradient id="feed-glow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#D4943A" stop-opacity="0.12"/>
-                  <stop offset="0.5" stop-color="#D4943A" stop-opacity="0.04"/>
-                  <stop offset="1" stop-color="#D4943A" stop-opacity="0"/>
+                  <stop offset="0" stop-color="#D4943A" stop-opacity="0.2"/>
+                  <stop offset="0.5" stop-color="#D4943A" stop-opacity="0.1"/>
+                  <stop offset="1" stop-color="#2A3036" stop-opacity="0.25"/>
                 </linearGradient>
               </defs>
-              <!-- Glow wash behind the channels -->
-              <ellipse cx="287" cy="80" rx="120" ry="200" fill="url(#feed-glow)" opacity="0.5"/>
-              <!-- 3 converging intake channels -->
+              <!-- 3 converging intake channels — clean, no glow -->
               <path d="M200 0 L200 400 Q200 580, 270 598 L282 598 Q210 580, 210 400 L210 0 Z" fill="url(#feed-fade)"/>
-              <path d="M283 0 L283 598 L292 598 L292 0 Z" fill="url(#feed-fade)" opacity="0.7"/>
+              <path d="M283 0 L283 598 L292 598 L292 0 Z" fill="url(#feed-fade)" opacity="0.5"/>
               <path d="M375 0 L375 400 Q375 580, 305 598 L293 598 Q365 580, 365 400 L365 0 Z" fill="url(#feed-fade)"/>
             </svg>
           </div>
@@ -2374,20 +2352,6 @@ section[id] { scroll-margin-top: 80px; }
             </g>
           </svg>
 
-          <!-- Flow arcs: gold energy veins tracing ring paths -->
-          <div class="grow-inner-flow">
-            <svg viewBox="0 0 575 575" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <!-- Outer flow arc (r≈262, centered at 287.5) -->
-              <circle class="grow-flow-arc grow-flow-outer" cx="287.5" cy="287.5" r="262"
-                      stroke-width="3" stroke-opacity="0.4"/>
-              <!-- Middle flow arc (r≈187) -->
-              <circle class="grow-flow-arc grow-flow-middle" cx="287.5" cy="287.5" r="187"
-                      stroke-width="2.5" stroke-opacity="0.35"/>
-              <!-- Inner flow arc (r≈112) -->
-              <circle class="grow-flow-arc grow-flow-inner" cx="287.5" cy="287.5" r="112"
-                      stroke-width="2" stroke-opacity="0.3"/>
-            </svg>
-          </div>
         </div>
 
         <!-- ===== STATE 0: Capture (3-column) ===== -->
@@ -2901,24 +2865,9 @@ const growPanels = [
   document.getElementById('grow-panel-3')
 ];
 const growReveal = document.querySelector('.grow-g-reveal');
-const growRingOuter = document.querySelector('.grow-ring-outer');
-const growRingMiddle = document.querySelector('.grow-ring-middle');
-const growRingInner = document.querySelector('.grow-ring-inner');
-const growGLogo = document.querySelector('.grow-g-logo');
-const growRingsWrap = document.querySelector('.grow-rings-wrap');
-const growFeedLines = document.querySelector('.grow-feed-lines');
-const growFlowArcs = document.querySelectorAll('.grow-flow-arc');
-
-// Pre-compute flow arc lengths
-let flowArcLens = [];
-growFlowArcs.forEach(arc => {
-  const len = arc.getTotalLength();
-  flowArcLens.push(len);
-  arc.style.strokeDasharray = len;
-  arc.style.strokeDashoffset = len;
-});
 
 let lastGrowState = -1;
+let lastRingState = -1;
 
 function updateGrowScroll() {
   if (!growWrapper || !growStage) return;
@@ -2929,14 +2878,13 @@ function updateGrowScroll() {
   const scrollable = sectionHeight - window.innerHeight;
   const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
-  // Still keep discrete states for PANEL switching (content must snap)
+  // Panel state (content snaps at quartiles)
   let state;
   if (progress < 0.25) state = 0;
   else if (progress < 0.50) state = 1;
   else if (progress < 0.75) state = 2;
   else state = 3;
 
-  // Panel switching stays discrete
   if (state !== lastGrowState) {
     lastGrowState = state;
     growStage.setAttribute('data-grow-state', state);
@@ -2946,83 +2894,21 @@ function updateGrowScroll() {
     if (growReveal) growReveal.style.opacity = state === 3 ? '1' : '0';
   }
 
-  // --- CONTINUOUS ring transforms driven by progress ---
-  const ease = progress * progress * (3 - 2 * progress); // smoothstep
+  // Ring state — 5 visual states (0-4), transitions smoothly via CSS classes
+  // Thresholds offset slightly from panel thresholds for visual lead
+  let ringState;
+  if (progress < 0.12) ringState = 0;
+  else if (progress < 0.35) ringState = 1;
+  else if (progress < 0.58) ringState = 2;
+  else if (progress < 0.80) ringState = 3;
+  else ringState = 4;
 
-  // 1. ROTATION: rings slowly spin as you scroll (outer fastest, inner slowest)
-  const outerRotation = ease * 90;
-  const middleRotation = ease * 60;
-  const innerRotation = ease * 35;
-
-  if (growRingOuter) growRingOuter.style.transform = `rotate(${outerRotation}deg)`;
-  if (growRingMiddle) growRingMiddle.style.transform = `rotate(${middleRotation}deg)`;
-  if (growRingInner) growRingInner.style.transform = `rotate(${innerRotation}deg)`;
-
-  // 2. COLOR: continuous gray → gold interpolation
-  // Gray: rgb(42,48,54) = #2A3036, Gold: rgb(249,168,26) = #F9A81A
-  const r = Math.round(42 + (249 - 42) * ease);
-  const g = Math.round(48 + (168 - 48) * ease);
-  const b = Math.round(54 + (26 - 54) * ease);
-  const ringColor = `rgb(${r},${g},${b})`;
-
-  // Outer ring: opacity 0.3 → 0.62
-  if (growRingOuter) {
-    growRingOuter.style.fill = ringColor;
-    growRingOuter.style.fillOpacity = 0.3 + ease * 0.32;
-  }
-  // Middle ring: opacity 0.56 → 0.81 (leads slightly)
-  if (growRingMiddle) {
-    const mp = Math.min(1, ease * 1.15);
-    growRingMiddle.style.fill = ringColor;
-    growRingMiddle.style.fillOpacity = 0.56 + mp * 0.25;
-  }
-  // Inner ring: opacity 0.8 → 0.96
-  if (growRingInner) {
-    const ip = Math.min(1, ease * 1.25);
-    growRingInner.style.fill = ringColor;
-    growRingInner.style.fillOpacity = 0.8 + ip * 0.16;
-  }
-
-  // 3. G LOGO: fade in progressively
-  if (growGLogo) {
-    growGLogo.style.fillOpacity = 0.1 + ease * 0.9;
-    if (ease > 0.5) {
-      growGLogo.style.fill = ringColor;
+  if (ringState !== lastRingState) {
+    lastRingState = ringState;
+    // Remove all ring states, add current
+    for (let i = 0; i <= 4; i++) {
+      growStage.classList.toggle('ring-state-' + i, i === ringState);
     }
-  }
-
-  // 4. GLOW: outer ring gets a gold drop-shadow that intensifies
-  if (growRingOuter) {
-    const glowIntensity = Math.max(0, (ease - 0.15) / 0.85);
-    const glowRadius = 6 + glowIntensity * 18;
-    const glowOpacity = glowIntensity * 0.4;
-    growRingOuter.style.filter = `drop-shadow(0 0 ${glowRadius}px rgba(212,148,58,${glowOpacity}))`;
-  }
-
-  // 5. SCALE: rings subtly breathe — grow slightly as energy fills
-  const scale = 1 + ease * 0.04;
-  if (growRingsWrap) {
-    growRingsWrap.style.transform = `translate(-50%, -50%) scale(${scale})`;
-  }
-
-  // 6. FLOW ARCS: gold energy veins tracing ring circumferences (staggered)
-  growFlowArcs.forEach((arc, i) => {
-    const staggerStart = i * 0.15; // outer first, then middle, then inner
-    const arcProgress = Math.max(0, Math.min(1, (ease - staggerStart) / (1 - staggerStart)));
-    const arcEase = arcProgress * arcProgress * (3 - 2 * arcProgress);
-
-    arc.style.strokeDashoffset = flowArcLens[i] * (1 - arcEase);
-    arc.style.opacity = arcEase > 0 ? 0.15 + arcEase * 0.35 : 0;
-
-    // Flow arcs also rotate, matching their ring
-    const arcRotations = [90, 60, 35];
-    arc.style.transform = `rotate(${arcEase * arcRotations[i]}deg)`;
-  });
-
-  // 7. FEED LINES: fade as energy transfers to rings
-  if (growFeedLines) {
-    const feedIntensity = Math.max(0.15, 1 - ease * 0.85);
-    growFeedLines.style.opacity = feedIntensity;
   }
 }
 
@@ -3163,22 +3049,13 @@ window.addEventListener('scroll', checkOverviewTransition, { passive: true });
 
 // ---- SNAKE-LINE TRANSITION (Discovery → Grow) ----
 const snakeSection = document.getElementById('snake-transition');
-const snakeCorePaths = document.querySelectorAll('.snake-path');
-const snakeGlowPaths = document.querySelectorAll('.snake-glow');
-const growStageEl = document.getElementById('grow-stage');
-let snakeCoreLen = [];
-let snakeGlowLen = [];
+const snakePaths = document.querySelectorAll('.snake-path');
+let snakePathLens = [];
 
 // Pre-compute path lengths and set initial dash state
-snakeCorePaths.forEach(path => {
+snakePaths.forEach(path => {
   const len = path.getTotalLength();
-  snakeCoreLen.push(len);
-  path.style.strokeDasharray = len;
-  path.style.strokeDashoffset = len;
-});
-snakeGlowPaths.forEach(path => {
-  const len = path.getTotalLength();
-  snakeGlowLen.push(len);
+  snakePathLens.push(len);
   path.style.strokeDasharray = len;
   path.style.strokeDashoffset = len;
 });
@@ -3187,23 +3064,12 @@ function checkSnakeTransition() {
   if (!snakeSection) return;
   const rect = snakeSection.getBoundingClientRect();
   const wh = window.innerHeight;
-  // Start revealing when top enters lower 70% of viewport
   const progress = Math.max(0, Math.min(1, (wh * 0.7 - rect.top) / (rect.height + wh * 0.2)));
-  // Smoothstep for organic feel
   const ease = progress * progress * (3 - 2 * progress);
 
-  // Glow reveals slightly ahead of core (leading glow effect)
-  const glowProgress = Math.min(1, ease * 1.15);
-  const coreProgress = ease;
-
-  snakeCorePaths.forEach((path, i) => {
-    path.style.strokeDashoffset = snakeCoreLen[i] * (1 - coreProgress);
+  snakePaths.forEach((path, i) => {
+    path.style.strokeDashoffset = snakePathLens[i] * (1 - ease);
   });
-  snakeGlowPaths.forEach((path, i) => {
-    path.style.strokeDashoffset = snakeGlowLen[i] * (1 - glowProgress);
-  });
-
-  // Ring gold effect now handled continuously by updateGrowScroll()
 }
 
 window.addEventListener('scroll', checkSnakeTransition, { passive: true });
