@@ -1284,22 +1284,16 @@ section[id] { scroll-margin-top: 80px; }
 }
 
 .fj-cloud-closing {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 700px;
   text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(24px, 2.8vw, 36px);
+  font-size: clamp(26px, 3vw, 40px);
   font-weight: normal;
   font-style: normal;
   color: var(--white);
   line-height: 1.35;
-  z-index: 2;
-  padding: 16px 40px;
-  background: radial-gradient(ellipse at center, var(--bg-primary) 40%, transparent 75%);
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
   box-sizing: border-box;
 }
 
@@ -1307,6 +1301,27 @@ section[id] { scroll-margin-top: 80px; }
   color: var(--gold);
   font-style: normal;
   font-weight: normal;
+}
+
+/* Scroll indicator */
+.fj-scroll-hint {
+  text-align: center;
+  margin-top: 32px;
+  opacity: 0.4;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+.fj-scroll-hint svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--gold);
+  stroke-width: 2;
+  fill: none;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(8px); opacity: 0.7; }
 }
 
 /* Flow curves */
@@ -1357,7 +1372,7 @@ section[id] { scroll-margin-top: 80px; }
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
-  padding: 40px 40px 0;
+  padding: clamp(100px, 14vw, 180px) 40px 0;
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -2050,7 +2065,7 @@ section[id] { scroll-margin-top: 80px; }
   .fj-node-xs .fj-node-icon { width: 14px; height: 14px; }
   .fj-node-tip { min-width: 180px; padding: 10px 14px; }
   .fj-flow-wrap { max-width: 100%; height: 120px; }
-  .fj-cloud-closing { font-size: clamp(18px, 4.5vw, 26px); padding: 10px 16px; max-width: 90%; }
+  .fj-cloud-closing { font-size: clamp(20px, 5vw, 28px); padding: 0 20px; max-width: 90%; margin: 0 auto; }
   /* Fader experience mobile */
   .fader-wrapper { height: 380vh; }
   .fader-experience {
@@ -2268,9 +2283,8 @@ section[id] { scroll-margin-top: 80px; }
     </div>
   </div>
 
-  <!-- Flow curves + overlaid sentence -->
+  <!-- Flow curves -->
   <div class="fj-flow-wrap">
-    <p class="fj-cloud-closing fade-up">Turn every follower into a fan<br><em>at the moment they care</em></p>
     <div class="fj-flow-svg" id="fj-flow-svg">
       <svg viewBox="0 0 1200 120" preserveAspectRatio="none" fill="none">
         <path class="fj-flow-path" d="M60,0 C60,65 600,45 600,120"/>
@@ -2295,6 +2309,14 @@ section[id] { scroll-margin-top: 80px; }
         <path class="fj-flow-path" d="M1140,0 C1140,70 600,35 600,120"/>
       </svg>
     </div>
+  </div>
+
+  <!-- Closing sentence -->
+  <p class="fj-cloud-closing fade-up">Turn every follower into a fan<br><em>at the moment they care</em></p>
+
+  <!-- Scroll indicator -->
+  <div class="fj-scroll-hint">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 
   <!-- Grouped destination -->
