@@ -829,10 +829,16 @@ section[id] { scroll-margin-top: 80px; }
 .grow-feed-lines svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
 /* Feed lines fade when logo fully reveals */
 [data-grow-state="3"] .grow-feed-lines { opacity: 0.3; }
+
+/* When snake arrives, feed lines warm to gold */
+.grow-stage.snake-arrived .grow-feed-lines svg path {
+  transition: fill 1s ease;
+}
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1419,30 +1425,48 @@ section[id] { scroll-margin-top: 80px; }
 
 /* ============================================
    SNAKE-LINE TRANSITION: Discovery → Grow
+   Thick glowing lines that physically connect
+   to the outer ring — zero gap
    ============================================ */
 .snake-transition {
   position: relative;
   width: 100%;
-  height: clamp(200px, 25vh, 320px);
+  height: clamp(280px, 35vh, 480px);
+  margin-bottom: -2px;
   overflow: visible;
   pointer-events: none;
+  z-index: 1;
 }
 
 .snake-transition svg {
   width: 100%;
   height: 100%;
+  overflow: visible;
 }
 
+/* Main visible stroke */
 .snake-path {
-  transition: stroke-dashoffset 0.05s linear;
+  transition: stroke-dashoffset 0.02s linear;
+}
+
+/* Duplicate glow layer behind each path */
+.snake-glow {
+  transition: stroke-dashoffset 0.02s linear;
+  filter: blur(8px);
 }
 
 /* Gold glow on outer ring once snake energy arrives */
 .grow-stage.snake-arrived .grow-ring-outer {
   fill: #D4943A !important;
-  fill-opacity: 0.22 !important;
-  filter: blur(1.5px);
-  transition: fill 1.2s ease, fill-opacity 1.2s ease, filter 1.2s ease;
+  fill-opacity: 0.3 !important;
+  filter: drop-shadow(0 0 12px rgba(212,148,58,0.35));
+  transition: fill 0.8s ease, fill-opacity 0.8s ease, filter 0.8s ease;
+}
+/* Also warm the middle ring slightly */
+.grow-stage.snake-arrived .grow-ring-middle {
+  fill: #8B6A3A !important;
+  fill-opacity: 0.2 !important;
+  transition: fill 1.2s ease 0.2s, fill-opacity 1.2s ease 0.2s;
 }
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
@@ -2063,7 +2087,7 @@ section[id] { scroll-margin-top: 80px; }
   .discovery-closing { text-align: center; }
   .discovery-closing-headline { text-align: center; font-size: clamp(18px, 4.5vw, 26px); }
   /* Snake transition mobile */
-  .snake-transition { height: clamp(120px, 18vh, 200px); }
+  .snake-transition { height: clamp(180px, 25vh, 280px); }
   /* Grow experience mobile */
   .grow-wrapper { height: 380vh; }
   .grow-rings-wrap { width: 320px; height: 320px; }
@@ -2303,36 +2327,42 @@ section[id] { scroll-margin-top: 80px; }
        3 curved lines converging, gold gradient leads eye
        ============================================ -->
   <div class="snake-transition" id="snake-transition">
-    <svg viewBox="0 0 1200 300" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 1200 500" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="snake-grad-l" x1="0" y1="0" x2="0" y2="1">
+        <!-- Core stroke gradient: fades in from transparent → gold → settles to warm gray -->
+        <linearGradient id="snake-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
-          <stop offset="0.35" stop-color="#D4943A" stop-opacity="0.45"/>
-          <stop offset="0.65" stop-color="#D4943A" stop-opacity="0.25"/>
-          <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
+          <stop offset="0.15" stop-color="#D4943A" stop-opacity="0.15"/>
+          <stop offset="0.4" stop-color="#D4943A" stop-opacity="0.55"/>
+          <stop offset="0.7" stop-color="#D4943A" stop-opacity="0.7"/>
+          <stop offset="0.9" stop-color="#D4943A" stop-opacity="0.5"/>
+          <stop offset="1" stop-color="#D4943A" stop-opacity="0.35"/>
         </linearGradient>
-        <linearGradient id="snake-grad-c" x1="0" y1="0" x2="0" y2="1">
+        <!-- Glow layer gradient: softer, wider bloom -->
+        <linearGradient id="snake-glow-grad" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
-          <stop offset="0.3" stop-color="#D4943A" stop-opacity="0.35"/>
-          <stop offset="0.6" stop-color="#D4943A" stop-opacity="0.2"/>
-          <stop offset="1" stop-color="#2A3036" stop-opacity="0.35"/>
-        </linearGradient>
-        <linearGradient id="snake-grad-r" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#D4943A" stop-opacity="0"/>
-          <stop offset="0.35" stop-color="#D4943A" stop-opacity="0.45"/>
-          <stop offset="0.65" stop-color="#D4943A" stop-opacity="0.25"/>
-          <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
+          <stop offset="0.2" stop-color="#D4943A" stop-opacity="0.06"/>
+          <stop offset="0.45" stop-color="#D4943A" stop-opacity="0.2"/>
+          <stop offset="0.75" stop-color="#D4943A" stop-opacity="0.3"/>
+          <stop offset="1" stop-color="#D4943A" stop-opacity="0.15"/>
         </linearGradient>
       </defs>
-      <!-- Left snake: wide start, curves inward -->
-      <path class="snake-path" d="M380,0 C380,50 340,90 360,140 C385,195 510,240 560,300"
-            stroke="url(#snake-grad-l)" stroke-width="14" stroke-linecap="round"/>
-      <!-- Center snake: gentle S-curve, stays centered -->
-      <path class="snake-path" d="M600,0 C600,55 575,100 595,155 C615,210 605,255 600,300"
-            stroke="url(#snake-grad-c)" stroke-width="11" stroke-linecap="round" opacity="0.65"/>
-      <!-- Right snake: wide start, curves inward -->
-      <path class="snake-path" d="M820,0 C820,50 860,90 840,140 C815,195 690,240 640,300"
-            stroke="url(#snake-grad-r)" stroke-width="14" stroke-linecap="round"/>
+
+      <!-- GLOW LAYERS (behind — blurred, thicker) -->
+      <path class="snake-glow" d="M360,0 C360,80 300,140 340,220 C385,310 530,380 565,500"
+            stroke="url(#snake-glow-grad)" stroke-width="50" stroke-linecap="round"/>
+      <path class="snake-glow" d="M600,0 C600,80 570,150 590,240 C615,340 605,420 600,500"
+            stroke="url(#snake-glow-grad)" stroke-width="40" stroke-linecap="round" opacity="0.5"/>
+      <path class="snake-glow" d="M840,0 C840,80 900,140 860,220 C815,310 670,380 635,500"
+            stroke="url(#snake-glow-grad)" stroke-width="50" stroke-linecap="round"/>
+
+      <!-- CORE STROKES (sharp, thick) -->
+      <path class="snake-path" d="M360,0 C360,80 300,140 340,220 C385,310 530,380 565,500"
+            stroke="url(#snake-grad)" stroke-width="22" stroke-linecap="round"/>
+      <path class="snake-path" d="M600,0 C600,80 570,150 590,240 C615,340 605,420 600,500"
+            stroke="url(#snake-grad)" stroke-width="18" stroke-linecap="round" opacity="0.6"/>
+      <path class="snake-path" d="M840,0 C840,80 900,140 860,220 C815,310 670,380 635,500"
+            stroke="url(#snake-grad)" stroke-width="22" stroke-linecap="round"/>
     </svg>
   </div>
 
@@ -2345,16 +2375,24 @@ section[id] { scroll-margin-top: 80px; }
 
         <!-- SVG Rings (background, centered) -->
         <div class="grow-rings-wrap">
-          <!-- Feed lines: solid filled channels matching ring aesthetic -->
+          <!-- Feed lines: converging channels from snake into outer ring -->
           <div class="grow-feed-lines">
             <svg viewBox="0 0 575 600" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
                 <linearGradient id="feed-fade" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#2A3036" stop-opacity="0.4"/>
-                  <stop offset="0.4" stop-color="#2A3036" stop-opacity="0.35"/>
-                  <stop offset="1" stop-color="#2A3036" stop-opacity="0.5"/>
+                  <stop offset="0" stop-color="#D4943A" stop-opacity="0.25"/>
+                  <stop offset="0.3" stop-color="#D4943A" stop-opacity="0.15"/>
+                  <stop offset="0.6" stop-color="#2A3036" stop-opacity="0.3"/>
+                  <stop offset="1" stop-color="#2A3036" stop-opacity="0.45"/>
+                </linearGradient>
+                <linearGradient id="feed-glow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#D4943A" stop-opacity="0.12"/>
+                  <stop offset="0.5" stop-color="#D4943A" stop-opacity="0.04"/>
+                  <stop offset="1" stop-color="#D4943A" stop-opacity="0"/>
                 </linearGradient>
               </defs>
+              <!-- Glow wash behind the channels -->
+              <ellipse cx="287" cy="80" rx="120" ry="200" fill="url(#feed-glow)" opacity="0.5"/>
               <!-- 3 converging intake channels -->
               <path d="M200 0 L200 400 Q200 580, 270 598 L282 598 Q210 580, 210 400 L210 0 Z" fill="url(#feed-fade)"/>
               <path d="M283 0 L283 598 L292 598 L292 0 Z" fill="url(#feed-fade)" opacity="0.7"/>
@@ -3063,33 +3101,49 @@ window.addEventListener('scroll', checkOverviewTransition, { passive: true });
 
 // ---- SNAKE-LINE TRANSITION (Discovery → Grow) ----
 const snakeSection = document.getElementById('snake-transition');
-const snakePaths = document.querySelectorAll('.snake-path');
+const snakeCorePaths = document.querySelectorAll('.snake-path');
+const snakeGlowPaths = document.querySelectorAll('.snake-glow');
 const growStageEl = document.getElementById('grow-stage');
-let snakePathLengths = [];
+let snakeCoreLen = [];
+let snakeGlowLen = [];
 
 // Pre-compute path lengths and set initial dash state
-snakePaths.forEach(path => {
+snakeCorePaths.forEach(path => {
   const len = path.getTotalLength();
-  snakePathLengths.push(len);
+  snakeCoreLen.push(len);
+  path.style.strokeDasharray = len;
+  path.style.strokeDashoffset = len;
+});
+snakeGlowPaths.forEach(path => {
+  const len = path.getTotalLength();
+  snakeGlowLen.push(len);
   path.style.strokeDasharray = len;
   path.style.strokeDashoffset = len;
 });
 
 function checkSnakeTransition() {
-  if (!snakeSection || !snakePaths.length) return;
+  if (!snakeSection) return;
   const rect = snakeSection.getBoundingClientRect();
   const wh = window.innerHeight;
-  // Progress: 0 when top of snake enters viewport bottom, 1 when bottom leaves viewport top
-  const progress = Math.max(0, Math.min(1, 1 - (rect.top / (wh * 0.8))));
+  // Start revealing when top enters lower 70% of viewport
+  const progress = Math.max(0, Math.min(1, (wh * 0.7 - rect.top) / (rect.height + wh * 0.2)));
+  // Smoothstep for organic feel
+  const ease = progress * progress * (3 - 2 * progress);
 
-  snakePaths.forEach((path, i) => {
-    const len = snakePathLengths[i];
-    path.style.strokeDashoffset = len * (1 - progress);
+  // Glow reveals slightly ahead of core (leading glow effect)
+  const glowProgress = Math.min(1, ease * 1.15);
+  const coreProgress = ease;
+
+  snakeCorePaths.forEach((path, i) => {
+    path.style.strokeDashoffset = snakeCoreLen[i] * (1 - coreProgress);
+  });
+  snakeGlowPaths.forEach((path, i) => {
+    path.style.strokeDashoffset = snakeGlowLen[i] * (1 - glowProgress);
   });
 
-  // When snake lines finish, light up the outer grow ring gold
+  // When snake lines reach the ring, light it up gold
   if (growStageEl) {
-    if (progress >= 0.85) {
+    if (ease >= 0.75) {
       growStageEl.classList.add('snake-arrived');
     } else {
       growStageEl.classList.remove('snake-arrived');
