@@ -769,40 +769,23 @@ section[id] { scroll-margin-top: 80px; }
   height: 100%;
 }
 
-/* Ring paths — transition fill + opacity between states */
+/* Ring paths — continuous scroll-driven animation (JS controls fill + opacity) */
 .grow-ring-outer,
 .grow-ring-middle,
 .grow-ring-inner {
-  transition: fill 0.8s ease, fill-opacity 0.8s ease;
+  transform-origin: 287.5px 287.5px;
+  will-change: transform, fill, fill-opacity, filter;
 }
 
 .grow-g-logo {
-  transition: fill-opacity 0.8s ease, clip-path 0.8s ease;
+  will-change: fill, fill-opacity;
 }
 
-/* State 0 (default / Capture): gray dormant rings */
+/* Initial state (before JS takes over): gray dormant rings */
 .grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
 .grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
 .grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
 .grow-g-logo { fill: #F1F0EE; fill-opacity: 0.1; clip-path: inset(0 0 0 0); }
-
-/* State 1 — Keep: gold starts emerging */
-[data-grow-state="1"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.2; }
-[data-grow-state="1"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.35; }
-[data-grow-state="1"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.55; }
-[data-grow-state="1"] .grow-g-logo { fill-opacity: 0.15; }
-
-/* State 2 — Grow: fully gold */
-[data-grow-state="2"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.45; }
-[data-grow-state="2"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.65; }
-[data-grow-state="2"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.85; }
-[data-grow-state="2"] .grow-g-logo { fill: #F9A81A; fill-opacity: 0.25; }
-
-/* State 3 — Skyrocket: full logo reveal */
-[data-grow-state="3"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.62; }
-[data-grow-state="3"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.81; }
-[data-grow-state="3"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.96; }
-[data-grow-state="3"] .grow-g-logo { fill: #F9A81A; fill-opacity: 1; clip-path: inset(0 0 0 0); }
 
 /* Logo mask reveal (bottom half unclips progressively) */
 .grow-g-mask {
@@ -832,13 +815,8 @@ section[id] { scroll-margin-top: 80px; }
   overflow: visible;
 }
 
-/* Feed lines fade when logo fully reveals */
-[data-grow-state="3"] .grow-feed-lines { opacity: 0.3; }
+/* Feed lines — JS controls opacity continuously now */
 
-/* When snake arrives, feed lines warm to gold */
-.grow-stage.snake-arrived .grow-feed-lines svg path {
-  transition: fill 1s ease;
-}
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1470,18 +1448,24 @@ section[id] { scroll-margin-top: 80px; }
   filter: blur(8px);
 }
 
-/* Gold glow on outer ring once snake energy arrives */
-.grow-stage.snake-arrived .grow-ring-outer {
-  fill: #D4943A !important;
-  fill-opacity: 0.3 !important;
-  filter: drop-shadow(0 0 12px rgba(212,148,58,0.35));
-  transition: fill 0.8s ease, fill-opacity 0.8s ease, filter 0.8s ease;
+/* Flow arcs: gold energy veins tracing ring circumferences */
+.grow-inner-flow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
-/* Also warm the middle ring slightly */
-.grow-stage.snake-arrived .grow-ring-middle {
-  fill: #8B6A3A !important;
-  fill-opacity: 0.2 !important;
-  transition: fill 1.2s ease 0.2s, fill-opacity 1.2s ease 0.2s;
+.grow-inner-flow svg {
+  width: 100%;
+  height: 100%;
+}
+.grow-flow-arc {
+  fill: none;
+  stroke: #D4943A;
+  stroke-linecap: round;
+  opacity: 0;
+  transform-origin: 287.5px 287.5px;
+  will-change: stroke-dashoffset, opacity, transform;
 }
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
@@ -2389,6 +2373,21 @@ section[id] { scroll-margin-top: 80px; }
               </g>
             </g>
           </svg>
+
+          <!-- Flow arcs: gold energy veins tracing ring paths -->
+          <div class="grow-inner-flow">
+            <svg viewBox="0 0 575 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Outer flow arc (r≈262, centered at 287.5) -->
+              <circle class="grow-flow-arc grow-flow-outer" cx="287.5" cy="287.5" r="262"
+                      stroke-width="3" stroke-opacity="0.4"/>
+              <!-- Middle flow arc (r≈187) -->
+              <circle class="grow-flow-arc grow-flow-middle" cx="287.5" cy="287.5" r="187"
+                      stroke-width="2.5" stroke-opacity="0.35"/>
+              <!-- Inner flow arc (r≈112) -->
+              <circle class="grow-flow-arc grow-flow-inner" cx="287.5" cy="287.5" r="112"
+                      stroke-width="2" stroke-opacity="0.3"/>
+            </svg>
+          </div>
         </div>
 
         <!-- ===== STATE 0: Capture (3-column) ===== -->
@@ -2902,6 +2901,22 @@ const growPanels = [
   document.getElementById('grow-panel-3')
 ];
 const growReveal = document.querySelector('.grow-g-reveal');
+const growRingOuter = document.querySelector('.grow-ring-outer');
+const growRingMiddle = document.querySelector('.grow-ring-middle');
+const growRingInner = document.querySelector('.grow-ring-inner');
+const growGLogo = document.querySelector('.grow-g-logo');
+const growRingsWrap = document.querySelector('.grow-rings-wrap');
+const growFeedLines = document.querySelector('.grow-feed-lines');
+const growFlowArcs = document.querySelectorAll('.grow-flow-arc');
+
+// Pre-compute flow arc lengths
+let flowArcLens = [];
+growFlowArcs.forEach(arc => {
+  const len = arc.getTotalLength();
+  flowArcLens.push(len);
+  arc.style.strokeDasharray = len;
+  arc.style.strokeDashoffset = len;
+});
 
 let lastGrowState = -1;
 
@@ -2914,32 +2929,100 @@ function updateGrowScroll() {
   const scrollable = sectionHeight - window.innerHeight;
   const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
-  // 4 states across scroll:
-  // 0.00 - 0.25: State 0 — Capture
-  // 0.25 - 0.50: State 1 — Keep
-  // 0.50 - 0.75: State 2 — Grow
-  // 0.75 - 1.00: State 3 — Skyrocket (full logo reveal)
-
+  // Still keep discrete states for PANEL switching (content must snap)
   let state;
   if (progress < 0.25) state = 0;
   else if (progress < 0.50) state = 1;
   else if (progress < 0.75) state = 2;
   else state = 3;
 
-  if (state === lastGrowState) return;
-  lastGrowState = state;
+  // Panel switching stays discrete
+  if (state !== lastGrowState) {
+    lastGrowState = state;
+    growStage.setAttribute('data-grow-state', state);
+    growPanels.forEach((panel, i) => {
+      if (panel) panel.classList.toggle('active', i === state);
+    });
+    if (growReveal) growReveal.style.opacity = state === 3 ? '1' : '0';
+  }
 
-  // Update data attribute for CSS ring color transitions
-  growStage.setAttribute('data-grow-state', state);
+  // --- CONTINUOUS ring transforms driven by progress ---
+  const ease = progress * progress * (3 - 2 * progress); // smoothstep
 
-  // Toggle panel visibility
-  growPanels.forEach((panel, i) => {
-    if (panel) panel.classList.toggle('active', i === state);
+  // 1. ROTATION: rings slowly spin as you scroll (outer fastest, inner slowest)
+  const outerRotation = ease * 90;
+  const middleRotation = ease * 60;
+  const innerRotation = ease * 35;
+
+  if (growRingOuter) growRingOuter.style.transform = `rotate(${outerRotation}deg)`;
+  if (growRingMiddle) growRingMiddle.style.transform = `rotate(${middleRotation}deg)`;
+  if (growRingInner) growRingInner.style.transform = `rotate(${innerRotation}deg)`;
+
+  // 2. COLOR: continuous gray → gold interpolation
+  // Gray: rgb(42,48,54) = #2A3036, Gold: rgb(249,168,26) = #F9A81A
+  const r = Math.round(42 + (249 - 42) * ease);
+  const g = Math.round(48 + (168 - 48) * ease);
+  const b = Math.round(54 + (26 - 54) * ease);
+  const ringColor = `rgb(${r},${g},${b})`;
+
+  // Outer ring: opacity 0.3 → 0.62
+  if (growRingOuter) {
+    growRingOuter.style.fill = ringColor;
+    growRingOuter.style.fillOpacity = 0.3 + ease * 0.32;
+  }
+  // Middle ring: opacity 0.56 → 0.81 (leads slightly)
+  if (growRingMiddle) {
+    const mp = Math.min(1, ease * 1.15);
+    growRingMiddle.style.fill = ringColor;
+    growRingMiddle.style.fillOpacity = 0.56 + mp * 0.25;
+  }
+  // Inner ring: opacity 0.8 → 0.96
+  if (growRingInner) {
+    const ip = Math.min(1, ease * 1.25);
+    growRingInner.style.fill = ringColor;
+    growRingInner.style.fillOpacity = 0.8 + ip * 0.16;
+  }
+
+  // 3. G LOGO: fade in progressively
+  if (growGLogo) {
+    growGLogo.style.fillOpacity = 0.1 + ease * 0.9;
+    if (ease > 0.5) {
+      growGLogo.style.fill = ringColor;
+    }
+  }
+
+  // 4. GLOW: outer ring gets a gold drop-shadow that intensifies
+  if (growRingOuter) {
+    const glowIntensity = Math.max(0, (ease - 0.15) / 0.85);
+    const glowRadius = 6 + glowIntensity * 18;
+    const glowOpacity = glowIntensity * 0.4;
+    growRingOuter.style.filter = `drop-shadow(0 0 ${glowRadius}px rgba(212,148,58,${glowOpacity}))`;
+  }
+
+  // 5. SCALE: rings subtly breathe — grow slightly as energy fills
+  const scale = 1 + ease * 0.04;
+  if (growRingsWrap) {
+    growRingsWrap.style.transform = `translate(-50%, -50%) scale(${scale})`;
+  }
+
+  // 6. FLOW ARCS: gold energy veins tracing ring circumferences (staggered)
+  growFlowArcs.forEach((arc, i) => {
+    const staggerStart = i * 0.15; // outer first, then middle, then inner
+    const arcProgress = Math.max(0, Math.min(1, (ease - staggerStart) / (1 - staggerStart)));
+    const arcEase = arcProgress * arcProgress * (3 - 2 * arcProgress);
+
+    arc.style.strokeDashoffset = flowArcLens[i] * (1 - arcEase);
+    arc.style.opacity = arcEase > 0 ? 0.15 + arcEase * 0.35 : 0;
+
+    // Flow arcs also rotate, matching their ring
+    const arcRotations = [90, 60, 35];
+    arc.style.transform = `rotate(${arcEase * arcRotations[i]}deg)`;
   });
 
-  // Full logo reveal (State 3)
-  if (growReveal) {
-    growReveal.style.opacity = state === 3 ? '1' : '0';
+  // 7. FEED LINES: fade as energy transfers to rings
+  if (growFeedLines) {
+    const feedIntensity = Math.max(0.15, 1 - ease * 0.85);
+    growFeedLines.style.opacity = feedIntensity;
   }
 }
 
@@ -3120,14 +3203,7 @@ function checkSnakeTransition() {
     path.style.strokeDashoffset = snakeGlowLen[i] * (1 - glowProgress);
   });
 
-  // When snake lines reach the ring, light it up gold
-  if (growStageEl) {
-    if (ease >= 0.75) {
-      growStageEl.classList.add('snake-arrived');
-    } else {
-      growStageEl.classList.remove('snake-arrived');
-    }
-  }
+  // Ring gold effect now handled continuously by updateGrowScroll()
 }
 
 window.addEventListener('scroll', checkSnakeTransition, { passive: true });
