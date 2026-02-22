@@ -1259,17 +1259,29 @@ section[id] { scroll-margin-top: 80px; }
 
 /* ============================================
    OVERVIEW SECTION — "One place to own it all"
+   Scroll-driven: rings stay centered, text fades
    ============================================ */
-.overview-section {
+.overview-wrapper {
+  height: 200vh;
   position: relative;
   background: var(--bg-deep);
-  padding: clamp(80px, 10vw, 120px) 0;
+}
+
+.overview-section {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
   overflow: hidden;
 }
 
 .overview-stage {
   position: relative;
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   min-height: 620px;
   display: flex;
@@ -1309,30 +1321,7 @@ section[id] { scroll-margin-top: 80px; }
 .overview-ring-middle { animation: ringPulseMiddle 4s ease-in-out infinite 0.6s; }
 .overview-ring-inner { animation: ringPulseInner 4s ease-in-out infinite 1.2s; }
 
-/* Transition to glow state — inner/middle fade, outer becomes gold glow */
-.overview-section.transitioning .overview-ring-inner {
-  fill-opacity: 0 !important;
-  animation: none;
-}
-.overview-section.transitioning .overview-ring-middle {
-  fill-opacity: 0 !important;
-  animation: none;
-}
-.overview-section.transitioning .overview-ring-outer {
-  fill: var(--gold);
-  fill-opacity: 0.12 !important;
-  animation: none;
-  filter: blur(1px);
-}
-.overview-section.transitioning .overview-g-logo {
-  fill-opacity: 0;
-}
-.overview-section.transitioning .overview-center,
-.overview-section.transitioning .overview-tags,
-.overview-section.transitioning .overview-bottom {
-  opacity: 0;
-  transition: opacity 0.6s ease;
-}
+/* Scroll-driven transition — JS sets --ov-progress (0 → 1) */
 
 @keyframes ringPulseOuter {
   0%, 100% { fill-opacity: 0.18; }
@@ -2116,6 +2105,7 @@ section[id] { scroll-margin-top: 80px; }
   .hero-bg-union { display: none; }
   .hero-pill { margin-left: auto; margin-right: auto; }
   /* Overview mobile */
+  .overview-wrapper { height: 160vh; }
   .overview-stage { min-height: 500px; }
   .overview-rings { width: 360px; height: 360px; }
   .overview-tags { display: none; }
@@ -2263,6 +2253,7 @@ section[id] { scroll-margin-top: 80px; }
 <!-- ============================================
      OVERVIEW — "One place to own it all" (step map)
      ============================================ -->
+<div class="overview-wrapper" id="overview-wrapper">
 <section class="overview-section" id="overview">
   <div class="overview-stage">
 
@@ -2329,6 +2320,7 @@ section[id] { scroll-margin-top: 80px; }
     </a>
   </div>
 </section>
+</div><!-- /overview-wrapper -->
 
 <!-- ============================================
      FAN JOURNEY — DISCOVERY → GROUPED → FADER EXPERIENCE
@@ -2345,7 +2337,8 @@ section[id] { scroll-margin-top: 80px; }
       <div class="discovery-text">
         <div class="discovery-label">00 &nbsp;|&nbsp; Discovery</div>
         <h2 class="discovery-headline fade-up">Fans are already<br><em>finding you.</em></h2>
-        <p class="discovery-body fade-up">Every stream, every scroll, every share — people are discovering your music across every platform, every day. The question isn't whether they'll find you. It's whether you'll keep them.</p>
+        <p class="discovery-body fade-up">Every stream, every scroll, every share. People are discovering your music across every platforms, every day.</p>
+        <p class="discovery-body fade-up" style="margin-top:16px">The question isn't whether they'll find you...</p>
       </div>
 
       <!-- Right: glow circle with 8 platform icons -->
@@ -3057,21 +3050,71 @@ function updateFeatures() {
   }
 }
 
-// ---- OVERVIEW → DISCOVERY TRANSITION ----
+// ---- OVERVIEW → DISCOVERY SCROLL TRANSITION ----
+const overviewWrapper = document.getElementById('overview-wrapper');
 const overviewSection = document.querySelector('.overview-section');
-const discoverySection = document.querySelector('.discovery-section');
+const ovRings = document.querySelector('.overview-rings');
+const ovRingOuter = document.querySelector('.overview-ring-outer');
+const ovRingMiddle = document.querySelector('.overview-ring-middle');
+const ovRingInner = document.querySelector('.overview-ring-inner');
+const ovGLogo = document.querySelector('.overview-g-logo');
+const ovCenter = document.querySelector('.overview-center');
+const ovTags = document.querySelector('.overview-tags');
+const ovBottom = document.querySelector('.overview-bottom');
 
 function checkOverviewTransition() {
-  if (!overviewSection || !discoverySection) return;
-  const ovRect = overviewSection.getBoundingClientRect();
+  if (!overviewWrapper) return;
+  const rect = overviewWrapper.getBoundingClientRect();
   const wh = window.innerHeight;
-  // Start transitioning when overview bottom is near viewport bottom
-  // (i.e., user is scrolling past the overview section)
-  const progress = 1 - (ovRect.bottom / wh);
-  if (progress > 0.3) {
-    overviewSection.classList.add('transitioning');
-  } else {
-    overviewSection.classList.remove('transitioning');
+  // progress 0 → 1 as user scrolls through the 200vh wrapper
+  // The first 100vh is the visible section; the remaining 100vh is the transition zone
+  const scrolledPast = -rect.top;
+  const transitionZone = rect.height - wh; // = 100vh
+  const progress = Math.max(0, Math.min(1, scrolledPast / transitionZone));
+
+  if (progress <= 0) {
+    // Fully visible — default state
+    if (ovRingInner) { ovRingInner.style.fillOpacity = ''; ovRingInner.style.animation = ''; }
+    if (ovRingMiddle) { ovRingMiddle.style.fillOpacity = ''; ovRingMiddle.style.animation = ''; }
+    if (ovRingOuter) { ovRingOuter.style.fill = ''; ovRingOuter.style.fillOpacity = ''; ovRingOuter.style.animation = ''; ovRingOuter.style.filter = ''; }
+    if (ovGLogo) ovGLogo.style.fillOpacity = '';
+    if (ovCenter) ovCenter.style.opacity = '';
+    if (ovTags) ovTags.style.opacity = '';
+    if (ovBottom) ovBottom.style.opacity = '';
+    return;
+  }
+
+  // Ease the progress for smoother feel
+  const ease = progress * progress * (3 - 2 * progress); // smoothstep
+
+  // Text fades out faster (fully gone by 50% progress)
+  const textOpacity = Math.max(0, 1 - ease * 2.5);
+  if (ovCenter) ovCenter.style.opacity = textOpacity;
+  if (ovTags) ovTags.style.opacity = textOpacity;
+  if (ovBottom) ovBottom.style.opacity = textOpacity;
+
+  // Inner ring fades first
+  const innerOp = Math.max(0, 0.42 * (1 - ease * 1.8));
+  if (ovRingInner) { ovRingInner.style.fillOpacity = innerOp; ovRingInner.style.animation = 'none'; }
+
+  // Middle ring fades slightly after
+  const middleOp = Math.max(0, 0.28 * (1 - ease * 1.5));
+  if (ovRingMiddle) { ovRingMiddle.style.fillOpacity = middleOp; ovRingMiddle.style.animation = 'none'; }
+
+  // G logo fades
+  if (ovGLogo) ovGLogo.style.fillOpacity = Math.max(0, 0.06 * (1 - ease * 2));
+
+  // Outer ring transitions to gold glow
+  if (ovRingOuter) {
+    ovRingOuter.style.animation = 'none';
+    // Interpolate from gray (#2A3036) to gold (#D4943A)
+    const r = Math.round(42 + (212 - 42) * ease);
+    const g = Math.round(48 + (148 - 48) * ease);
+    const b = Math.round(54 + (58 - 54) * ease);
+    ovRingOuter.style.fill = `rgb(${r},${g},${b})`;
+    // Opacity goes from 0.18 down to a subtle 0.1
+    ovRingOuter.style.fillOpacity = 0.18 - (0.06 * ease);
+    ovRingOuter.style.filter = `blur(${ease * 2}px)`;
   }
 }
 
