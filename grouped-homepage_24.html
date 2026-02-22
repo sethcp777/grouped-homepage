@@ -76,12 +76,16 @@
 
 /* GroupedFont must never be italicized or bolded */
 .hero-headline, .hero-step-title, .hero-closing-headline,
+.grow-step-title, .grow-panel-headline, .grow-panel-brand,
+.grow-closing-headline,
 .fj-headline, .fj-dest-headline, .fj-closer-headline,
 .feat-headline, .feat-card-name,
 .results-headline, .cases-headline, .case-card-name,
 .final-headline, .stat-card-number,
 .ps-title, .nav-logo-text, .fj-cloud-closing,
 .hero-headline em, .hero-step-title em, .hero-closing-headline em,
+.grow-step-title em, .grow-panel-headline em,
+.grow-closing-headline em,
 .fj-headline em, .fj-dest-headline em, .fj-closer-headline em,
 .feat-headline em, .feat-card-name em,
 .results-headline em, .cases-headline em, .case-card-name em,
@@ -312,9 +316,7 @@ section[id] { scroll-margin-top: 80px; }
   z-index: 2;
 }
 
-.fader-experience .hero-content {
-  min-height: 380px;
-}
+/* (grow-stage replaces old fader-experience) */
 
 /* Hero pill tag */
 .hero-pill {
@@ -374,117 +376,7 @@ section[id] { scroll-margin-top: 80px; }
   z-index: 0;
 }
 
-/* Right column: Powered by Grouped */
-.hero-powers {
-  position: relative;
-  z-index: 2;
-  max-width: 360px;
-  justify-self: end;
-  transition: opacity 0.5s;
-}
-
-.hero-powers-panel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-}
-
-.hero-powers-panel.active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-  position: relative;
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s,
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
-}
-
-.hero-powers-label {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.hero-powers-label::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gold);
-}
-
-.hero-powers-intro {
-  font-size: 15px;
-  color: var(--gray-300);
-  line-height: 1.65;
-  margin-bottom: 28px;
-}
-
-.hero-powers-feature {
-  margin-bottom: 8px;
-  border: 1px solid rgba(255,255,255,0.04);
-  border-radius: 4px;
-  background: rgba(255,255,255,0.02);
-  overflow: hidden;
-  transition: border-color 0.3s, background 0.3s;
-}
-.hero-powers-feature:last-child { margin-bottom: 0; }
-.hero-powers-feature:hover {
-  border-color: rgba(255,255,255,0.12);
-  background: rgba(255,255,255,0.03);
-}
-
-.hero-powers-feature-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 14px;
-}
-
-.hero-powers-feature-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 4px;
-  background: rgba(212,148,58,0.1);
-  color: var(--gold);
-  font-size: 15px;
-  flex-shrink: 0;
-}
-
-.hero-powers-feature-name {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--white);
-  flex: 1;
-}
-
-.hero-powers-feature-body {
-  max-height: none;
-  overflow: visible;
-  padding: 0 14px 14px 14px;
-}
-
-.hero-powers-feature-desc {
-  font-size: 13px;
-  color: var(--gray-400);
-  line-height: 1.6;
-  padding-left: 40px;
-}
+/* (old hero-powers removed — replaced by grow-powers in grow section) */
 
 /* --- Opening state --- */
 .hero-opener {
@@ -562,20 +454,22 @@ section[id] { scroll-margin-top: 80px; }
   flex-wrap: wrap;
 }
 
-/* --- Step text overlay (replaces opener during scroll) --- */
-.hero-step-text {
+/* --- Grow State Panels (scroll-driven content overlays) --- */
+.grow-panel {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
+  z-index: 3;
 }
 
-.hero-step-text.active {
+.grow-panel.active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -583,7 +477,80 @@ section[id] { scroll-margin-top: 80px; }
               transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
 }
 
-.hero-step-label {
+/* Centered panel layout (State 0 + State 4) */
+.grow-panel-centered {
+  flex-direction: column;
+  text-align: center;
+  padding: 0 40px;
+}
+
+.grow-panel-brand {
+  font-family: var(--font-display);
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.grow-panel-headline {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  color: var(--gold);
+  line-height: 1.1;
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+
+.grow-panel-sub {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.3vw, 17px);
+  color: rgba(255,255,255,0.5);
+  line-height: 1.65;
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.grow-panel-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  cursor: pointer;
+  transition: gap 0.3s;
+}
+
+.grow-panel-cta:hover { gap: 12px; }
+
+.grow-panel-cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s;
+}
+
+.grow-panel-cta:hover svg { transform: translateY(2px); }
+
+/* 3-column step layout (States 1-3) */
+.grow-panel-cols {
+  display: grid;
+  grid-template-columns: 1fr 300px 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: var(--container-width);
+  padding: 0 40px;
+}
+
+.grow-step-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.grow-step-label {
+  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.5px;
@@ -592,7 +559,7 @@ section[id] { scroll-margin-top: 80px; }
   margin-bottom: 16px;
 }
 
-.hero-step-title {
+.grow-step-title {
   font-family: var(--font-display);
   font-size: clamp(28px, 3.5vw, 44px);
   line-height: 1.1;
@@ -600,21 +567,22 @@ section[id] { scroll-margin-top: 80px; }
   margin-bottom: 16px;
 }
 
-.hero-step-copy {
+.grow-step-copy {
+  font-family: var(--font-body);
   font-size: clamp(14px, 1.4vw, 16px);
   color: var(--gray-300);
   line-height: 1.7;
   max-width: 400px;
 }
 
-.hero-step-features {
+.grow-step-features {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 24px;
 }
 
-.hero-step-feat {
+.grow-step-feat {
   font-size: 14px;
   color: rgba(255,255,255,0.5);
   padding-left: 18px;
@@ -622,7 +590,7 @@ section[id] { scroll-margin-top: 80px; }
   line-height: 1.5;
 }
 
-.hero-step-feat::before {
+.grow-step-feat::before {
   content: '';
   position: absolute;
   left: 0;
@@ -634,36 +602,97 @@ section[id] { scroll-margin-top: 80px; }
   opacity: 0.6;
 }
 
-/* --- Closing line --- */
-.hero-closing {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%) scale(0.95);
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  pointer-events: none;
-  padding: 0 40px;
-  z-index: 10;
+/* Center phone column */
+.grow-step-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.hero-closing.active {
-  opacity: 1;
-  transform: translateY(-50%) scale(1);
-  pointer-events: auto;
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s,
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s;
+/* Right column: powered features */
+.grow-step-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 360px;
+  justify-self: end;
 }
 
-.hero-closing-inner {
-  max-width: 1100px;
-  margin: 0 auto;
+.grow-powers-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.grow-powers-label::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
 }
 
-.hero-closing-headline {
+.grow-powers-feature {
+  margin-bottom: 8px;
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 4px;
+  background: rgba(255,255,255,0.02);
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s;
+}
+.grow-powers-feature:last-child { margin-bottom: 0; }
+.grow-powers-feature:hover {
+  border-color: rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+}
+
+.grow-powers-feature-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.grow-powers-feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: rgba(212,148,58,0.1);
+  color: var(--gold);
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.grow-powers-feature-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--white);
+  flex: 1;
+}
+
+.grow-powers-feature-body {
+  padding: 0 14px 14px 14px;
+}
+
+.grow-powers-feature-desc {
+  font-size: 13px;
+  color: var(--gray-400);
+  line-height: 1.6;
+  padding-left: 40px;
+}
+
+/* --- State 4 closing cards --- */
+.grow-closing-headline {
   font-family: var(--font-display);
   font-size: clamp(26px, 3.5vw, 42px);
   color: var(--gold);
@@ -671,7 +700,7 @@ section[id] { scroll-margin-top: 80px; }
   margin-bottom: 18px;
 }
 
-.hero-closing-subline {
+.grow-closing-subline {
   font-family: var(--font-body);
   font-size: clamp(15px, 1.4vw, 17px);
   color: rgba(255,255,255,0.55);
@@ -680,19 +709,20 @@ section[id] { scroll-margin-top: 80px; }
   margin: 0 auto 48px;
 }
 
-.hero-closing-subline strong {
+.grow-closing-subline strong {
   color: rgba(255,255,255,0.88);
   font-weight: 600;
 }
 
-.hero-closing-cards {
+.grow-closing-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   text-align: left;
+  max-width: 1100px;
 }
 
-.hero-closing-card {
+.grow-closing-card {
   background: rgba(255,255,255,0.03);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 6px;
@@ -700,11 +730,11 @@ section[id] { scroll-margin-top: 80px; }
   transition: border-color 0.3s;
 }
 
-.hero-closing-card:hover {
+.grow-closing-card:hover {
   border-color: rgba(255,255,255,0.12);
 }
 
-.hero-closing-card-title {
+.grow-closing-card-title {
   font-family: var(--font-body);
   font-size: 16px;
   font-weight: 700;
@@ -713,7 +743,7 @@ section[id] { scroll-margin-top: 80px; }
   line-height: 1.3;
 }
 
-.hero-closing-card-desc {
+.grow-closing-card-desc {
   font-family: var(--font-body);
   font-size: 14px;
   color: rgba(255,255,255,0.5);
@@ -721,104 +751,90 @@ section[id] { scroll-margin-top: 80px; }
 }
 
 /* ============================================
-   SPEAKER RINGS (background layer)
+   GROW RINGS (scroll-driven SVG background)
    ============================================ */
-.speaker-rings {
+.grow-rings-wrap {
   position: absolute;
   top: 50%;
-  left: 38%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
+  width: 575px;
+  height: 575px;
   pointer-events: none;
   z-index: 0;
 }
 
-.speaker-ring {
+.grow-rings-wrap svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Ring paths — transition fill + opacity between states */
+.grow-ring-outer,
+.grow-ring-middle,
+.grow-ring-inner {
+  transition: fill 0.8s ease, fill-opacity 0.8s ease;
+}
+
+.grow-g-logo {
+  transition: fill-opacity 0.8s ease, clip-path 0.8s ease;
+}
+
+/* State 0 (default / dormant): gray rings */
+.grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
+.grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
+.grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
+.grow-g-logo { fill: #F1F0EE; fill-opacity: 0.1; clip-path: inset(0 0 0 0); }
+
+/* State 1 — Capture: same gray, feed lines appear (handled separately) */
+[data-grow-state="1"] .grow-ring-outer { fill: #2A3036; fill-opacity: 0.3; }
+[data-grow-state="1"] .grow-ring-middle { fill: #2A3036; fill-opacity: 0.56; }
+[data-grow-state="1"] .grow-ring-inner { fill: #2A3036; fill-opacity: 0.8; }
+
+/* State 2 — Keep: gold starts emerging */
+[data-grow-state="2"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.2; }
+[data-grow-state="2"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.35; }
+[data-grow-state="2"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.55; }
+[data-grow-state="2"] .grow-g-logo { fill-opacity: 0.15; }
+
+/* State 3 — Grow: fully gold */
+[data-grow-state="3"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.45; }
+[data-grow-state="3"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.65; }
+[data-grow-state="3"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.85; }
+[data-grow-state="3"] .grow-g-logo { fill: #F9A81A; fill-opacity: 0.25; }
+
+/* State 4 — Skyrocket: full logo reveal */
+[data-grow-state="4"] .grow-ring-outer { fill: #F9A81A; fill-opacity: 0.62; }
+[data-grow-state="4"] .grow-ring-middle { fill: #F9A81A; fill-opacity: 0.81; }
+[data-grow-state="4"] .grow-ring-inner { fill: #F9A81A; fill-opacity: 0.96; }
+[data-grow-state="4"] .grow-g-logo { fill: #F9A81A; fill-opacity: 1; clip-path: inset(0 0 0 0); }
+
+/* Logo mask reveal (bottom half unclips progressively) */
+.grow-g-mask {
+  transition: clip-path 1s cubic-bezier(0.22, 1, 0.36, 1);
+  clip-path: inset(0 0 100% 0);
+}
+
+[data-grow-state="3"] .grow-g-mask { clip-path: inset(0 0 50% 0); }
+[data-grow-state="4"] .grow-g-mask { clip-path: inset(0 0 0 0); }
+
+/* Feed lines (entering outer ring from top) */
+.grow-feed-lines {
   position: absolute;
-  top: 50%;
+  top: -140px;
   left: 50%;
-  border-radius: 50%;
-  border: 1.5px solid rgba(100, 120, 145, 0.12);
-  background: rgba(100, 120, 145, 0.03);
-  transform: translate(-50%, -50%) scale(0);
+  transform: translateX(-50%);
+  width: 300px;
+  height: 180px;
+  pointer-events: none;
   opacity: 0;
-  transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.8s ease;
+  transition: opacity 0.8s ease;
 }
 
-.speaker-ring.visible {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.speaker-ring.visible.pulse {
-  animation: ringPulse 3s ease-in-out infinite;
-}
-
-.speaker-ring:nth-child(1) {
-  width: 200px;
-  height: 200px;
-  animation-delay: 0s;
-}
-
-.speaker-ring:nth-child(2) {
-  width: 380px;
-  height: 380px;
-  animation-delay: 0.4s;
-}
-
-.speaker-ring:nth-child(3) {
-  width: 580px;
-  height: 580px;
-  animation-delay: 0.8s;
-}
-
-.speaker-ring:nth-child(4) {
-  width: 800px;
-  height: 800px;
-  animation-delay: 0.2s;
-}
-
-.speaker-ring:nth-child(5) {
-  width: 1050px;
-  height: 1050px;
-  animation-delay: 0.6s;
-}
-
-.speaker-ring:nth-child(6) {
-  width: 1320px;
-  height: 1320px;
-  animation-delay: 1s;
-}
-
-.speaker-ring:nth-child(7) {
-  width: 1620px;
-  height: 1620px;
-  animation-delay: 0.3s;
-}
-
-.speaker-ring:nth-child(8) {
-  width: 1950px;
-  height: 1950px;
-  animation-delay: 0.7s;
-}
-
-.speaker-ring:nth-child(9) {
-  width: 2300px;
-  height: 2300px;
-  animation-delay: 1.1s;
-}
-
-@keyframes ringPulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.015);
-    opacity: 0.7;
-  }
-}
+[data-grow-state="1"] .grow-feed-lines,
+[data-grow-state="2"] .grow-feed-lines,
+[data-grow-state="3"] .grow-feed-lines { opacity: 1; }
+[data-grow-state="4"] .grow-feed-lines { opacity: 0.5; }
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1422,59 +1438,29 @@ section[id] { scroll-margin-top: 80px; }
   margin: 0 auto;
 }
 
-/* Fader experience (scroll-driven, embedded in fan journey) */
-.fader-wrapper {
-  height: 420vh;
+/* Grow experience (scroll-driven, embedded in fan journey) */
+.grow-wrapper {
+  height: 520vh;
   position: relative;
   margin-top: 80px;
 }
 
-.fader-wrapper-sticky {
+.grow-sticky {
   position: sticky;
   top: 0;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: visible;
 }
 
-.fader-experience {
-  flex: 1;
-  display: grid;
-  grid-template-columns: 1fr 300px 1fr;
-  gap: 40px;
-  align-items: center;
+.grow-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
   max-width: var(--container-width);
   margin: 0 auto;
-  padding: 0 40px;
-  width: 100%;
-  position: relative;
-  z-index: 2;
-}
-
-/* Closing phase — fade out all 3 columns */
-.fader-experience .hero-content,
-.fader-experience .hero-phone-wrapper,
-.fader-experience .hero-powers {
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fader-experience.in-closing .hero-content {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.fader-experience.in-closing .hero-phone-wrapper {
-  opacity: 0;
-  transform: scale(0.97);
-  transition-delay: 0.05s;
-}
-
-.fader-experience.in-closing .hero-powers {
-  opacity: 0;
-  transform: translateY(-10px);
-  transition-delay: 0.1s;
 }
 
 /* ============================================
@@ -2066,24 +2052,26 @@ section[id] { scroll-margin-top: 80px; }
   .fj-node-tip { min-width: 180px; padding: 10px 14px; }
   .fj-flow-wrap { max-width: 100%; height: 120px; }
   .fj-cloud-closing { font-size: clamp(20px, 5vw, 28px); padding: 0 20px; max-width: 90%; margin: 0 auto; }
-  /* Fader experience mobile */
-  .fader-wrapper { height: 380vh; }
-  .fader-experience {
+  /* Grow experience mobile */
+  .grow-wrapper { height: 480vh; }
+  .grow-rings-wrap { width: 320px; height: 320px; }
+  .grow-panel-cols {
     grid-template-columns: 1fr;
     text-align: center;
-    padding-top: 80px;
-    gap: 30px;
+    padding: 0 20px;
+    gap: 24px;
   }
-  .fader-experience .hero-phone-wrapper { order: -1; padding-top: 0; }
-  .phone-frame { width: 220px; height: 460px; }
-  .hero-step-copy { margin-left: auto; margin-right: auto; }
-  .fader-experience .hero-step-features { align-items: center; }
-  .fader-experience .hero-powers { display: none; }
-  .hero-closing { padding: 0 20px; }
-  .hero-closing-cards { grid-template-columns: 1fr; gap: 14px; }
-  .hero-closing-card { padding: 24px 20px; }
-  .hero-closing-headline { font-size: clamp(22px, 5vw, 32px); }
-  .hero-closing-subline { font-size: 15px; margin-bottom: 32px; }
+  .grow-step-left { align-items: center; }
+  .grow-step-copy { margin-left: auto; margin-right: auto; }
+  .grow-step-features { align-items: center; }
+  .grow-step-right { display: none; }
+  .grow-step-center .phone-frame { width: 220px; height: 460px; }
+  .grow-step-center { order: -1; }
+  .grow-panel-headline { font-size: clamp(26px, 6vw, 40px); }
+  .grow-closing-cards { grid-template-columns: 1fr; gap: 14px; }
+  .grow-closing-card { padding: 24px 20px; }
+  .grow-closing-headline { font-size: clamp(22px, 5vw, 32px); }
+  .grow-closing-subline { font-size: 15px; margin-bottom: 32px; }
   .feat-section { height: 300vh; }
   .feat-header { padding: 0 20px 30px; }
   .feat-body { padding: 0 20px; gap: 30px; flex-direction: column; align-items: flex-start; }
@@ -2332,247 +2320,266 @@ section[id] { scroll-margin-top: 80px; }
   <!-- ============================================
        FADER EXPERIENCE (scroll-driven, embedded)
        ============================================ -->
-  <div class="fader-wrapper" id="fader-wrapper">
-    <div class="fader-wrapper-sticky">
+  <div class="grow-wrapper" id="grow-wrapper">
+    <div class="grow-sticky">
+      <div class="grow-stage" id="grow-stage" data-grow-state="0">
 
-      <div class="speaker-rings" id="speaker-rings-fader">
-        <div class="speaker-ring" data-phase="0"></div>
-        <div class="speaker-ring" data-phase="0"></div>
-        <div class="speaker-ring" data-phase="0"></div>
-        <div class="speaker-ring" data-phase="1"></div>
-        <div class="speaker-ring" data-phase="1"></div>
-        <div class="speaker-ring" data-phase="1"></div>
-        <div class="speaker-ring" data-phase="2"></div>
-        <div class="speaker-ring" data-phase="2"></div>
-        <div class="speaker-ring" data-phase="2"></div>
+        <!-- SVG Rings (background, centered) -->
+        <div class="grow-rings-wrap">
+          <!-- Feed lines entering outer ring from above -->
+          <div class="grow-feed-lines">
+            <svg viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 0 C50 80, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.5"/>
+              <path d="M150 0 C150 60, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.7"/>
+              <path d="M250 0 C250 80, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.5"/>
+              <defs>
+                <linearGradient id="feed-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#F9A81A" stop-opacity="0"/>
+                  <stop offset="1" stop-color="#F9A81A" stop-opacity="0.6"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <svg width="575" height="575" viewBox="0 0 575 575" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer ring -->
+            <path class="grow-ring-outer" d="M287.5 574.994C128.969 574.994 0 446.025 0 287.506C0 128.987 128.969 0 287.5 0C446.031 0 575 128.975 575 287.506C575 446.037 446.031 575 287.5 575V574.994ZM287.5 49.9484C156.513 49.9484 49.9484 156.513 49.9484 287.506C49.9484 418.499 156.513 525.052 287.5 525.052C418.487 525.052 525.052 418.487 525.052 287.506C525.052 156.525 418.481 49.9484 287.5 49.9484Z"/>
+            <!-- Middle ring -->
+            <path class="grow-ring-middle" d="M287.5 500C170.326 500 75 404.675 75 287.509C75 170.342 170.326 75 287.5 75C404.674 75 500 170.331 500 287.503C500 404.675 404.674 499.994 287.5 499.994V500ZM287.5 124.93C197.86 124.93 124.931 197.859 124.931 287.503C124.931 377.147 197.86 450.064 287.5 450.064C377.14 450.064 450.069 377.136 450.069 287.503C450.069 197.87 377.14 124.93 287.5 124.93Z"/>
+            <!-- Inner ring -->
+            <path class="grow-ring-inner" d="M287.5 425C250.775 425 216.242 410.695 190.273 384.727C164.305 358.758 150 324.225 150 287.5C150 250.775 164.305 216.242 190.273 190.273C216.242 164.305 250.775 150 287.5 150C324.225 150 358.758 164.305 384.727 190.273C410.695 216.242 425 250.775 425 287.5C425 324.225 410.695 358.758 384.727 384.727C358.758 410.695 324.225 425 287.5 425ZM287.5 199.892C239.193 199.892 199.892 239.193 199.892 287.5C199.892 335.807 239.193 375.108 287.5 375.108C335.807 375.108 375.108 335.807 375.108 287.5C375.108 239.193 335.807 199.892 287.5 199.892Z"/>
+            <!-- G logo (spiral) with mask reveal -->
+            <g class="grow-g-mask">
+              <path class="grow-g-logo" d="M338.114 284.049H287.999C285.544 284.049 283.548 286.04 283.548 288.5C283.548 290.961 285.538 292.952 287.999 292.952H302.979C301.056 299.406 295.072 304.129 287.999 304.129C279.034 304.129 271.807 296.537 272.407 287.443C272.926 279.598 279.362 273.273 287.22 272.896C291.344 272.698 295.269 274.083 298.317 276.766C298.744 277.143 299.381 277.125 299.783 276.723L304.562 271.944C304.994 271.511 304.982 270.8 304.525 270.392C299.993 266.25 294.169 263.987 287.993 263.987C274.447 263.987 263.257 275.356 263.467 288.902C263.677 302.244 274.595 313.038 287.993 313.038C299.999 313.038 310.008 304.364 312.104 292.964H316.624C314.478 306.837 302.453 317.49 287.987 317.49C271.98 317.49 258.966 304.451 259.01 288.438C259.053 273.032 271.368 260.203 286.756 259.566C294.49 259.245 301.866 261.959 307.529 267.146C307.95 267.536 308.605 267.511 309.007 267.097L313.743 262.274C314.169 261.842 314.144 261.143 313.699 260.729C306.608 254.157 297.421 250.577 287.727 250.639C267.399 250.775 250.657 267.177 250.119 287.505C249.557 308.847 266.762 326.392 287.98 326.392C307.362 326.392 323.387 311.759 325.594 292.964H330.052C327.826 314.213 309.804 330.831 287.98 330.831C264.561 330.831 245.526 311.715 245.668 288.265C245.798 265.959 263.486 247.393 285.767 246.256C297.507 245.656 308.698 249.823 317.149 257.872C317.576 258.28 318.243 258.28 318.658 257.86L323.418 253.081C323.838 252.661 323.838 251.968 323.412 251.554C313.959 242.441 301.613 237.409 288.494 237.285C260.351 237.025 237.062 259.851 236.784 287.987C236.506 316.476 259.597 339.716 287.999 339.716C305.557 339.716 321.087 330.844 330.318 317.335V335.27C330.318 337.725 332.308 339.722 334.769 339.722C337.223 339.722 339.22 337.731 339.22 335.27V285.156C339.22 284.55 338.726 284.055 338.12 284.055L338.114 284.049Z"/>
+            </g>
+            <!-- Full logo bottom-half reveal (State 4) -->
+            <g class="grow-g-reveal" style="opacity:0; transition: opacity 0.8s ease;">
+              <mask id="grow-reveal-mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="259" width="575" height="317">
+                <path d="M287.409 575.648C130.127 575.648 1.96482 451.741 0.773085 298.812V259.518H50.5867V298.812C51.7696 424.958 157.524 527.166 287.409 527.166C409.564 527.166 510.432 436.655 522.885 320.922H497.93C485.57 423.293 395.893 502.983 287.423 502.983C171.262 502.983 76.6276 411.596 75.4492 298.812H75.4758V259.518H125.285V298.812H125.263C126.437 384.857 198.725 454.513 287.423 454.513C368.385 454.513 435.663 396.476 447.682 320.922H422.386C410.632 383.041 354.607 430.282 287.423 430.282C212.468 430.282 151.348 371.5 150.174 298.812V259.518H199.988V298.812H199.996C201.157 344.768 239.931 381.8 287.423 381.8C326.998 381.8 360.5 356.082 371.252 320.922H287.423C273.671 320.922 262.52 310.07 262.52 296.687C262.52 283.304 273.671 272.452 287.423 272.452H567.901C571.308 272.452 574.055 275.125 574.055 278.441V551.413C574.055 558.105 571.268 564.171 566.758 568.547C562.261 572.932 556.028 575.648 549.152 575.648C535.401 575.648 524.25 564.796 524.25 551.413V453.72C472.607 527.308 385.703 575.648 287.409 575.648Z" fill="#F9A81A"/>
+              </mask>
+              <g mask="url(#grow-reveal-mask)">
+                <rect x="-55" y="269" width="657" height="325" fill="#F9A81A"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <!-- ===== STATE 0: One place to own it all (centered) ===== -->
+        <div class="grow-panel grow-panel-centered active" id="grow-panel-0">
+          <div class="grow-panel-brand">Grouped</div>
+          <h2 class="grow-panel-headline">One place to own it all</h2>
+          <p class="grow-panel-sub">Every fan your music creates, captured, kept, and activated from one platform you control.</p>
+          <div class="grow-panel-cta">
+            See how it works
+            <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+        </div>
+
+        <!-- ===== STATE 1: Capture (3-column) ===== -->
+        <div class="grow-panel" id="grow-panel-1">
+          <div class="grow-panel-cols">
+            <div class="grow-step-left">
+              <div class="grow-step-label">01 / Capture</div>
+              <h2 class="grow-step-title">Own a Direct Line to Your Fans</h2>
+              <p class="grow-step-copy">Your music is already creating fans. Grouped captures that first spark of interest and turns it into a connection you control.</p>
+              <div class="grow-step-features">
+                <div class="grow-step-feat">Every link captures fan data instantly</div>
+                <div class="grow-step-feat">Fans get early access, you get their info</div>
+                <div class="grow-step-feat">Import existing lists so you build on what you have</div>
+              </div>
+            </div>
+            <div class="grow-step-center">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-slide active">
+                    <div class="ps-header">Smart Swap</div>
+                    <div class="ps-title">Early Access: "Midnight"</div>
+                    <div class="ps-subtitle">Single dropping March 1</div>
+                    <div class="ps-card">
+                      <div class="ps-card-title">Fans trade contact info for:</div>
+                      <div class="ps-card-sub ps-card-sub-spaced">&#127925; Early access to your music</div>
+                      <div class="ps-card-sub">&#127381; Exclusive unreleased content</div>
+                      <div class="ps-card-sub">&#127775; Insider access before anyone else</div>
+                    </div>
+                    <div class="ps-stat-row">
+                      <div class="ps-stat"><div class="ps-stat-num">847</div><div class="ps-stat-label">New fans</div></div>
+                      <div class="ps-stat"><div class="ps-stat-num">92%</div><div class="ps-stat-label">Opt-in rate</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grow-step-right">
+              <div class="grow-powers-label">Powered by Grouped</div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128279;</div>
+                  <div class="grow-powers-feature-name">Swaps</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Every link captures fan data instantly. They get early access, you get their info.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#127911;</div>
+                  <div class="grow-powers-feature-name">First Listens &amp; Premieres</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Drop music to your people before it hits streaming. Know exactly who showed up.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128229;</div>
+                  <div class="grow-powers-feature-name">Import Your Lists</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Bring your existing audience with you. Build on what you already have.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== STATE 2: Keep (3-column) ===== -->
+        <div class="grow-panel" id="grow-panel-2">
+          <div class="grow-panel-cols">
+            <div class="grow-step-left">
+              <div class="grow-step-label">02 / Keep</div>
+              <h2 class="grow-step-title">Keep Every Fan You Earn</h2>
+              <p class="grow-step-copy">Most artists earn fans and lose them in the same week. Grouped keeps curious listeners engaged between releases without you having to become a content creator.</p>
+            </div>
+            <div class="grow-step-center">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-slide active">
+                    <div class="ps-header">Your Group</div>
+                    <div class="ps-title">Smart Feed</div>
+                    <div class="ps-subtitle">Syncs automatically. Zero effort.</div>
+                    <div class="ps-card"><div class="ps-card-title">New track: "Midnight"</div><div class="ps-card-sub">From Spotify &middot; 2h ago</div></div>
+                    <div class="ps-card"><div class="ps-card-title">Studio session BTS</div><div class="ps-card-sub">From Instagram &middot; 5h ago</div></div>
+                    <div class="ps-card"><div class="ps-card-title">Tour dates announced</div><div class="ps-card-sub">From your website &middot; 1d ago</div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grow-step-right">
+              <div class="grow-powers-label">Powered by Grouped</div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128225;</div>
+                  <div class="grow-powers-feature-name">Smart Feed</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Connects to Spotify, YouTube, and Instagram during setup. Auto-populates with your activity. Zero maintenance.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128276;</div>
+                  <div class="grow-powers-feature-name">Push Notifications</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Reach fans through wallet-based passes with 85%+ open rates. Direct to their phone, no app download required.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128100;</div>
+                  <div class="grow-powers-feature-name">Fan Profiling</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Every interaction teaches you more about who your fans are and what they care about.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== STATE 3: Grow (3-column) ===== -->
+        <div class="grow-panel" id="grow-panel-3">
+          <div class="grow-panel-cols">
+            <div class="grow-step-left">
+              <div class="grow-step-label">03 / Grow</div>
+              <h2 class="grow-step-title">Activate and Reactivate on Your Terms</h2>
+              <p class="grow-step-copy">When you're ready to move, your audience is already warm. Tour dates, merch drops, new music: you're reaching people who never stopped paying attention.</p>
+            </div>
+            <div class="grow-step-center">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  <div class="phone-screen-slide active">
+                    <div class="ps-header">Activate</div>
+                    <div class="ps-title">Direct Reach</div>
+                    <div class="ps-subtitle">Your fans, your terms, every time</div>
+                    <div class="ps-stat-row">
+                      <div class="ps-stat"><div class="ps-stat-num">4.2K</div><div class="ps-stat-label">Reachable fans</div></div>
+                      <div class="ps-stat"><div class="ps-stat-num">89%</div><div class="ps-stat-label">Open rate</div></div>
+                    </div>
+                    <div class="ps-notification">
+                      <div class="ps-notif-icon">&#127925;</div>
+                      <div class="ps-notif-text">"Midnight" is LIVE. You heard it first.<span class="ps-notif-time">Push &middot; 89% opened</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grow-step-right">
+              <div class="grow-powers-label">Powered by Grouped</div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128227;</div>
+                  <div class="grow-powers-feature-name">Direct Reach</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Email, push, your choice. No algorithm decides who sees it. No platform stands between you and your fans.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#127873;</div>
+                  <div class="grow-powers-feature-name">Automatic Rewards</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Fans who engage early get the next first listen. Grouped handles the timing.</div>
+                </div>
+              </div>
+              <div class="grow-powers-feature">
+                <div class="grow-powers-feature-header">
+                  <div class="grow-powers-feature-icon">&#128176;</div>
+                  <div class="grow-powers-feature-name">Built-in Sales</div>
+                </div>
+                <div class="grow-powers-feature-body">
+                  <div class="grow-powers-feature-desc">Sell music, merch, and experiences directly. The revenue stays yours.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== STATE 4: Skyrocket (centered, full logo reveal + cards) ===== -->
+        <div class="grow-panel grow-panel-centered" id="grow-panel-4">
+          <h2 class="grow-closing-headline">The growth engine for lifelong music careers.</h2>
+          <p class="grow-closing-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome to Grouped.</strong></p>
+          <div class="grow-closing-cards">
+            <div class="grow-closing-card">
+              <div class="grow-closing-card-title">A fanbase that remembers.</div>
+              <p class="grow-closing-card-desc">The people who showed up for your first single are still there for your album. Nothing leaks. Nothing resets. Every release builds on the last.</p>
+            </div>
+            <div class="grow-closing-card">
+              <div class="grow-closing-card-title">Success that actually feels like success.</div>
+              <p class="grow-closing-card-desc">Not follower counts. Fans who buy tickets, share your music with friends, and drive hours to see you play. Revenue that grows. Progress you can feel.</p>
+            </div>
+            <div class="grow-closing-card">
+              <div class="grow-closing-card-title">A career you actually own.</div>
+              <p class="grow-closing-card-desc">No algorithm decides your reach. No platform takes a cut of your relationship. Your data, your audience, your future. You built this. It belongs to you.</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-
-      <div class="fader-experience" id="fader-experience">
-        <div class="hero-content">
-
-          <div class="hero-step-text active" id="step-text-0">
-            <div class="hero-step-label">01 / Capture</div>
-            <h2 class="hero-step-title">Own a Direct Line to Your Fans</h2>
-            <p class="hero-step-copy">
-              Your music is already creating fans. Grouped captures that first spark of interest and turns it into a connection you control. One release, one link, a fan base that starts building itself.
-            </p>
-            <div class="hero-step-features">
-              <div class="hero-step-feat">Every link captures fan data instantly</div>
-              <div class="hero-step-feat">Fans get early access, you get their info</div>
-              <div class="hero-step-feat">Import existing lists so you build on what you have</div>
-            </div>
-          </div>
-
-          <div class="hero-step-text" id="step-text-1">
-            <div class="hero-step-label">02 / Keep</div>
-            <h2 class="hero-step-title">Keep Every Fan You Earn</h2>
-            <p class="hero-step-copy">
-              Most artists earn fans and lose them in the same week. Grouped keeps curious listeners engaged between releases without you having to become a content creator. You make music. The relationship keeps building on its own.
-            </p>
-          </div>
-
-          <div class="hero-step-text" id="step-text-2">
-            <div class="hero-step-label">03 / Compound</div>
-            <h2 class="hero-step-title">Activate and Reactivate on Your Terms</h2>
-            <p class="hero-step-copy">
-              When you're ready to move, your audience is already warm. Tour dates, merch drops, new music: you're reaching people who never stopped paying attention. And the next time? They're still there. Every release compounds on the last.
-            </p>
-          </div>
-
-        </div>
-
-        <!-- Phone (center column) -->
-        <div class="hero-phone-wrapper">
-          <div class="phone-frame">
-            <div class="phone-notch"></div>
-            <div class="phone-screen" id="hero-phone-screen">
-
-              <div class="phone-screen-slide active" data-screen="0">
-                <div class="ps-header">Smart Swap</div>
-                <div class="ps-title">Early Access: "Midnight"</div>
-                <div class="ps-subtitle">Single dropping March 1</div>
-                <div class="ps-card">
-                  <div class="ps-card-title">Fans trade contact info for:</div>
-                  <div class="ps-card-sub ps-card-sub-spaced">&#127925; Early access to your music</div>
-                  <div class="ps-card-sub">&#127381; Exclusive unreleased content</div>
-                  <div class="ps-card-sub">&#127775; Insider access before anyone else</div>
-                </div>
-                <div class="ps-stat-row">
-                  <div class="ps-stat">
-                    <div class="ps-stat-num">847</div>
-                    <div class="ps-stat-label">New fans</div>
-                  </div>
-                  <div class="ps-stat">
-                    <div class="ps-stat-num">92%</div>
-                    <div class="ps-stat-label">Opt-in rate</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="phone-screen-slide" data-screen="1">
-                <div class="ps-header">Your Group</div>
-                <div class="ps-title">Smart Feed</div>
-                <div class="ps-subtitle">Syncs automatically. Zero effort.</div>
-                <div class="ps-card">
-                  <div class="ps-card-title">New track: "Midnight"</div>
-                  <div class="ps-card-sub">From Spotify &middot; 2h ago</div>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-card-title">Studio session BTS</div>
-                  <div class="ps-card-sub">From Instagram &middot; 5h ago</div>
-                </div>
-                <div class="ps-card">
-                  <div class="ps-card-title">Tour dates announced</div>
-                  <div class="ps-card-sub">From your website &middot; 1d ago</div>
-                </div>
-              </div>
-
-              <div class="phone-screen-slide" data-screen="2">
-                <div class="ps-header">Activate</div>
-                <div class="ps-title">Direct Reach</div>
-                <div class="ps-subtitle">Your fans, your terms, every time</div>
-                <div class="ps-stat-row">
-                  <div class="ps-stat">
-                    <div class="ps-stat-num">4.2K</div>
-                    <div class="ps-stat-label">Reachable fans</div>
-                  </div>
-                  <div class="ps-stat">
-                    <div class="ps-stat-num">89%</div>
-                    <div class="ps-stat-label">Open rate</div>
-                  </div>
-                </div>
-                <div class="ps-notification">
-                  <div class="ps-notif-icon">&#127925;</div>
-                  <div class="ps-notif-text">"Midnight" is LIVE. You heard it first.<span class="ps-notif-time">Push &middot; 89% opened</span></div>
-                </div>
-                <div class="ps-card ps-card-highlight">
-                  <div class="ps-card-sub ps-card-success">Every fan, every time. No gatekeepers.</div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-        <!-- Powers (right column) -->
-        <div class="hero-powers" id="hero-powers">
-          <div class="hero-powers-panel active" id="powers-0">
-            <div class="hero-powers-label">Powered by Grouped</div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128279;</div>
-                <div class="hero-powers-feature-name">Swaps</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Every link captures fan data instantly. They get early access, you get their info.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#127911;</div>
-                <div class="hero-powers-feature-name">First Listens &amp; Premieres</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Drop music to your people before it hits streaming. Know exactly who showed up.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128229;</div>
-                <div class="hero-powers-feature-name">Import Your Lists</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Bring your existing audience with you. Build on what you already have.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-powers-panel" id="powers-1">
-            <div class="hero-powers-label">Powered by Grouped</div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128225;</div>
-                <div class="hero-powers-feature-name">Smart Feed</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Connects to Spotify, YouTube, and Instagram during setup. Auto-populates with your activity. Zero maintenance.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128276;</div>
-                <div class="hero-powers-feature-name">Push Notifications</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Reach fans through wallet-based passes with 85%+ open rates. Direct to their phone, no app download required.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128100;</div>
-                <div class="hero-powers-feature-name">Fan Profiling</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Every interaction teaches you more about who your fans are and what they care about.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hero-powers-panel" id="powers-2">
-            <div class="hero-powers-label">Powered by Grouped</div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128227;</div>
-                <div class="hero-powers-feature-name">Direct Reach</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Email, push, your choice. No algorithm decides who sees it. No platform stands between you and your fans.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#127873;</div>
-                <div class="hero-powers-feature-name">Automatic Rewards</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Fans who engage early get the next first listen. Grouped handles the timing.</div>
-              </div>
-            </div>
-            <div class="hero-powers-feature">
-              <div class="hero-powers-feature-header">
-                <div class="hero-powers-feature-icon">&#128176;</div>
-                <div class="hero-powers-feature-name">Built-in Sales</div>
-              </div>
-              <div class="hero-powers-feature-body">
-                <div class="hero-powers-feature-desc">Sell music, merch, and experiences directly. The revenue stays yours.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Closing (spans full width when all faders up) -->
-        <div class="hero-closing" id="hero-closing">
-          <div class="hero-closing-inner">
-            <h2 class="hero-closing-headline">The growth engine for lifelong music careers.</h2>
-            <p class="hero-closing-subline">Imagine looking back at every release you've ever put out and knowing that every single fan it created is still connected to you. <strong>Welcome Grouped.</strong></p>
-            <div class="hero-closing-cards">
-              <div class="hero-closing-card">
-                <div class="hero-closing-card-title">A fanbase that remembers.</div>
-                <p class="hero-closing-card-desc">The people who showed up for your first single are still there for your album. Nothing leaks. Nothing resets. Every release builds on the last.</p>
-              </div>
-              <div class="hero-closing-card">
-                <div class="hero-closing-card-title">Success that actually feels like success.</div>
-                <p class="hero-closing-card-desc">Not follower counts. Fans who buy tickets, share your music with friends, and drive hours to see you play. Revenue that grows. Progress you can feel.</p>
-              </div>
-              <div class="hero-closing-card">
-                <div class="hero-closing-card-title">A career you actually own.</div>
-                <p class="hero-closing-card-desc">No algorithm decides your reach. No platform takes a cut of your relationship. Your data, your audience, your future. You built this. It belongs to you.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -2868,77 +2875,62 @@ function rotateHero() {
 
 heroRotationInterval = setInterval(rotateHero, 3000);
 
-// ---- PARALLAX SCROLL LOGIC (drives off fader-wrapper in fan journey) ----
-const faderWrapper = document.getElementById('fader-wrapper');
-const faderExperience = document.getElementById('fader-experience');
-const heroClosing = document.getElementById('hero-closing');
-const heroPhoneScreen = document.getElementById('hero-phone-screen');
-const phoneSlides = heroPhoneScreen.querySelectorAll('.phone-screen-slide');
-const stepTexts = [
-  document.getElementById('step-text-0'),
-  document.getElementById('step-text-1'),
-  document.getElementById('step-text-2')
+// ---- GROW SECTION: SCROLL-DRIVEN STATE MACHINE ----
+const growWrapper = document.getElementById('grow-wrapper');
+const growStage = document.getElementById('grow-stage');
+const growPanels = [
+  document.getElementById('grow-panel-0'),
+  document.getElementById('grow-panel-1'),
+  document.getElementById('grow-panel-2'),
+  document.getElementById('grow-panel-3'),
+  document.getElementById('grow-panel-4')
 ];
-const powersPanels = [
-  document.getElementById('powers-0'),
-  document.getElementById('powers-1'),
-  document.getElementById('powers-2')
-];
-const speakerRings = document.querySelectorAll('#speaker-rings-fader .speaker-ring');
+const growReveal = document.querySelector('.grow-g-reveal');
 
-let lastPhase = -1;
+let lastGrowState = -1;
 
-function updateFaderScroll() {
-  const rect = faderWrapper.getBoundingClientRect();
-  const sectionHeight = faderWrapper.offsetHeight;
+function updateGrowScroll() {
+  if (!growWrapper || !growStage) return;
+
+  const rect = growWrapper.getBoundingClientRect();
+  const sectionHeight = growWrapper.offsetHeight;
   const scrolled = -rect.top;
   const scrollable = sectionHeight - window.innerHeight;
   const progress = Math.max(0, Math.min(1, scrolled / scrollable));
 
-  // Phases:
-  // 0.00 - 0.25: Capture
-  // 0.25 - 0.50: Keep
-  // 0.50 - 0.75: Compound
-  // 0.75 - 1.00: Closing line
+  // 5 states across scroll:
+  // 0.00 - 0.20: State 0 — "One place to own it all"
+  // 0.20 - 0.40: State 1 — Capture
+  // 0.40 - 0.60: State 2 — Keep
+  // 0.60 - 0.80: State 3 — Grow
+  // 0.80 - 1.00: State 4 — Skyrocket (full logo reveal)
 
-  let phase;
-  if (progress < 0.25) phase = 0;
-  else if (progress < 0.50) phase = 1;
-  else if (progress < 0.75) phase = 2;
-  else phase = 3;
+  let state;
+  if (progress < 0.20) state = 0;
+  else if (progress < 0.40) state = 1;
+  else if (progress < 0.60) state = 2;
+  else if (progress < 0.80) state = 3;
+  else state = 4;
 
-  if (phase === lastPhase) return;
-  lastPhase = phase;
+  if (state === lastGrowState) return;
+  lastGrowState = state;
 
-  const isClosing = phase === 3;
+  // Update data attribute for CSS ring color transitions
+  growStage.setAttribute('data-grow-state', state);
 
-  // Step texts (left column)
-  stepTexts.forEach((el, i) => el.classList.toggle('active', phase === i));
-
-  // Powers panels (right column)
-  powersPanels.forEach((el, i) => el.classList.toggle('active', phase === i));
-
-  // Phone screens (center column)
-  if (!isClosing) {
-    phoneSlides.forEach((s, i) => s.classList.toggle('active', i === phase));
-  }
-
-  // Speaker rings: reveal progressively, stay visible once shown
-  speakerRings.forEach(ring => {
-    const ringPhase = parseInt(ring.dataset.phase);
-    if (phase >= ringPhase || isClosing) {
-      ring.classList.add('visible');
-      setTimeout(() => ring.classList.add('pulse'), 800 + ringPhase * 300);
-    }
+  // Toggle panel visibility
+  growPanels.forEach((panel, i) => {
+    if (panel) panel.classList.toggle('active', i === state);
   });
 
-  // Closing: toggle class on experience container (CSS handles transitions)
-  faderExperience.classList.toggle('in-closing', isClosing);
-  heroClosing.classList.toggle('active', isClosing);
+  // Full logo reveal (State 4)
+  if (growReveal) {
+    growReveal.style.opacity = state === 4 ? '1' : '0';
+  }
 }
 
-window.addEventListener('scroll', updateFaderScroll, { passive: true });
-updateFaderScroll();
+window.addEventListener('scroll', updateGrowScroll, { passive: true });
+updateGrowScroll();
 
 // ---- FEATURES: HORIZONTAL SCROLL + STACKING RINGS ----
 const featSection = document.querySelector('.feat-section');
