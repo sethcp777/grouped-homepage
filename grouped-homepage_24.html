@@ -818,23 +818,26 @@ section[id] { scroll-margin-top: 80px; }
 [data-grow-state="3"] .grow-g-mask { clip-path: inset(0 0 50% 0); }
 [data-grow-state="4"] .grow-g-mask { clip-path: inset(0 0 0 0); }
 
-/* Feed lines (entering outer ring from top) */
+/* Feed lines (intake channels entering outer ring from top) */
 .grow-feed-lines {
   position: absolute;
-  top: -140px;
+  top: -50vh;
   left: 50%;
   transform: translateX(-50%);
-  width: 300px;
-  height: 180px;
+  width: 575px;
+  height: calc(50vh + 12px);
   pointer-events: none;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.8s ease;
 }
 
-[data-grow-state="1"] .grow-feed-lines,
-[data-grow-state="2"] .grow-feed-lines,
-[data-grow-state="3"] .grow-feed-lines { opacity: 1; }
-[data-grow-state="4"] .grow-feed-lines { opacity: 0.5; }
+.grow-feed-lines svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Feed lines fade when logo fully reveals */
+[data-grow-state="4"] .grow-feed-lines { opacity: 0.3; }
 .btn-primary {
   font-family: var(--font-body);
   font-size: 16px;
@@ -1322,7 +1325,8 @@ section[id] { scroll-margin-top: 80px; }
 /* Scroll indicator */
 .fj-scroll-hint {
   text-align: center;
-  margin-top: 32px;
+  margin-top: 24px;
+  margin-bottom: 0;
   opacity: 0.4;
   animation: scrollBounce 2s ease-in-out infinite;
 }
@@ -1383,66 +1387,13 @@ section[id] { scroll-margin-top: 80px; }
 .fj-flow-path:nth-child(11) { transition-delay: 0.02s; }
 .fj-flow-path:nth-child(12) { transition-delay: 0.22s; }
 
-/* Grouped destination */
-.fj-destination {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  padding: clamp(100px, 14vw, 180px) 40px 0;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fj-destination.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fj-dest-logo {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 28px;
-  color: var(--white);
-  letter-spacing: -0.5px;
-  margin-bottom: 4px;
-}
-
-.fj-dest-logo span { color: var(--gold); }
-
-.fj-dest-line {
-  width: 40px;
-  height: 2px;
-  background: var(--gold);
-  margin: 16px auto 24px;
-  opacity: 0.5;
-}
-
-.fj-dest-headline {
-  font-family: var(--font-display);
-  font-size: clamp(28px, 3.5vw, 44px);
-  line-height: 1.15;
-  margin-bottom: 20px;
-}
-
-.fj-dest-headline em {
-  font-style: normal;
-  color: var(--gold);
-}
-
-.fj-dest-sub {
-  font-size: 17px;
-  color: var(--gray-300);
-  line-height: 1.65;
-  max-width: 560px;
-  margin: 0 auto;
-}
+/* (fj-destination section removed — content merged into grow State 0) */
 
 /* Grow experience (scroll-driven, embedded in fan journey) */
 .grow-wrapper {
   height: 520vh;
   position: relative;
-  margin-top: 80px;
+  margin-top: 0;
 }
 
 .grow-sticky {
@@ -2055,6 +2006,7 @@ section[id] { scroll-margin-top: 80px; }
   /* Grow experience mobile */
   .grow-wrapper { height: 480vh; }
   .grow-rings-wrap { width: 320px; height: 320px; }
+  .grow-feed-lines { width: 320px; }
   .grow-panel-cols {
     grid-template-columns: 1fr;
     text-align: center;
@@ -2307,16 +2259,6 @@ section[id] { scroll-margin-top: 80px; }
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 
-  <!-- Grouped destination -->
-  <div class="fj-destination" id="fj-destination">
-    <div class="fj-dest-logo">grouped<span>.</span></div>
-    <div class="fj-dest-line"></div>
-    <h2 class="fj-dest-headline">One place to <em>own it all.</em></h2>
-    <p class="fj-dest-sub">Every fan that discovers you across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
-  </div>
-
-  <!-- PLACEHOLDER: Circular rotation visualization (logo-based — coming soon) -->
-
   <!-- ============================================
        FADER EXPERIENCE (scroll-driven, embedded)
        ============================================ -->
@@ -2326,18 +2268,20 @@ section[id] { scroll-margin-top: 80px; }
 
         <!-- SVG Rings (background, centered) -->
         <div class="grow-rings-wrap">
-          <!-- Feed lines entering outer ring from above -->
+          <!-- Feed lines: solid filled channels matching ring aesthetic -->
           <div class="grow-feed-lines">
-            <svg viewBox="0 0 300 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M50 0 C50 80, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.5"/>
-              <path d="M150 0 C150 60, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.7"/>
-              <path d="M250 0 C250 80, 150 100, 150 180" stroke="url(#feed-grad)" stroke-width="1.5" opacity="0.5"/>
+            <svg viewBox="0 0 575 600" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
               <defs>
-                <linearGradient id="feed-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#F9A81A" stop-opacity="0"/>
-                  <stop offset="1" stop-color="#F9A81A" stop-opacity="0.6"/>
+                <linearGradient id="feed-fade" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#2A3036" stop-opacity="0"/>
+                  <stop offset="0.5" stop-color="#2A3036" stop-opacity="0.25"/>
+                  <stop offset="1" stop-color="#2A3036" stop-opacity="0.5"/>
                 </linearGradient>
               </defs>
+              <!-- 3 converging intake channels -->
+              <path d="M200 0 L200 400 Q200 580, 270 598 L282 598 Q210 580, 210 400 L210 0 Z" fill="url(#feed-fade)"/>
+              <path d="M283 0 L283 598 L292 598 L292 0 Z" fill="url(#feed-fade)" opacity="0.7"/>
+              <path d="M375 0 L375 400 Q375 580, 305 598 L293 598 Q365 580, 365 400 L365 0 Z" fill="url(#feed-fade)"/>
             </svg>
           </div>
           <svg width="575" height="575" viewBox="0 0 575 575" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2367,7 +2311,7 @@ section[id] { scroll-margin-top: 80px; }
         <div class="grow-panel grow-panel-centered active" id="grow-panel-0">
           <div class="grow-panel-brand">Grouped</div>
           <h2 class="grow-panel-headline">One place to own it all</h2>
-          <p class="grow-panel-sub">Every fan your music creates, captured, kept, and activated from one platform you control.</p>
+          <p class="grow-panel-sub">Every fan across every channel flows into one place you control. No algorithms. No rented audience. Your fans, your data, your career.</p>
           <div class="grow-panel-cta">
             See how it works
             <svg viewBox="0 0 16 16" fill="none"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2987,8 +2931,6 @@ function updateFeatures() {
 // ---- FAN JOURNEY SCROLL ANIMATIONS ----
 const fjNodes = document.querySelectorAll('.fj-node');
 const fjFlowSvg = document.getElementById('fj-flow-svg');
-const fjDestination = document.getElementById('fj-destination');
-
 function checkFanJourney() {
   const wh = window.innerHeight;
 
@@ -3003,13 +2945,6 @@ function checkFanJourney() {
     const fRect = fjFlowSvg.getBoundingClientRect();
     if (fRect.top < wh * 0.75) {
       fjFlowSvg.classList.add('visible');
-    }
-  }
-
-  if (fjDestination) {
-    const dRect = fjDestination.getBoundingClientRect();
-    if (dRect.top < wh * 0.72) {
-      fjDestination.classList.add('visible');
     }
   }
 }
