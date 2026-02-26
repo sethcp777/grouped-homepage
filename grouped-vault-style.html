@@ -1,0 +1,4663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grouped | The Growth Engine for Music Careers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+<style>
+/* ============================================
+   FONT
+   ============================================ */
+@font-face {
+  font-family: 'GroupedFont';
+  src: url('GroupedFont.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+::selection {
+  background: rgba(196,138,58,0.3);
+  color: var(--text-primary);
+}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { border: none; background: none; cursor: pointer; font: inherit; color: inherit; }
+
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
+:root {
+  /* Backgrounds */
+  --bg-base: #111620;
+  --bg-raised: #181E2A;
+  --bg-overlay: #1F2735;
+  --bg-subtle: #262F3F;
+  --bg-muted: #2E3849;
+
+  /* Legacy aliases */
+  --bg: #111620;
+  --bg-card: #181E2A;
+  --bg-card-hover: #1F2735;
+  --bg-elevated: #1F2735;
+
+  /* Borders */
+  --border: rgba(235,225,210,0.07);
+  --border-hover: rgba(235,225,210,0.11);
+  --border-active: rgba(235,225,210,0.16);
+  --border-strong: rgba(235,225,210,0.22);
+
+  /* Text */
+  --text-primary: #F0EBE3;
+  --text-secondary: rgba(240,235,227,0.6);
+  --text-tertiary: rgba(240,235,227,0.38);
+  --text-muted: rgba(240,235,227,0.18);
+  --text-inverse: #111620;
+
+  /* Brand */
+  --gold: #C48A3A;
+  --gold-light: #F6B44E;
+  --gold-dim: rgba(196,138,58,0.5);
+  --gold-glow: rgba(196,138,58,0.15);
+  --focus: #7CBBDF;
+
+  /* Bronze scale */
+  --bronze-50: #FEF7EC;
+  --bronze-100: #FDE9C8;
+  --bronze-200: #FAD08E;
+  --bronze-300: #F6B44E;
+  --bronze-400: #C48A3A;
+  --bronze-500: #B87A2E;
+  --bronze-600: #916024;
+  --bronze-700: #6B471B;
+
+  /* Legacy gray aliases (mapped to new system) */
+  --white: #F0EBE3;
+  --gray-100: #F0EBE3;
+  --gray-200: rgba(240,235,227,0.6);
+  --gray-300: rgba(240,235,227,0.38);
+  --gray-400: rgba(240,235,227,0.25);
+  --gray-500: #2E3849;
+  --gray-600: #1F2735;
+  --gray-700: #181E2A;
+
+  /* Semantic */
+  --success: #8BAF9C;
+  --warning: #D4A24B;
+  --error: #C27A6B;
+  --info: #8BA4BE;
+
+  /* Glass */
+  --glass-bg: rgba(17,22,32,0.75);
+  --glass-border: rgba(235,225,210,0.06);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.35);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.45);
+  --shadow-glow-gold: 0 0 24px rgba(196,138,58,0.15);
+  --shadow-glow-soft: 0 0 60px rgba(196,138,58,0.06);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+  /* Radius */
+  --radius-sleeve: 4px;
+  --radius-label: 9999px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 4px;
+  --radius-xl: 4px;
+  --radius-full: 9999px;
+
+  /* Layout */
+  --container: 1200px;
+  --section-pad: clamp(80px, 10vw, 140px);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.font-display {
+  font-family: 'GroupedFont', serif;
+  font-weight: normal;
+  font-style: normal;
+}
+h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
+.label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-weight: 700;
+}
+.label-gold { color: var(--gold); }
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.section { padding: var(--section-pad) 0; }
+
+/* ============================================
+   NAVIGATION — Inspo style
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 900px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-label);
+  padding: 8px 8px 8px 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: all 0.4s var(--ease-out);
+}
+.nav.scrolled .nav-bar {
+  background: rgba(17,22,32,0.95);
+  box-shadow: var(--shadow-lg);
+}
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--gray-200);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-left:hover { color: var(--white); }
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 18px;
+}
+.nav-hamburger span {
+  display: block;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'GroupedFont', serif;
+  font-size: 20px;
+  color: var(--white);
+}
+.nav-center em {
+  font-style: normal;
+  color: var(--gold);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-login {
+  font-size: 13px;
+  color: var(--gray-200);
+  padding: 8px 18px;
+  border-radius: var(--radius-label);
+  transition: all 0.2s;
+  background: var(--gray-600);
+}
+.nav-login:hover { color: var(--white); background: var(--gray-500); }
+.nav-join {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: var(--radius-label);
+  background: var(--gold);
+  color: var(--text-inverse);
+  transition: all 0.2s;
+}
+.nav-join:hover { background: var(--gold-light); }
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: max(120px, 12vh) 32px 40px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.hero-content {
+  text-align: left;
+  max-width: var(--container);
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Pill tag above headline */
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  background: var(--bg-raised);
+  border-radius: 33px;
+  margin-bottom: 24px;
+}
+.hero-tag-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.hero-tag-text {
+  font-size: 13px;
+  color: var(--gray-200);
+  letter-spacing: 0.02em;
+}
+
+/* Two-line headline with rotating words */
+.hero-headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 4.2vw, 68px);
+  line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 28px;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+}
+.hero-line {
+  display: block;
+  white-space: nowrap;
+}
+.hero-rotating-word {
+  display: inline-block;
+  color: var(--gold);
+  position: relative;
+}
+.hero-rotating-word .word {
+  display: inline-block;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.hero-rotating-word .word.exit {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.hero-rotating-result {
+  display: inline-block;
+  color: var(--gold);
+  position: relative;
+}
+.hero-rotating-result .word {
+  display: inline-block;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.hero-rotating-result .word.exit {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* Subtitle */
+.hero-sub {
+  font-size: clamp(16px, 1.8vw, 19px);
+  color: var(--gray-300);
+  line-height: 1.65;
+  margin-bottom: 32px;
+  max-width: 464px;
+}
+.hero-sub p {
+  margin-bottom: 8px;
+}
+.hero-sub p:last-child {
+  margin-bottom: 0;
+}
+
+/* CTA row */
+.hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.hero-cta-link {
+  font-size: 14px;
+  color: var(--gray-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  border-bottom: 1px solid var(--gray-500);
+  padding-bottom: 1px;
+}
+.hero-cta-link:hover { color: var(--white); border-color: var(--white); }
+.hero-cta-link svg { width: 14px; height: 14px; }
+
+/* Social proof */
+.hero-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  margin-bottom: 32px;
+  font-size: 13px;
+  color: var(--gray-400);
+}
+.hero-proof-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hero-proof-value {
+  color: var(--gray-200);
+  font-weight: 600;
+}
+.hero-proof-divider {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gray-500);
+  flex-shrink: 0;
+}
+
+/* Pill tabs row */
+.hero-pills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 0;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
+  padding: 0 20px;
+}
+
+/* ============================================
+   HERO PRODUCT VISUAL (Swap phone mockup)
+   ============================================ */
+.hero-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.hero-phone {
+  width: 280px;
+  background: var(--bg-base);
+  border-radius: 36px;
+  border: 2.5px solid var(--gray-600);
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.5),
+    0 0 0 1px rgba(240,235,227,0.04),
+    0 0 60px rgba(196,138,58,0.06);
+}
+.hero-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 24px;
+  background: var(--bg-base);
+  border-radius: 0 0 16px 16px;
+  z-index: 10;
+}
+.hero-phone-screen {
+  background: var(--bg-base);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+/* Cover image area */
+.swap-cover {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(180deg, #1a1520 0%, #0d0d12 100%);
+  position: relative;
+  overflow: hidden;
+}
+.swap-cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(transparent, var(--bg-base));
+}
+/* Animated visual noise in cover */
+.swap-cover-visual {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(196,138,58,0.15), transparent 70%);
+  animation: coverPulse 4s ease-in-out infinite;
+}
+@keyframes coverPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+/* Music waveform bars in cover */
+.swap-waveform {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 28px;
+}
+.swap-waveform span {
+  width: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  opacity: 0.5;
+  animation: waveBar 1.2s ease-in-out infinite;
+}
+.swap-waveform span:nth-child(1) { height: 8px; animation-delay: 0s; }
+.swap-waveform span:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+.swap-waveform span:nth-child(3) { height: 24px; animation-delay: 0.2s; }
+.swap-waveform span:nth-child(4) { height: 12px; animation-delay: 0.3s; }
+.swap-waveform span:nth-child(5) { height: 20px; animation-delay: 0.15s; }
+.swap-waveform span:nth-child(6) { height: 28px; animation-delay: 0.25s; }
+.swap-waveform span:nth-child(7) { height: 14px; animation-delay: 0.05s; }
+.swap-waveform span:nth-child(8) { height: 22px; animation-delay: 0.35s; }
+.swap-waveform span:nth-child(9) { height: 10px; animation-delay: 0.2s; }
+@keyframes waveBar {
+  0%, 100% { transform: scaleY(0.4); opacity: 0.3; }
+  50% { transform: scaleY(1); opacity: 0.7; }
+}
+/* Swap content */
+.swap-body {
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.swap-artist {
+  font-size: 12px;
+  color: var(--gray-400);
+  text-align: center;
+  letter-spacing: 0.03em;
+}
+.swap-title {
+  font-family: 'GroupedFont', serif;
+  font-size: 20px;
+  color: var(--white);
+  text-align: center;
+  line-height: 1.2;
+  font-weight: normal;
+}
+.swap-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.swap-field {
+  background: rgba(240,235,227,0.06);
+  border: 1px solid rgba(235,225,210,0.08);
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-size: 13px;
+  color: var(--gray-400);
+  position: relative;
+  overflow: hidden;
+}
+.swap-field-typing {
+  color: var(--gray-200);
+}
+/* Typing cursor animation */
+.swap-field-typing::after {
+  content: '';
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: var(--gold);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.swap-btn {
+  background: var(--white);
+  color: var(--text-inverse);
+  border: none;
+  border-radius: var(--radius-label);
+  padding: 13px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+}
+.swap-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(240,235,227,0.3), transparent);
+  transform: translateX(-100%);
+  animation: shimmer 3s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  30%, 100% { transform: translateX(100%); }
+}
+/* Success state notification */
+.swap-success {
+  position: absolute;
+  bottom: 20px;
+  left: 16px;
+  right: 16px;
+  background: rgba(196,138,58,0.15);
+  border: 1px solid rgba(196,138,58,0.3);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(8px);
+  animation: successPop 6s ease-in-out infinite;
+}
+@keyframes successPop {
+  0%, 60% { opacity: 0; transform: translateY(8px); }
+  68%, 92% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(8px); }
+}
+.swap-success-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 10px;
+  color: var(--text-inverse);
+  font-weight: bold;
+}
+/* Floating stat badges around phone */
+.hero-float {
+  position: absolute;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  white-space: nowrap;
+  animation: floatGently 6s ease-in-out infinite;
+  z-index: 2;
+}
+.hero-float-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gold);
+  display: block;
+  line-height: 1.2;
+}
+.hero-float-label {
+  font-size: 11px;
+  color: var(--gray-400);
+}
+.hero-float-1 {
+  top: 15%;
+  right: -40px;
+  animation-delay: -1s;
+}
+.hero-float-2 {
+  bottom: 20%;
+  left: -50px;
+  animation-delay: -3s;
+}
+.hero-pill {
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: var(--radius-label);
+  border: 1px solid var(--border);
+  color: var(--gray-300);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.hero-pill:hover {
+  border-color: var(--border-hover);
+  color: var(--white);
+}
+.hero-pill.active {
+  background: var(--white);
+  color: var(--text-inverse);
+  border-color: var(--white);
+  font-weight: 500;
+}
+
+/* Hero background glow */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 10%;
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ============================================
+   FAN-ROTATION CARD CAROUSEL (Osmo-style exact)
+   ============================================ */
+.carousel-section {
+  position: relative;
+}
+.carousel-header {
+  text-align: center;
+  padding: 80px 32px 0;
+  position: relative;
+  z-index: 1;
+}
+.carousel-header .label { margin-bottom: 16px; }
+.carousel-header h2 {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--white);
+  font-weight: normal;
+  margin-bottom: 16px;
+}
+.carousel-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+.carousel-inner {
+  position: relative;
+  overflow: hidden;
+  padding-top: 2.5em;
+  padding-bottom: calc(14.5em + 20em);
+  margin-bottom: -20em;
+}
+
+/* Slider wrapper — flex column centered like Osmo's .gsap-slider */
+.carousel-slider {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  gap: 1.25em;
+}
+
+/* Decorative circle — matches Osmo's 238em wide SVG at top:48% */
+.carousel-deco-circle {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 238em;
+  aspect-ratio: 3481 / 1740.5;
+  pointer-events: none;
+  z-index: 0;
+}
+.carousel-deco-circle svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Custom drag cursor */
+.drag-cursor {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.15s ease;
+  transform: translate(-50%, -50%) scale(0.6);
+  will-change: transform, opacity;
+}
+.drag-cursor.visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+.drag-cursor.dragging {
+  transform: translate(-50%, -50%) scale(0.85);
+}
+.drag-cursor__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--white);
+  flex-shrink: 0;
+}
+.drag-cursor__circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.drag-cursor__text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-inverse);
+  letter-spacing: 0.02em;
+}
+
+/* Draggable collection area — 82.5em wide like Osmo */
+.carousel-collection {
+  width: 82.5em;
+  max-width: 100%;
+  cursor: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  position: relative;
+}
+
+/* The list holds all cards, height set by JS to match card height */
+.carousel-list {
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+  will-change: transform;
+  touch-action: pan-y;
+  backface-visibility: hidden;
+  display: flex;
+  cursor: none;
+}
+
+/* Each card item — positioned absolutely, rotation applied by JS */
+.carousel-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-right: 0;
+  /* Width: 1/3 of collection like Osmo (--slider-spv: 3, --slider-gap: 0) */
+  width: calc((100% - 1px) / 3);
+  flex: none;
+  border-radius: 1em;
+  overflow: hidden;
+  /* Osmo exact: transform-origin: 50% 375% on desktop */
+  transform-origin: 50% 375%;
+  /* No CSS transitions — GSAP handles all animation for jank-free updates */
+  will-change: transform, opacity;
+  cursor: none;
+}
+
+/* Aspect ratio spacer — 130% padding-top like Osmo */
+.carousel-card-before {
+  padding-top: 130%;
+}
+
+.carousel-card-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 1em;
+  padding: 2.5em;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+/* Card color themes — vinyl surface gradient */
+.carousel-card[data-index="0"] .carousel-card-inner {
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.06) 100%);
+  border-color: rgba(196,138,58,0.18);
+}
+.carousel-card[data-index="1"] .carousel-card-inner {
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.04) 100%);
+  border-color: rgba(196,138,58,0.12);
+}
+.carousel-card[data-index="2"] .carousel-card-inner {
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.05) 100%);
+  border-color: rgba(196,138,58,0.12);
+}
+.carousel-card[data-index="3"] .carousel-card-inner {
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.04) 100%);
+  border-color: rgba(196,138,58,0.12);
+}
+.carousel-card[data-index="4"] .carousel-card-inner {
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.06) 100%);
+  border-color: rgba(196,138,58,0.18);
+}
+
+/* Active card highlight */
+.carousel-card.active .carousel-card-inner {
+  border-color: var(--gold-dim);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px var(--gold-glow);
+}
+
+/* Bottom fade gradient — OUTSIDE __inner, child of section (like Osmo) */
+.carousel-fade {
+  background-image: linear-gradient(180deg, transparent, var(--bg));
+  pointer-events: none;
+  width: 100%;
+  height: 10em;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  z-index: 2;
+}
+
+/* Card inner elements */
+.card-label {
+  display: inline-flex;
+  gap: 6px;
+  margin-bottom: 1.2em;
+}
+.card-label span {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background: rgba(240,235,227,0.06);
+  color: var(--gray-300);
+  font-weight: 500;
+}
+.card-label span.label-accent {
+  color: var(--gold);
+  background: rgba(196,138,58,0.12);
+}
+
+.card-icon {
+  font-family: 'GroupedFont', serif;
+  font-size: 2.8em;
+  color: var(--gold);
+  margin-bottom: 0.3em;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.card-title {
+  font-family: 'GroupedFont', serif;
+  font-size: 1.8em;
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1.15;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.01em;
+}
+.card-desc {
+  font-size: 0.875em;
+  color: var(--gray-300);
+  line-height: 1.7;
+  margin-bottom: 1.5em;
+}
+.card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  margin-top: auto;
+}
+.card-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6em;
+  font-size: 0.8em;
+  color: var(--gray-200);
+  line-height: 1.5;
+}
+.card-feat-icon {
+  width: 1.4em;
+  height: 1.4em;
+  border-radius: 50%;
+  background: var(--gold-glow);
+  border: 1px solid rgba(196,138,58,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.75em;
+}
+
+/* Pill nav for carousel — inside slider, above collection (like Osmo) */
+.carousel-nav {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.125em;
+  padding-bottom: 1.25em;
+  position: relative;
+  z-index: 3;
+}
+.carousel-nav-btn {
+  font-size: 14px;
+  padding: 10px 22px;
+  border-radius: 3em;
+  border: 1px solid var(--border);
+  color: var(--gray-300);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+.carousel-nav-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--white);
+}
+.carousel-nav-btn.active {
+  background: var(--gray-700);
+  color: var(--white);
+  border-color: var(--gray-700);
+  font-weight: 500;
+}
+
+/* Carousel controls below */
+.carousel-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 3;
+}
+.carousel-step-label {
+  font-size: 13px;
+  color: var(--gray-400);
+  letter-spacing: 0.05em;
+}
+.carousel-step-label span { color: var(--gold); font-weight: 600; }
+.drag-hint {
+  font-size: 12px;
+  color: var(--gray-500);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: opacity 0.5s;
+}
+.drag-hint.hidden { opacity: 0; }
+.drag-hint svg { width: 16px; height: 16px; }
+
+/* ============================================
+   SECTION DIVIDER
+   ============================================ */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ============================================
+   VIDEO DEMO SECTION
+   ============================================ */
+.demo-section {
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+.demo-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, var(--bg) 0%, rgba(10,10,10,0.95) 50%, var(--bg) 100%);
+  pointer-events: none;
+}
+.demo-phone-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.demo-phone {
+  width: 300px;
+  height: 620px;
+  background: var(--bg-base);
+  border-radius: 40px;
+  border: 3px solid var(--gray-600);
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(240,235,227,0.05),
+    inset 0 0 0 1px rgba(240,235,227,0.05);
+}
+.demo-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 28px;
+  background: var(--bg-base);
+  border-radius: 0 0 20px 20px;
+  z-index: 10;
+}
+.demo-phone-screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, var(--bg-raised) 0%, var(--bg-base) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+}
+.demo-play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 30px var(--gold-glow);
+}
+.demo-play-btn:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(196,138,58,0.25); }
+.demo-play-btn svg { width: 24px; height: 24px; fill: var(--bg-base); margin-left: 3px; }
+.demo-label-text {
+  margin-top: 16px;
+  font-size: 13px;
+  color: var(--gray-400);
+}
+.demo-badge {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(240,235,227,0.06);
+  border-radius: var(--radius-label);
+  font-size: 11px;
+  color: var(--gray-300);
+  white-space: nowrap;
+}
+.demo-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* Floating UI hints around phone */
+.demo-float {
+  position: absolute;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  font-size: 12px;
+  color: var(--gray-200);
+  white-space: nowrap;
+  animation: floatGently 6s ease-in-out infinite;
+  z-index: 1;
+}
+.demo-float-left { left: calc(50% - 300px); top: 180px; animation-delay: -1s; }
+.demo-float-right { right: calc(50% - 300px); top: 280px; animation-delay: -3s; }
+.demo-float-bottom { left: calc(50% - 120px); bottom: 120px; animation-delay: -2s; }
+.demo-float .demo-float-stat {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gold);
+  display: block;
+  margin-bottom: 2px;
+}
+@keyframes floatGently {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ============================================
+   FEATURE CARDS
+   ============================================ */
+.features-section {
+  padding: var(--section-pad) 0;
+}
+.features-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.features-header .label { margin-bottom: 16px; }
+.features-header h2 {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--white);
+  font-weight: normal;
+  margin-bottom: 16px;
+}
+.features-header p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* Filter buttons */
+.filter-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.filter-btn {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--bg-overlay);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-label);
+  padding: 8px 20px;
+  font-family: 'Satoshi', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: color 0.4s cubic-bezier(0.625, 0.05, 0, 1),
+              background-color 0.4s cubic-bezier(0.625, 0.05, 0, 1),
+              border-color 0.4s cubic-bezier(0.625, 0.05, 0, 1);
+}
+.filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-hover);
+}
+.filter-btn[data-filter-status="active"] {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg-base);
+}
+
+/* Filter list (wraps the grid) */
+.filter-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.filter-list__item {
+  /* Transition states */
+}
+.filter-list__item[data-filter-status="active"] {
+  transition: opacity 0.5s cubic-bezier(0.625, 0.05, 0, 1),
+              transform 0.5s cubic-bezier(0.625, 0.05, 0, 1);
+  transform: scale(1) rotate(0.001deg);
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+.filter-list__item[data-filter-status="transition-out"] {
+  transition: opacity 0.35s cubic-bezier(0.625, 0.05, 0, 1),
+              transform 0.35s cubic-bezier(0.625, 0.05, 0, 1);
+  transform: scale(0.95) rotate(0.001deg);
+  opacity: 0;
+  visibility: visible;
+}
+.filter-list__item[data-filter-status="not-active"] {
+  transform: scale(0.95) rotate(0.001deg);
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+@media (max-width: 1024px) {
+  .filter-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .filter-list { grid-template-columns: 1fr; }
+}
+
+/* Feature cards — square flip grid (inside filter items) */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+/* Card wrapper — provides 3D perspective */
+.fcard {
+  perspective: 1200px;
+  cursor: pointer;
+}
+/* Inner — maintains aspect ratio and 3D space */
+.fcard-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-out);
+}
+.fcard.is-flipped .fcard-inner {
+  transform: rotateY(180deg);
+}
+/* Shared face styles */
+.fcard-front,
+.fcard-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: var(--radius-sleeve);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.fcard-front {
+  background: var(--bg-raised);
+  justify-content: flex-end;
+  padding: 24px;
+  position: absolute;
+}
+.fcard:hover .fcard-front {
+  border-color: var(--border-hover);
+}
+.fcard-back {
+  background: var(--bg-overlay);
+  transform: rotateY(180deg);
+  padding: 28px;
+  gap: 16px;
+}
+/* Animation placeholder — fills upper portion */
+.fcard-anim {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sleeve);
+  background: radial-gradient(ellipse at center, rgba(196,138,58,0.06) 0%, transparent 70%);
+}
+.fcard-anim svg { width: 100%; height: 100%; }
+.fcard-anim-icon {
+  font-size: 48px;
+  opacity: 0.15;
+}
+/* Front content — bottom-aligned */
+.fcard-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fcard-stage {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.fcard-tag {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 3;
+}
+.fcard-name {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1.2;
+}
+/* Tag styles */
+.feature-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-label);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.feature-tag--live {
+  background: rgba(52,211,153,0.12);
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.feature-tag--live::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px #34d399, 0 0 12px rgba(52,211,153,0.4);
+  animation: live-pulse 2s ease-in-out infinite;
+}
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #34d399, 0 0 12px rgba(52,211,153,0.4); }
+  50% { opacity: 0.5; box-shadow: 0 0 3px #34d399, 0 0 6px rgba(52,211,153,0.2); }
+}
+.feature-tag--soon {
+  background: rgba(196,138,58,0.1);
+  color: var(--gold);
+  border: 1px solid rgba(196,138,58,0.2);
+}
+.feature-tag--roadmap {
+  background: rgba(240,235,227,0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.fcard-summary {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.fcard-flip-cue {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* BACK FACE */
+.fcard-back-stage {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.fcard-back-name {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1.2;
+}
+.fcard-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.fcard-benefit {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.fcard-benefit::before {
+  content: '';
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(52,211,153,0.12);
+  border: 1px solid rgba(52,211,153,0.25);
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L3.5 6.5L9 1' stroke='%2334d399' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.fcard-vs {
+  background: rgba(196,138,58,0.06);
+  border: 1px solid rgba(196,138,58,0.12);
+  border-radius: var(--radius-sleeve);
+  padding: 14px 16px;
+}
+.fcard-vs-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.fcard-vs-text {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.fcard-flip-hint {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+@media (max-width: 600px) {
+  .fcard-inner { aspect-ratio: 1 / 1.1; }
+}
+.features-cta {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin-top: 32px;
+}
+.features-cta a {
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(196,138,58,0.3);
+  transition: border-color 0.2s ease;
+}
+.features-cta a:hover {
+  border-color: var(--gold);
+}
+
+/* ============================================
+   COST COMPARISON — BEFORE / AFTER SLIDER
+   ============================================ */
+.cost-section {
+  padding: var(--section-pad) 0;
+}
+.cost-header {
+  margin-bottom: 48px;
+}
+.cost-header h2 {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: normal;
+  color: var(--white);
+  line-height: 1.1;
+  margin: 12px 0 16px;
+}
+.cost-header p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Slider container */
+.cost-slider {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-sleeve);
+  overflow: hidden;
+  cursor: col-resize;
+  -webkit-user-select: none;
+  user-select: none;
+  aspect-ratio: 16 / 9;
+  max-height: 520px;
+}
+
+/* BEFORE (old way) — full width, gray/dull */
+.cost-before,
+.cost-after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 64px);
+}
+.cost-before {
+  background: #1a1a1a;
+  z-index: 1;
+}
+.cost-after {
+  background: var(--bg-raised);
+  z-index: 2;
+  clip-path: inset(0 0 0 50%);
+  border: 1px solid rgba(100, 160, 255, 0.15);
+  border-radius: var(--radius-sleeve);
+}
+
+/* Before — desaturated, dull feel */
+.cost-before .cost-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #555;
+  margin-bottom: 24px;
+}
+.cost-before .cost-stat-number {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  color: #444;
+  font-weight: normal;
+  line-height: 1.1;
+}
+.cost-before .cost-stat-desc {
+  font-size: 14px;
+  color: #444;
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.cost-before .cost-stat-group {
+  margin-bottom: 28px;
+}
+.cost-before .cost-divider {
+  width: 100%;
+  height: 1px;
+  background: #2a2a2a;
+  margin: 24px 0;
+}
+.cost-before .cost-result {
+  font-size: 14px;
+  color: #3a3a3a;
+  line-height: 1.6;
+  max-width: 480px;
+}
+
+/* After — vibrant, blue-accented */
+.cost-after .cost-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.cost-after .cost-stat-number {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 6vw, 64px);
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1.1;
+}
+.cost-after .cost-stat-number .cost-unit {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 0.4em;
+  color: var(--text-secondary);
+  vertical-align: baseline;
+}
+.cost-after .cost-stat-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.cost-after .cost-stat-group {
+  margin-bottom: 28px;
+}
+.cost-after .cost-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(100,160,255,0.15), rgba(196,138,58,0.2));
+  margin: 24px 0;
+}
+.cost-after .cost-result {
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 480px;
+}
+/* Blue glow accent on after panel */
+.cost-after::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse at center, rgba(100,160,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cost-after::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 50%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(196,138,58,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Drag handle */
+.cost-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: rgba(255,255,255,0.3);
+  z-index: 10;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.cost-handle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-overlay);
+  border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  pointer-events: auto;
+  cursor: col-resize;
+}
+.cost-handle::after {
+  content: '‹ ›';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 6px;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Labels pinned to each side */
+.cost-side-label {
+  position: absolute;
+  bottom: 16px;
+  z-index: 11;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-label);
+  pointer-events: none;
+}
+.cost-side-label--before {
+  left: 16px;
+  background: rgba(60,60,60,0.5);
+  color: #666;
+  border: 1px solid #333;
+}
+.cost-side-label--after {
+  right: 16px;
+  background: rgba(100,160,255,0.1);
+  color: #64a0ff;
+  border: 1px solid rgba(100,160,255,0.2);
+}
+
+@media (max-width: 768px) {
+  .cost-slider { aspect-ratio: 3 / 4; max-height: none; }
+  .cost-before, .cost-after { padding: clamp(24px, 4vw, 40px); }
+}
+
+/* ============================================
+   YOUR GROUP — (merged into Step 2 / .swaps-keep)
+   ============================================ */
+/* group-section removed — orbit viz now lives in .swaps-keep Step 2 */
+
+/* ============================================
+   CASE STUDIES — ARTIST CARDS
+   ============================================ */
+.cases-section {
+  padding: var(--section-pad) 0;
+}
+.cases-header {
+  margin-bottom: 48px;
+}
+.cases-header h2 {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: normal;
+  color: var(--white);
+  line-height: 1.1;
+  margin: 12px 0 0;
+}
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Individual case card */
+.case-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sleeve);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: border-color 0.3s ease;
+}
+.case-card:hover {
+  border-color: var(--border-hover);
+}
+
+/* Artist header row */
+.case-artist {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.case-artist-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.case-artist-name {
+  font-family: 'GroupedFont', serif;
+  font-size: 18px;
+  color: var(--white);
+  font-weight: normal;
+}
+.case-artist-meta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+.case-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+.case-avatar--ff {
+  background: linear-gradient(135deg, rgba(196,138,58,0.25), rgba(196,138,58,0.1));
+  color: var(--gold);
+  border: 1px solid rgba(196,138,58,0.2);
+}
+.case-avatar--mike {
+  background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08));
+  color: #34d399;
+  border: 1px solid rgba(52,211,153,0.2);
+}
+.case-avatar--pardy {
+  background: linear-gradient(135deg, rgba(100,160,255,0.2), rgba(100,160,255,0.08));
+  color: #64a0ff;
+  border: 1px solid rgba(100,160,255,0.2);
+}
+
+/* Stats rows */
+.case-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.case-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+.case-stat:last-child {
+  border-bottom: none;
+}
+.case-stat-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.case-stat-value {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+.case-stat-value--gold {
+  color: var(--gold);
+}
+.case-stat-value--green {
+  color: #34d399;
+}
+
+/* Quote */
+.case-quote {
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* Link */
+.case-link {
+  font-size: 12px;
+  color: var(--gold);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.case-link:hover { opacity: 1; }
+
+@media (max-width: 1024px) {
+  .cases-grid { grid-template-columns: 1fr; max-width: 500px; }
+}
+
+/* ============================================
+   RESULTS / STATS
+   ============================================ */
+.stats-section {
+  padding: var(--section-pad) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat-item {
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+.stat-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: var(--border);
+}
+.stat-number {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 4vw, 52px);
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--gray-400);
+  max-width: 180px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   FINAL CTA
+   ============================================ */
+.cta-section {
+  padding: clamp(100px, 14vw, 200px) 0;
+  text-align: center;
+  position: relative;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.4;
+}
+.cta-section .label { margin-bottom: 24px; }
+.cta-section h2 {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--white);
+  font-weight: normal;
+  margin-bottom: 20px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-section h2 em { font-style: normal; color: var(--gold); }
+.cta-section p {
+  color: var(--gray-300);
+  font-size: 16px;
+  margin-bottom: 36px;
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--gold);
+  color: var(--text-inverse);
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-label);
+  transition: all 0.25s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 8px 30px var(--gold-glow); }
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--gray-200);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--radius-label);
+  transition: all 0.25s;
+}
+.btn-secondary:hover { border-color: var(--border-hover); color: var(--white); background: rgba(240,235,227,0.03); }
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'GroupedFont', serif;
+  font-size: 18px;
+  color: var(--white);
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex;
+  gap: 28px;
+}
+.footer-links a {
+  font-size: 13px;
+  color: var(--gray-400);
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--white); }
+.footer-copy {
+  font-size: 12px;
+  color: var(--gray-500);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Noise texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+/* ============================================
+   HERO + MANIFESTO WRAP (Sticky Scroll)
+   ============================================ */
+.hero-manifesto-wrap {
+  position: relative;
+  width: 100%;
+}
+
+/* Hero Card — scrolls up to reveal manifesto */
+.hero-card {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  will-change: transform;
+}
+.hero-card-inner {
+  background: var(--bg-base);
+  border-radius: 0 0 var(--radius-sleeve) var(--radius-sleeve);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Manifesto Sticky Section */
+.manifesto-sticky {
+  position: relative;
+  width: 100%;
+  height: 450vh;
+  z-index: 1;
+}
+.manifesto-sticky-container {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  display: flex;
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+.manifesto-sticky-inner {
+  text-align: center;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 60em;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  position: relative;
+}
+.manifesto-label {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.manifesto-titles {
+  position: relative;
+  width: 100%;
+}
+.manifesto-title-el {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 5vw, 68px);
+  line-height: 1.08;
+  color: var(--white);
+  font-weight: normal;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.manifesto-body {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(16px, 1.8vw, 22px);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 38em;
+  margin: 24px auto 0;
+  opacity: 0;
+  transform: translateY(12px);
+}
+.manifesto-title-el.is--stacked {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.manifesto-final {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 3vw, 36px);
+}
+.manifesto-logo {
+  width: clamp(64px, 10vw, 120px);
+  height: auto;
+}
+.manifesto-logo svg {
+  width: 100%;
+  height: auto;
+}
+.manifesto-final-text {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 5vw, 68px);
+  line-height: 1.08;
+  color: var(--white);
+  font-weight: normal;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+.manifesto-autopilot {
+  font-family: 'Caveat', cursive !important;
+  font-style: normal !important;
+  font-weight: 700;
+  font-size: clamp(24px, 3.5vw, 42px);
+  color: var(--gold);
+  margin-top: 4px;
+  align-self: flex-end;
+  margin-right: 5%;
+}
+/* Two CTA cards */
+.manifesto-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 680px;
+  margin: 48px auto 0;
+  opacity: 0;
+  transform: translateY(20px);
+}
+.manifesto-card {
+  background: rgba(240,235,227,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sleeve);
+  padding: 28px 24px;
+  text-align: left;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.3s, background 0.3s;
+}
+.manifesto-card:hover {
+  border-color: var(--border-hover);
+  background: rgba(240,235,227,0.05);
+}
+.manifesto-card-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--white);
+}
+.manifesto-card-body {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--gray-300);
+  margin: 0;
+}
+.manifesto-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+  margin-top: auto;
+  padding-top: 4px;
+  transition: gap 0.3s;
+}
+.manifesto-card:hover .manifesto-card-cta {
+  gap: 10px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .stat-item:nth-child(2)::after { display: none; }
+  .demo-float { display: none; }
+  .nav-bar { max-width: 100%; }
+  .hero-content { grid-template-columns: 1fr; gap: 40px; }
+  .hero-visual { justify-content: flex-start; }
+  .hero-float { display: none; }
+}
+@media (max-width: 767px) {
+  .manifesto-title-el { font-size: clamp(28px, 6vw, 48px); }
+  .carousel-collection { width: 60em; }
+  .carousel-card { transform-origin: 50% 325%; }
+  .carousel-inner {
+    padding-top: 2em;
+    padding-bottom: calc(1.75em + 10em);
+    margin-bottom: -10em;
+  }
+  .carousel-card-inner { padding: 1.5em; }
+  .card-title { font-size: 1.4em; }
+  .card-desc { font-size: 0.8em; }
+}
+@media (max-width: 600px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-item::after { display: none !important; }
+  .stat-item { border-bottom: 1px solid var(--border); }
+  .hero-pills { gap: 6px; }
+  .hero-pill { font-size: 12px; padding: 8px 16px; }
+  .carousel-nav-btn { font-size: 12px; padding: 8px 16px; }
+  .nav-left span { display: none; }
+  .hero-headline { font-size: clamp(24px, 7.5vw, 42px); }
+  .hero-tag { margin-bottom: 18px; }
+  .hero-proof { flex-wrap: wrap; gap: 10px; }
+  .hero-phone { width: 240px; }
+  .manifesto-title-el { font-size: clamp(24px, 7.5vw, 42px); }
+  .manifesto-cards { grid-template-columns: 1fr; }
+  .manifesto-cards { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   SMART SWAPS — MARBLE RUN (Steps 1 + 2)
+   300svh wrapper → sticky viewport → one canvas
+   ============================================ */
+.swaps-wrap {
+  position: relative;
+  width: 100%;
+  height: 300svh;
+  background: var(--bg-base);
+}
+.swaps-sticky {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* Copy blocks — absolute, z-index 2 */
+.swaps-copy {
+  position: absolute;
+  top: clamp(40px, 6vw, 80px);
+  left: 0; right: 0;
+  margin: 0 auto;
+  z-index: 2;
+  text-align: center;
+  max-width: 600px;
+  width: calc(100% - var(--gutter) * 2);
+  transition: opacity 0.5s ease;
+}
+.swaps-copy .label { margin-bottom: 16px; }
+.swaps-physics-headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: normal;
+  color: var(--white);
+  line-height: 1.1;
+  margin: 0 0 16px;
+}
+.swaps-copy p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 8px auto 0;
+}
+.swaps-copy-step2 { opacity: 0; }
+.swaps-copy-step2 .swaps-physics-headline {
+  font-size: clamp(28px, 4.5vw, 52px);
+}
+.keep-note {
+  font-style: italic;
+  color: var(--gold) !important;
+  font-size: 15px !important;
+  margin-top: 14px !important;
+}
+
+/* Single canvas — fills sticky viewport */
+.swaps-canvas {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.swaps-canvas__target {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+#swaps-canvas-target canvas {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  max-width: unset;
+  pointer-events: all;
+  min-width: calc(100% + 2px);
+  min-height: calc(100% + 2px);
+}
+
+/* Orbit rings — fade in after balls settle */
+.keep-orbit {
+  position: absolute;
+  bottom: 4%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 36%;
+  max-width: 380px;
+  aspect-ratio: 1 / 1;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+}
+.keep-orbit.visible { opacity: 1; }
+.keep-orbit-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.keep-orbit-ring--outer {
+  width: 100%; height: 100%;
+  border-color: rgba(240,235,227,0.04);
+}
+.keep-orbit-ring--mid {
+  width: 64%; height: 64%;
+  border-color: rgba(240,235,227,0.07);
+}
+.keep-orbit-ring--inner {
+  width: 36%; height: 36%;
+  border-color: rgba(196,138,58,0.2);
+  box-shadow: 0 0 30px rgba(196,138,58,0.05);
+}
+.keep-orbit-core {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 15%; height: 15%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold) 0%, rgba(196,138,58,0.3) 60%, transparent 100%);
+  box-shadow: 0 0 40px rgba(196,138,58,0.3), 0 0 80px rgba(196,138,58,0.1);
+  display: flex; align-items: center; justify-content: center;
+}
+.keep-orbit-core svg {
+  width: 55%; height: 55%;
+}
+.keep-footnote {
+  position: absolute;
+  bottom: clamp(12px, 2vw, 24px);
+  left: 50%; transform: translateX(-50%);
+  z-index: 2;
+  font-size: 13px; color: var(--text-tertiary);
+  font-style: italic; white-space: nowrap;
+  opacity: 0; transition: opacity 1.5s ease;
+}
+.keep-footnote.visible { opacity: 1; }
+
+@media (max-width: 768px) {
+  .keep-orbit { width: 55%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION — Inspo style
+     ============================================ -->
+<nav class="nav" id="nav">
+  <div class="nav-bar">
+    <div class="nav-left">
+      <div class="nav-hamburger">
+        <span></span>
+        <span></span>
+      </div>
+      <span>Menu</span>
+    </div>
+    <div class="nav-center">g<em>.</em></div>
+    <div class="nav-right">
+      <a href="#" class="nav-login">Login</a>
+      <a href="#start" class="nav-join">Join</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================================
+     HERO + MANIFESTO — Sticky Title Scroll
+     ============================================ -->
+<section class="hero-manifesto-wrap" id="hero">
+  <!-- HERO CARD — scrolls up like a card lifting away -->
+  <div class="hero-card">
+    <div class="hero-card-inner">
+      <section class="hero">
+        <div class="hero-content">
+          <!-- Left column: text -->
+          <div class="hero-text">
+            <div class="hero-tag">
+              <span class="hero-tag-dot"></span>
+              <span class="hero-tag-text">direct-to-fan growth engine</span>
+            </div>
+
+            <div class="hero-headline">
+              <span class="hero-line">Turn every <span class="hero-rotating-word"><span class="word" id="hero-word-1">release</span></span></span>
+              <span class="hero-line">into a <span class="hero-rotating-result"><span class="word" id="hero-word-2">growth engine.</span></span></span>
+            </div>
+
+            <div class="hero-sub">
+              <p>One place to capture who's listening, reach them directly, and build an audience that grows with every release.</p>
+            </div>
+
+            <div class="hero-ctas">
+              <a href="#start" class="btn-primary">Get Started - it's free!</a>
+              <a href="#demo" class="hero-cta-link">
+                Watch it work
+                <svg viewBox="0 0 14 14" fill="none"><path d="M5 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+
+            <div class="hero-proof">
+              <div class="hero-proof-item"><span class="hero-proof-value">4,500+</span> artists</div>
+              <span class="hero-proof-divider"></span>
+              <div class="hero-proof-item"><span class="hero-proof-value">1.2M</span> fans captured</div>
+              <span class="hero-proof-divider"></span>
+              <div class="hero-proof-item"><span class="hero-proof-value">8,000+</span> releases powered</div>
+            </div>
+
+          </div>
+
+          <!-- Right column: product visual -->
+          <div class="hero-visual">
+            <div class="hero-phone">
+              <div class="hero-phone-notch"></div>
+              <div class="hero-phone-screen">
+                <div class="swap-cover">
+                  <div class="swap-cover-visual"></div>
+                  <div class="swap-waveform">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                  </div>
+                </div>
+                <div class="swap-body">
+                  <div class="swap-artist">Zari Banks</div>
+                  <div class="swap-title">Exclusive Live Studio Performance</div>
+                  <div class="swap-fields">
+                    <div class="swap-field">Name</div>
+                    <div class="swap-field swap-field-typing">zari@email.com</div>
+                    <div class="swap-field">+1 Phone</div>
+                  </div>
+                  <div class="swap-btn">Get Access</div>
+                </div>
+                <div class="swap-success">
+                  <div class="swap-success-icon">&#10003;</div>
+                  Fan captured &amp; pre-save confirmed
+                </div>
+              </div>
+            </div>
+            <div class="hero-float hero-float-1">
+              <span class="hero-float-value">92%</span>
+              <span class="hero-float-label">Swap completion</span>
+            </div>
+            <div class="hero-float hero-float-2">
+              <span class="hero-float-value">+847</span>
+              <span class="hero-float-label">Fans this week</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- MANIFESTO — Sticky title scroll headings revealed underneath -->
+  <div class="manifesto-sticky" id="opportunity">
+    <div class="manifesto-sticky-container">
+      <div class="manifesto-sticky-inner" data-sticky-title="wrap">
+        <div class="manifesto-label" data-manifesto-label>The opportunity</div>
+        <div class="manifesto-titles">
+          <h2 data-sticky-title="heading" data-label="The opportunity" class="manifesto-title-el">This is the most exciting time to be an independent artist.</h2>
+          <p class="manifesto-body" data-manifesto-body>You can create, distribute, market, and build a real career without waiting for permission.</p>
+          <h2 data-sticky-title="heading" data-label="The missing piece" data-kicker-break="until" class="manifesto-title-el is--stacked">The only piece that's been missing is a way to capture and keep the fans you're already earning… until now.</h2>
+          <div data-sticky-title="heading" data-label="Introducing" class="manifesto-title-el manifesto-final is--stacked">
+            <div class="manifesto-logo">
+              <svg width="254" height="254" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="#C48A3A"/></svg>
+            </div>
+            <h2 class="manifesto-final-text">One place to own it all.</h2>
+            <span class="manifesto-autopilot">*on autopilot</span>
+          </div>
+        </div>
+
+        <div class="manifesto-cards" data-manifesto-cards>
+          <a href="/about" class="manifesto-card">
+            <div class="manifesto-card-title">Our story</div>
+            <p class="manifesto-card-body">Built by artists who got tired of building on rented land. We've been where you are.</p>
+            <span class="manifesto-card-cta">Read our story <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+          <a href="/about" class="manifesto-card">
+            <div class="manifesto-card-title">Why we're different</div>
+            <p class="manifesto-card-body">No label affiliations. No outside interests. Just tools that put artists first.</p>
+            <span class="manifesto-card-cta">See our vision <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end .manifesto-sticky -->
+</section> <!-- end .hero-manifesto-wrap -->
+
+<!-- ============================================
+     SMART SWAPS — UNIFIED (Steps 1 + 2)
+     200svh wrapper → sticky viewport → one canvas
+     ============================================ -->
+<section class="swaps-wrap" id="swaps-physics">
+  <div class="swaps-sticky">
+
+    <!-- Step 1 copy — visible initially -->
+    <div class="swaps-copy swaps-copy-step1 reveal">
+      <div class="label label-gold">Step 01 &mdash; Capture</div>
+      <h2 class="swaps-physics-headline">Every link.<br>Every release.<br>Fans flow in.</h2>
+      <p>Smart Swaps turn every touchpoint into a capture moment. Pre-saves, links, QR codes &mdash; fans opt in, and you own the connection.</p>
+    </div>
+
+    <!-- Step 2 copy — fades in on scroll -->
+    <div class="swaps-copy swaps-copy-step2">
+      <div class="label label-gold">Step 02 &mdash; Keep</div>
+      <h2 class="swaps-physics-headline">Your Group.<br>Where fans stay.</h2>
+      <p>Every fan that flows in lands in your Group. Direct access, real touchpoints, a relationship that compounds over time.</p>
+      <p class="keep-note">Start free. Let the loyalty build. Add paid tiers when you're ready.</p>
+    </div>
+
+    <!-- Single physics canvas -->
+    <div class="swaps-canvas">
+      <div id="swaps-canvas-target" class="swaps-canvas__target"></div>
+    </div>
+
+    <!-- Orbit rings — fade in after balls settle into basin -->
+    <div class="keep-orbit" id="keep-orbit">
+      <div class="keep-orbit-ring keep-orbit-ring--outer"></div>
+      <div class="keep-orbit-ring keep-orbit-ring--mid"></div>
+      <div class="keep-orbit-ring keep-orbit-ring--inner"></div>
+      <div class="keep-orbit-core"><svg width="40" height="40" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="#C48A3A"/></svg></div>
+    </div>
+
+    <span class="keep-footnote" id="keep-footnote">All tiers live in the same Group. The loyalty compounds.</span>
+  </div>
+</section>
+
+<!-- ============================================
+     CARD CAROUSEL — 3D Fan-Rotation
+     ============================================ -->
+<section class="carousel-section" id="product">
+  <div class="carousel-header reveal">
+    <div class="label label-gold">See it in action</div>
+    <h2>Everything you need, from first listen to lifelong fan.</h2>
+    <p>Watch how artists use Grouped to capture, keep, and grow their fanbase from a single dashboard.</p>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-slider">
+
+      <!-- Decorative circle SVG with dial notches (Osmo-style) -->
+      <div class="carousel-deco-circle">
+        <svg viewBox="0 0 3481 1741" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer circle -->
+          <circle cx="1740.5" cy="870.5" r="869.5" stroke="rgba(196,138,58,0.07)" stroke-width="1"/>
+          <!-- Inner circle -->
+          <circle cx="1740.5" cy="870.5" r="780" stroke="rgba(196,138,58,0.04)" stroke-width="1"/>
+          <!-- Dial notches around the outer circle -->
+          <g stroke="rgba(196,138,58,0.08)" stroke-width="1">
+            <script type="text/javascript">/* notches generated below */</script>
+          </g>
+        </svg>
+        <!-- Notch generation via JS (runs once) -->
+        <script>
+        (function(){
+          const svg = document.querySelector('.carousel-deco-circle svg');
+          const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+          g.setAttribute('stroke','rgba(196,138,58,0.08)');
+          g.setAttribute('stroke-width','1');
+          const cx = 1740.5, cy = 870.5, r = 869.5;
+          const tickOuter = 28; // length of each notch
+          const count = 120; // total notches around full circle
+          for(let i = 0; i < count; i++){
+            const angle = (i / count) * Math.PI * 2;
+            const x1 = cx + Math.cos(angle) * r;
+            const y1 = cy + Math.sin(angle) * r;
+            const x2 = cx + Math.cos(angle) * (r - tickOuter);
+            const y2 = cy + Math.sin(angle) * (r - tickOuter);
+            const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+            line.setAttribute('x1', x1.toFixed(1));
+            line.setAttribute('y1', y1.toFixed(1));
+            line.setAttribute('x2', x2.toFixed(1));
+            line.setAttribute('y2', y2.toFixed(1));
+            g.appendChild(line);
+          }
+          svg.appendChild(g);
+        })();
+        </script>
+      </div>
+
+      <!-- Draggable card area -->
+      <div class="carousel-collection" id="carousel-collection">
+        <div class="carousel-list" id="carousel-list">
+
+        <!-- Card 1: Capture -->
+        <div class="carousel-card" data-index="0">
+          <div class="carousel-card-before"></div>
+          <div class="carousel-card-inner">
+            <div class="card-label">
+              <span>Step 01</span>
+              <span class="label-accent">Capture</span>
+            </div>
+            <div class="card-icon">*</div>
+            <div class="card-title">Own a Direct Line<br>to Your Fans</div>
+            <div class="card-desc">Your music is already creating fans. Grouped captures that first spark and turns it into a connection you control.</div>
+            <div class="card-features">
+              <div class="card-feat">
+                <div class="card-feat-icon">&#9889;</div>
+                Every link captures fan data instantly
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#127911;</div>
+                Fans get early access, you get their info
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128229;</div>
+                Import existing lists to build on what you have
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Keep -->
+        <div class="carousel-card" data-index="1">
+          <div class="carousel-card-before"></div>
+          <div class="carousel-card-inner">
+            <div class="card-label">
+              <span>Step 02</span>
+              <span class="label-accent">Keep</span>
+            </div>
+            <div class="card-icon">*</div>
+            <div class="card-title">Keep Every Fan<br>You Earn</div>
+            <div class="card-desc">Most artists earn fans and lose them in the same week. Grouped keeps listeners engaged between releases.</div>
+            <div class="card-features">
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128225;</div>
+                Smart Feed auto-syncs your activity
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128276;</div>
+                Push notifications with 85%+ open rates
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128100;</div>
+                Progressive fan profiling builds over time
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Grow -->
+        <div class="carousel-card" data-index="2">
+          <div class="carousel-card-before"></div>
+          <div class="carousel-card-inner">
+            <div class="card-label">
+              <span>Step 03</span>
+              <span class="label-accent">Grow</span>
+            </div>
+            <div class="card-icon">*</div>
+            <div class="card-title">Activate on<br>Your Terms</div>
+            <div class="card-desc">When you're ready to move, your audience is already warm. Tour dates, merch drops, new music — they're there.</div>
+            <div class="card-features">
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128227;</div>
+                Direct reach: email, push, your choice
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#127873;</div>
+                Automatic rewards for early engagers
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128176;</div>
+                Built-in sales, revenue stays yours
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Compound -->
+        <div class="carousel-card" data-index="3">
+          <div class="carousel-card-before"></div>
+          <div class="carousel-card-inner">
+            <div class="card-label">
+              <span>Step 04</span>
+              <span class="label-accent">Compound</span>
+            </div>
+            <div class="card-icon">*</div>
+            <div class="card-title">Growth That<br>Never Resets</div>
+            <div class="card-desc">Every release builds on the last. Fans from your first single are still there for your album. Nothing resets.</div>
+            <div class="card-features">
+              <div class="card-feat">
+                <div class="card-feat-icon">&#127793;</div>
+                A fanbase that remembers every release
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128200;</div>
+                Revenue and reach compound over time
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128274;</div>
+                A career you actually own
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Reactivate -->
+        <div class="carousel-card" data-index="4">
+          <div class="carousel-card-before"></div>
+          <div class="carousel-card-inner">
+            <div class="card-label">
+              <span>Step 05</span>
+              <span class="label-accent">Reactivate</span>
+            </div>
+            <div class="card-icon">*</div>
+            <div class="card-title">Drop Again.<br>Start Bigger.</div>
+            <div class="card-desc">Your next release doesn't start from zero. Every fan you've captured is primed and waiting. Hit play on the cycle again.</div>
+            <div class="card-features">
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128260;</div>
+                Re-engage your full audience instantly
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#128640;</div>
+                Each release launches bigger than the last
+              </div>
+              <div class="card-feat">
+                <div class="card-feat-icon">&#9854;</div>
+                The cycle never stops compounding
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+    </div> <!-- end .carousel-slider -->
+  </div> <!-- end .carousel-inner -->
+
+  <!-- Bottom fade gradient — OUTSIDE inner, sibling (like Osmo) -->
+  <div class="carousel-fade"></div>
+
+  <div class="hero-pills" id="hero-pills">
+    <div class="hero-pill active" data-index="0">Capture</div>
+    <div class="hero-pill" data-index="1">Keep</div>
+    <div class="hero-pill" data-index="2">Grow</div>
+    <div class="hero-pill" data-index="3">Compound</div>
+    <div class="hero-pill" data-index="4">Reactivate</div>
+  </div>
+
+  <div class="container">
+    <div class="carousel-controls">
+      <div class="carousel-step-label">Step <span id="step-counter">01</span> of 05</div>
+      <div class="drag-hint" id="drag-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Drag to explore
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================
+     VIDEO DEMO
+     ============================================ -->
+<section class="demo-section section" id="demo">
+  <div class="demo-phone-wrapper">
+    <div class="demo-float demo-float-left reveal">
+      <span class="demo-float-stat">847</span>
+      New fans captured this week
+    </div>
+    <div class="demo-float demo-float-right reveal reveal-delay-1">
+      <span class="demo-float-stat">92%</span>
+      Swap completion rate
+    </div>
+
+    <div class="demo-phone reveal">
+      <div class="demo-phone-notch"></div>
+      <div class="demo-phone-screen">
+        <div class="demo-play-btn" id="demo-play">
+          <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+        </div>
+        <div class="demo-label-text">Watch demo walkthrough</div>
+        <div class="demo-badge">
+          <span class="demo-badge-dot"></span>
+          2:30 · Product demo
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-float demo-float-bottom reveal reveal-delay-2">
+      <span class="demo-float-stat">85%+</span>
+      Push notification open rates
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================
+     FEATURE CARDS
+     ============================================ -->
+<section class="features-section section" id="features">
+  <div class="container">
+    <div class="features-header reveal">
+      <div class="label label-gold">Features</div>
+      <h2>Everything works together.<br>Every feature compounds.</h2>
+      <p>Each tool feeds the next. The more you use, the stronger your entire system gets.</p>
+    </div>
+
+    <div data-filter-group="" role="group" class="filter-group">
+      <div class="filter-buttons reveal">
+        <button data-filter-target="all" data-filter-status="active" aria-pressed="true" aria-controls="feature-filter-list" class="filter-btn">All</button>
+        <button data-filter-target="live" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Live</button>
+        <button data-filter-target="soon" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Coming Soon</button>
+        <button data-filter-target="roadmap" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Roadmap</button>
+      </div>
+
+      <div aria-live="polite" role="list" id="feature-filter-list" class="filter-list">
+
+        <!-- 1. Smart Swaps — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Capture</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128279;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Smart Swaps</div>
+                  <div class="fcard-summary">Fans get early access. You get their email and phone. Every release grows your list.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Capture</span>
+                <div class="fcard-back-name">Smart Swaps</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">92% average opt-in rate</div>
+                  <div class="fcard-benefit">Pre-save + email + phone in one step</div>
+                  <div class="fcard-benefit">Every link becomes a capture point</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Most link-in-bio tools just redirect. Smart Swaps capture fan data before the click.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Smart Feed — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Keep</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128225;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Smart Feed</div>
+                  <div class="fcard-summary">Set it up once. Auto-populates from your activity across platforms. Zero maintenance.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Keep</span>
+                <div class="fcard-back-name">Smart Feed</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Auto-syncs Spotify, YouTube, Instagram</div>
+                  <div class="fcard-benefit">Fan hub runs quietly in the background</div>
+                  <div class="fcard-benefit">Always-fresh content with zero effort</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Other fan pages need constant manual updates. Smart Feed runs itself.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Custom Email — Coming Soon -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Grow</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="soon" class="feature-tag feature-tag--soon">Coming Soon</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#9993;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Custom Email</div>
+                  <div class="fcard-summary">Reach your entire list at a fraction of what you pay now. Credit model, built for music.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Grow</span>
+                <div class="fcard-back-name">Custom Email</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">89% average open rates</div>
+                  <div class="fcard-benefit">$0 per-send cost on credits</div>
+                  <div class="fcard-benefit">Purpose-built templates for releases</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Mailchimp charges per subscriber. We charge per send — at a fraction of the cost.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Your Group — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Keep</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128101;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Your Group</div>
+                  <div class="fcard-summary">A space for everyone curious about you. Build fans, not just collect them.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Keep</span>
+                <div class="fcard-back-name">Your Group</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">1,240+ average members per artist</div>
+                  <div class="fcard-benefit">12% average weekly growth</div>
+                  <div class="fcard-benefit">Direct conversations with fans</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Discord is noisy. Instagram is rented. Your Group is yours — clean, focused, owned.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Fan Passes — Roadmap -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Compound</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="roadmap" class="feature-tag feature-tag--roadmap">Roadmap</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#127915;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Fan Passes</div>
+                  <div class="fcard-summary">A badge in fans' wallets. Push notifications with 85-90% open rates for pennies.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Compound</span>
+                <div class="fcard-back-name">Fan Passes</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">89% push notification open rate</div>
+                  <div class="fcard-benefit">$20-50/mo to reach millions of fans</div>
+                  <div class="fcard-benefit">Wallet-native — always in their pocket</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">SMS costs $0.01-0.05 per message. Fan Passes reach fans for 1/1000th the cost.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Fan Profiling — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Reactivate</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128100;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Fan Profiling</div>
+                  <div class="fcard-summary">Every fan visit sharpens their profile. Data syncs to your existing CRM.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Reactivate</span>
+                <div class="fcard-back-name">Fan Profiling</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Auto-enriched profiles with every visit</div>
+                  <div class="fcard-benefit">Engagement scoring (Low / Med / High)</div>
+                  <div class="fcard-benefit">CRM sync — Mailchimp, HubSpot, etc.</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Most tools treat fans as email rows. We build living profiles that get smarter over time.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="features-cta reveal">Don't see what you're looking for? Email us at <a href="mailto:info@grouped.com">info@grouped.com</a> and request a feature!</p>
+
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================
+     COST COMPARISON — BEFORE / AFTER SLIDER
+     ============================================ -->
+<section class="cost-section section" id="cost">
+  <div class="container">
+    <div class="cost-header reveal">
+      <div class="label label-gold">The Numbers</div>
+      <h2>What it actually costs to tell your fans about new music.</h2>
+      <p>Having a million fan contacts you can't afford to message is worse than having no list at all.</p>
+    </div>
+
+    <div class="cost-slider reveal">
+      <!-- BEFORE — The Old Way (gray/dull) -->
+      <div class="cost-before">
+        <div class="cost-card-label">The Old Way (SMS)</div>
+        <div class="cost-stat-group">
+          <div class="cost-stat-number">$50,000</div>
+          <div class="cost-stat-desc">Cost to notify 1M fans about a new release</div>
+        </div>
+        <div class="cost-stat-group">
+          <div class="cost-stat-number">12.5M</div>
+          <div class="cost-stat-desc">Streams needed at $0.004/stream just to break even</div>
+        </div>
+        <div class="cost-divider"></div>
+        <div class="cost-result">Result: Most artists just don't tell their fans. The people who want to hear from you the most never find out.</div>
+      </div>
+
+      <!-- AFTER — With Grouped (vibrant/designed) -->
+      <div class="cost-after">
+        <div class="cost-card-label">With Grouped</div>
+        <div class="cost-stat-group">
+          <div class="cost-stat-number">Included</div>
+          <div class="cost-stat-desc">Email credits come with your plan</div>
+        </div>
+        <div class="cost-stat-group">
+          <div class="cost-stat-number">$20–$50<span class="cost-unit">/mo</span></div>
+          <div class="cost-stat-desc">Fan Passes: same reach, wallet-based notifications</div>
+        </div>
+        <div class="cost-divider"></div>
+        <div class="cost-result">Result: Every release, every single, every tour announcement actually reaches the people who care. And everything downstream hits harder.</div>
+      </div>
+
+      <!-- Drag handle -->
+      <div class="cost-handle"></div>
+
+      <!-- Side labels -->
+      <span class="cost-side-label cost-side-label--before">Before</span>
+      <span class="cost-side-label cost-side-label--after">After</span>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================
+     CASE STUDIES — REAL ARTISTS
+     ============================================ -->
+<section class="cases-section section" id="case-studies">
+  <div class="container">
+    <div class="cases-header reveal">
+      <div class="label label-gold">Artists Using Grouped</div>
+      <h2>Real artists. Real momentum.</h2>
+    </div>
+
+    <div class="cases-grid">
+
+      <!-- 1. Forrest Frank -->
+      <div class="case-card reveal">
+        <div class="case-artist">
+          <div class="case-artist-info">
+            <div class="case-artist-name">Forrest Frank</div>
+            <div class="case-artist-meta">Christian Pop · 15M+ streams</div>
+          </div>
+          <div class="case-avatar case-avatar--ff">FF</div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-label">Instagram growth</span>
+            <span class="case-stat-value case-stat-value--green">+1.2M</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">Timeframe</span>
+            <span class="case-stat-value">35 days</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">Breakthrough hit</span>
+            <span class="case-stat-value case-stat-value--gold">Good Day</span>
+          </div>
+        </div>
+        <div class="case-quote">"Never would have released if it wasn't for the vote." — Used his Group as a focus group. Fans voted on 5 demos. The winner became a hit.</div>
+        <a class="case-link" href="https://support.grouped.com/en/articles/10743374-forrest-frank-gains-1-2m-followers-in-35-days-w-grouped" target="_blank">Read case study &rarr;</a>
+      </div>
+
+      <!-- 2. MIKE. -->
+      <div class="case-card reveal">
+        <div class="case-artist">
+          <div class="case-artist-info">
+            <div class="case-artist-name">MIKE.</div>
+            <div class="case-artist-meta">@justmike · Paid community</div>
+          </div>
+          <div class="case-avatar case-avatar--mike">MK</div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-label">Strategy</span>
+            <span class="case-stat-value">IG Automation</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">Subscribers</span>
+            <span class="case-stat-value case-stat-value--green">While he sleeps</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">Paid community</span>
+            <span class="case-stat-value case-stat-value--gold">OnlySteves</span>
+          </div>
+        </div>
+        <div class="case-quote">"This turns the feeling from being sold a subscription, to feeling like they 'won' something cool like free access to a paid community!"</div>
+        <a class="case-link" href="https://support.grouped.com/en/articles/10743709-mike-gets-new-paid-subscribers-while-he-sleeps-by-using-social-media-automations" target="_blank">Read case study &rarr;</a>
+      </div>
+
+      <!-- 3. PardyAlone -->
+      <div class="case-card reveal">
+        <div class="case-artist">
+          <div class="case-artist-info">
+            <div class="case-artist-name">PardyAlone</div>
+            <div class="case-artist-meta">Tour M&G · $5/mo tier</div>
+          </div>
+          <div class="case-avatar case-avatar--pardy">PA</div>
+        </div>
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-label">Subscribers from tour</span>
+            <span class="case-stat-value">~700</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">6-month retention</span>
+            <span class="case-stat-value case-stat-value--green">82%</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-label">Annual recurring revenue</span>
+            <span class="case-stat-value case-stat-value--gold">$35,000+</span>
+          </div>
+        </div>
+        <div class="case-quote">"To fans, it seemed too cheap to turn down — fans would immediately sign up at the merch booth to meet him after the show."</div>
+        <a class="case-link" href="https://support.grouped.com/en/articles/10743729-pardyalone-turns-tour-m-g-tix-into-35-000-recurring-revenue-instead-of-a-one-time-purchase" target="_blank">Read case study &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- ============================================
+     STATS / RESULTS
+     ============================================ -->
+<section class="stats-section" id="results">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number">2x</div>
+        <div class="stat-label">Sold out shows from fans found through Grouped</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <div class="stat-number">92%</div>
+        <div class="stat-label">Swap completion rate across all artists</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number">20K+</div>
+        <div class="stat-label">Fans captured and identified</div>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <div class="stat-number">$0</div>
+        <div class="stat-label">Per-send messaging costs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     FINAL CTA
+     ============================================ -->
+<section class="cta-section section" id="start">
+  <div class="container">
+    <div class="label label-gold reveal">Ready?</div>
+    <h2 class="reveal">Stop dropping music.<br>Start building <em>momentum.</em></h2>
+    <p class="reveal">Free to start. Build your first release in minutes.</p>
+    <a href="#" class="btn-primary reveal">
+      Get Started - it's free!
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="#" class="footer-logo">grouped<span>.</span></a>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 Grouped</div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Custom drag cursor -->
+<div class="drag-cursor" id="drag-cursor">
+  <div class="drag-cursor__dot"></div>
+  <div class="drag-cursor__circle">
+    <span class="drag-cursor__text">Drag</span>
+  </div>
+  <div class="drag-cursor__dot"></div>
+</div>
+
+<!-- ============================================
+     JAVASCRIPT
+     ============================================ -->
+<script>
+// ---- NAV SCROLL ----
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// ---- FAN-ROTATION CAROUSEL (GSAP-powered smooth interaction) ----
+const collection = document.getElementById('carousel-collection');
+const list = document.getElementById('carousel-list');
+const cards = document.querySelectorAll('.carousel-card');
+const heroPills = document.querySelectorAll('.hero-pill');
+const stepCounter = document.getElementById('step-counter');
+const dragHint = document.getElementById('drag-hint');
+const totalCards = cards.length;
+
+let currentIndex = 0;
+let isDragging = false;
+let hasInteracted = false;
+
+// Config
+const ROTATE_PER_CARD = 20;
+const DRAG_SENSITIVITY = 200;
+
+// GSAP-driven smooth position value — this is the continuous "center" we animate
+let position = { value: 0 }; // fractional card index (0 = card 0 centered)
+let snapTween = null; // active snap/throw tween
+
+// Velocity tracking for momentum
+let velocityTracker = { samples: [], maxAge: 100 }; // last 100ms of samples
+function trackVelocity(x) {
+  const now = performance.now();
+  velocityTracker.samples.push({ x, t: now });
+  // Prune old samples
+  while (velocityTracker.samples.length > 0 && now - velocityTracker.samples[0].t > velocityTracker.maxAge) {
+    velocityTracker.samples.shift();
+  }
+}
+function getVelocity() {
+  const s = velocityTracker.samples;
+  if (s.length < 2) return 0;
+  const first = s[0];
+  const last = s[s.length - 1];
+  const dt = last.t - first.t;
+  if (dt === 0) return 0;
+  return (last.x - first.x) / dt; // px per ms
+}
+
+// Set list height to match first card height
+function initListHeight() {
+  const firstCard = cards[0];
+  if (firstCard) {
+    list.style.height = firstCard.offsetHeight + 'px';
+    list.style.position = 'relative';
+  }
+}
+
+// Wrap helper: shortest distance on a ring of totalCards
+function wrapOffset(rawIndex, center) {
+  let diff = rawIndex - center;
+  const half = totalCards / 2;
+  while (diff > half) diff -= totalCards;
+  while (diff < -half) diff += totalCards;
+  return diff;
+}
+
+// Render cards from the current position.value — called by GSAP onUpdate and during drag
+function renderCards() {
+  const effectiveCenter = position.value;
+
+  cards.forEach((card, i) => {
+    const offset = wrapOffset(i, effectiveCenter);
+    const absOffset = Math.abs(offset);
+    const rotation = offset * ROTATE_PER_CARD;
+
+    let status;
+    if (absOffset < 0.5) status = 'active';
+    else if (absOffset < 1.5) status = 'inview';
+    else status = 'not-active';
+
+    const opacity = status === 'active' ? 1 : status === 'inview' ? 0.9 : 0.6;
+    const zIndex = 10 - Math.round(absOffset);
+
+    // Use GSAP quickSetter-style direct DOM writes for jank-free updates
+    card.style.transform = `translate(-50%, 0%) rotate(${rotation}deg)`;
+    card.style.opacity = opacity;
+    card.style.zIndex = zIndex;
+    card.style.transition = 'none'; // GSAP handles all animation, no CSS transitions
+
+    card.classList.toggle('active', status === 'active');
+    card.dataset.status = status;
+  });
+}
+
+// Update UI (pills, counter) based on nearest card index
+function updateUI() {
+  // Find nearest integer index
+  let nearest = Math.round(position.value);
+  nearest = ((nearest % totalCards) + totalCards) % totalCards;
+  currentIndex = nearest;
+  heroPills.forEach((p, i) => p.classList.toggle('active', i === currentIndex));
+  stepCounter.textContent = String(currentIndex + 1).padStart(2, '0');
+}
+
+// Animate to a target card index using GSAP
+function goToCard(targetIndex, animated) {
+  // Kill any active snap tween
+  if (snapTween) { snapTween.kill(); snapTween = null; }
+
+  // Wrap target
+  targetIndex = ((targetIndex % totalCards) + totalCards) % totalCards;
+
+  // Find shortest path on the ring from current position
+  let target = targetIndex;
+  let current = position.value;
+  let diff = target - current;
+  // Normalize to shortest path
+  while (diff > totalCards / 2) diff -= totalCards;
+  while (diff < -totalCards / 2) diff += totalCards;
+  const finalValue = current + diff;
+
+  if (animated === false) {
+    position.value = finalValue;
+    renderCards();
+    updateUI();
+    return;
+  }
+
+  snapTween = gsap.to(position, {
+    value: finalValue,
+    duration: 0.6,
+    ease: 'expo.out',
+    onUpdate: () => {
+      renderCards();
+      updateUI();
+    },
+    onComplete: () => {
+      // Normalize position.value back into [0, totalCards) range
+      position.value = ((finalValue % totalCards) + totalCards) % totalCards;
+      currentIndex = Math.round(position.value);
+      renderCards();
+      updateUI();
+      snapTween = null;
+    }
+  });
+}
+
+// Momentum-based snap after drag release
+function throwToSnap(velocityPxMs) {
+  if (snapTween) { snapTween.kill(); snapTween = null; }
+
+  // Convert velocity from px/ms to cards/s
+  const velocityCardsPerSec = (velocityPxMs * 1000) / DRAG_SENSITIVITY;
+
+  // Physics: how far the throw carries (with deceleration)
+  const throwResistance = 5; // higher = less distance
+  const throwDistance = -velocityCardsPerSec / throwResistance;
+
+  // Target position (continuous)
+  const rawTarget = position.value + throwDistance;
+
+  // Snap to nearest integer card
+  let snapTarget = Math.round(rawTarget);
+  snapTarget = ((snapTarget % totalCards) + totalCards) % totalCards;
+
+  // Find shortest path
+  let diff = snapTarget - position.value;
+  while (diff > totalCards / 2) diff -= totalCards;
+  while (diff < -totalCards / 2) diff += totalCards;
+  const finalValue = position.value + diff;
+
+  // Duration based on distance (clamped like Osmo: 0.2–0.6s)
+  const dist = Math.abs(diff);
+  const duration = Math.min(0.6, Math.max(0.2, dist * 0.3));
+
+  snapTween = gsap.to(position, {
+    value: finalValue,
+    duration: duration,
+    ease: 'expo.out',
+    onUpdate: () => {
+      renderCards();
+      updateUI();
+    },
+    onComplete: () => {
+      position.value = ((finalValue % totalCards) + totalCards) % totalCards;
+      currentIndex = Math.round(position.value);
+      renderCards();
+      updateUI();
+      snapTween = null;
+    }
+  });
+}
+
+// ---- Custom Drag Cursor ----
+const dragCursorEl = document.getElementById('drag-cursor');
+let cursorInZone = false;
+
+collection.addEventListener('mouseenter', () => {
+  cursorInZone = true;
+  dragCursorEl.classList.add('visible');
+});
+collection.addEventListener('mouseleave', () => {
+  if (!isDragging) {
+    cursorInZone = false;
+    dragCursorEl.classList.remove('visible');
+    dragCursorEl.classList.remove('dragging');
+  }
+});
+
+// Smooth cursor follow — use GSAP quickTo for silky cursor movement
+const cursorX = gsap.quickTo(dragCursorEl, 'left', { duration: 0.15, ease: 'power2.out' });
+const cursorY = gsap.quickTo(dragCursorEl, 'top', { duration: 0.15, ease: 'power2.out' });
+
+// Drag state
+let dragStartX = 0;
+let dragStartPosition = 0;
+
+window.addEventListener('mousemove', (e) => {
+  if (cursorInZone || isDragging) {
+    cursorX(e.clientX);
+    cursorY(e.clientY);
+  }
+  if (!isDragging) return;
+
+  const dx = e.clientX - dragStartX;
+  trackVelocity(e.clientX);
+
+  // Live position: start position minus drag delta (converted to card units)
+  // Drag resistance: slight friction (like Osmo's dragResistance: 0.05)
+  const dragCards = dx / DRAG_SENSITIVITY;
+  position.value = dragStartPosition - dragCards;
+  renderCards();
+  updateUI();
+});
+
+// ---- Mouse drag ----
+collection.addEventListener('mousedown', (e) => {
+  // Kill any running snap animation
+  if (snapTween) { snapTween.kill(); snapTween = null; }
+
+  isDragging = true;
+  dragStartX = e.clientX;
+  dragStartPosition = position.value;
+  velocityTracker.samples = [];
+  trackVelocity(e.clientX);
+
+  dragCursorEl.classList.add('dragging');
+  if (!hasInteracted) { hasInteracted = true; dragHint.classList.add('hidden'); }
+  e.preventDefault();
+});
+
+window.addEventListener('mouseup', () => {
+  if (!isDragging) return;
+  isDragging = false;
+  dragCursorEl.classList.remove('dragging');
+  if (!cursorInZone) {
+    dragCursorEl.classList.remove('visible');
+  }
+
+  const velocity = getVelocity(); // px per ms
+  const dragDistance = Math.abs(position.value - dragStartPosition);
+
+  if (Math.abs(velocity) > 0.3 || dragDistance > 0.25) {
+    // Momentum throw — let velocity carry the card
+    throwToSnap(velocity);
+  } else {
+    // Snap back to nearest card
+    let nearest = Math.round(position.value);
+    nearest = ((nearest % totalCards) + totalCards) % totalCards;
+    goToCard(nearest);
+  }
+});
+
+// ---- Touch drag ----
+let touchStartX = 0;
+
+collection.addEventListener('touchstart', (e) => {
+  if (snapTween) { snapTween.kill(); snapTween = null; }
+
+  isDragging = true;
+  touchStartX = e.touches[0].clientX;
+  dragStartX = touchStartX;
+  dragStartPosition = position.value;
+  velocityTracker.samples = [];
+  trackVelocity(touchStartX);
+
+  if (!hasInteracted) { hasInteracted = true; dragHint.classList.add('hidden'); }
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  if (!isDragging) return;
+  const tx = e.touches[0].clientX;
+  trackVelocity(tx);
+
+  const dx = tx - dragStartX;
+  const dragCards = dx / DRAG_SENSITIVITY;
+  position.value = dragStartPosition - dragCards;
+  renderCards();
+  updateUI();
+}, { passive: true });
+
+window.addEventListener('touchend', () => {
+  if (!isDragging) return;
+  isDragging = false;
+
+  const velocity = getVelocity();
+  const dragDistance = Math.abs(position.value - dragStartPosition);
+
+  if (Math.abs(velocity) > 0.3 || dragDistance > 0.25) {
+    throwToSnap(velocity);
+  } else {
+    let nearest = Math.round(position.value);
+    nearest = ((nearest % totalCards) + totalCards) % totalCards;
+    goToCard(nearest);
+  }
+});
+
+// ---- Hero pill clicks ----
+heroPills.forEach((p) => {
+  p.addEventListener('click', () => goToCard(parseInt(p.dataset.index)));
+});
+
+// ---- Keyboard ----
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') goToCard(currentIndex + 1);
+  if (e.key === 'ArrowLeft') goToCard(currentIndex - 1);
+});
+
+// ---- Initialize ----
+initListHeight();
+window.addEventListener('resize', initListHeight);
+goToCard(0, false);
+
+// ---- Auto-rotate (loops forever until interaction) ----
+let autoInterval = setInterval(() => {
+  if (hasInteracted) { clearInterval(autoInterval); return; }
+  goToCard(currentIndex + 1);
+}, 3500);
+
+// ---- HERO WORD ROTATION ----
+const heroWord1 = document.getElementById('hero-word-1');
+const heroWord2 = document.getElementById('hero-word-2');
+const heroRotations = [
+  { input: 'release', output: 'growth engine.' },
+  { input: 'moment', output: 'momentum.' },
+  { input: 'listen', output: 'fan.' }
+];
+let heroIndex = 0;
+
+function rotateHero() {
+  heroWord1.classList.add('exit');
+  heroWord2.classList.add('exit');
+  setTimeout(() => {
+    heroIndex = (heroIndex + 1) % heroRotations.length;
+    heroWord1.textContent = heroRotations[heroIndex].input;
+    heroWord2.textContent = heroRotations[heroIndex].output;
+    heroWord1.classList.remove('exit');
+    heroWord2.classList.remove('exit');
+  }, 400);
+}
+
+let heroRotationInterval = setInterval(rotateHero, 3000);
+
+
+// ---- SCROLL REVEAL ----
+const revealEls = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12 });
+
+revealEls.forEach(el => revealObserver.observe(el));
+
+// ---- SMOOTH SCROLL ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// ---- HERO CARD SCROLL-UP + STICKY TITLE SCROLL ----
+gsap.registerPlugin(ScrollTrigger);
+
+// Hero card scrolls up like lifting a card to reveal manifesto
+(function initHeroCardScroll() {
+  const heroCard = document.querySelector('.hero-card');
+  const wrap = document.querySelector('.hero-manifesto-wrap');
+  if (!heroCard || !wrap) return;
+
+  gsap.to(heroCard, {
+    yPercent: -100,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: wrap,
+      start: 'top top',
+      end: () => `+=${heroCard.offsetHeight}`,
+      scrub: true,
+      invalidateOnRefresh: true,
+    }
+  });
+})();
+
+// Manual text splitting (no SplitText plugin needed)
+function splitIntoChars(el) {
+  const text = el.textContent;
+  el.textContent = '';
+  el.setAttribute('aria-label', text);
+  const words = text.split(/(\s+)/);
+  const chars = [];
+  words.forEach(segment => {
+    if (/^\s+$/.test(segment)) {
+      // Whitespace — preserve as-is
+      el.appendChild(document.createTextNode(segment));
+    } else {
+      const wordSpan = document.createElement('span');
+      wordSpan.style.display = 'inline-block';
+      wordSpan.style.whiteSpace = 'nowrap';
+      wordSpan.setAttribute('aria-hidden', 'true');
+      segment.split('').forEach(ch => {
+        const charSpan = document.createElement('span');
+        charSpan.textContent = ch;
+        charSpan.style.display = 'inline-block';
+        charSpan.style.visibility = 'inherit';
+        wordSpan.appendChild(charSpan);
+        chars.push(charSpan);
+      });
+      el.appendChild(wordSpan);
+    }
+  });
+  return chars;
+}
+
+// Sticky title char-by-char scroll reveal
+(function initStickyTitleScroll() {
+  const wraps = document.querySelectorAll('[data-sticky-title="wrap"]');
+
+  wraps.forEach(wrap => {
+    const headings = Array.from(wrap.querySelectorAll('[data-sticky-title="heading"]'));
+    const cards = wrap.querySelector('[data-manifesto-cards]');
+    const bodyEl = wrap.querySelector('[data-manifesto-body]');
+    const labelEl = wrap.querySelector('[data-manifesto-label]');
+
+    const masterTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrap.closest('.manifesto-sticky') || wrap,
+        start: 'top 40%',
+        end: 'bottom bottom',
+        scrub: true,
+      }
+    });
+
+    const revealDuration = 0.7,
+          fadeOutDuration = 0.7,
+          overlapOffset = 0.15;
+
+    headings.forEach((heading, index) => {
+      // Check if this is the final logo heading (has .manifesto-final class)
+      const isFinalLogo = heading.classList.contains('manifesto-final');
+      let chars = [];
+
+      if (isFinalLogo) {
+        // Don't split — animate logo + text + note as whole elements
+        const logo = heading.querySelector('.manifesto-logo');
+        const text = heading.querySelector('.manifesto-final-text');
+        const autopilot = heading.querySelector('.manifesto-autopilot');
+        gsap.set(heading, { visibility: 'visible' });
+        if (logo) gsap.set(logo, { autoAlpha: 0, scale: 0.8 });
+        if (text) gsap.set(text, { autoAlpha: 0, y: 20 });
+        if (autopilot) gsap.set(autopilot, { autoAlpha: 0, y: 10, rotate: -3 });
+
+        const headingTl = gsap.timeline();
+
+        if (labelEl && heading.hasAttribute('data-label')) {
+          headingTl.call(() => { labelEl.textContent = heading.getAttribute('data-label'); });
+        }
+
+        if (logo) {
+          headingTl.to(logo, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(1.4)' });
+        }
+        if (text) {
+          headingTl.to(text, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.2');
+        }
+        if (autopilot) {
+          headingTl.to(autopilot, { autoAlpha: 1, y: 0, rotate: 0, duration: 0.4, ease: 'power2.out' }, '-=0.15');
+        }
+
+        if (index === 0) {
+          masterTl.add(headingTl);
+        } else {
+          masterTl.add(headingTl, `-=${overlapOffset}`);
+        }
+        return; // skip the rest of the loop for this heading
+      }
+
+      chars = splitIntoChars(heading);
+
+      // If heading has a kicker break word (e.g. "until"), split it visually
+      const breakWord = heading.getAttribute('data-kicker-break');
+      let kickerChars = [];
+      if (breakWord) {
+        const children = Array.from(heading.childNodes);
+        let foundBreak = false;
+        for (let i = 0; i < children.length; i++) {
+          const node = children[i];
+          if (!foundBreak && node.nodeType === 1 && node.textContent === breakWord) {
+            foundBreak = true;
+            // Remove the whitespace text node before the break word
+            if (i > 0 && children[i - 1].nodeType === 3) {
+              children[i - 1].remove();
+            }
+            // Insert a block-level line break with spacing
+            const spacer = document.createElement('span');
+            spacer.style.display = 'block';
+            spacer.style.height = 'clamp(24px, 4vw, 48px)';
+            heading.insertBefore(spacer, node);
+          }
+          if (foundBreak && node.nodeType === 1 && node.style.whiteSpace === 'nowrap') {
+            // Style the kicker words bigger
+            node.style.fontSize = 'clamp(44px, 7vw, 96px)';
+            // Collect their char spans for separate animation
+            const wordChars = Array.from(node.querySelectorAll('span'));
+            kickerChars.push(...wordChars);
+          }
+        }
+      }
+
+      // Make heading visible but start all chars invisible
+      gsap.set(heading, { visibility: 'visible' });
+      gsap.set(chars, { autoAlpha: 0 });
+
+      const headingTl = gsap.timeline();
+
+      // Swap the label text when this heading starts
+      if (labelEl && heading.hasAttribute('data-label')) {
+        const newLabel = heading.getAttribute('data-label');
+        headingTl.call(() => { labelEl.textContent = newLabel; });
+      }
+
+      // Reveal chars — split into main chars and kicker chars
+      if (kickerChars.length > 0) {
+        const mainChars = chars.filter(c => !kickerChars.includes(c));
+        // Reveal main text first
+        headingTl.to(mainChars, {
+          autoAlpha: 1,
+          stagger: { amount: revealDuration, from: 'start' },
+          duration: revealDuration
+        });
+        // Then punch in the kicker
+        headingTl.to(kickerChars, {
+          autoAlpha: 1,
+          stagger: { amount: 0.25, from: 'start' },
+          duration: 0.4
+        }, '-=0.1');
+        // Hold
+        headingTl.to({}, { duration: 0.4 });
+        // Fade out everything
+        if (index < headings.length - 1) {
+          headingTl.to(chars, {
+            autoAlpha: 0,
+            duration: 0.5
+          });
+        }
+      } else {
+        // Standard reveal
+        headingTl.to(chars, {
+          autoAlpha: 1,
+          stagger: { amount: revealDuration, from: 'start' },
+          duration: revealDuration
+        });
+
+        // After first heading reveals, fade in body copy then fade both out
+        if (index === 0 && bodyEl) {
+          headingTl.to(bodyEl, {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            ease: 'power2.out'
+          });
+          headingTl.to({}, { duration: 0.3 });
+          headingTl.to(bodyEl, {
+            opacity: 0,
+            y: -10,
+            duration: 0.4,
+          }, 'fadeOut1');
+          headingTl.to(chars, {
+            autoAlpha: 0,
+            stagger: { amount: fadeOutDuration, from: 'end' },
+            duration: fadeOutDuration
+          }, 'fadeOut1');
+        } else if (index < headings.length - 1) {
+          headingTl.to(chars, {
+            autoAlpha: 0,
+            stagger: { amount: fadeOutDuration, from: 'end' },
+            duration: fadeOutDuration
+          });
+        }
+      }
+
+      if (index === 0) {
+        masterTl.add(headingTl);
+      } else {
+        masterTl.add(headingTl, `-=${overlapOffset}`);
+      }
+    });
+
+    // Fade in the two CTA cards after the last heading lands
+    if (cards) {
+      masterTl.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out'
+      });
+    }
+  });
+})();
+
+// Feature card flip on click
+document.querySelectorAll('.fcard').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('is-flipped');
+  });
+});
+
+// Feature filter — multi-match pattern
+(function initFeatureFilter() {
+  const transitionDelay = 300;
+  const groups = [...document.querySelectorAll('[data-filter-group]')];
+  groups.forEach(group => {
+    const buttons = [...group.querySelectorAll('[data-filter-target]')];
+    const items = [...group.querySelectorAll('[data-filter-name]')];
+
+    // Collect filter names from data-filter-name-collect children
+    items.forEach(item => {
+      const cs = item.querySelectorAll('[data-filter-name-collect]');
+      if (!cs.length) return;
+      const seen = new Set(), out = [];
+      cs.forEach(c => {
+        const v = (c.getAttribute('data-filter-name-collect') || '').trim().toLowerCase();
+        if (v && !seen.has(v)) { seen.add(v); out.push(v); }
+      });
+      if (out.length) item.setAttribute('data-filter-name', out.join(' '));
+    });
+
+    // Cache tokens per item
+    const itemTokens = new Map();
+    items.forEach(el => {
+      const tokens = (el.getAttribute('data-filter-name') || '').trim().toLowerCase().split(/\s+/).filter(Boolean);
+      itemTokens.set(el, new Set(tokens));
+    });
+
+    const setItemState = (el, on) => {
+      const next = on ? 'active' : 'not-active';
+      if (el.getAttribute('data-filter-status') !== next) {
+        el.setAttribute('data-filter-status', next);
+        el.setAttribute('aria-hidden', on ? 'false' : 'true');
+      }
+    };
+    const setButtonState = (btn, on) => {
+      const next = on ? 'active' : 'not-active';
+      if (btn.getAttribute('data-filter-status') !== next) {
+        btn.setAttribute('data-filter-status', next);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      }
+    };
+
+    let activeTarget = 'all';
+    const itemMatches = el => {
+      if (!activeTarget || activeTarget === 'all') return true;
+      return itemTokens.get(el).has(activeTarget);
+    };
+
+    const paint = rawTarget => {
+      const target = (rawTarget || '').trim().toLowerCase();
+      activeTarget = (!target || target === 'all') ? 'all' : target;
+
+      items.forEach(el => {
+        if (el._ft) clearTimeout(el._ft);
+        const next = itemMatches(el);
+        const cur = el.getAttribute('data-filter-status');
+
+        if (cur === 'active' && !next && transitionDelay > 0) {
+          el.setAttribute('data-filter-status', 'transition-out');
+          el._ft = setTimeout(() => { setItemState(el, false); el._ft = null; }, transitionDelay);
+        } else if (cur !== 'active' && next && transitionDelay > 0) {
+          el._ft = setTimeout(() => { setItemState(el, true); el._ft = null; }, transitionDelay);
+        } else {
+          setItemState(el, next);
+        }
+      });
+
+      buttons.forEach(btn => {
+        const t = (btn.getAttribute('data-filter-target') || '').trim().toLowerCase();
+        setButtonState(btn, (activeTarget === 'all' && t === 'all') || (t && t === activeTarget));
+      });
+    };
+
+    group.addEventListener('click', e => {
+      const btn = e.target.closest('[data-filter-target]');
+      if (btn && group.contains(btn)) {
+        e.stopPropagation(); // prevent card flip
+        paint(btn.getAttribute('data-filter-target'));
+      }
+    });
+  });
+})();
+
+// Lottie scroll-triggered animations (adapted from Osmo)
+(function initLottieAnimations() {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-lottie]').forEach(target => {
+    const src = target.getAttribute('data-lottie-src');
+    if (!src) return; // Skip if no source URL yet (placeholder)
+    let anim;
+    ScrollTrigger.create({
+      trigger: target,
+      start: 'top bottom+=50%',
+      end: 'bottom top-=25%',
+      onEnter: handleEnter,
+      onEnterBack: handleEnter,
+      onLeave: handleLeave,
+      onLeaveBack: handleLeave,
+    });
+    function handleEnter() {
+      if (!target.hasAttribute('data-lottie-fired')) {
+        target.setAttribute('data-lottie-fired', 'true');
+        anim = lottie.loadAnimation({
+          container: target,
+          renderer: 'svg',
+          loop: true,
+          autoplay: !reduceMotion,
+          path: src,
+        });
+        anim.addEventListener('DOMLoaded', () => {
+          if (reduceMotion) {
+            const frame = parseInt(target.getAttribute('data-lottie-frame') || '0', 10);
+            anim.goToAndStop(frame, true);
+          }
+        });
+      } else if (anim && !reduceMotion) {
+        anim.play();
+      }
+    }
+    function handleLeave() {
+      if (anim && !reduceMotion) anim.pause();
+    }
+  });
+})();
+
+// Cost comparison — before/after slider
+(function initCostSlider() {
+  const slider = document.querySelector('.cost-slider');
+  if (!slider) return;
+  const afterPanel = slider.querySelector('.cost-after');
+  const handle = slider.querySelector('.cost-handle');
+  let isDragging = false;
+
+  function setPosition(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = ((x - rect.left) / rect.width) * 100;
+    pct = Math.max(5, Math.min(95, pct));
+    afterPanel.style.clipPath = `inset(0 0 0 ${pct}%)`;
+    handle.style.left = pct + '%';
+  }
+
+  function onDown(e) {
+    isDragging = true;
+    slider.style.cursor = 'col-resize';
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  }
+  function onMove(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    setPosition(x);
+  }
+  function onUp() {
+    isDragging = false;
+    slider.style.cursor = 'col-resize';
+  }
+
+  slider.addEventListener('mousedown', onDown);
+  slider.addEventListener('touchstart', onDown, { passive: true });
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('touchmove', onMove, { passive: false });
+  window.addEventListener('mouseup', onUp);
+  window.addEventListener('touchend', onUp);
+})();
+
+// Smart Swaps — Marble Run (Matter.js + ScrollTrigger)
+// One engine: balls drop → floor opens → cascade down ramps → collect in pool
+(function initSwapsMarbleRun() {
+  const canvasEl = document.querySelector('#swaps-canvas-target');
+  if (!canvasEl) return;
+
+  let initialized = false;
+  const isMobile = window.innerWidth <= 768;
+
+  // ── Fan avatar textures ──
+  function makeFanSVG(bg, fg, letter) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><circle cx="128" cy="128" r="128" fill="${bg}"/><text x="128" y="140" text-anchor="middle" font-family="sans-serif" font-size="100" font-weight="700" fill="${fg}">${letter}</text></svg>`;
+    return 'data:image/svg+xml,' + encodeURIComponent(svg);
+  }
+  const textureArray = [
+    makeFanSVG('#C48A3A', '#fff', 'J'),
+    makeFanSVG('#34d399', '#111620', 'M'),
+    makeFanSVG('#64a0ff', '#fff', 'S'),
+    makeFanSVG('#8B7355', '#F0EBE3', 'K'),
+    makeFanSVG('#F0EBE3', '#111620', 'A'),
+    makeFanSVG('#C48A3A', '#111620', 'R'),
+    makeFanSVG('#5B8DEF', '#fff', 'T'),
+    makeFanSVG('#E8A849', '#fff', 'L'),
+  ];
+  let textureIndex = 0;
+  function getNextTexture() {
+    const t = textureArray[textureIndex];
+    textureIndex = (textureIndex + 1) % textureArray.length;
+    return t;
+  }
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+
+  // ── Trigger: start physics when section scrolls into view ──
+  ScrollTrigger.create({
+    trigger: '.swaps-wrap',
+    start: 'top 80%',
+    once: true,
+    onEnter: () => { if (!initialized) { initialized = true; startPhysics(); } }
+  });
+
+  function startPhysics() {
+    const { Engine, Render, Runner, Bodies, Body, Composite, Mouse, MouseConstraint, Events } = Matter;
+
+    const cw = canvasEl.clientWidth + 2;
+    const ch = canvasEl.clientHeight + 2;
+
+    const wallD = cw / 4;
+
+    // ── Smaller balls for marble-run feel ──
+    const fanSize = cw / (isMobile ? 18 : 26);
+    const fanScale = fanSize / 256;
+    const fanCount = isMobile ? 16 : 24;
+    const physT = Math.max(16, Math.round(fanSize * 0.5)); // proportional to ball size
+
+    const engine = Engine.create({ positionIterations: 10, velocityIterations: 10 });
+    engine.world.gravity.y = 2;
+
+    const render = Render.create({
+      element: canvasEl,
+      engine: engine,
+      options: { background: 'transparent', wireframes: false, width: cw, height: ch, pixelRatio: 2 }
+    });
+
+    // All physics bodies invisible — we draw visuals via afterRender
+    const wo = { isStatic: true, render: { visible: false } };
+
+    // ── Helpers ──
+    function lerp(a, b, t) { return a + (b - a) * t; }
+    function smoothstep(t) { return t * t * (3 - 2 * t); }
+
+    // ═══════════════════════════════════════
+    // PHASE 1 — Floor + gold line + side walls
+    // Wide invisible floor catches all balls.
+    // Narrower gold line body is visible + animates to become ramp 1.
+    // ═══════════════════════════════════════
+    const floorY = ch * 0.76;
+    const floor = Bodies.rectangle(cw / 2, floorY, cw + wallD * 4, physT, wo); // wide invisible catch-all
+    const wallL = Bodies.rectangle(-wallD, ch / 2, wallD * 2, ch * 3, wo);
+    const wallR = Bodies.rectangle(cw + wallD, ch / 2, wallD * 2, ch * 3, wo);
+
+    // Gold line body — visible, will animate to become ramp 1
+    const goldLineW = cw * (isMobile ? 0.75 : 0.65); // 65% of canvas (wider on mobile)
+    const goldLineBody = Bodies.rectangle(cw / 2, floorY, goldLineW, physT, { ...wo, angle: 0 });
+
+    Composite.add(engine.world, [floor, wallL, wallR, goldLineBody]);
+
+    // ═══════════════════════════════════════
+    // RAMP 1 TARGET — where the gold line will animate to
+    // ═══════════════════════════════════════
+    const ramp1Target = { x1: cw * 0.04, y1: ch * 0.15, x2: cw * 0.90, y2: ch * 0.28 };
+    const ramp1Cx = (ramp1Target.x1 + ramp1Target.x2) / 2;
+    const ramp1Cy = (ramp1Target.y1 + ramp1Target.y2) / 2;
+    const ramp1Angle = Math.atan2(ramp1Target.y2 - ramp1Target.y1, ramp1Target.x2 - ramp1Target.x1);
+
+    // ═══════════════════════════════════════
+    // PHASE 2 — Spiral Helix (guided animation)
+    // Balls slide off tilted gold line, get captured,
+    // and glide down a sinusoidal spiral path.
+    // At the bottom they orbit continuously on a ring.
+    // ═══════════════════════════════════════
+    const OFF = ch * 4;
+
+    // Fan color lookup — matches textureArray order
+    const fanColors = [
+      { bg: '#C48A3A', fg: '#fff',    letter: 'J' },
+      { bg: '#34d399', fg: '#111620', letter: 'M' },
+      { bg: '#64a0ff', fg: '#fff',    letter: 'S' },
+      { bg: '#8B7355', fg: '#F0EBE3', letter: 'K' },
+      { bg: '#F0EBE3', fg: '#111620', letter: 'A' },
+      { bg: '#C48A3A', fg: '#111620', letter: 'R' },
+      { bg: '#5B8DEF', fg: '#fff',    letter: 'T' },
+      { bg: '#E8A849', fg: '#fff',    letter: 'L' },
+    ];
+
+    // ── Spiral path parametric function ──
+    // Side-view helix: sinusoidal x oscillation + linear y descent
+    // Starts at LEFT (phase offset π), sweeps right across ball pile area,
+    // then winds down through S-curves to the orbit ring.
+    // 2.75 loops → ends at center (orbit ring)
+    const spiralLoops     = 2.75;
+    const spiralStartY    = ch * 0.22; // matches ball pile area (gold line tilt midpoint)
+    const spiralEndY      = ch * 0.72;
+    const spiralAmplitude = cw * 0.35;
+    const spiralCenterX   = cw * 0.50;
+    const spiralPhase     = Math.PI;   // start from LEFT side → sweeps right across balls
+
+    function getSpiralPoint(t) {
+      const angle = t * spiralLoops * Math.PI * 2 + spiralPhase;
+      return {
+        x: spiralCenterX + spiralAmplitude * Math.cos(angle),
+        y: spiralStartY + (spiralEndY - spiralStartY) * t
+      };
+    }
+
+    // ── Orbit ring parameters ──
+    // Initial small orbit (where balls first land from spiral)
+    const orbitRadius  = cw * (isMobile ? 0.14 : 0.10);
+    const orbitCenterX = cw * 0.50;
+    const orbitCenterY = ch * 0.78;
+    const orbitYScale  = 0.35; // elliptical compression for perspective
+
+    // Final orbit (matches CSS outer ring — balls expand to here)
+    const cssOrbitSize     = Math.min(cw * (isMobile ? 0.55 : 0.36), 380);
+    const finalOrbitRadius = cssOrbitSize / 2;
+    const finalOrbitCenterY = ch - (ch * 0.04) - (cssOrbitSize / 2);
+    const finalOrbitYScale  = 1.0; // CSS rings are perfect circles
+    const orbitExpandFrames = 150; // 2.5s ease to final position at 60fps
+
+    // ── Spiral state ──
+    const spiralBalls = [];
+    let spiralActive = false;
+    let spiralOpacity = 0;
+    const orbitSpeed  = 0.003;   // radians per frame — slow, graceful rotation
+
+    // ── Scroll-driven progress values (set in scroll handler, used in draw) ──
+    let captureT = 0;        // 0→1: transition from floor positions to spiral start
+    let spiralT  = 0;        // 0→1: descent along spiral helix
+    let orbitExpandT = 0;    // 0→1: expansion from small orbit to outer ring
+    const totalStagger = 0.15; // spread of balls along spiral (first vs last)
+
+    // Easing: smooth ease-in-out for elegant motion
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    // ── Ceiling (prevents balls escaping top) ──
+    const ceilingY = -ch * 1.5;
+    const ceiling = Bodies.rectangle(cw / 2, ceilingY, cw + wallD * 4, physT * 2, wo);
+    Composite.add(engine.world, ceiling);
+
+    // ═══════════════════════════════════════
+    // CUSTOM VISUAL RENDERING
+    // Gold line + spiral ribbon + orbit ring + guided balls
+    // ═══════════════════════════════════════
+    let goldLineAlpha = 0; // gold line removed per user request
+
+    // Pre-compute spiral path points for efficient drawing
+    const spiralPathSteps = 200;
+    const spiralPathPoints = [];
+    for (let i = 0; i <= spiralPathSteps; i++) {
+      const t = i / spiralPathSteps;
+      const pt = getSpiralPoint(t);
+      const angle = t * spiralLoops * Math.PI * 2 + spiralPhase; // include phase offset
+      spiralPathPoints.push({ x: pt.x, y: pt.y, sin: Math.sin(angle) });
+    }
+
+    function drawSpiralRibbon(ctx, opacity) {
+      if (opacity < 0.01) return;
+
+      // Two-pass rendering for helix depth illusion:
+      // Pass 0: "back" sections (dimmer) — ribbon going away from viewer
+      // Pass 1: "front" sections (brighter) — ribbon coming toward viewer
+      // Front drawn on top → creates overlapping helix look
+      for (let pass = 0; pass < 2; pass++) {
+        const isFront = pass === 1;
+        const alpha = isFront ? 0.30 * opacity : 0.12 * opacity;
+        const width = isFront ? 5 : 3;
+
+        ctx.strokeStyle = `rgba(100,160,255,${alpha})`;
+        ctx.lineWidth = width;
+        ctx.beginPath();
+        let drawing = false;
+
+        for (let i = 0; i <= spiralPathSteps; i++) {
+          const pt = spiralPathPoints[i];
+          // sin >= 0 → front half of helix loop (moving toward viewer)
+          // sin < 0  → back half (moving away)
+          const shouldDraw = isFront ? pt.sin >= 0 : pt.sin < 0;
+
+          if (shouldDraw) {
+            if (!drawing) { ctx.moveTo(pt.x, pt.y); drawing = true; }
+            else ctx.lineTo(pt.x, pt.y);
+          } else {
+            if (drawing) { ctx.stroke(); ctx.beginPath(); }
+            drawing = false;
+          }
+        }
+        if (drawing) ctx.stroke();
+      }
+    }
+
+    function drawOrbitRing(ctx, opacity) {
+      if (opacity < 0.01) return;
+      ctx.strokeStyle = `rgba(100,160,255,${0.20 * opacity})`;
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.ellipse(orbitCenterX, orbitCenterY, orbitRadius, orbitRadius * orbitYScale, 0, 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    function drawSpiralBalls(ctx) {
+      const r = fanSize / 2;
+      spiralBalls.forEach(ball => {
+        let x, y;
+
+        // Compute this ball's scroll-driven pathT (accounts for stagger)
+        const rawPathT = spiralT * (1 + totalStagger) - ball.stagger;
+        const clampedPathT = Math.max(0, Math.min(1, rawPathT));
+        const onSpiral = clampedPathT > 0 && clampedPathT < 1;
+        const inOrbit = clampedPathT >= 1;
+
+        if (captureT < 1 && !inOrbit) {
+          // ── Phase A: Transition from floor to spiral start ──
+          const easedCapture = easeInOutCubic(captureT);
+          const spiralStart = getSpiralPoint(easeInOutCubic(Math.max(0, rawPathT)));
+          x = lerp(ball.startX, spiralStart.x, easedCapture);
+          y = lerp(ball.startY, spiralStart.y, easedCapture);
+        } else if (!inOrbit) {
+          // ── Phase B: Flowing down the spiral (scroll-driven) ──
+          const easedT = easeInOutCubic(clampedPathT);
+          const pt = getSpiralPoint(easedT);
+          x = pt.x; y = pt.y;
+        } else {
+          // ── Phase C: In orbit — rotate (per-frame) + expand (scroll-driven) ──
+          ball.orbitAngle += orbitSpeed;
+
+          const easedExpand = easeInOutCubic(Math.min(Math.max(orbitExpandT, 0), 1));
+          const curRadius  = orbitRadius + (finalOrbitRadius - orbitRadius) * easedExpand;
+          const curCenterY = orbitCenterY + (finalOrbitCenterY - orbitCenterY) * easedExpand;
+          const curYScale  = orbitYScale + (finalOrbitYScale - orbitYScale) * easedExpand;
+
+          x = orbitCenterX + curRadius * Math.cos(ball.orbitAngle);
+          y = curCenterY   + curRadius * Math.sin(ball.orbitAngle) * curYScale;
+        }
+
+        // Draw circle
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = ball.bg;
+        ctx.fill();
+
+        // Draw letter
+        ctx.fillStyle = ball.fg;
+        ctx.font = `bold ${Math.round(fanSize * 0.39)}px sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(ball.letter, x, y + 1);
+      });
+    }
+
+    let allCaptured = false; // flag to capture all balls at once
+
+    function captureAllBalls() {
+      if (!spiralActive || allCaptured) return;
+      allCaptured = true;
+
+      // Capture EVERY fan ball at once
+      // Record each ball's current physics position for seamless transition
+      fans.forEach((fan, i) => {
+        if (fan._captured) return;
+        fan._captured = true;
+        const c = fanColors[fan._colorIdx];
+        spiralBalls.push({
+          bg: c.bg, fg: c.fg, letter: c.letter,
+          startX: fan.position.x,            // where ball was on the floor
+          startY: fan.position.y,            // for seamless lerp to spiral
+          stagger: (i / fans.length) * totalStagger, // spread along spiral
+          orbitAngle: (Math.PI * 2 / fans.length) * i, // evenly spaced in orbit
+        });
+        // Hide physics body
+        Body.setStatic(fan, true);
+        Body.setPosition(fan, { x: -999, y: -999 });
+        fan.render.visible = false;
+      });
+    }
+
+    Events.on(render, 'afterRender', function() {
+      const ctx = render.context;
+      ctx.save();
+      ctx.lineCap = 'round';
+
+      // ── Spiral ribbon (blue helix) ──
+      drawSpiralRibbon(ctx, spiralOpacity);
+
+      // ── Orbit ring (elliptical plate) ──
+      drawOrbitRing(ctx, spiralOpacity);
+
+      // ── Capture all balls when spiral activates ──
+      captureAllBalls();
+
+      // ── Animate + draw spiral balls ──
+      drawSpiralBalls(ctx);
+
+      ctx.restore();
+    });
+
+    // ═══════════════════════════════════════
+    // START RENDERER + DROP FANS
+    // ═══════════════════════════════════════
+    Render.run(render);
+    Runner.run(Runner.create(), engine);
+
+    const fans = [];
+    let dropIdx = 0;
+    (function drop() {
+      if (dropIdx < fanCount) {
+        const fan = Bodies.rectangle(
+          rand(cw * 0.15, cw * 0.85),
+          -fanSize - rand(0, fanSize),
+          fanSize, fanSize,
+          {
+            chamfer: { radius: fanSize / 2 },
+            restitution: 0.15,
+            friction: 0.06,
+            frictionAir: 0.004,
+            render: { sprite: { texture: getNextTexture(), xScale: fanScale, yScale: fanScale } }
+          }
+        );
+        fan._colorIdx = dropIdx % fanColors.length; // tag for spiral drawing
+        fan._captured = false;
+        Composite.add(engine.world, fan);
+        fans.push(fan);
+        dropIdx++;
+        setTimeout(drop, 100);
+      }
+    })();
+
+    // ── Mouse / touch interaction ──
+    const mouse = Mouse.create(render.canvas);
+    const mc = MouseConstraint.create(engine, {
+      mouse: mouse,
+      constraint: { stiffness: 0.2, render: { visible: false } }
+    });
+    Composite.add(engine.world, mc);
+    mc.mouse.element.removeEventListener('mousewheel', mc.mouse.mousewheel);
+    mc.mouse.element.removeEventListener('DOMMouseScroll', mc.mouse.mousewheel);
+    mc.mouse.element.removeEventListener('touchstart', mc.mouse.mousedown);
+    mc.mouse.element.removeEventListener('touchmove', mc.mouse.mousemove);
+    mc.mouse.element.removeEventListener('touchend', mc.mouse.mouseup);
+    mc.mouse.element.addEventListener('touchstart', mc.mouse.mousedown, { passive: true });
+    mc.mouse.element.addEventListener('touchmove', (e) => { if (mc.body) mc.mouse.mousemove(e); });
+    mc.mouse.element.addEventListener('touchend', (e) => { if (mc.body) mc.mouse.mouseup(e); });
+
+    // ═══════════════════════════════════════
+    // SCROLL-DRIVEN PHASE TRANSITIONS
+    // Gold line tilts → balls captured → spiral descent → orbit ring
+    // ═══════════════════════════════════════
+    const copyStep1 = document.querySelector('.swaps-copy-step1');
+    const copyStep2 = document.querySelector('.swaps-copy-step2');
+    const orbitEl = document.getElementById('keep-orbit');
+    const footnoteEl = document.getElementById('keep-footnote');
+
+    let floorActive = true;
+    let orbitShown = false;
+
+    ScrollTrigger.create({
+      trigger: '.swaps-wrap',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0,
+      onUpdate: (self) => {
+        const p = self.progress; // 0 → 1 over 300svh
+
+        // ═══════════════════════════════════════
+        // BEAT-DRIVEN SCROLL TIMELINE
+        // ═══════════════════════════════════════
+        // p = 0.00–0.15  Step 1 copy fully visible, balls pile on floor
+        // p = 0.15–0.28  Step 1 copy fades out
+        // p = 0.24–0.32  Spiral ribbon fades in
+        // p = 0.26       Capture! Balls picked up from floor
+        // p = 0.26–0.32  Transition: balls lerp from floor → spiral start
+        // p = 0.32–0.62  Spiral descent (scroll-driven)
+        // p = 0.55–0.68  Spiral ribbon fades out
+        // p = 0.62–0.76  Orbit phase: balls rotate + expand to outer ring
+        // p = 0.68–0.80  Step 2 copy fades in
+        // p = 0.74       CSS orbit rings appear
+        // p = 0.76+      Final state: balls on outer ring, rotating
+        // ═══════════════════════════════════════
+
+        // ── Copy crossfade ──
+        if (copyStep1) {
+          const raw1 = p < 0.15 ? 1 : p > 0.28 ? 0 : 1 - (p - 0.15) / 0.13;
+          copyStep1.style.opacity = smoothstep(raw1);
+        }
+        if (copyStep2) {
+          const raw2 = p < 0.68 ? 0 : p > 0.80 ? 1 : (p - 0.68) / 0.12;
+          copyStep2.style.opacity = smoothstep(raw2);
+        }
+
+        // ── Spiral ribbon + orbit ring opacity ──
+        spiralOpacity = p < 0.24 ? 0 : p < 0.32 ? (p - 0.24) / 0.08
+                      : p < 0.55 ? 1 : p > 0.68 ? 0 : 1 - (p - 0.55) / 0.13;
+
+        // ── Capture activation at p=0.26 ──
+        spiralActive = p >= 0.26;
+
+        // ── Scroll-driven progress values ──
+        // Capture transition: floor → spiral start (0.26 → 0.32)
+        captureT = p < 0.26 ? 0 : p > 0.32 ? 1 : (p - 0.26) / 0.06;
+        // Spiral descent (0.32 → 0.62)
+        spiralT = p < 0.32 ? 0 : p > 0.62 ? 1 : (p - 0.32) / 0.30;
+        // Orbit expansion (0.62 → 0.76)
+        orbitExpandT = p < 0.62 ? 0 : p > 0.76 ? 1 : (p - 0.62) / 0.14;
+
+        // ── Physics surfaces: stable until capture, then remove ──
+        Body.setPosition(goldLineBody, { x: cw / 2, y: floorY });
+        Body.setAngle(goldLineBody, 0);
+
+        if (p >= 0.26 && floorActive && allCaptured) {
+          floorActive = false;
+          Body.setPosition(floor, { x: cw / 2, y: ch * 6 });
+          Body.setPosition(goldLineBody, { x: -9999, y: -9999 });
+        } else if (p < 0.26 && floorActive) {
+          Body.setPosition(floor, { x: cw / 2, y: floorY });
+        }
+
+        // ── SCROLL BACK: Restore Phase 1 ──
+        if (p <= 0.10 && !floorActive) {
+          floorActive = true;
+          spiralActive = false;
+          engine.world.gravity.y = 2;
+
+          Body.setPosition(floor, { x: cw / 2, y: floorY });
+          Body.setPosition(goldLineBody, { x: cw / 2, y: floorY });
+          Body.setAngle(goldLineBody, 0);
+
+          // Clear spiral balls
+          spiralBalls.length = 0;
+          allCaptured = false; // allow re-capture on next scroll down
+
+          // Un-capture all fans, reset to physics
+          fans.forEach(fan => {
+            if (fan._captured) {
+              fan._captured = false;
+              Body.setStatic(fan, false);
+              fan.render.visible = true; // restore physics sprite
+            }
+            Body.setPosition(fan, { x: rand(cw * 0.15, cw * 0.85), y: floorY - fanSize * 2 });
+            Body.setVelocity(fan, { x: 0, y: 0 });
+          });
+
+          if (orbitEl) orbitEl.classList.remove('visible');
+          if (footnoteEl) footnoteEl.classList.remove('visible');
+          orbitShown = false;
+        }
+
+        // ── Show orbit CSS + footnote in Phase 3 ──
+        if (p > 0.74 && !orbitShown) {
+          orbitShown = true;
+          if (orbitEl) orbitEl.classList.add('visible');
+          if (footnoteEl) footnoteEl.classList.add('visible');
+        }
+        if (p <= 0.68 && orbitShown) {
+          orbitShown = false;
+          if (orbitEl) orbitEl.classList.remove('visible');
+          if (footnoteEl) footnoteEl.classList.remove('visible');
+        }
+      }
+    });
+  }
+})();
+
+</script>
+
+</body>
+</html>
