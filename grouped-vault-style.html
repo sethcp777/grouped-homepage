@@ -1974,44 +1974,6 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 /* ============================================
    RESULTS / STATS
    ============================================ */
-.stats-section {
-  padding: var(--section-pad) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-}
-.stat-item {
-  text-align: center;
-  padding: 40px 20px;
-  position: relative;
-}
-.stat-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 20%;
-  height: 60%;
-  width: 1px;
-  background: var(--border);
-}
-.stat-number {
-  font-family: 'GroupedFont', serif;
-  font-size: clamp(36px, 4vw, 52px);
-  color: var(--white);
-  font-weight: normal;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.stat-label {
-  font-size: 13px;
-  color: var(--gray-400);
-  max-width: 180px;
-  margin: 0 auto;
-}
 
 /* ============================================
    FINAL CTA
@@ -2325,8 +2287,6 @@ body::after {
    RESPONSIVE
    ============================================ */
 @media (max-width: 900px) {
-  .stats-grid { grid-template-columns: 1fr 1fr; }
-  .stat-item:nth-child(2)::after { display: none; }
   .demo-float { display: none; }
   .nav-bar { max-width: 100%; }
   .hero-content { grid-template-columns: 1fr; gap: 40px; }
@@ -2347,9 +2307,6 @@ body::after {
   .card-desc { font-size: 0.8em; }
 }
 @media (max-width: 600px) {
-  .stats-grid { grid-template-columns: 1fr; }
-  .stat-item::after { display: none !important; }
-  .stat-item { border-bottom: 1px solid var(--border); }
   .hero-pills { gap: 6px; }
   .hero-pill { font-size: 12px; padding: 8px 16px; }
   .carousel-nav-btn { font-size: 12px; padding: 8px 16px; }
@@ -3408,31 +3365,6 @@ body::after {
 
 <div class="section-divider"></div>
 
-<!-- ============================================
-     STATS / RESULTS
-     ============================================ -->
-<section class="stats-section" id="results">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <div class="stat-number">2x</div>
-        <div class="stat-label">Sold out shows from fans found through Grouped</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-1">
-        <div class="stat-number">92%</div>
-        <div class="stat-label">Swap completion rate across all artists</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-2">
-        <div class="stat-number">20K+</div>
-        <div class="stat-label">Fans captured and identified</div>
-      </div>
-      <div class="stat-item reveal reveal-delay-3">
-        <div class="stat-number">$0</div>
-        <div class="stat-label">Per-send messaging costs</div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============================================
      FINAL CTA
