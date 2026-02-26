@@ -899,61 +899,73 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   left: 50%;
   top: 0;
   margin-right: 0;
-  /* Width: 1/3 of collection like Osmo (--slider-spv: 3, --slider-gap: 0) */
   width: calc((100% - 1px) / 3);
   flex: none;
-  border-radius: 1em;
+  border-radius: 2.2em;
   overflow: hidden;
-  /* Osmo exact: transform-origin: 50% 375% on desktop */
-  transform-origin: 50% 375%;
-  /* No CSS transitions — GSAP handles all animation for jank-free updates */
+  transform-origin: 50% 300%;
   will-change: transform, opacity;
   cursor: none;
 }
 
-/* Aspect ratio spacer — 130% padding-top like Osmo */
+/* Aspect ratio spacer — phone proportions */
 .carousel-card-before {
-  padding-top: 130%;
+  padding-top: 190%;
 }
 
 .carousel-card-inner {
   position: absolute;
   inset: 0;
-  border-radius: 1em;
-  padding: 2.5em;
+  border-radius: 2.2em;
+  padding: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-}
-
-/* Card color themes — vinyl surface gradient */
-.carousel-card[data-index="0"] .carousel-card-inner {
-  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.06) 100%);
-  border-color: rgba(196,138,58,0.18);
-}
-.carousel-card[data-index="1"] .carousel-card-inner {
-  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.04) 100%);
-  border-color: rgba(196,138,58,0.12);
-}
-.carousel-card[data-index="2"] .carousel-card-inner {
-  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.05) 100%);
-  border-color: rgba(196,138,58,0.12);
-}
-.carousel-card[data-index="3"] .carousel-card-inner {
-  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.04) 100%);
-  border-color: rgba(196,138,58,0.12);
-}
-.carousel-card[data-index="4"] .carousel-card-inner {
-  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.06) 100%);
-  border-color: rgba(196,138,58,0.18);
+  border: 2px solid rgba(235,225,210,0.10);
+  background: var(--bg-base);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,235,227,0.04);
 }
 
 /* Active card highlight */
 .carousel-card.active .carousel-card-inner {
-  border-color: var(--gold-dim);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px var(--gold-glow);
+  border-color: rgba(196,138,58,0.22);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 50px rgba(196,138,58,0.06);
+}
+
+/* Phone frame elements inside cards */
+.card-phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5.5em;
+  height: 1.4em;
+  background: var(--bg-base);
+  border-radius: 0 0 0.9em 0.9em;
+  z-index: 10;
+}
+.card-phone-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(170deg, rgba(30,36,50,1) 0%, var(--bg-base) 100%);
+  padding: 0 1em 1.5em;
+}
+.card-phone-status {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1.2em;
+  padding-top: 1.8em;
+  font-size: 0.6em;
+  color: var(--gray-400);
+  flex-shrink: 0;
+}
+.card-phone-status em {
+  color: var(--gold);
+  font-style: normal;
 }
 
 /* Bottom fade gradient — OUTSIDE __inner, child of section (like Osmo) */
@@ -968,77 +980,247 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   z-index: 2;
 }
 
-/* Card inner elements */
-.card-label {
-  display: inline-flex;
-  gap: 6px;
-  margin-bottom: 1.2em;
+/* ============================================
+   PHONE SCREEN CONTENT STYLES (5 stages)
+   ============================================ */
+
+/* ---- Screen 1: Capture (Smart Swap) ---- */
+.screen-capture { align-items: center; gap: 0.5em; padding-top: 0.5em; }
+.screen-capture-cover {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4em;
+  padding: 0.5em 0; width: 100%;
 }
-.card-label span {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 5px 10px;
-  border-radius: 4px;
-  background: rgba(240,235,227,0.06);
-  color: var(--gray-300);
-  font-weight: 500;
+.screen-capture-art {
+  width: 4em; height: 4em; border-radius: 0.6em; overflow: hidden;
+  background: linear-gradient(135deg, rgba(196,138,58,0.18), rgba(30,24,40,0.9));
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(196,138,58,0.15);
 }
-.card-label span.label-accent {
-  color: var(--gold);
-  background: rgba(196,138,58,0.12);
+.screen-capture-art-inner { display: flex; align-items: center; justify-content: center; }
+.screen-capture-waveform {
+  display: flex; align-items: center; gap: 2px; height: 1.2em; justify-content: center;
+}
+.screen-capture-waveform span {
+  width: 2px; height: 40%; background: var(--gold); border-radius: 2px; opacity: 0.5;
+  animation: waveBar 1.2s ease-in-out infinite;
+}
+.screen-capture-waveform span:nth-child(odd) { height: 70%; animation-delay: -0.3s; }
+.screen-capture-waveform span:nth-child(3n) { height: 100%; animation-delay: -0.6s; }
+.screen-capture-artist { font-family: 'GroupedFont', serif; font-size: 0.85em; color: var(--white); }
+.screen-capture-subtitle { font-size: 0.55em; color: var(--gray-400); margin-top: -0.2em; }
+.screen-capture-field {
+  display: flex; align-items: center; gap: 0.3em; width: 100%;
+  padding: 0.5em 0.7em; background: rgba(240,235,227,0.04);
+  border: 1px solid var(--border); border-radius: 0.4em;
+  font-size: 0.6em; color: var(--gray-400);
+}
+.screen-capture-field-icon { font-size: 0.9em; }
+.screen-capture-field-text { flex: 1; }
+.screen-capture-cursor { color: var(--gold); animation: blink 1s step-end infinite; }
+.screen-capture-btn {
+  width: 100%; padding: 0.55em; background: var(--gold);
+  color: var(--text-inverse); border-radius: 0.4em;
+  font-size: 0.65em; font-weight: 600; text-align: center;
+}
+.screen-capture-toast {
+  display: flex; align-items: center; gap: 0.3em;
+  padding: 0.4em 0.6em; background: rgba(52,211,153,0.12);
+  border: 1px solid rgba(52,211,153,0.2); border-radius: 0.35em;
+  font-size: 0.5em; color: #34d399;
+}
+.screen-capture-toast-icon { font-weight: 700; }
+
+/* ---- Screen 2: Connect (Fan Profile) ---- */
+.screen-connect { align-items: center; gap: 0.5em; padding-top: 0.5em; }
+.screen-connect-avatar {
+  width: 3.5em; height: 3.5em; border-radius: 50%;
+  background: linear-gradient(135deg, rgba(196,138,58,0.15), rgba(196,138,58,0.05));
+  border: 2px solid rgba(196,138,58,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'GroupedFont', serif; font-size: 1.4em; color: var(--gold);
+}
+.screen-connect-name { font-family: 'GroupedFont', serif; font-size: 1em; color: var(--white); }
+.screen-connect-since { font-size: 0.55em; color: var(--gray-400); margin-top: -0.2em; }
+.screen-connect-platforms { display: flex; gap: 0.4em; margin-top: 0.3em; flex-wrap: wrap; justify-content: center; }
+.screen-connect-badge {
+  display: flex; align-items: center; gap: 0.25em;
+  padding: 0.3em 0.5em; background: rgba(240,235,227,0.06);
+  border: 1px solid var(--border); border-radius: 0.35em;
+  font-size: 0.55em; color: var(--gray-200);
+}
+.screen-connect-badge-check { color: #34d399; font-weight: 700; }
+.screen-connect-info { width: 100%; display: flex; flex-direction: column; gap: 0.35em; margin-top: 0.3em; }
+.screen-connect-row {
+  display: flex; justify-content: space-between;
+  padding: 0.4em 0.7em; background: rgba(240,235,227,0.04);
+  border-radius: 0.3em; font-size: 0.55em;
+}
+.screen-connect-row-label { color: var(--gray-400); }
+.screen-connect-row-value { color: var(--gray-200); }
+.screen-connect-score {
+  display: flex; align-items: center; gap: 0.5em; margin-top: 0.3em;
+  padding: 0.5em 0.8em; width: 100%;
+  background: rgba(196,138,58,0.08); border: 1px solid rgba(196,138,58,0.15);
+  border-radius: 0.4em;
+}
+.screen-connect-score-num { font-weight: 600; color: var(--gold); font-size: 1.2em; }
+.screen-connect-score-label { font-size: 0.55em; color: var(--gray-300); }
+
+/* ---- Screen 3: Engage (Feed + Notifications) ---- */
+.screen-engage { display: flex; flex-direction: column; gap: 0.4em; padding-top: 0.3em; }
+.screen-engage-notif {
+  display: flex; align-items: flex-start; gap: 0.4em;
+  padding: 0.45em 0.6em;
+  background: rgba(196,138,58,0.1); border: 1px solid rgba(196,138,58,0.2);
+  border-radius: 0.45em; font-size: 0.5em;
+}
+.screen-engage-notif-icon { font-size: 1.1em; flex-shrink: 0; }
+.screen-engage-notif-text { color: var(--gray-200); line-height: 1.3; }
+.screen-engage-notif-text strong { color: var(--gold); display: block; }
+.screen-engage-notif-text span { color: var(--gray-400); }
+.screen-engage-feed { flex: 1; display: flex; flex-direction: column; gap: 0.4em; overflow: hidden; }
+.screen-engage-post { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 0.4em; overflow: hidden; }
+.screen-engage-post-video { display: flex; flex-direction: column; }
+.screen-engage-thumb {
+  height: 4em; background: linear-gradient(135deg, #1a1520, #0d0d12);
+  position: relative; display: flex; align-items: center; justify-content: center;
+}
+.screen-engage-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(196,138,58,0.12), transparent 70%);
+}
+.screen-engage-play {
+  width: 1.8em; height: 1.8em; border-radius: 50%;
+  background: rgba(255,255,255,0.12); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.6em; color: var(--white); position: relative; z-index: 1;
+}
+.screen-engage-post-body { padding: 0.4em 0.5em; }
+.screen-engage-post-author { font-size: 0.55em; color: var(--white); font-weight: 500; margin-bottom: 0.1em; }
+.screen-engage-post-text { font-size: 0.48em; color: var(--gray-400); line-height: 1.3; }
+.screen-engage-post-stats { font-size: 0.45em; color: var(--gray-400); display: flex; gap: 0.6em; margin-top: 0.2em; }
+.screen-engage-post-text-only { padding: 0.5em; }
+.screen-engage-post-quote {
+  font-size: 0.52em; color: var(--gray-200);
+  line-height: 1.4; font-style: italic; padding: 0.15em 0;
 }
 
-.card-icon {
-  font-family: 'GroupedFont', serif;
-  font-size: 2.8em;
-  color: var(--gold);
-  margin-bottom: 0.3em;
-  line-height: 1;
-  opacity: 0.7;
+/* ---- Screen 4: Grow (Monetization / Tiers) ---- */
+.screen-grow { gap: 0.4em; display: flex; flex-direction: column; padding-top: 0.3em; }
+.screen-grow-tiers { display: flex; flex-direction: column; gap: 0.4em; flex: 1; }
+.screen-grow-tier {
+  border: 1px solid var(--border); border-radius: 0.5em;
+  padding: 0.6em; background: var(--bg-raised);
+  position: relative;
+}
+.screen-grow-tier-vip {
+  border-color: rgba(196,138,58,0.25);
+  background: linear-gradient(135deg, var(--bg-raised) 0%, rgba(196,138,58,0.06) 100%);
+}
+.screen-grow-tier-badge {
+  position: absolute; top: -0.35em; right: 0.6em;
+  padding: 0.15em 0.4em; background: var(--gold);
+  color: var(--text-inverse); font-size: 0.4em; font-weight: 700;
+  border-radius: 0.25em; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.screen-grow-tier-name { font-size: 0.7em; font-weight: 600; color: var(--white); }
+.screen-grow-tier-price { font-size: 0.6em; color: var(--gold); font-weight: 600; margin-bottom: 0.2em; }
+.screen-grow-tier-price span { font-weight: 400; color: var(--gray-400); font-size: 0.8em; }
+.screen-grow-perks {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 0.15em;
+}
+.screen-grow-perks li { display: flex; align-items: center; gap: 0.3em; font-size: 0.48em; color: var(--gray-200); }
+.screen-grow-check { color: var(--gold); font-weight: 700; }
+.screen-grow-cta {
+  padding: 0.5em; background: var(--gold);
+  color: var(--text-inverse); border-radius: 0.4em;
+  font-size: 0.6em; font-weight: 600; text-align: center;
 }
 
-.card-title {
+/* ---- Screen 5: Compound (Dashboard) ---- */
+.screen-compound { display: flex; flex-direction: column; gap: 0.4em; padding-top: 0.3em; }
+.screen-compound-chart {
+  height: 4.5em; background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 0.45em; padding: 0.4em; position: relative; overflow: hidden;
+}
+.screen-compound-chart svg { width: 100%; height: 100%; }
+.screen-compound-metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.3em; }
+.screen-compound-metric {
+  background: var(--bg-raised); border: 1px solid var(--border);
+  border-radius: 0.35em; padding: 0.4em; text-align: center;
+}
+.screen-compound-metric-val { font-size: 0.75em; font-weight: 600; color: var(--gold); display: block; }
+.screen-compound-metric-label { font-size: 0.4em; color: var(--gray-400); }
+.screen-compound-campaign {
+  background: var(--bg-raised); border: 1px solid rgba(196,138,58,0.15);
+  border-radius: 0.45em; padding: 0.5em 0.6em;
+  display: flex; align-items: center; gap: 0.4em;
+}
+.screen-compound-campaign-icon {
+  font-size: 1em; color: var(--gold); flex-shrink: 0;
+}
+.screen-compound-campaign-body { flex: 1; }
+.screen-compound-campaign-title { font-size: 0.55em; font-weight: 500; color: var(--white); }
+.screen-compound-campaign-desc { font-size: 0.45em; color: var(--gray-400); }
+.screen-compound-campaign-arrow { font-size: 0.7em; color: var(--gold); }
+.screen-compound-loop {
+  display: flex; align-items: center; justify-content: center; gap: 0.3em;
+  padding: 0.4em; font-size: 0.5em; color: var(--gold);
+  background: rgba(196,138,58,0.06); border: 1px solid rgba(196,138,58,0.12);
+  border-radius: 0.35em; font-weight: 600;
+}
+.screen-compound-loop-icon { font-size: 1.3em; }
+
+/* ---- Carousel Floating Callouts ---- */
+.carousel-callouts {
+  position: absolute; inset: 0;
+  pointer-events: none; z-index: 5;
+}
+.carousel-callout {
+  position: absolute;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-md); padding: 10px 14px;
+  white-space: nowrap;
+  opacity: 0; transform: translateY(6px);
+  pointer-events: none;
+  animation: floatGently 6s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.carousel-callout.visible {
+  opacity: 1; transform: translateY(0);
+  animation-play-state: running;
+}
+.carousel-callout-value { font-size: 16px; font-weight: 600; color: var(--gold); display: block; line-height: 1.2; }
+.carousel-callout-label { font-size: 11px; color: var(--gray-400); }
+/* Callout positions — alternating left/right of phone */
+.carousel-callout.callout-left { top: 22%; right: calc(50% + 11em); animation-delay: -1s; }
+.carousel-callout.callout-right { top: 26%; left: calc(50% + 11em); animation-delay: -2.5s; }
+.carousel-callout.callout-lower { top: 42%; animation-delay: -4s; }
+
+/* ---- Stage Copy (below carousel, above pills) ---- */
+.carousel-stage-copy {
+  text-align: center; position: relative; z-index: 3;
+  min-height: 5.5em; margin-bottom: 1.5em;
+  padding: 0 24px;
+}
+.carousel-stage-item {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 500px;
+  opacity: 0;
+  pointer-events: none;
+}
+.carousel-stage-item.active { opacity: 1; pointer-events: auto; }
+.carousel-stage-label {
+  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 6px;
+}
+.carousel-stage-headline {
   font-family: 'GroupedFont', serif;
-  font-size: 1.8em;
-  color: var(--white);
-  font-weight: normal;
-  line-height: 1.15;
-  margin-bottom: 0.5em;
-  letter-spacing: -0.01em;
+  font-size: clamp(20px, 2.5vw, 28px);
+  color: var(--white); font-weight: normal; line-height: 1.2; margin-bottom: 6px;
 }
-.card-desc {
-  font-size: 0.875em;
-  color: var(--gray-300);
-  line-height: 1.7;
-  margin-bottom: 1.5em;
-}
-.card-features {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7em;
-  margin-top: auto;
-}
-.card-feat {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6em;
-  font-size: 0.8em;
-  color: var(--gray-200);
-  line-height: 1.5;
-}
-.card-feat-icon {
-  width: 1.4em;
-  height: 1.4em;
-  border-radius: 50%;
-  background: var(--gold-glow);
-  border: 1px solid rgba(196,138,58,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  font-size: 0.75em;
-}
+.carousel-stage-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
 
 /* Pill nav for carousel — inside slider, above collection (like Osmo) */
 .carousel-nav {
@@ -2296,15 +2478,15 @@ body::after {
 @media (max-width: 767px) {
   .manifesto-title-el { font-size: clamp(28px, 6vw, 48px); }
   .carousel-collection { width: 60em; }
-  .carousel-card { transform-origin: 50% 325%; }
+  .carousel-card { transform-origin: 50% 260%; }
+  .carousel-card-before { padding-top: 185%; }
   .carousel-inner {
     padding-top: 2em;
     padding-bottom: calc(1.75em + 10em);
     margin-bottom: -10em;
   }
-  .carousel-card-inner { padding: 1.5em; }
-  .card-title { font-size: 1.4em; }
-  .card-desc { font-size: 0.8em; }
+  .carousel-callout { display: none; }
+  .carousel-stage-copy { min-height: 6em; }
 }
 @media (max-width: 600px) {
   .hero-pills { gap: 6px; }
@@ -2707,9 +2889,9 @@ body::after {
      ============================================ -->
 <section class="carousel-section" id="product">
   <div class="carousel-header reveal">
-    <div class="label label-gold">See it in action</div>
-    <h2>Everything you need, from first listen to lifelong fan.</h2>
-    <p>Watch how artists use Grouped to capture, keep, and grow their fanbase from a single dashboard.</p>
+    <div class="label label-gold">The Fan Journey</div>
+    <h2>Five stages. One engine. Lifelong fans.</h2>
+    <p>See how Grouped turns a single listener into a lifelong fan — from capture to compound growth.</p>
   </div>
   <div class="carousel-inner">
     <div class="carousel-slider">
@@ -2758,141 +2940,220 @@ body::after {
       <div class="carousel-collection" id="carousel-collection">
         <div class="carousel-list" id="carousel-list">
 
-        <!-- Card 1: Capture -->
+        <!-- Card 1: Capture — Smart Swap page -->
         <div class="carousel-card" data-index="0">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
-            <div class="card-label">
-              <span>Step 01</span>
-              <span class="label-accent">Capture</span>
-            </div>
-            <div class="card-icon">*</div>
-            <div class="card-title">Own a Direct Line<br>to Your Fans</div>
-            <div class="card-desc">Your music is already creating fans. Grouped captures that first spark and turns it into a connection you control.</div>
-            <div class="card-features">
-              <div class="card-feat">
-                <div class="card-feat-icon">&#9889;</div>
-                Every link captures fan data instantly
+            <div class="card-phone-notch"></div>
+            <div class="card-phone-screen screen-capture">
+              <div class="card-phone-status">
+                <span>9:41</span>
+                <span>grouped.</span>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#127911;</div>
-                Fans get early access, you get their info
+              <div class="screen-capture-cover">
+                <div class="screen-capture-art">
+                  <div class="screen-capture-art-inner">
+                    <span style="font-size:2em;line-height:1">&#127926;</span>
+                  </div>
+                </div>
+                <div class="screen-capture-waveform">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128229;</div>
-                Import existing lists to build on what you have
+              <div class="screen-capture-artist">Zari Banks</div>
+              <div class="screen-capture-subtitle">Exclusive Early Access</div>
+              <div class="screen-capture-field">
+                <span class="screen-capture-field-icon">&#9993;</span>
+                <span class="screen-capture-field-text">you@email.com<span class="screen-capture-cursor">|</span></span>
+              </div>
+              <div class="screen-capture-btn">Get Access</div>
+              <div class="screen-capture-toast">
+                <span class="screen-capture-toast-icon">&#10003;</span>
+                You're in! Check your inbox.
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Keep -->
+        <!-- Card 2: Connect — Unified fan profile -->
         <div class="carousel-card" data-index="1">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
-            <div class="card-label">
-              <span>Step 02</span>
-              <span class="label-accent">Keep</span>
-            </div>
-            <div class="card-icon">*</div>
-            <div class="card-title">Keep Every Fan<br>You Earn</div>
-            <div class="card-desc">Most artists earn fans and lose them in the same week. Grouped keeps listeners engaged between releases.</div>
-            <div class="card-features">
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128225;</div>
-                Smart Feed auto-syncs your activity
+            <div class="card-phone-notch"></div>
+            <div class="card-phone-screen screen-connect">
+              <div class="card-phone-status">
+                <span>9:41</span>
+                <span>grouped.</span>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128276;</div>
-                Push notifications with 85%+ open rates
+              <div class="screen-connect-avatar">Z</div>
+              <div class="screen-connect-name">Zari Banks</div>
+              <div class="screen-connect-since">Member since Nov 2024</div>
+              <div class="screen-connect-platforms">
+                <div class="screen-connect-badge">
+                  <span class="screen-connect-badge-check">&#10003;</span>
+                  Spotify
+                </div>
+                <div class="screen-connect-badge">
+                  <span class="screen-connect-badge-check">&#10003;</span>
+                  Instagram
+                </div>
+                <div class="screen-connect-badge">
+                  <span class="screen-connect-badge-check">&#10003;</span>
+                  TikTok
+                </div>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128100;</div>
-                Progressive fan profiling builds over time
+              <div class="screen-connect-info">
+                <div class="screen-connect-row">
+                  <span class="screen-connect-row-label">Email</span>
+                  <span class="screen-connect-row-value">zari@email.com</span>
+                </div>
+                <div class="screen-connect-row">
+                  <span class="screen-connect-row-label">Phone</span>
+                  <span class="screen-connect-row-value">+1 (555) 012-3456</span>
+                </div>
+                <div class="screen-connect-row">
+                  <span class="screen-connect-row-label">Location</span>
+                  <span class="screen-connect-row-value">Los Angeles, CA</span>
+                </div>
+              </div>
+              <div class="screen-connect-score">
+                <span class="screen-connect-score-num">94</span>
+                <span class="screen-connect-score-label">Engagement Score</span>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 3: Grow -->
+        <!-- Card 3: Engage — Group feed + notifications -->
         <div class="carousel-card" data-index="2">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
-            <div class="card-label">
-              <span>Step 03</span>
-              <span class="label-accent">Grow</span>
-            </div>
-            <div class="card-icon">*</div>
-            <div class="card-title">Activate on<br>Your Terms</div>
-            <div class="card-desc">When you're ready to move, your audience is already warm. Tour dates, merch drops, new music — they're there.</div>
-            <div class="card-features">
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128227;</div>
-                Direct reach: email, push, your choice
+            <div class="card-phone-notch"></div>
+            <div class="card-phone-screen screen-engage">
+              <div class="card-phone-status">
+                <span>9:41</span>
+                <span>grouped.</span>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#127873;</div>
-                Automatic rewards for early engagers
+              <div class="screen-engage-notif">
+                <span class="screen-engage-notif-icon">&#128276;</span>
+                <div class="screen-engage-notif-text">
+                  <strong>New exclusive content</strong>
+                  <span>from Zari Banks</span>
+                </div>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128176;</div>
-                Built-in sales, revenue stays yours
+              <div class="screen-engage-feed">
+                <div class="screen-engage-post screen-engage-post-video">
+                  <div class="screen-engage-thumb">
+                    <span class="screen-engage-play">&#9654;</span>
+                  </div>
+                  <div class="screen-engage-post-body">
+                    <div class="screen-engage-post-author">Zari Banks</div>
+                    <div class="screen-engage-post-text">Behind the scenes from the studio session...</div>
+                    <div class="screen-engage-post-stats">
+                      <span>&#10084; 342</span>
+                      <span>&#128172; 48</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="screen-engage-post screen-engage-post-text-only">
+                  <div class="screen-engage-post-author">Zari Banks</div>
+                  <div class="screen-engage-post-quote">"New music is coming sooner than you think. Who's ready?"</div>
+                  <div class="screen-engage-post-stats">
+                    <span>&#10084; 518</span>
+                    <span>&#128172; 73</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 4: Compound -->
+        <!-- Card 4: Grow — Paid tiers -->
         <div class="carousel-card" data-index="3">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
-            <div class="card-label">
-              <span>Step 04</span>
-              <span class="label-accent">Compound</span>
-            </div>
-            <div class="card-icon">*</div>
-            <div class="card-title">Growth That<br>Never Resets</div>
-            <div class="card-desc">Every release builds on the last. Fans from your first single are still there for your album. Nothing resets.</div>
-            <div class="card-features">
-              <div class="card-feat">
-                <div class="card-feat-icon">&#127793;</div>
-                A fanbase that remembers every release
+            <div class="card-phone-notch"></div>
+            <div class="card-phone-screen screen-grow">
+              <div class="card-phone-status">
+                <span>9:41</span>
+                <span>grouped.</span>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128200;</div>
-                Revenue and reach compound over time
+              <div class="screen-grow-tiers">
+                <div class="screen-grow-tier screen-grow-tier-free">
+                  <div class="screen-grow-tier-name">Free</div>
+                  <div class="screen-grow-tier-price">$0<span>/mo</span></div>
+                  <ul class="screen-grow-perks">
+                    <li><span class="screen-grow-check">&#10003;</span> Group feed access</li>
+                    <li><span class="screen-grow-check">&#10003;</span> Push notifications</li>
+                    <li><span class="screen-grow-check">&#10003;</span> Community chat</li>
+                  </ul>
+                </div>
+                <div class="screen-grow-tier screen-grow-tier-vip">
+                  <div class="screen-grow-tier-badge">Popular</div>
+                  <div class="screen-grow-tier-name">VIP</div>
+                  <div class="screen-grow-tier-price">$12<span>/mo</span></div>
+                  <ul class="screen-grow-perks">
+                    <li><span class="screen-grow-check">&#10003;</span> Everything in Free</li>
+                    <li><span class="screen-grow-check">&#10003;</span> Exclusive content</li>
+                    <li><span class="screen-grow-check">&#10003;</span> Merch discounts</li>
+                    <li><span class="screen-grow-check">&#10003;</span> Presale access</li>
+                  </ul>
+                </div>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128274;</div>
-                A career you actually own
-              </div>
+              <div class="screen-grow-cta">Upgrade to VIP</div>
             </div>
           </div>
         </div>
 
-        <!-- Card 5: Reactivate -->
+        <!-- Card 5: Compound — Dashboard + growth -->
         <div class="carousel-card" data-index="4">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
-            <div class="card-label">
-              <span>Step 05</span>
-              <span class="label-accent">Reactivate</span>
-            </div>
-            <div class="card-icon">*</div>
-            <div class="card-title">Drop Again.<br>Start Bigger.</div>
-            <div class="card-desc">Your next release doesn't start from zero. Every fan you've captured is primed and waiting. Hit play on the cycle again.</div>
-            <div class="card-features">
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128260;</div>
-                Re-engage your full audience instantly
+            <div class="card-phone-notch"></div>
+            <div class="card-phone-screen screen-compound">
+              <div class="card-phone-status">
+                <span>9:41</span>
+                <span>grouped.</span>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#128640;</div>
-                Each release launches bigger than the last
+              <div class="screen-compound-chart">
+                <svg viewBox="0 0 200 80" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(196,138,58,0.3)"/>
+                      <stop offset="100%" stop-color="rgba(196,138,58,0)"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 70 Q30 65 50 55 T100 35 T150 18 T200 5 L200 80 L0 80Z" fill="url(#chartGrad)"/>
+                  <path d="M0 70 Q30 65 50 55 T100 35 T150 18 T200 5" fill="none" stroke="var(--gold)" stroke-width="2"/>
+                </svg>
               </div>
-              <div class="card-feat">
-                <div class="card-feat-icon">&#9854;</div>
-                The cycle never stops compounding
+              <div class="screen-compound-metrics">
+                <div class="screen-compound-metric">
+                  <span class="screen-compound-metric-val">20.4K</span>
+                  <span class="screen-compound-metric-label">Fans</span>
+                </div>
+                <div class="screen-compound-metric">
+                  <span class="screen-compound-metric-val">$4.2K</span>
+                  <span class="screen-compound-metric-label">Revenue</span>
+                </div>
+                <div class="screen-compound-metric">
+                  <span class="screen-compound-metric-val">87%</span>
+                  <span class="screen-compound-metric-label">Retention</span>
+                </div>
+              </div>
+              <div class="screen-compound-campaign">
+                <div class="screen-compound-campaign-icon">&#128260;</div>
+                <div class="screen-compound-campaign-body">
+                  <div class="screen-compound-campaign-title">Reactivation Campaign</div>
+                  <div class="screen-compound-campaign-desc">Re-engage 3,200 dormant fans</div>
+                </div>
+                <div class="screen-compound-campaign-arrow">&#8594;</div>
+              </div>
+              <div class="screen-compound-loop">
+                <span class="screen-compound-loop-icon">&#8635;</span>
+                Compound &#8594; Capture
               </div>
             </div>
           </div>
@@ -2902,17 +3163,75 @@ body::after {
       </div>
 
     </div> <!-- end .carousel-slider -->
+
+    <!-- Floating stat callouts — contextual per stage -->
+    <div class="carousel-callouts" id="carousel-callouts">
+      <div class="carousel-callout callout-left" data-stage="0">
+        <span class="carousel-callout-value">847</span>
+        <span class="carousel-callout-label">new fans this week</span>
+      </div>
+      <div class="carousel-callout callout-right" data-stage="1">
+        <span class="carousel-callout-value">92%</span>
+        <span class="carousel-callout-label">Swap completion rate</span>
+      </div>
+      <div class="carousel-callout callout-left" data-stage="2">
+        <span class="carousel-callout-value">85%+</span>
+        <span class="carousel-callout-label">push notification open rate</span>
+      </div>
+      <div class="carousel-callout callout-right" data-stage="3">
+        <span class="carousel-callout-value">$12/mo</span>
+        <span class="carousel-callout-label">avg. subscriber revenue</span>
+      </div>
+      <div class="carousel-callout callout-left" data-stage="4">
+        <span class="carousel-callout-value">2x</span>
+        <span class="carousel-callout-label">sold out shows</span>
+      </div>
+      <div class="carousel-callout callout-right callout-lower" data-stage="4">
+        <span class="carousel-callout-value">&#8635;</span>
+        <span class="carousel-callout-label">Compound &#8594; Capture</span>
+      </div>
+    </div>
+
   </div> <!-- end .carousel-inner -->
 
   <!-- Bottom fade gradient — OUTSIDE inner, sibling (like Osmo) -->
   <div class="carousel-fade"></div>
 
+  <!-- Stage copy — crossfades per active card -->
+  <div class="carousel-stage-copy" id="carousel-stage-copy">
+    <div class="carousel-stage-item active" data-stage="0">
+      <div class="carousel-stage-label">Capture</div>
+      <div class="carousel-stage-headline">Turn Every Listener Into a Known Fan</div>
+      <div class="carousel-stage-desc">Your music is already creating fans. Grouped captures that first spark and turns it into a connection you control.</div>
+    </div>
+    <div class="carousel-stage-item" data-stage="1">
+      <div class="carousel-stage-label">Connect</div>
+      <div class="carousel-stage-headline">One Profile. Every Platform. Unified.</div>
+      <div class="carousel-stage-desc">Bring every fan from every social into one place you own. Spotify, Instagram, TikTok — all in a single profile.</div>
+    </div>
+    <div class="carousel-stage-item" data-stage="2">
+      <div class="carousel-stage-label">Engage</div>
+      <div class="carousel-stage-headline">Stay Top of Mind Between Releases</div>
+      <div class="carousel-stage-desc">Push notifications, exclusive content, and a living feed that keeps fans engaged when you're not dropping music.</div>
+    </div>
+    <div class="carousel-stage-item" data-stage="3">
+      <div class="carousel-stage-label">Grow</div>
+      <div class="carousel-stage-headline">Monetize on Your Terms</div>
+      <div class="carousel-stage-desc">Paid tiers, merch drops, presale access — revenue that stays yours, built on a fanbase that already loves you.</div>
+    </div>
+    <div class="carousel-stage-item" data-stage="4">
+      <div class="carousel-stage-label">Compound</div>
+      <div class="carousel-stage-headline">Growth That Never Resets</div>
+      <div class="carousel-stage-desc">Every release builds on the last. Reactivate dormant fans, compound your reach, and never start from zero again.</div>
+    </div>
+  </div>
+
   <div class="hero-pills" id="hero-pills">
     <div class="hero-pill active" data-index="0">Capture</div>
-    <div class="hero-pill" data-index="1">Keep</div>
-    <div class="hero-pill" data-index="2">Grow</div>
-    <div class="hero-pill" data-index="3">Compound</div>
-    <div class="hero-pill" data-index="4">Reactivate</div>
+    <div class="hero-pill" data-index="1">Connect</div>
+    <div class="hero-pill" data-index="2">Engage</div>
+    <div class="hero-pill" data-index="3">Grow</div>
+    <div class="hero-pill" data-index="4">Compound</div>
   </div>
 
   <div class="container">
@@ -3427,9 +3746,12 @@ const cards = document.querySelectorAll('.carousel-card');
 const heroPills = document.querySelectorAll('.hero-pill');
 const stepCounter = document.getElementById('step-counter');
 const dragHint = document.getElementById('drag-hint');
+const carouselCallouts = document.querySelectorAll('.carousel-callout');
+const stageItems = document.querySelectorAll('.carousel-stage-item');
 const totalCards = cards.length;
 
 let currentIndex = 0;
+let prevStageIndex = -1;
 let isDragging = false;
 let hasInteracted = false;
 
@@ -3515,6 +3837,27 @@ function updateUI() {
   currentIndex = nearest;
   heroPills.forEach((p, i) => p.classList.toggle('active', i === currentIndex));
   stepCounter.textContent = String(currentIndex + 1).padStart(2, '0');
+
+  // Only update stage copy + callouts when the active stage actually changes
+  if (currentIndex !== prevStageIndex) {
+    prevStageIndex = currentIndex;
+
+    // Crossfade stage copy via GSAP (avoids CSS transition interference)
+    stageItems.forEach(s => {
+      const stage = parseInt(s.dataset.stage, 10);
+      const isActive = stage === currentIndex;
+      s.classList.toggle('active', isActive);
+      gsap.to(s, { opacity: isActive ? 1 : 0, duration: 0.35, ease: 'power2.out', overwrite: true });
+    });
+
+    // Toggle floating callouts via GSAP
+    carouselCallouts.forEach(c => {
+      const stage = parseInt(c.dataset.stage, 10);
+      const show = stage === currentIndex;
+      c.classList.toggle('visible', show);
+      gsap.to(c, { opacity: show ? 1 : 0, y: show ? 0 : 6, duration: 0.4, ease: 'power2.out', overwrite: true });
+    });
+  }
 }
 
 // Animate to a target card index using GSAP
