@@ -773,17 +773,17 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 }
 .carousel-header {
   text-align: center;
-  padding: 80px 32px 0;
+  padding: 40px 32px 0;
   position: relative;
   z-index: 1;
 }
-.carousel-header .label { margin-bottom: 16px; }
+.carousel-header .label { margin-bottom: 12px; }
 .carousel-header h2 {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(28px, 3.5vw, 42px);
   color: var(--white);
   font-weight: normal;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .carousel-header p {
   color: var(--text-secondary);
@@ -795,9 +795,9 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 .carousel-inner {
   position: relative;
   overflow: hidden;
-  padding-top: 2.5em;
-  padding-bottom: calc(14.5em + 20em);
-  margin-bottom: -20em;
+  padding-top: 0.75em;
+  padding-bottom: calc(3em + 5em);
+  margin-bottom: -5em;
 }
 
 /* Slider wrapper — flex column centered like Osmo's .gsap-slider */
@@ -870,9 +870,9 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   letter-spacing: 0.02em;
 }
 
-/* Draggable collection area — 82.5em wide like Osmo */
+/* Draggable collection area */
 .carousel-collection {
-  width: 82.5em;
+  width: 58em;
   max-width: 100%;
   cursor: none;
   user-select: none;
@@ -903,14 +903,14 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   flex: none;
   border-radius: 2.2em;
   overflow: hidden;
-  transform-origin: 50% 300%;
+  transform-origin: 50% 280%;
   will-change: transform, opacity;
   cursor: none;
 }
 
 /* Aspect ratio spacer — phone proportions */
 .carousel-card-before {
-  padding-top: 190%;
+  padding-top: 135%;
 }
 
 .carousel-card-inner {
@@ -1201,7 +1201,7 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 /* ---- Stage Copy (below carousel, above pills) ---- */
 .carousel-stage-copy {
   text-align: center; position: relative; z-index: 3;
-  min-height: 5.5em; margin-bottom: 1.5em;
+  min-height: 5em; margin-bottom: 1em;
   padding: 0 24px;
 }
 .carousel-stage-item {
@@ -2477,13 +2477,13 @@ body::after {
 }
 @media (max-width: 767px) {
   .manifesto-title-el { font-size: clamp(28px, 6vw, 48px); }
-  .carousel-collection { width: 60em; }
-  .carousel-card { transform-origin: 50% 260%; }
-  .carousel-card-before { padding-top: 185%; }
+  .carousel-collection { width: 52em; }
+  .carousel-card { transform-origin: 50% 240%; }
+  .carousel-card-before { padding-top: 150%; }
   .carousel-inner {
-    padding-top: 2em;
-    padding-bottom: calc(1.75em + 10em);
-    margin-bottom: -10em;
+    padding-top: 1em;
+    padding-bottom: calc(1.5em + 8em);
+    margin-bottom: -8em;
   }
   .carousel-callout { display: none; }
   .carousel-stage-copy { min-height: 6em; }
