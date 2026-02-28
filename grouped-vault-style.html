@@ -475,7 +475,7 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 0;
   flex-wrap: wrap;
   position: relative;
@@ -729,17 +729,19 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   animation-delay: -3s;
 }
 .hero-pill {
-  font-size: 14px;
-  padding: 10px 22px;
+  font-size: 11px;
+  padding: 6px 14px;
   border-radius: var(--radius-label);
   border: 1px solid var(--border);
-  color: var(--gray-300);
+  color: var(--gray-400);
   background: transparent;
   cursor: pointer;
   transition: all 0.3s var(--ease-out);
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .hero-pill:hover {
   border-color: var(--border-hover);
@@ -749,7 +751,7 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   background: var(--white);
   color: var(--text-inverse);
   border-color: var(--white);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 /* Hero background glow */
@@ -770,20 +772,22 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
    ============================================ */
 .carousel-section {
   position: relative;
+  padding-top: 100px;
 }
 .carousel-header {
   text-align: center;
-  padding: 40px 32px 0;
+  padding: 0 32px;
   position: relative;
   z-index: 1;
+  margin-bottom: 32px;
 }
-.carousel-header .label { margin-bottom: 12px; }
+.carousel-header .label { margin-bottom: 16px; }
 .carousel-header h2 {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-size: clamp(32px, 4vw, 48px);
   color: var(--white);
   font-weight: normal;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .carousel-header p {
   color: var(--text-secondary);
@@ -796,7 +800,7 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   position: relative;
   overflow: hidden;
   padding-top: 0.75em;
-  padding-bottom: calc(3em + 5em);
+  padding-bottom: calc(3.5em + 5em);
   margin-bottom: -5em;
 }
 
@@ -872,7 +876,7 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 
 /* Draggable collection area */
 .carousel-collection {
-  width: 58em;
+  width: 75em;
   max-width: 100%;
   cursor: none;
   user-select: none;
@@ -899,18 +903,18 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   left: 50%;
   top: 0;
   margin-right: 0;
-  width: calc((100% - 1px) / 3);
+  width: 20%;
   flex: none;
   border-radius: 2.2em;
   overflow: hidden;
-  transform-origin: 50% 280%;
+  transform-origin: 50% 310%;
   will-change: transform, opacity;
   cursor: none;
 }
 
 /* Aspect ratio spacer — phone proportions */
 .carousel-card-before {
-  padding-top: 135%;
+  padding-top: 190%;
 }
 
 .carousel-card-inner {
@@ -1194,14 +1198,14 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 .carousel-callout-value { font-size: 16px; font-weight: 600; color: var(--gold); display: block; line-height: 1.2; }
 .carousel-callout-label { font-size: 11px; color: var(--gray-400); }
 /* Callout positions — alternating left/right of phone */
-.carousel-callout.callout-left { top: 22%; right: calc(50% + 11em); animation-delay: -1s; }
-.carousel-callout.callout-right { top: 26%; left: calc(50% + 11em); animation-delay: -2.5s; }
+.carousel-callout.callout-left { top: 22%; right: calc(50% + 7em); animation-delay: -1s; }
+.carousel-callout.callout-right { top: 26%; left: calc(50% + 7em); animation-delay: -2.5s; }
 .carousel-callout.callout-lower { top: 42%; animation-delay: -4s; }
 
 /* ---- Stage Copy (below carousel, above pills) ---- */
 .carousel-stage-copy {
   text-align: center; position: relative; z-index: 3;
-  min-height: 5em; margin-bottom: 1em;
+  min-height: 10em; margin-bottom: 1em;
   padding: 0 24px;
 }
 .carousel-stage-item {
@@ -1212,15 +1216,15 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
 }
 .carousel-stage-item.active { opacity: 1; pointer-events: auto; }
 .carousel-stage-label {
-  font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--gold); font-weight: 700; margin-bottom: 6px;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); font-weight: 700; margin-bottom: 8px;
 }
 .carousel-stage-headline {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(20px, 2.5vw, 28px);
-  color: var(--white); font-weight: normal; line-height: 1.2; margin-bottom: 6px;
+  font-size: clamp(22px, 2.8vw, 32px);
+  color: var(--white); font-weight: normal; line-height: 1.2; margin-bottom: 8px;
 }
-.carousel-stage-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; }
+.carousel-stage-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
 
 /* Pill nav for carousel — inside slider, above collection (like Osmo) */
 .carousel-nav {
@@ -1266,11 +1270,33 @@ h1, h2, h3 { line-height: 1.1; letter-spacing: -0.02em; }
   z-index: 3;
 }
 .carousel-step-label {
-  font-size: 13px;
-  color: var(--gray-400);
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  color: var(--gray-500);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-.carousel-step-label span { color: var(--gold); font-weight: 600; }
+.carousel-step-label .step-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.carousel-step-label .step-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gray-600);
+  transition: all 0.3s var(--ease-out);
+}
+.carousel-step-label .step-dot.filled {
+  background: var(--gold);
+}
+.carousel-step-label .step-dot.active {
+  background: var(--gold);
+  width: 16px;
+  border-radius: 3px;
+}
 .drag-hint {
   font-size: 12px;
   color: var(--gray-500);
@@ -2477,20 +2503,20 @@ body::after {
 }
 @media (max-width: 767px) {
   .manifesto-title-el { font-size: clamp(28px, 6vw, 48px); }
-  .carousel-collection { width: 52em; }
-  .carousel-card { transform-origin: 50% 240%; }
-  .carousel-card-before { padding-top: 150%; }
+  .carousel-collection { width: 42em; }
+  .carousel-card { width: 28%; transform-origin: 50% 270%; }
+  .carousel-card-before { padding-top: 190%; }
   .carousel-inner {
     padding-top: 1em;
     padding-bottom: calc(1.5em + 8em);
     margin-bottom: -8em;
   }
   .carousel-callout { display: none; }
-  .carousel-stage-copy { min-height: 6em; }
+  .carousel-stage-copy { min-height: 10em; }
 }
 @media (max-width: 600px) {
   .hero-pills { gap: 6px; }
-  .hero-pill { font-size: 12px; padding: 8px 16px; }
+  .hero-pill { font-size: 10px; padding: 5px 12px; }
   .carousel-nav-btn { font-size: 12px; padding: 8px 16px; }
   .nav-left span { display: none; }
   .hero-headline { font-size: clamp(24px, 7.5vw, 42px); }
@@ -3236,48 +3262,19 @@ body::after {
 
   <div class="container">
     <div class="carousel-controls">
-      <div class="carousel-step-label">Step <span id="step-counter">01</span> of 05</div>
+      <div class="carousel-step-label" id="step-label">
+        <span class="step-dots" id="step-dots">
+          <span class="step-dot active"></span>
+          <span class="step-dot"></span>
+          <span class="step-dot"></span>
+          <span class="step-dot"></span>
+          <span class="step-dot"></span>
+        </span>
+      </div>
       <div class="drag-hint" id="drag-hint">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Drag to explore
       </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ============================================
-     VIDEO DEMO
-     ============================================ -->
-<section class="demo-section section" id="demo">
-  <div class="demo-phone-wrapper">
-    <div class="demo-float demo-float-left reveal">
-      <span class="demo-float-stat">847</span>
-      New fans captured this week
-    </div>
-    <div class="demo-float demo-float-right reveal reveal-delay-1">
-      <span class="demo-float-stat">92%</span>
-      Swap completion rate
-    </div>
-
-    <div class="demo-phone reveal">
-      <div class="demo-phone-notch"></div>
-      <div class="demo-phone-screen">
-        <div class="demo-play-btn" id="demo-play">
-          <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
-        </div>
-        <div class="demo-label-text">Watch demo walkthrough</div>
-        <div class="demo-badge">
-          <span class="demo-badge-dot"></span>
-          2:30 · Product demo
-        </div>
-      </div>
-    </div>
-
-    <div class="demo-float demo-float-bottom reveal reveal-delay-2">
-      <span class="demo-float-stat">85%+</span>
-      Push notification open rates
     </div>
   </div>
 </section>
@@ -3744,7 +3741,7 @@ const collection = document.getElementById('carousel-collection');
 const list = document.getElementById('carousel-list');
 const cards = document.querySelectorAll('.carousel-card');
 const heroPills = document.querySelectorAll('.hero-pill');
-const stepCounter = document.getElementById('step-counter');
+const stepDots = document.querySelectorAll('.step-dot');
 const dragHint = document.getElementById('drag-hint');
 const carouselCallouts = document.querySelectorAll('.carousel-callout');
 const stageItems = document.querySelectorAll('.carousel-stage-item');
@@ -3815,7 +3812,7 @@ function renderCards() {
     else if (absOffset < 1.5) status = 'inview';
     else status = 'not-active';
 
-    const opacity = status === 'active' ? 1 : status === 'inview' ? 0.9 : 0.6;
+    const opacity = status === 'active' ? 1 : status === 'inview' ? 0.45 : 0.2;
     const zIndex = 10 - Math.round(absOffset);
 
     // Use GSAP quickSetter-style direct DOM writes for jank-free updates
@@ -3836,7 +3833,10 @@ function updateUI() {
   nearest = ((nearest % totalCards) + totalCards) % totalCards;
   currentIndex = nearest;
   heroPills.forEach((p, i) => p.classList.toggle('active', i === currentIndex));
-  stepCounter.textContent = String(currentIndex + 1).padStart(2, '0');
+  stepDots.forEach((dot, i) => {
+    dot.classList.toggle('filled', i < currentIndex);
+    dot.classList.toggle('active', i === currentIndex);
+  });
 
   // Only update stage copy + callouts when the active stage actually changes
   if (currentIndex !== prevStageIndex) {
@@ -4608,7 +4608,7 @@ document.querySelectorAll('.fcard').forEach(card => {
     const physT = Math.max(16, Math.round(fanSize * 0.5)); // proportional to ball size
 
     const engine = Engine.create({ positionIterations: 10, velocityIterations: 10 });
-    engine.world.gravity.y = 2;
+    engine.world.gravity.y = 3;
 
     const render = Render.create({
       element: canvasEl,
@@ -4839,6 +4839,14 @@ document.querySelectorAll('.fcard').forEach(card => {
       if (!spiralActive || allCaptured) return;
       allCaptured = true;
 
+      // Guard: snap any balls that haven't settled near the floor
+      fans.forEach(fan => {
+        if (!fan._captured && fan.position.y < floorY - fanSize * 3) {
+          Body.setPosition(fan, { x: fan.position.x, y: floorY - fanSize * rand(0.5, 1.5) });
+          Body.setVelocity(fan, { x: 0, y: 0 });
+        }
+      });
+
       // Capture EVERY fan ball at once
       // Record each ball's current physics position for seamless transition
       fans.forEach((fan, i) => {
@@ -4891,7 +4899,7 @@ document.querySelectorAll('.fcard').forEach(card => {
       if (dropIdx < fanCount) {
         const fan = Bodies.rectangle(
           rand(cw * 0.15, cw * 0.85),
-          -fanSize - rand(0, fanSize),
+          floorY - rand(fanSize * 2, fanSize * 6),
           fanSize, fanSize,
           {
             chamfer: { radius: fanSize / 2 },
@@ -4906,7 +4914,7 @@ document.querySelectorAll('.fcard').forEach(card => {
         Composite.add(engine.world, fan);
         fans.push(fan);
         dropIdx++;
-        setTimeout(drop, 100);
+        setTimeout(drop, 35);
       }
     })();
 
@@ -5003,7 +5011,7 @@ document.querySelectorAll('.fcard').forEach(card => {
         if (p <= 0.10 && !floorActive) {
           floorActive = true;
           spiralActive = false;
-          engine.world.gravity.y = 2;
+          engine.world.gravity.y = 3;
 
           Body.setPosition(floor, { x: cw / 2, y: floorY });
           Body.setPosition(goldLineBody, { x: cw / 2, y: floorY });
