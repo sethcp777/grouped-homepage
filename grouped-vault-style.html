@@ -82,6 +82,9 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
   --gold-dim: rgba(196,138,58,0.5);
   --gold-glow: rgba(196,138,58,0.15);
   --focus: #7CBBDF;
+  --blue: #4A9FD9;
+  --blue-light: #7CBBDF;
+  --blue-glow: rgba(74,159,217,0.15);
 
   /* Bronze scale */
   --bronze-50: #FEF7EC;
@@ -3313,41 +3316,87 @@ a.nav-link:hover .nav-link__label::after {
    ============================================ */
 
 /* ============================================
-   FINAL CTA
+   FINAL CTA — banner with pill + circle
    ============================================ */
 .cta-section {
-  padding: clamp(100px, 14vw, 200px) 0;
+  border-top: 1px solid var(--border);
+  padding: clamp(60px, 8vw, 100px) 32px;
   text-align: center;
   position: relative;
+  overflow: hidden;
 }
-.cta-section::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
-  background: radial-gradient(ellipse, var(--gold-glow) 0%, transparent 70%);
-  pointer-events: none;
-  opacity: 0.4;
+.cta-banner {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
 }
-.cta-section .label { margin-bottom: 24px; }
-.cta-section h2 {
+.cta-banner__text { margin-bottom: 40px; }
+.cta-banner h2 {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(36px, 5vw, 64px);
+  font-size: clamp(28px, 4vw, 48px);
   color: var(--white);
   font-weight: normal;
-  margin-bottom: 20px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 12px;
+  line-height: 1.15;
 }
-.cta-section h2 em { font-style: normal; color: var(--gold); }
-.cta-section p {
-  color: var(--gray-300);
-  font-size: 16px;
-  margin-bottom: 36px;
+.cta-banner h2 em { font-style: normal; color: var(--gold); }
+.cta-banner p {
+  color: var(--gray-400);
+  font-size: 15px;
+}
+.cta-banner__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+/* Primary — blue pill */
+.cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 40px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+  transition: all 0.25s;
+}
+.cta-pill:hover {
+  background: var(--blue-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--blue-glow);
+}
+.cta-pill svg { width: 14px; height: 14px; }
+
+/* Secondary — light blue circle */
+.cta-circle {
+  width: clamp(140px, 18vw, 200px);
+  height: clamp(140px, 18vw, 200px);
+  border-radius: 50%;
+  background: rgba(124,187,223,0.1);
+  border: 1px solid rgba(124,187,223,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.cta-circle:hover {
+  background: rgba(124,187,223,0.16);
+  border-color: rgba(124,187,223,0.35);
+  transform: scale(1.04);
+}
+.cta-circle__text {
+  font-size: clamp(13px, 1.3vw, 15px);
+  color: var(--blue-light);
+  line-height: 1.4;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* Buttons */
@@ -5115,14 +5164,20 @@ body::after {
      FINAL CTA
      ============================================ -->
 <section class="cta-section section" id="start">
-  <div class="container">
-    <div class="label label-gold reveal">Ready?</div>
-    <h2 class="reveal">Stop dropping music.<br>Start building <em>momentum.</em></h2>
-    <p class="reveal">Free to start. Build your first release in minutes.</p>
-    <a href="#" class="btn-primary reveal">
-      Get Started - it's free!
-      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+  <div class="cta-banner reveal">
+    <div class="cta-banner__text">
+      <h2>Stop dropping music. Start creating <em>moments.</em></h2>
+      <p>Free to start. Build your first release in minutes.</p>
+    </div>
+    <div class="cta-banner__actions">
+      <a href="#" class="cta-pill">
+        Get Started - it's free!
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#" class="cta-circle">
+        <span class="cta-circle__text">Join our free<br>artist community</span>
+      </a>
+    </div>
   </div>
 </section>
 
