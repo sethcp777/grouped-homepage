@@ -3572,34 +3572,227 @@ a.nav-link:hover .nav-link__label::after {
 /* ============================================
    FOOTER
    ============================================ */
+/* Footer wrapper — full-viewport, scroll-revealed */
 .footer {
-  padding: 40px 0;
-  border-top: 1px solid var(--border);
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: #0C1018;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(196,138,58,0.03) 0%, transparent 70%);
+  overflow: hidden;
+  padding: 0;
 }
+
+/* Spacer between body content and footer columns */
+.footer-spacer {
+  height: clamp(40px, 6vw, 80px);
+  flex-shrink: 0;
+}
+
+/* Rounded body edge — sits on the section above the footer */
+.cta-section::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -32px;
+  left: 0;
+  width: 100%;
+  height: 32px;
+  background: #111620;
+  border-radius: 0 0 32px 32px;
+  z-index: 2;
+}
+
+/* Inner content wrapper */
 .footer-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px clamp(24px, 5vw, 60px) 40px;
+}
+
+/* Top area: 3 columns */
+.footer-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(24px, 4vw, 60px);
+  margin-bottom: clamp(60px, 8vw, 120px);
+}
+
+/* Column label — parenthesized, in GroupedFont */
+.footer-col__label {
+  font-family: 'GroupedFont', serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  margin-bottom: 20px;
+}
+
+/* Column links */
+.footer-col__links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-col__link {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(1.1em, 1.8vw, 1.5em);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  width: fit-content;
+}
+
+/* Social icons row */
+.footer-socials {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+.footer-social-icon:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(196,138,58,0.06);
+}
+.footer-social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.footer-col__link:hover {
+  color: var(--white);
+}
+
+/* Underline animation on links */
+.footer-col__link[data-underline-link] {
+  position: relative;
+  display: inline-block;
+}
+.footer-col__link[data-underline-link]::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.footer-col__link[data-underline-link]:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Tagline above wordmark */
+.footer-tagline {
+  font-family: 'Satoshi', sans-serif;
+  font-size: clamp(13px, 1.2vw, 15px);
+  font-weight: 400;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+/* Large logo lockup — gold badge */
+.footer-logo-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(12px, 2vw, 24px);
+  background: var(--gold);
+  border-radius: clamp(14px, 2vw, 24px);
+  padding: clamp(14px, 2.5vw, 28px) clamp(20px, 3.5vw, 44px);
+  margin-bottom: 0;
+  width: fit-content;
+}
+
+.footer-logo-lockup__icon {
+  width: clamp(36px, 5vw, 64px);
+  height: clamp(36px, 5vw, 64px);
+  color: var(--bg-base);
+  flex-shrink: 0;
+}
+
+.footer-logo-lockup__text {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(1.8rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--bg-base);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* Bottom bar: copyright + legal */
+.footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid var(--border);
 }
-.footer-logo {
-  font-family: 'GroupedFont', serif;
-  font-size: 18px;
-  color: var(--white);
-}
-.footer-logo span { color: var(--gold); }
-.footer-links {
-  display: flex;
-  gap: 28px;
-}
-.footer-links a {
-  font-size: 13px;
-  color: var(--gray-400);
-  transition: color 0.2s;
-}
-.footer-links a:hover { color: var(--white); }
+
 .footer-copy {
   font-size: 12px;
-  color: var(--gray-500);
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-legal a {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+  color: var(--white);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .footer-columns {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-logo-lockup {
+    padding: 12px 20px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
 }
 
 /* ============================================
@@ -5662,19 +5855,67 @@ body::after {
 <!-- ============================================
      FOOTER
      ============================================ -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-inner">
-      <a href="#" class="footer-logo">grouped<span>.</span></a>
-      <div class="footer-links">
-        <a href="#">About</a>
-        <a href="#">Features</a>
-        <a href="#">Pricing</a>
-        <a href="#">Blog</a>
-        <a href="#">Contact</a>
+<footer class="footer" id="site-footer">
+  <div class="footer-spacer"></div>
+  <div class="footer-inner">
+
+    <!-- 3-Column Links -->
+    <div class="footer-columns">
+
+      <div class="footer-col">
+        <div class="footer-col__label">(Pages)</div>
+        <div class="footer-col__links">
+          <a href="#product" class="footer-col__link" data-underline-link>Product</a>
+          <a href="#features" class="footer-col__link" data-underline-link>Features</a>
+          <a href="#pricing" class="footer-col__link" data-underline-link>Pricing</a>
+          <a href="#case-studies" class="footer-col__link" data-underline-link>Case Studies</a>
+        </div>
       </div>
-      <div class="footer-copy">&copy; 2026 Grouped</div>
+
+      <div class="footer-col">
+        <div class="footer-col__label">(Socials)</div>
+        <div class="footer-socials">
+          <a href="https://instagram.com/grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://twitter.com/grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg>
+          </a>
+          <a href="https://youtube.com/@grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col__label">(Contact)</div>
+        <div class="footer-col__links">
+          <a href="mailto:info@grouped.com" class="footer-col__link" data-underline-link>info@grouped.com</a>
+          <a href="#" class="footer-col__link" data-underline-link id="footer-feature-trigger">Request a Feature</a>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Tagline + Logo lockup -->
+    <div class="footer-tagline">Direct-to-fan, finally done right.</div>
+    <div class="footer-logo-lockup">
+      <svg class="footer-logo-lockup__icon" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="currentColor"/></svg>
+      <span class="footer-logo-lockup__text">Grouped</span>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Grouped. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+
   </div>
 </footer>
 
@@ -7295,6 +7536,86 @@ document.querySelectorAll('.fcard').forEach(card => {
 
     // Auto-close after 3s
     setTimeout(closeModal, 3000);
+  });
+  // Also wire footer "Request a Feature" link to open modal
+  const footerFeatureTrigger = document.getElementById('footer-feature-trigger');
+  if (footerFeatureTrigger) {
+    footerFeatureTrigger.addEventListener('click', openModal);
+  }
+})();
+</script>
+
+<!-- Footer parallax scroll-in -->
+<script>
+(function initFooterParallax() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  const footer = document.getElementById('site-footer');
+  if (!footer) return;
+
+  const columns = footer.querySelector('.footer-columns');
+  const tagline = footer.querySelector('.footer-tagline');
+  const wordmark = footer.querySelector('.footer-logo-lockup');
+  const bottomBar = footer.querySelector('.footer-bottom');
+
+  // Staggered reveal for columns
+  const cols = footer.querySelectorAll('.footer-col');
+  gsap.set(cols, { opacity: 0, y: 60 });
+  gsap.set([tagline, wordmark, bottomBar].filter(Boolean), { opacity: 0, y: 40 });
+
+  ScrollTrigger.create({
+    trigger: footer,
+    start: 'top 80%',
+    once: true,
+    onEnter: () => {
+      // Columns stagger in
+      gsap.to(cols, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: 'power3.out',
+      });
+
+      // Tagline
+      gsap.to(tagline, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: 0.4,
+        ease: 'power3.out',
+      });
+
+      // Wordmark — big reveal
+      gsap.to(wordmark, {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        delay: 0.55,
+        ease: 'power3.out',
+      });
+
+      // Bottom bar
+      gsap.to(bottomBar, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: 0.7,
+        ease: 'power3.out',
+      });
+    }
+  });
+
+  // Parallax: wordmark slides up slightly on scroll
+  gsap.to(wordmark, {
+    yPercent: -8,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: footer,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      scrub: 0.5,
+    }
   });
 })();
 </script>
