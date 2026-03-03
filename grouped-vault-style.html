@@ -4090,6 +4090,183 @@ body::after {
 @media (max-width: 768px) {
   .keep-orbit { width: 55%; }
 }
+
+/* ============================================
+   FEATURE REQUEST MODAL
+   ============================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(24px, 4vw, 40px);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
+}
+.modal-overlay.active .modal {
+  transform: scale(1) translateY(0);
+  opacity: 1;
+  transition: transform 0.4s var(--ease-spring), opacity 0.3s ease;
+}
+.modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.modal__title {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(20px, 2.5vw, 26px);
+  color: var(--white);
+  line-height: 1.2;
+  margin: 0;
+}
+.modal__close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: var(--text-tertiary);
+  transition: color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.modal__close:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+}
+.modal__close svg {
+  width: 18px;
+  height: 18px;
+}
+.modal__row {
+  display: flex;
+  gap: 12px;
+}
+.modal__row .modal__field {
+  flex: 1;
+}
+.modal__field {
+  margin-bottom: 16px;
+}
+.modal__label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.modal__hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: italic;
+  color: var(--text-tertiary);
+}
+.modal__input,
+.modal__textarea {
+  display: block;
+  width: 100%;
+  background: var(--bg-base);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 15px;
+  padding: 12px 16px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.modal__input:focus,
+.modal__textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px var(--gold-glow);
+}
+.modal__input::placeholder,
+.modal__textarea::placeholder {
+  color: var(--text-tertiary);
+}
+.modal__textarea {
+  min-height: 90px;
+  resize: vertical;
+  line-height: 1.5;
+}
+.modal__submit {
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+  font-size: 15px;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+}
+.modal__success {
+  text-align: center;
+  padding: 32px 0 16px;
+}
+.modal__success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(196,138,58,0.15);
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+.modal__success h4 {
+  font-family: 'GroupedFont', serif;
+  font-size: 22px;
+  color: var(--white);
+  margin: 0 0 6px;
+}
+.modal__success p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .modal__row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .modal {
+    padding: 24px 20px;
+    border-radius: 12px;
+  }
+}
 </style>
 </head>
 <body>
@@ -5293,7 +5470,7 @@ body::after {
       </div>
     </div>
 
-    <p class="features-cta reveal">Don't see what you're looking for? Email us at <a href="mailto:info@grouped.com">info@grouped.com</a> and request a feature!</p>
+    <p class="features-cta reveal">Don't see what you're looking for? <a href="#" id="feature-modal-trigger">Tell us what you'd build</a> — we actually read these.</p>
 
     <div class="features-action reveal" style="text-align:center; margin-top:24px;">
       <a href="#start" class="inline-cta" style="font-size:15px;">Ready to try it? Get started free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
@@ -6984,6 +7161,140 @@ document.querySelectorAll('.fcard').forEach(card => {
   }
 })();
 
+</script>
+
+<!-- ============================================
+     FEATURE REQUEST MODAL
+     ============================================ -->
+<div class="modal-overlay" id="feature-modal-overlay">
+  <div class="modal" id="feature-modal" role="dialog" aria-modal="true" aria-labelledby="feature-modal-title">
+    <div class="modal__header">
+      <h3 class="modal__title" id="feature-modal-title">Got an idea? We're all ears.</h3>
+      <button class="modal__close" id="feature-modal-close" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <form class="modal__form" id="feature-form">
+      <div class="modal__row">
+        <div class="modal__field">
+          <label class="modal__label" for="feat-first">First name</label>
+          <input class="modal__input" id="feat-first" name="first" type="text" required autocomplete="given-name">
+        </div>
+        <div class="modal__field">
+          <label class="modal__label" for="feat-last">Last name</label>
+          <input class="modal__input" id="feat-last" name="last" type="text" required autocomplete="family-name">
+        </div>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="feat-stage">Stage name <span class="modal__hint">(if you've got one)</span></label>
+        <input class="modal__input" id="feat-stage" name="stage" type="text">
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="feat-feature">What's the feature?</label>
+        <textarea class="modal__textarea" id="feat-feature" name="feature" required placeholder="Tell us what you'd build if you could..."></textarea>
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label" for="feat-why">Why would this be amazing for you?</label>
+        <textarea class="modal__textarea" id="feat-why" name="why" required placeholder="Paint us the picture..."></textarea>
+      </div>
+
+      <button type="submit" class="modal__submit btn-primary">Send it over &rarr;</button>
+    </form>
+
+    <div class="modal__success" id="feature-success" style="display:none">
+      <div class="modal__success-icon">&check;</div>
+      <h4>Idea received.</h4>
+      <p>We read every single one. Seriously.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function initFeatureModal() {
+  const overlay = document.getElementById('feature-modal-overlay');
+  const modal = document.getElementById('feature-modal');
+  const trigger = document.getElementById('feature-modal-trigger');
+  const closeBtn = document.getElementById('feature-modal-close');
+  const form = document.getElementById('feature-form');
+  const success = document.getElementById('feature-success');
+  if (!overlay || !trigger) return;
+
+  let previousFocus = null;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    previousFocus = document.activeElement;
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    // Focus first input after animation
+    setTimeout(() => {
+      const firstInput = modal.querySelector('input');
+      if (firstInput) firstInput.focus();
+    }, 300);
+  }
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    // Reset form after close animation
+    setTimeout(() => {
+      form.reset();
+      form.style.display = '';
+      success.style.display = 'none';
+    }, 400);
+    if (previousFocus) previousFocus.focus();
+  }
+
+  // Open
+  trigger.addEventListener('click', openModal);
+
+  // Close — button
+  closeBtn.addEventListener('click', closeModal);
+
+  // Close — overlay click
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // Close — Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // Submit — mailto
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const first = form.elements.first.value.trim();
+    const last = form.elements.last.value.trim();
+    const stage = form.elements.stage.value.trim();
+    const feature = form.elements.feature.value.trim();
+    const why = form.elements.why.value.trim();
+
+    const name = stage ? `${first} ${last} (${stage})` : `${first} ${last}`;
+    const subject = encodeURIComponent(`Feature Request from ${name}`);
+    const body = encodeURIComponent(
+      `From: ${name}\n\n` +
+      `Feature Request:\n${feature}\n\n` +
+      `Why it would be amazing:\n${why}`
+    );
+
+    window.location.href = `mailto:ihaveanidea@grouped.com?subject=${subject}&body=${body}`;
+
+    // Show success state
+    form.style.display = 'none';
+    success.style.display = '';
+
+    // Auto-close after 3s
+    setTimeout(closeModal, 3000);
+  });
+})();
 </script>
 
 </body>
