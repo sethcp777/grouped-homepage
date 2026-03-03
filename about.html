@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Grouped</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<link rel="stylesheet" href="assets/css/about.css">
+</head>
+<body>
+
+<!-- ============================================
+     NAVIGATION
+     ============================================ -->
+<nav data-menu-status="closed" class="nav">
+  <div class="nav-scroll-bg"></div>
+  <div class="nav-container">
+    <div class="nav-bg"></div>
+    <div class="nav-inner">
+      <a href="grouped-vault-style.html" class="nav-logo">
+        <svg class="nav-logo__icon" width="254" height="254" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="currentColor"/></svg>
+        <span class="nav-logo__text">Grouped</span>
+      </a>
+      <div class="nav-center">
+        <ul class="nav-center__list">
+          <!-- Artist Tools -->
+          <li>
+            <button data-dropdown-toggle="" class="nav-link">
+              <span class="nav-link__label">Artist Tools</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 17 10" fill="none" class="nav-link__dropdown-icon"><path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <div class="nav-dropdown__overflow">
+                <div class="nav-dropdown__overflow-inner">
+                  <div class="nav-container">
+                    <ul class="nav-dropdown__content">
+                      <li class="nav-dropdown__content-li">
+                        <a href="grouped-vault-style.html#product" class="nav-dropdown__link">
+                          <div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(196,138,58,0.15), rgba(196,138,58,0.03))"></div><div class="nav-dropdown__img-overlay"></div></div>
+                          <div class="nav-preview nav-preview--capture"><div class="nav-preview__input"></div><div class="nav-preview__btn"></div></div>
+                          <div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Capture</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div>
+                        </a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="grouped-vault-style.html#product" class="nav-dropdown__link">
+                          <div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(52,211,153,0.12), rgba(52,211,153,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div>
+                          <div class="nav-preview nav-preview--connect"><div class="nav-preview__bubble nav-preview__bubble--left"></div><div class="nav-preview__bubble nav-preview__bubble--right"></div><div class="nav-preview__bubble nav-preview__bubble--left2"></div></div>
+                          <div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Connect</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div>
+                        </a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="grouped-vault-style.html#product" class="nav-dropdown__link">
+                          <div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(129,140,248,0.12), rgba(129,140,248,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div>
+                          <div class="nav-preview nav-preview--engage"><div class="nav-preview__bell"><div class="nav-preview__bell-body"></div><div class="nav-preview__bell-clapper"></div><div class="nav-preview__dot"></div><div class="nav-preview__dot"></div></div></div>
+                          <div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Engage</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div>
+                        </a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="grouped-vault-style.html#product" class="nav-dropdown__link">
+                          <div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(248,113,113,0.12), rgba(248,113,113,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div>
+                          <div class="nav-preview nav-preview--grow"><div class="nav-preview__bar"></div><div class="nav-preview__bar"></div><div class="nav-preview__bar"></div><div class="nav-preview__bar"></div><div class="nav-preview__bar"></div></div>
+                          <div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Grow</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div>
+                        </a>
+                      </li>
+                    </ul>
+                    <div class="nav-dropdown__footer"><a href="/tools" class="nav-dropdown__footer-link">Too many choices? See everything on one page &rarr;</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Case Studies -->
+          <li>
+            <a href="case-studies.html" class="nav-link"><span class="nav-link__label">Case Studies</span></a>
+          </li>
+          <!-- About -->
+          <li>
+            <button data-dropdown-toggle="" class="nav-link">
+              <span class="nav-link__label">About</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 17 10" fill="none" class="nav-link__dropdown-icon"><path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <div class="nav-dropdown__overflow">
+                <div class="nav-dropdown__overflow-inner">
+                  <div class="nav-container">
+                    <ul class="nav-dropdown__content">
+                      <li class="nav-dropdown__content-li">
+                        <a href="about.html#mission" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(244,114,182,0.12), rgba(244,114,182,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--mission"><div class="nav-preview__pulse-ring"></div><div class="nav-preview__pulse-ring"></div><div class="nav-preview__pulse-core"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Why We Exist</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="about.html#team" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(99,102,241,0.12), rgba(99,102,241,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--team"><div class="nav-preview__avatar"></div><div class="nav-preview__avatar"></div><div class="nav-preview__avatar"></div><div class="nav-preview__avatar"></div><div class="nav-preview__avatar"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Team</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="about.html#join" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(52,211,153,0.12), rgba(52,211,153,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--careers"><div class="nav-preview__ladder-rung"></div><div class="nav-preview__ladder-rung"></div><div class="nav-preview__ladder-rung"></div><div class="nav-preview__ladder-star"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Careers</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(251,191,36,0.12), rgba(251,191,36,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--media"><div class="nav-preview__play-circle"><div class="nav-preview__play-tri"></div></div><div class="nav-preview__eq-bar"></div><div class="nav-preview__eq-bar"></div><div class="nav-preview__eq-bar"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Media</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="about.html#contact" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(196,138,58,0.15), rgba(196,138,58,0.03))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--contact"><div class="nav-preview__envelope"><div class="nav-preview__envelope-flap"></div><div class="nav-preview__envelope-letter"></div></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Contact</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <!-- Resources -->
+          <li>
+            <button data-dropdown-toggle="" class="nav-link">
+              <span class="nav-link__label">Resources</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 17 10" fill="none" class="nav-link__dropdown-icon"><path d="M1.5 1.5L8.5 8.5L15.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div class="nav-dropdown">
+              <div class="nav-dropdown__overflow">
+                <div class="nav-dropdown__overflow-inner">
+                  <div class="nav-container">
+                    <ul class="nav-dropdown__content">
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(251,146,60,0.12), rgba(251,146,60,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--blog"><div class="nav-preview__text-line"></div><div class="nav-preview__text-line"></div><div class="nav-preview__text-line"></div><div class="nav-preview__cursor"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Blog</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(168,85,247,0.12), rgba(168,85,247,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--community"><div class="nav-preview__node"></div><div class="nav-preview__node"></div><div class="nav-preview__node"></div><div class="nav-preview__node"></div><div class="nav-preview__node-line"></div><div class="nav-preview__node-line"></div><div class="nav-preview__node-line"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Community</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(236,72,153,0.12), rgba(236,72,153,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--artists"><div class="nav-preview__note-float"></div><div class="nav-preview__note-float"></div><div class="nav-preview__note-float"></div><div class="nav-preview__vinyl"></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Artists</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(56,189,248,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--faqs"><div class="nav-preview__q-mark">?</div><div class="nav-preview__a-mark">!</div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">FAQs</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                      <li class="nav-dropdown__content-li">
+                        <a href="#" class="nav-dropdown__link"><div class="nav-dropdown__link-bg"><div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.02))"></div><div class="nav-dropdown__img-overlay"></div></div><div class="nav-preview nav-preview--helpcenter"><div class="nav-preview__lifebuoy"><div class="nav-preview__lifebuoy-ring"></div><div class="nav-preview__lifebuoy-cross"></div></div></div><div class="nav-dropdown__link-inner"><span class="nav-dropdown__link-label">Help Center</span><div class="nav-dropdown__link-bubble"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 16 16" fill="none" class="icon"><path d="M9.334 12.667L14 8L9.334 3.333" stroke="currentColor" stroke-miterlimit="10"/><path d="M14 8H1.334" stroke="currentColor" stroke-miterlimit="10"/></svg></div></div></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-end">
+        <a href="#" class="nav-btn md--hide">Login</a>
+        <a href="grouped-vault-style.html#start" class="nav-btn is--primary md--hide">Get Started (It's Free!)</a>
+        <button data-menu-button aria-label="toggle menu" class="menu-button">
+          <div class="menu-button__line"></div>
+          <div class="menu-button__line"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="page-overlay"></div>
+</nav>
+
+<!-- ============================================
+     PAGE CONTENT
+     ============================================ -->
+<div class="page-content">
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero__inner">
+    <div class="about-hero__label">About Grouped</div>
+    <h1 class="about-hero__title">We built a platform where artists matter and fans belong.</h1>
+    <p class="about-hero__sub">Grouped exists because the relationship between artists and fans deserves better than an algorithm. We're here to make sure it gets it.</p>
+  </div>
+</section>
+
+<!-- MISSION -->
+<section class="about-mission section" id="mission">
+  <div class="container">
+    <div class="about-mission__inner">
+      <!-- Grouped icon -->
+      <svg class="about-mission__icon" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="currentColor"/></svg>
+      <div class="about-mission__label">Mission</div>
+      <h2 class="about-mission__title">Music first, always.</h2>
+      <p class="about-mission__body">Grouped exists because artists deserve control over their moments. We give them the tools to share music on their own terms, with context, exclusivity, and intention. Fans get what they've always wanted&mdash;real access to the artists they care about.</p>
+    </div>
+  </div>
+</section>
+
+<!-- OUR STORY -->
+<section class="about-story section" id="story">
+  <div class="container">
+    <div class="about-story__inner">
+      <div class="about-story__label">Our Story</div>
+
+      <div class="about-story__block">
+        <p class="about-story__text">This is the most exciting time to be an independent artist. You can create, distribute, market, and build a real career without waiting for permission from anyone. The tools are everywhere. The opportunity is real.</p>
+      </div>
+
+      <div class="about-story__block">
+        <p class="about-story__text"><strong>But there's been one piece missing.</strong> You release a song. It gets added to a playlist. People discover you at a show. They follow you on streaming platforms, maybe on socials. And then? They disappear into the feed. The algorithm moves on. You're left starting from scratch with every release.</p>
+      </div>
+
+      <div class="about-story__block">
+        <p class="about-story__text">We built Grouped because we lived it. We watched artists fill rooms, earn thousands of monthly listeners, generate real momentum&mdash;and still have no way to actually <em>reach</em> the fans they'd already earned. Every release felt like a reset. Every tour started cold.</p>
+      </div>
+
+      <div class="about-story__block">
+        <p class="about-story__text">So we asked a simple question: <strong>what if every fan you earned actually stayed?</strong> What if every release compounded on the last one? What if you could talk to your audience directly&mdash;no algorithm, no paywall, no noise?</p>
+      </div>
+
+      <div class="about-story__block">
+        <p class="about-story__text">That's Grouped. One place to capture who's listening, keep them close, and build something that grows with every release, every show, every moment. Not another tool. Not another dashboard. <strong>A growth engine built for lifelong music careers.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BELIEFS -->
+<section class="about-beliefs section" id="beliefs">
+  <div class="container">
+    <div class="about-beliefs__header">
+      <div class="about-beliefs__label">What We Believe</div>
+      <h2 class="about-beliefs__title">The principles behind everything we build.</h2>
+    </div>
+    <div class="about-beliefs__grid">
+      <div class="about-belief-card">
+        <span class="about-belief-card__icon">&#9670;</span>
+        <h3 class="about-belief-card__heading">Own, don't rent.</h3>
+        <p class="about-belief-card__body">Your fans belong to you, not an algorithm. Grouped gives you direct ownership of your audience&mdash;their emails, their data, their attention. No middlemen.</p>
+      </div>
+      <div class="about-belief-card">
+        <span class="about-belief-card__icon">&#9652;</span>
+        <h3 class="about-belief-card__heading">Every release compounds.</h3>
+        <p class="about-belief-card__body">Growth shouldn't reset with every drop. Your second release should build on the first. Your tenth should be unstoppable. That's how careers are made.</p>
+      </div>
+      <div class="about-belief-card">
+        <span class="about-belief-card__icon">&#9711;</span>
+        <h3 class="about-belief-card__heading">Direct means direct.</h3>
+        <p class="about-belief-card__body">When you want to reach your fans, you should be able to. No pay-to-play, no throttled reach, no guessing who sees what. Just you and your people.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="about-stats">
+  <div class="container">
+    <div class="about-stats__grid">
+      <div class="about-stat">
+        <div class="about-stat__number">4,500+</div>
+        <div class="about-stat__label">Artists on Grouped</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat__number">1.2M</div>
+        <div class="about-stat__label">Fans captured</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat__number">8,000+</div>
+        <div class="about-stat__label">Releases powered</div>
+      </div>
+      <div class="about-stat">
+        <div class="about-stat__number">92%</div>
+        <div class="about-stat__label">Avg. Smart Swap opt-in</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="about-team section" id="team">
+  <div class="container">
+    <div class="about-team__header">
+      <div class="about-team__label">The Team</div>
+      <h2 class="about-team__title">Built by people who've lived it.</h2>
+      <p class="about-team__sub">We're artists, managers, engineers, and music lovers who got tired of watching talent slip through the cracks of a broken system.</p>
+    </div>
+    <div class="about-team__grid">
+      <!-- Team Member 1 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Founder Name</div>
+        <div class="about-team-card__role">Co-Founder & CEO</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 2 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Co-Founder Name</div>
+        <div class="about-team-card__role">Co-Founder & CTO</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 3 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Head of Product</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 4 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Head of Artist Relations</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 5 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Lead Engineer</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 6 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Design Lead</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 7 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Growth & Marketing</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+      <!-- Team Member 8 -->
+      <div class="about-team-card">
+        <div class="about-team-card__photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        </div>
+        <div class="about-team-card__name">Team Member</div>
+        <div class="about-team-card__role">Community Manager</div>
+        <div class="about-team-card__note">placeholder for fun fact</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOIN US -->
+<section class="about-join section" id="join">
+  <div class="container">
+    <div class="about-join__inner">
+      <div class="about-join__label">Join Us</div>
+      <h2 class="about-join__title">We're building something worth building.</h2>
+      <p class="about-join__body">Small team. Big mission. We're remote-first, music-obsessed, and we move fast because artists don't have time to wait. If you care about building tools that make real creative careers possible, we'd love to hear from you.</p>
+      <div class="about-join__ctas">
+        <a href="mailto:careers@grouped.com" class="btn-primary">See Open Roles &rarr;</a>
+        <a href="mailto:info@grouped.com" class="btn-secondary">Say Hello</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="about-contact section" id="contact">
+  <div class="container">
+    <h2 class="about-contact__title">Let's talk.</h2>
+    <div class="about-contact__channels">
+      <div class="about-contact__channel">
+        <div class="about-contact__channel-label">General</div>
+        <a href="mailto:info@grouped.com">info@grouped.com</a>
+      </div>
+      <div class="about-contact__channel">
+        <div class="about-contact__channel-label">Press</div>
+        <a href="mailto:press@grouped.com">press@grouped.com</a>
+      </div>
+      <div class="about-contact__channel">
+        <div class="about-contact__channel-label">Partnerships</div>
+        <a href="mailto:partners@grouped.com">partners@grouped.com</a>
+      </div>
+    </div>
+    <a href="grouped-vault-style.html#start" class="btn-primary">Get Started Free &rarr;</a>
+  </div>
+</section>
+
+</div><!-- end .page-content -->
+
+<!-- ============================================
+     FOOTER
+     ============================================ -->
+<footer class="footer" id="site-footer">
+  <div class="footer-spacer"></div>
+  <div class="footer-inner">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <div class="footer-col__label">(Pages)</div>
+        <div class="footer-col__links">
+          <a href="grouped-vault-style.html#product" class="footer-col__link" data-underline-link>Product</a>
+          <a href="grouped-vault-style.html#features" class="footer-col__link" data-underline-link>Features</a>
+          <a href="grouped-vault-style.html#pricing" class="footer-col__link" data-underline-link>Pricing</a>
+          <a href="case-studies.html" class="footer-col__link" data-underline-link>Case Studies</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__label">(Socials)</div>
+        <div class="footer-socials">
+          <a href="https://instagram.com/grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </a>
+          <a href="https://twitter.com/grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://tiktok.com/@grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg>
+          </a>
+          <a href="https://youtube.com/@grouped" class="footer-social-icon" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col__label">(Contact)</div>
+        <div class="footer-col__links">
+          <a href="mailto:info@grouped.com" class="footer-col__link" data-underline-link>info@grouped.com</a>
+          <a href="#" class="footer-col__link" data-underline-link id="footer-feature-trigger">Request a Feature</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-tagline">Direct-to-fan, finally done right.</div>
+    <div class="footer-logo-lockup">
+      <svg class="footer-logo-lockup__icon" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="currentColor"/></svg>
+      <span class="footer-logo-lockup__text">Grouped</span>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Grouped. All rights reserved.</div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================
+     FEATURE REQUEST MODAL
+     ============================================ -->
+<div class="modal-overlay" id="feature-modal-overlay">
+  <div class="modal" id="feature-modal" role="dialog" aria-modal="true" aria-labelledby="feature-modal-title">
+    <div class="modal__header">
+      <h3 class="modal__title" id="feature-modal-title">Got an idea? We're all ears.</h3>
+      <button class="modal__close" id="feature-modal-close" aria-label="Close modal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form class="modal__form" id="feature-form">
+      <div class="modal__row">
+        <div class="modal__field">
+          <label class="modal__label" for="feat-first">First name</label>
+          <input class="modal__input" id="feat-first" name="first" type="text" required autocomplete="given-name">
+        </div>
+        <div class="modal__field">
+          <label class="modal__label" for="feat-last">Last name</label>
+          <input class="modal__input" id="feat-last" name="last" type="text" required autocomplete="family-name">
+        </div>
+      </div>
+      <div class="modal__field">
+        <label class="modal__label" for="feat-stage">Stage name <span class="modal__hint">(if you've got one)</span></label>
+        <input class="modal__input" id="feat-stage" name="stage" type="text">
+      </div>
+      <div class="modal__field">
+        <label class="modal__label" for="feat-feature">What's the feature?</label>
+        <textarea class="modal__textarea" id="feat-feature" name="feature" required placeholder="Tell us what you'd build if you could..."></textarea>
+      </div>
+      <div class="modal__field">
+        <label class="modal__label" for="feat-why">Why would this be amazing for you?</label>
+        <textarea class="modal__textarea" id="feat-why" name="why" required placeholder="Paint us the picture..."></textarea>
+      </div>
+      <button type="submit" class="modal__submit btn-primary">Send it over &rarr;</button>
+    </form>
+    <div class="modal__success" id="feature-success" style="display:none">
+      <div class="modal__success-icon">&check;</div>
+      <h4>Idea received.</h4>
+      <p>We read every single one. Seriously.</p>
+    </div>
+  </div>
+</div>
+
+<!-- JS -->
+<script src="assets/js/shared.js"></script>
+<script src="assets/js/about.js"></script>
+
+</body>
+</html>
