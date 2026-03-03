@@ -674,6 +674,22 @@ a.nav-link:hover .nav-link__label::after {
   20%, 80% { height: var(--bar-h); opacity: 1; }
   100% { height: var(--bar-h); opacity: 0.3; }
 }
+/* Dropdown footer link */
+.nav-dropdown__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75em 0 0;
+}
+.nav-dropdown__footer-link {
+  font-size: 0.8em;
+  color: var(--gray-400);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.25s ease;
+}
+.nav-dropdown__footer-link:hover {
+  color: var(--gold);
+}
 /* ---- ABOUT: Animated Previews ---- */
 /* Why We Exist — pulsing rings from center */
 .nav-preview--mission {
@@ -2155,6 +2171,7 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--white); font-weight: normal; line-height: 1.2; margin-bottom: 8px;
 }
 .carousel-stage-desc { font-size: 15px; color: var(--text-secondary); line-height: 1.5; }
+.carousel-stage-cta { justify-content: center; }
 
 /* Pill nav for carousel — inside slider, above collection (like Osmo) */
 .carousel-nav {
@@ -2239,12 +2256,80 @@ a.nav-link:hover .nav-link__label::after {
 .drag-hint svg { width: 16px; height: 16px; }
 
 /* ============================================
-   SECTION DIVIDER
+   INTERSTITIAL BAND — gold elevated CTA strip
    ============================================ */
-.section-divider {
+.interstitial-band {
   width: 100%;
-  height: 1px;
-  background: var(--border);
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(145deg, #D4993E 0%, #C48A3A 40%, #A8742F 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.1),
+    0 -20px 60px rgba(0,0,0,0.35),
+    0 20px 60px rgba(0,0,0,0.35);
+  padding: clamp(28px, 4vw, 40px) 0;
+}
+.interstitial-band__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+}
+.interstitial-band__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.interstitial-band__headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(22px, 2.8vw, 34px);
+  color: var(--bg-base);
+  line-height: 1.2;
+}
+.interstitial-band__sub {
+  font-size: clamp(13px, 1.2vw, 16px);
+  color: rgba(17,22,32,0.65);
+  line-height: 1.5;
+}
+.interstitial-band__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 600;
+  color: var(--bg-base);
+  padding: 14px 32px;
+  border: 2px solid rgba(17,22,32,0.2);
+  border-radius: 100px;
+  background: rgba(17,22,32,0.08);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.19,1,0.22,1);
+}
+.interstitial-band__cta:hover {
+  background: rgba(17,22,32,0.15);
+  border-color: rgba(17,22,32,0.35);
+  gap: 14px;
+}
+.interstitial-band__cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s cubic-bezier(0.19,1,0.22,1);
+}
+.interstitial-band__cta:hover svg {
+  transform: translateX(3px);
+}
+@media (max-width: 600px) {
+  .interstitial-band__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
 }
 
 /* ============================================
@@ -2381,6 +2466,7 @@ a.nav-link:hover .nav-link__label::after {
    ============================================ */
 .features-section {
   padding: var(--section-pad) 0;
+  position: relative;
 }
 .features-header {
   display: grid;
@@ -3010,304 +3096,262 @@ a.nav-link:hover .nav-link__label::after {
 /* group-section removed — orbit viz now lives in .swaps-keep Step 2 */
 
 /* ============================================
-   CASE STUDIES — ARTIST CARDS
+   CASE STUDIES — SCROLL-DRIVEN MARQUEE
    ============================================ */
-/* --- Case Studies Looping Slider --- */
-.cases-section {
-  padding: var(--section-pad) 0;
+.cs-marquee {
   overflow: hidden;
+  position: relative;
 }
-.cases-header {
-  margin-bottom: 40px;
+.cs-marquee__pin {
+  padding: clamp(32px, 4vw, 56px) 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
 }
-.cases-header h2 {
+
+/* Header */
+.cs-marquee__header {
+  text-align: center;
+  margin-bottom: clamp(24px, 3vw, 40px);
+  padding: 0 32px;
+  flex-shrink: 0;
+}
+.cs-marquee__header h2 {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(28px, 4vw, 48px);
   font-weight: normal;
   color: var(--white);
   line-height: 1.1;
   margin: 12px 0 0;
 }
 
-/* Slider track */
-.cases-slider {
+/* Horizontal track */
+.cs-marquee__track {
   display: flex;
   width: fit-content;
-  padding: 40px 0;
-  cursor: grab;
-  user-select: none;
-}
-.cases-slider.dragging {
-  cursor: grabbing;
+  gap: clamp(20px, 2vw, 28px);
+  align-items: center;
+  padding: 10px clamp(32px, 5vw, 80px);
+  flex: 1;
+  min-height: 0;
 }
 
-/* Individual slide */
-.cs-slide {
-  width: 380px;
+/* Card — elite design */
+.cs-marquee__card {
+  width: clamp(300px, 26vw, 360px);
   flex-shrink: 0;
-  padding: 0 16px;
-  opacity: 0.35;
-  transform: scale(0.93);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-  will-change: opacity, transform;
-}
-.cs-slide.active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Card container */
-.cs-card {
   background: var(--bg-raised);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 36px 32px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
   overflow: hidden;
+  transform: rotate(var(--card-rotate, 0deg));
+  transition: transform 0.5s cubic-bezier(0.19,1,0.22,1), box-shadow 0.5s cubic-bezier(0.19,1,0.22,1), border-color 0.4s ease;
+  will-change: transform, opacity;
+  position: relative;
 }
-.cs-slide.active .cs-card {
-  border-color: rgba(196,138,58,0.2);
-  box-shadow: 0 0 40px rgba(196,138,58,0.06);
-}
-
-/* Gold corner accents on active card */
-.cs-card::before,
-.cs-card::after {
+.cs-marquee__card::before {
   content: '';
   position: absolute;
-  width: 28px;
-  height: 28px;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.08) 0%, transparent 40%, transparent 60%, rgba(196,138,58,0.1) 100%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
   opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.5s ease;
 }
-.cs-card::before {
-  top: -1px;
-  left: -1px;
-  border-top: 2px solid var(--gold);
-  border-left: 2px solid var(--gold);
-  border-radius: 20px 0 0 0;
+.cs-marquee__card:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow:
+    0 24px 48px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(196,138,58,0.15),
+    0 0 80px rgba(196,138,58,0.06);
+  border-color: rgba(196,138,58,0.25);
 }
-.cs-card::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 2px solid var(--gold);
-  border-right: 2px solid var(--gold);
-  border-radius: 0 0 20px 0;
-}
-.cs-slide.active .cs-card::before,
-.cs-slide.active .cs-card::after {
-  opacity: 0.6;
+.cs-marquee__card:hover::before {
+  opacity: 1;
 }
 
-/* Hero stat block */
-.cs-hero-stat {
-  text-align: left;
+/* Card image — blue duotone with stat overlay */
+.cs-marquee__img {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  filter: grayscale(100%) sepia(40%) hue-rotate(180deg) saturate(200%) brightness(0.85) contrast(1.15);
+  transition: filter 0.6s cubic-bezier(0.19,1,0.22,1);
 }
-.cs-stat-value {
-  font-size: clamp(42px, 5vw, 56px);
+.cs-marquee__img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,13,15,0.95) 0%, rgba(13,13,15,0.4) 50%, transparent 100%);
+  pointer-events: none;
+}
+.cs-marquee__card:hover .cs-marquee__img {
+  filter: none;
+}
+
+/* Stat overlay — positioned on image */
+.cs-marquee__stat-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 20px 16px;
+  z-index: 2;
+}
+.cs-marquee__stat {
+  font-size: clamp(32px, 3.5vw, 44px);
   font-weight: 800;
   color: var(--gold);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.5);
 }
-.cs-stat-label {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-top: 6px;
-  line-height: 1.4;
+.cs-marquee__stat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.3;
+  margin-top: 4px;
+  letter-spacing: 0.01em;
 }
 
-/* Divider */
-.cs-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 0;
+/* Card body — clean & minimal */
+.cs-marquee__body {
+  padding: 20px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 /* Quote */
-.cs-quote {
-  font-size: 15px;
+.cs-marquee__quote {
+  font-size: 13px;
   font-style: italic;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  flex: 1;
+  color: var(--gray-400);
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* Artist row */
-.cs-artist-row {
+.cs-marquee__artist {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
-.cs-avatar {
-  width: 40px;
-  height: 40px;
+.cs-marquee__avatar {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.02em;
   flex-shrink: 0;
 }
-.cs-avatar--ff {
-  background: linear-gradient(135deg, rgba(196,138,58,0.25), rgba(196,138,58,0.1));
-  color: var(--gold);
-  border: 1px solid rgba(196,138,58,0.2);
-}
-.cs-avatar--mike {
-  background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08));
-  color: #34d399;
-  border: 1px solid rgba(52,211,153,0.2);
-}
-.cs-avatar--pardy {
-  background: linear-gradient(135deg, rgba(100,160,255,0.2), rgba(100,160,255,0.08));
-  color: #64a0ff;
-  border: 1px solid rgba(100,160,255,0.2);
-}
-.cs-artist-name {
+.cs-marquee__name {
   font-family: 'GroupedFont', serif;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--white);
   font-weight: normal;
 }
-.cs-artist-meta {
-  font-size: 12px;
+.cs-marquee__meta {
+  font-size: 10px;
   color: var(--text-tertiary);
+  letter-spacing: 0.02em;
 }
 
 /* CTA link */
-.cs-cta {
-  font-size: 12px;
+.cs-marquee__cta {
+  font-size: 11px;
   color: var(--gold);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  letter-spacing: 0.02em;
+  opacity: 0.5;
+  transition: opacity 0.3s ease, gap 0.3s ease;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
-.cs-cta:hover { opacity: 1; }
+.cs-marquee__card:hover .cs-marquee__cta {
+  opacity: 1;
+  gap: 8px;
+}
 
-/* Artist circle toggles */
-.cs-circles {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 32px;
-  margin-bottom: 12px;
-}
-.cs-circle {
+/* "And more" reveal */
+.cs-marquee__reveal {
+  flex-shrink: 0;
+  width: clamp(300px, 40vw, 500px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  outline: none;
-  -webkit-tap-highlight-color: transparent;
-}
-.cs-circle-img {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  flex-shrink: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 0 3px transparent;
+  text-align: center;
+  padding: 40px 32px;
+  align-self: center;
 }
-.cs-circle.active .cs-circle-img {
-  transform: scale(1.1);
-  box-shadow: 0 0 0 3px var(--gold);
-}
-.cs-circle:not(.active) .cs-circle-img {
-  opacity: 0.5;
-}
-.cs-circle:hover .cs-circle-img {
-  opacity: 1;
-}
-.cs-circle-name {
-  font-size: 11px;
-  color: var(--text-tertiary);
-  letter-spacing: 0.02em;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(-4px);
-  pointer-events: none;
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
-}
-.cs-circle:hover .cs-circle-name {
-  opacity: 1;
-  transform: translateY(0);
-}
-.cs-circle.active .cs-circle-name {
-  opacity: 1;
-  transform: translateY(0);
+.cs-marquee__reveal-head {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(36px, 5vw, 56px);
   color: var(--white);
+  font-weight: normal;
+  line-height: 1.1;
+  margin-bottom: 8px;
 }
-
-/* Nav dots */
-.cs-nav {
-  display: flex;
+.cs-marquee__reveal-sub {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--gold);
+  margin-bottom: 32px;
+}
+.cs-marquee__reveal-btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
-  margin-top: 32px;
-}
-.cs-nav-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--gray-600);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.cs-nav-dot.active {
+  padding: 14px 32px;
   background: var(--gold);
-  width: 20px;
-  border-radius: 4px;
+  color: var(--bg-base);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cs-marquee__reveal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(196,138,58,0.25);
 }
 
 /* Responsive */
 @media (max-width: 767px) {
-  .cs-circles {
-    gap: 24px;
-  }
-  .cs-circle-img {
-    width: 48px;
-    height: 48px;
-    font-size: 12px;
-  }
-  .cs-circle-name {
-    font-size: 10px;
-  }
-  .cs-slide {
+  .cs-marquee__card {
     width: 85vw;
-    padding: 0 10px;
   }
-  .cs-card {
-    padding: 28px 24px;
-    gap: 20px;
+  .cs-marquee__track {
+    gap: 16px;
+    padding: 16px 20px;
   }
-  .cs-stat-value {
-    font-size: 36px;
+  .cs-marquee__body {
+    padding: 18px 16px 20px;
+    gap: 12px;
   }
-  .cs-nav {
-    margin-top: 24px;
+  .cs-marquee__reveal {
+    width: 85vw;
   }
 }
 
@@ -3316,87 +3360,183 @@ a.nav-link:hover .nav-link__label::after {
    ============================================ */
 
 /* ============================================
-   FINAL CTA — banner with pill + circle
+   FINAL CTA — duo blocks (pill 2/3 + circle 1/3)
    ============================================ */
 .cta-section {
-  border-top: 1px solid var(--border);
-  padding: clamp(60px, 8vw, 100px) 32px;
-  text-align: center;
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 3vw, 32px);
   position: relative;
   overflow: hidden;
 }
-.cta-banner {
-  position: relative;
+.cta-duo {
   max-width: var(--container);
   margin: 0 auto;
-}
-.cta-banner__text { margin-bottom: 40px; }
-.cta-banner h2 {
-  font-family: 'GroupedFont', serif;
-  font-size: clamp(28px, 4vw, 48px);
-  color: var(--white);
-  font-weight: normal;
-  margin-bottom: 12px;
-  line-height: 1.15;
-}
-.cta-banner h2 em { font-style: normal; color: var(--gold); }
-.cta-banner p {
-  color: var(--gray-400);
-  font-size: 15px;
-}
-.cta-banner__actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(12px, 2vw, 20px);
+  align-items: stretch;
 }
 
-/* Primary — blue pill */
-.cta-pill {
+/* Shared block base */
+.cta-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(56px, 6vw, 88px) clamp(28px, 4vw, 56px);
+  transition: transform 0.4s cubic-bezier(0.19,1,0.22,1), box-shadow 0.4s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.cta-block:hover { transform: translateY(-4px); }
+
+/* ---- Primary — gold gradient pill (2/3) ---- */
+.cta-block--primary {
+  background: linear-gradient(145deg, #D4993E 0%, #C48A3A 35%, #A8742F 100%);
+  border-radius: clamp(32px, 4vw, 56px);
+  box-shadow: 0 4px 24px rgba(196,138,58,0.15), inset 0 1px 0 rgba(255,255,255,0.12);
+}
+.cta-block--primary:hover {
+  box-shadow: 0 20px 70px rgba(196,138,58,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+/* Subtle radial glow behind content */
+.cta-block__glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-block__label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(17,22,32,0.4);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.cta-block__headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(28px, 3.8vw, 50px);
+  color: var(--text-inverse);
+  font-weight: normal;
+  line-height: 1.12;
+  margin-bottom: 16px;
+}
+.cta-block__sub {
+  font-size: clamp(13px, 1.2vw, 15px);
+  color: rgba(17,22,32,0.55);
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+.cta-block__btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 18px 40px;
-  background: var(--blue);
-  color: #fff;
+  padding: 16px 36px;
+  background: var(--text-inverse);
+  color: var(--gold);
   font-size: 15px;
   font-weight: 600;
   border-radius: 999px;
-  letter-spacing: 0.01em;
-  transition: all 0.25s;
+  transition: all 0.3s cubic-bezier(0.19,1,0.22,1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
 }
-.cta-pill:hover {
-  background: var(--blue-light);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px var(--blue-glow);
+.cta-block--primary:hover .cta-block__btn {
+  background: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
 }
-.cta-pill svg { width: 14px; height: 14px; }
+.cta-block__btn svg { width: 14px; height: 14px; }
 
-/* Secondary — light blue circle */
-.cta-circle {
-  width: clamp(140px, 18vw, 200px);
-  height: clamp(140px, 18vw, 200px);
+/* ---- Secondary — dark circle (1/3) ---- */
+.cta-block--secondary {
+  background: radial-gradient(circle at 50% 40%, var(--bg-overlay) 0%, var(--bg-raised) 70%);
   border-radius: 50%;
-  background: rgba(124,187,223,0.1);
-  border: 1px solid rgba(124,187,223,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  flex-shrink: 0;
+  aspect-ratio: 1;
+  border: 1px solid rgba(124,187,223,0.1);
+  padding: clamp(28px, 3vw, 56px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
 }
-.cta-circle:hover {
-  background: rgba(124,187,223,0.16);
-  border-color: rgba(124,187,223,0.35);
-  transform: scale(1.04);
+.cta-block--secondary:hover {
+  border-color: rgba(124,187,223,0.3);
+  box-shadow: 0 20px 70px rgba(74,159,217,0.15), 0 0 0 1px rgba(124,187,223,0.1);
 }
-.cta-circle__text {
-  font-size: clamp(13px, 1.3vw, 15px);
+/* Decorative orbit rings */
+.cta-block__ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(124,187,223,0.06);
+  pointer-events: none;
+  transition: border-color 0.4s ease;
+}
+.cta-block__ring--outer {
+  width: 90%;
+  height: 90%;
+  top: 5%;
+  left: 5%;
+}
+.cta-block__ring--inner {
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+.cta-block--secondary:hover .cta-block__ring--outer {
+  border-color: rgba(124,187,223,0.12);
+}
+.cta-block--secondary:hover .cta-block__ring--inner {
+  border-color: rgba(124,187,223,0.09);
+}
+
+.cta-block__kicker {
+  font-size: 11px;
+  color: rgba(240,235,227,0.3);
+  margin-bottom: 14px;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+.cta-block__circle-headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(20px, 2.2vw, 28px);
   color: var(--blue-light);
-  line-height: 1.4;
-  text-align: center;
-  font-weight: 500;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+}
+.cta-block__circle-desc {
+  font-size: clamp(12px, 1.1vw, 14px);
+  color: rgba(240,235,227,0.3);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+.cta-block__circle-note {
+  font-family: 'Caveat', cursive;
+  font-size: clamp(20px, 2vw, 26px);
+  color: var(--blue-light);
+  position: relative;
+  z-index: 1;
+  transform: rotate(-2deg);
+}
+
+@media (max-width: 768px) {
+  .cta-duo {
+    grid-template-columns: 1fr;
+  }
+  .cta-block--secondary {
+    border-radius: clamp(28px, 3vw, 48px);
+    aspect-ratio: auto;
+  }
+  .cta-block__ring { display: none; }
 }
 
 /* Buttons */
@@ -3742,6 +3882,26 @@ body::after {
    SMART SWAPS — MARBLE RUN (Steps 1 + 2)
    300svh wrapper → sticky viewport → one canvas
    ============================================ */
+/* Swaps intro heading */
+.swaps-intro {
+  text-align: center;
+  padding: clamp(60px, 8vw, 100px) clamp(16px, 3vw, 32px) clamp(32px, 4vw, 48px);
+}
+.swaps-intro__headline {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  color: var(--white);
+  margin: 12px 0 8px;
+  line-height: 1.2;
+}
+.swaps-intro__sub {
+  font-size: clamp(15px, 1.3vw, 18px);
+  color: var(--gray-400);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
 .swaps-wrap {
   position: relative;
   width: 100%;
@@ -3769,14 +3929,41 @@ body::after {
   width: calc(100% - var(--gutter) * 2);
   transition: opacity 0.5s ease;
 }
-.swaps-copy .label { margin-bottom: 16px; }
+/* Oversized step number watermark */
+.swaps-copy__number {
+  font-family: 'GroupedFont', serif;
+  font-size: clamp(100px, 14vw, 160px);
+  font-weight: normal;
+  color: rgba(196,138,58,0.06);
+  line-height: 0.85;
+  margin-bottom: -0.35em;
+  position: relative;
+  z-index: 0;
+  letter-spacing: -0.02em;
+}
+/* Small gold label — "capture" / "keep" */
+.swaps-copy .label {
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
 .swaps-physics-headline {
   font-family: 'GroupedFont', serif;
-  font-size: clamp(32px, 5vw, 56px);
+  font-size: clamp(36px, 5.5vw, 64px);
   font-weight: normal;
   color: var(--white);
-  line-height: 1.1;
+  line-height: 1;
   margin: 0 0 16px;
+  position: relative;
+  z-index: 1;
+}
+.swaps-physics-headline__lead {
+  display: block;
+  font-size: clamp(18px, 2.2vw, 26px);
+  color: var(--gray-400);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+  line-height: 1;
 }
 .swaps-copy p {
   font-size: 16px;
@@ -3784,6 +3971,8 @@ body::after {
   line-height: 1.6;
   max-width: 480px;
   margin: 8px auto 0;
+  position: relative;
+  z-index: 1;
 }
 .swaps-copy-step2 { opacity: 0; }
 .swaps-copy-step2 .swaps-physics-headline {
@@ -3794,6 +3983,30 @@ body::after {
   color: var(--gold) !important;
   font-size: 15px !important;
   margin-top: 14px !important;
+}
+/* Inline text CTA — used across sections */
+.inline-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gold);
+  text-decoration: none;
+  margin-top: 16px;
+  position: relative;
+  z-index: 1;
+  transition: gap 0.3s ease, opacity 0.3s ease;
+  opacity: 0.85;
+}
+.inline-cta:hover {
+  gap: 10px;
+  opacity: 1;
+}
+.inline-cta svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 /* Single canvas — fills sticky viewport */
@@ -3867,16 +4080,12 @@ body::after {
 .keep-orbit-core svg {
   width: 55%; height: 55%;
 }
-.keep-footnote {
-  position: absolute;
-  bottom: clamp(12px, 2vw, 24px);
-  left: 50%; transform: translateX(-50%);
-  z-index: 2;
-  font-size: 13px; color: var(--text-tertiary);
-  font-style: italic; white-space: nowrap;
-  opacity: 0; transition: opacity 1.5s ease;
+.keep-compound {
+  font-size: 13px !important;
+  color: var(--text-tertiary) !important;
+  margin-top: 4px !important;
+  letter-spacing: 0.01em;
 }
-.keep-footnote.visible { opacity: 1; }
 
 @media (max-width: 768px) {
   .keep-orbit { width: 55%; }
@@ -3993,6 +4202,9 @@ body::after {
                         </a>
                       </li>
                     </ul>
+                    <div class="nav-dropdown__footer">
+                      <a href="/tools" class="nav-dropdown__footer-link">Too many choices? See everything on one page &rarr;</a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4721,28 +4933,33 @@ body::after {
   <div class="carousel-stage-copy" id="carousel-stage-copy">
     <div class="carousel-stage-item active" data-stage="0">
       <div class="carousel-stage-label">Capture</div>
-      <div class="carousel-stage-headline">Turn Every Listener Into a Known Fan</div>
+      <div class="carousel-stage-headline">Listeners become fans.</div>
       <div class="carousel-stage-desc">Your music is already creating fans. Grouped captures that first spark and turns it into a connection you control.</div>
+      <a href="#swaps-physics" class="inline-cta carousel-stage-cta">See how it works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
     <div class="carousel-stage-item" data-stage="1">
       <div class="carousel-stage-label">Connect</div>
-      <div class="carousel-stage-headline">One Profile. Every Platform. Unified.</div>
+      <div class="carousel-stage-headline">Every fan. One place.</div>
       <div class="carousel-stage-desc">Bring every fan from every social into one place you own. Spotify, Instagram, TikTok — all in a single profile.</div>
+      <a href="#features" class="inline-cta carousel-stage-cta">Explore the features <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
     <div class="carousel-stage-item" data-stage="2">
       <div class="carousel-stage-label">Engage</div>
-      <div class="carousel-stage-headline">Stay Top of Mind Between Releases</div>
+      <div class="carousel-stage-headline">Always top of mind.</div>
       <div class="carousel-stage-desc">Push notifications, exclusive content, and a living feed that keeps fans engaged when you're not dropping music.</div>
+      <a href="#features" class="inline-cta carousel-stage-cta">Explore the features <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
     <div class="carousel-stage-item" data-stage="3">
       <div class="carousel-stage-label">Grow</div>
-      <div class="carousel-stage-headline">Monetize on Your Terms</div>
+      <div class="carousel-stage-headline">Revenue you own.</div>
       <div class="carousel-stage-desc">Paid tiers, merch drops, presale access — revenue that stays yours, built on a fanbase that already loves you.</div>
+      <a href="#case-studies" class="inline-cta carousel-stage-cta">See artist results <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
     <div class="carousel-stage-item" data-stage="4">
       <div class="carousel-stage-label">Compound</div>
-      <div class="carousel-stage-headline">Growth That Never Resets</div>
+      <div class="carousel-stage-headline">Never start from zero.</div>
       <div class="carousel-stage-desc">Every release builds on the last. Reactivate dormant fans, compound your reach, and never start from zero again.</div>
+      <a href="#start" class="inline-cta carousel-stage-cta">Start building free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
   </div>
 
@@ -4773,6 +4990,27 @@ body::after {
   </div>
 </section> <!-- end .carousel-embed -->
 
+<!-- Interstitial Band — gold CTA strip -->
+<div class="interstitial-band">
+  <div class="interstitial-band__inner">
+    <div class="interstitial-band__text">
+      <div class="interstitial-band__headline">Built different. On purpose.</div>
+      <div class="interstitial-band__sub">No labels. No middlemen. No agenda. Just artists building for artists.</div>
+    </div>
+    <a href="/about" class="interstitial-band__cta">
+      Our story
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- Swaps section intro -->
+<div class="swaps-intro">
+  <div class="label label-gold">How it works</div>
+  <h2 class="swaps-intro__headline">Just you and your fans.<br>Every. Single. Time.</h2>
+  <p class="swaps-intro__sub">A direct line to every fan you've ever earned. No algorithm in the middle. Stupidly simple — capture them, keep them, grow together.</p>
+</div>
+
 <!-- ============================================
      SMART SWAPS — UNIFIED (Steps 1 + 2)
      200svh wrapper → sticky viewport → one canvas
@@ -4782,17 +5020,21 @@ body::after {
 
     <!-- Step 1 copy — visible initially -->
     <div class="swaps-copy swaps-copy-step1 reveal">
-      <div class="label label-gold">Step 01 &mdash; Capture</div>
-      <h2 class="swaps-physics-headline">Every link.<br>Every release.<br>Fans flow in.</h2>
+      <div class="swaps-copy__number">01</div>
+      <div class="label label-gold">Capture</div>
+      <h2 class="swaps-physics-headline"><span class="swaps-physics-headline__lead">Every link. Every release.</span>Fans flow in.</h2>
       <p>Smart Swaps turn every touchpoint into a capture moment. Pre-saves, links, QR codes &mdash; fans opt in, and you own the connection.</p>
+      <a href="#product" class="inline-cta">See Smart Swaps in action <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
 
     <!-- Step 2 copy — fades in on scroll -->
     <div class="swaps-copy swaps-copy-step2">
-      <div class="label label-gold">Step 02 &mdash; Keep</div>
-      <h2 class="swaps-physics-headline">Your Group.<br>Where fans stay.</h2>
+      <div class="swaps-copy__number">02</div>
+      <div class="label label-gold">Keep</div>
+      <h2 class="swaps-physics-headline"><span class="swaps-physics-headline__lead">Your Group.</span>Where fans stay.</h2>
       <p>Every fan that flows in lands in your Group. Direct access, real touchpoints, a relationship that compounds over time.</p>
       <p class="keep-note">Start free. Let the loyalty build. Add paid tiers when you're ready.</p>
+      <a href="#start" class="inline-cta">Start your Group free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
 
     <!-- Single physics canvas -->
@@ -4808,11 +5050,8 @@ body::after {
       <div class="keep-orbit-core"><svg width="40" height="40" viewBox="0 0 254 254" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M250.452 115.587H126.589C120.523 115.587 115.587 120.507 115.587 126.589C115.587 132.671 120.508 137.591 126.589 137.591H163.614C158.862 153.544 144.07 165.218 126.589 165.218C104.433 165.218 86.5698 146.454 88.052 123.976C89.3356 104.585 105.243 88.9531 124.664 88.021C134.856 87.532 144.559 90.9548 152.092 97.5866C153.147 98.5187 154.721 98.4728 155.714 97.4796L167.526 85.6678C168.595 84.5982 168.565 82.8409 167.434 81.8324C156.233 71.5945 141.839 66.0018 126.574 66.0018C93.0946 66.0018 65.437 94.1026 65.9565 127.582C66.476 160.557 93.4613 187.237 126.574 187.237C156.249 187.237 180.988 165.799 186.168 137.621H197.338C192.035 171.911 162.315 198.239 126.559 198.239C86.9977 198.239 54.8324 166.013 54.9393 126.436C55.0463 88.3572 85.4849 56.6502 123.518 55.0763C142.634 54.2817 160.863 60.9898 174.86 73.8101C175.899 74.7728 177.519 74.7117 178.512 73.6879L190.217 61.7691C191.271 60.6995 191.21 58.9728 190.11 57.949C172.583 41.7059 149.877 32.8585 125.917 33.0113C75.6749 33.3474 34.2954 73.8866 32.9661 124.129C31.5755 176.877 74.101 220.243 126.543 220.243C174.448 220.243 214.054 184.074 219.51 137.621H230.527C225.026 190.14 180.483 231.214 126.543 231.214C68.6611 231.214 21.6127 183.967 21.9641 126.008C22.285 70.8763 66.0024 24.989 121.073 22.1774C150.091 20.6952 177.748 30.9942 198.637 50.8894C199.691 51.8979 201.341 51.8979 202.365 50.8589L214.131 39.0471C215.17 38.008 215.17 36.2966 214.116 35.2728C190.752 12.7493 160.237 0.311032 127.812 0.00542189C58.2552 -0.636358 0.693769 55.7792 0.00614891 125.321C-0.681471 195.733 56.391 253.172 126.589 253.172C169.986 253.172 208.37 231.245 231.184 197.857V242.186C231.184 248.252 236.104 253.188 242.186 253.188C248.252 253.188 253.188 248.267 253.188 242.186V118.322C253.188 116.825 251.965 115.602 250.468 115.602L250.452 115.587Z" fill="#C48A3A"/></svg></div>
     </div>
 
-    <span class="keep-footnote" id="keep-footnote">All tiers live in the same Group. The loyalty compounds.</span>
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <!-- ============================================
      FEATURE CARDS
@@ -5056,128 +5295,188 @@ body::after {
 
     <p class="features-cta reveal">Don't see what you're looking for? Email us at <a href="mailto:info@grouped.com">info@grouped.com</a> and request a feature!</p>
 
+    <div class="features-action reveal" style="text-align:center; margin-top:24px;">
+      <a href="#start" class="inline-cta" style="font-size:15px;">Ready to try it? Get started free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+
   </div>
 </section>
-
-<div class="section-divider"></div>
 
 <!-- ============================================
-     CASE STUDIES — CENTERED LOOPING SLIDER
+     CASE STUDIES — SCROLL-DRIVEN MARQUEE
      ============================================ -->
-<section class="cases-section section" id="case-studies">
-  <div class="container">
-    <div class="cases-header reveal">
-      <div class="label label-gold">Artists Using Grouped</div>
+<section class="cs-marquee section" id="case-studies">
+  <div class="cs-marquee__pin">
+    <div class="cs-marquee__header reveal">
+      <div class="label">Artists Using Grouped</div>
       <h2>Real artists. Real momentum.</h2>
     </div>
-  </div>
 
-  <!-- Artist circle toggles -->
-  <div class="cs-circles">
-    <button class="cs-circle active" data-index="0">
-      <div class="cs-circle-img cs-avatar--ff">FF</div>
-      <span class="cs-circle-name">Forrest Frank</span>
-    </button>
-    <button class="cs-circle" data-index="1">
-      <div class="cs-circle-img cs-avatar--mike">MK</div>
-      <span class="cs-circle-name">MIKE.</span>
-    </button>
-    <button class="cs-circle" data-index="2">
-      <div class="cs-circle-img cs-avatar--pardy">PA</div>
-      <span class="cs-circle-name">PardyAlone</span>
-    </button>
-  </div>
-
-  <div class="cases-slider">
-    <!-- 1. Forrest Frank -->
-    <div class="cs-slide">
-      <div class="cs-card">
-        <div class="cs-hero-stat">
-          <div class="cs-stat-value">+1.2M</div>
-          <div class="cs-stat-label">Instagram followers gained in just 35 days</div>
-        </div>
-        <div class="cs-divider"></div>
-        <div class="cs-quote">"Never would have released if it wasn't for the vote." — Used his Group as a focus group. Fans voted on demos. The winner became a hit.</div>
-        <div class="cs-artist-row">
-          <div class="cs-avatar cs-avatar--ff">FF</div>
-          <div>
-            <div class="cs-artist-name">Forrest Frank</div>
-            <div class="cs-artist-meta">Christian Pop · 15M+ streams</div>
+    <div class="cs-marquee__track">
+      <!-- Card 1: Forrest Frank -->
+      <div class="cs-marquee__card" style="--card-rotate: -1.5deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=450&fit=crop&crop=faces'); background-color: #D4993E;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">+1.2M</div>
+            <div class="cs-marquee__stat-label">Instagram followers in 35 days</div>
           </div>
         </div>
-        <a class="cs-cta" href="https://support.grouped.com/en/articles/10743374-forrest-frank-gains-1-2m-followers-in-35-days-w-grouped" target="_blank">Read case study &rarr;</a>
-      </div>
-    </div>
-
-    <!-- 2. MIKE. -->
-    <div class="cs-slide">
-      <div class="cs-card">
-        <div class="cs-hero-stat">
-          <div class="cs-stat-value">24/7</div>
-          <div class="cs-stat-label">Automated paid subscriber growth — even while he sleeps</div>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"Never would have released if it wasn't for the vote."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(196,138,58,0.25), rgba(196,138,58,0.1)); color: var(--gold); border: 1px solid rgba(196,138,58,0.2)">FF</div>
+            <div>
+              <div class="cs-marquee__name">Forrest Frank</div>
+              <div class="cs-marquee__meta">Christian Pop · 15M+ streams</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743374-forrest-frank-gains-1-2m-followers-in-35-days-w-grouped" target="_blank">Read case study &rarr;</a>
         </div>
-        <div class="cs-divider"></div>
-        <div class="cs-quote">"This turns the feeling from being sold a subscription, to feeling like they 'won' something cool like free access to a paid community!"</div>
-        <div class="cs-artist-row">
-          <div class="cs-avatar cs-avatar--mike">MK</div>
-          <div>
-            <div class="cs-artist-name">MIKE.</div>
-            <div class="cs-artist-meta">@justmike · Paid community</div>
+      </div>
+
+      <!-- Card 2: MIKE. -->
+      <div class="cs-marquee__card" style="--card-rotate: 1deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=450&fit=crop&crop=faces'); background-color: #34d399;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">24/7</div>
+            <div class="cs-marquee__stat-label">Automated paid subscriber growth</div>
           </div>
         </div>
-        <a class="cs-cta" href="https://support.grouped.com/en/articles/10743709-mike-gets-new-paid-subscribers-while-he-sleeps-by-using-social-media-automations" target="_blank">Read case study &rarr;</a>
-      </div>
-    </div>
-
-    <!-- 3. PardyAlone -->
-    <div class="cs-slide">
-      <div class="cs-card">
-        <div class="cs-hero-stat">
-          <div class="cs-stat-value">$35K+</div>
-          <div class="cs-stat-label">Annual recurring revenue · 82% retention over 6 months</div>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"Turns the feeling from being sold a subscription, to feeling like they 'won' something cool."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08)); color: #34d399; border: 1px solid rgba(52,211,153,0.2)">MK</div>
+            <div>
+              <div class="cs-marquee__name">MIKE.</div>
+              <div class="cs-marquee__meta">@justmike · Paid community</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743709-mike-gets-new-paid-subscribers-while-he-sleeps-by-using-social-media-automations" target="_blank">Read case study &rarr;</a>
         </div>
-        <div class="cs-divider"></div>
-        <div class="cs-quote">"To fans, it seemed too cheap to turn down — fans would immediately sign up at the merch booth to meet him after the show."</div>
-        <div class="cs-artist-row">
-          <div class="cs-avatar cs-avatar--pardy">PA</div>
-          <div>
-            <div class="cs-artist-name">PardyAlone</div>
-            <div class="cs-artist-meta">Tour M&amp;G · $5/mo tier</div>
+      </div>
+
+      <!-- Card 3: PardyAlone -->
+      <div class="cs-marquee__card" style="--card-rotate: -0.5deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=450&fit=crop&crop=faces'); background-color: #64a0ff;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">$35K+</div>
+            <div class="cs-marquee__stat-label">Annual recurring revenue · 82% retention</div>
           </div>
         </div>
-        <a class="cs-cta" href="https://support.grouped.com/en/articles/10743729-pardyalone-turns-tour-m-g-tix-into-35-000-recurring-revenue-instead-of-a-one-time-purchase" target="_blank">Read case study &rarr;</a>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"To fans, it seemed too cheap to turn down — fans would immediately sign up at the merch booth."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(100,160,255,0.2), rgba(100,160,255,0.08)); color: #64a0ff; border: 1px solid rgba(100,160,255,0.2)">PA</div>
+            <div>
+              <div class="cs-marquee__name">PardyAlone</div>
+              <div class="cs-marquee__meta">Tour M&amp;G · $5/mo tier</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743729-pardyalone-turns-tour-m-g-tix-into-35-000-recurring-revenue-instead-of-a-one-time-purchase" target="_blank">Read case study &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 4: Surfaces -->
+      <div class="cs-marquee__card" style="--card-rotate: 1.5deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=450&fit=crop&crop=faces'); background-color: #14b8a6;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">10K+</div>
+            <div class="cs-marquee__stat-label">Surf Club members in first 3 months</div>
+          </div>
+        </div>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"Grouped gave us a home base that feels as chill as our music."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.08)); color: #14b8a6; border: 1px solid rgba(20,184,166,0.2)">SU</div>
+            <div>
+              <div class="cs-marquee__name">Surfaces</div>
+              <div class="cs-marquee__meta">Indie Pop · Surf Club</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="#case-studies">Read case study &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 5: Ali Gatie -->
+      <div class="cs-marquee__card" style="--card-rotate: -1deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=450&fit=crop'); background-color: #a78bfa;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">500K+</div>
+            <div class="cs-marquee__stat-label">Direct fan connections through The FAMAli</div>
+          </div>
+        </div>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"Finally a space where my fans feel like they belong — not just follow."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(167,139,250,0.08)); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2)">AG</div>
+            <div>
+              <div class="cs-marquee__name">Ali Gatie</div>
+              <div class="cs-marquee__meta">R&amp;B · The FAMAli</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="#case-studies">Read case study &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Card 6: Devvon Terrell -->
+      <div class="cs-marquee__card" style="--card-rotate: 0.5deg">
+        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=450&fit=crop&crop=faces'); background-color: #fb7185;">
+          <div class="cs-marquee__stat-overlay">
+            <div class="cs-marquee__stat">3X</div>
+            <div class="cs-marquee__stat-label">Merch revenue increase through community drops</div>
+          </div>
+        </div>
+        <div class="cs-marquee__body">
+          <p class="cs-marquee__quote">"The Weirdo Company isn't just a fan club — it's a movement."</p>
+          <div class="cs-marquee__artist">
+            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(251,113,133,0.2), rgba(251,113,133,0.08)); color: #fb7185; border: 1px solid rgba(251,113,133,0.2)">DT</div>
+            <div>
+              <div class="cs-marquee__name">Devvon Terrell</div>
+              <div class="cs-marquee__meta">R&amp;B/Covers · The Weirdo Company</div>
+            </div>
+          </div>
+          <a class="cs-marquee__cta" href="#case-studies">Read case study &rarr;</a>
+        </div>
+      </div>
+
+      <!-- "And more" reveal -->
+      <div class="cs-marquee__reveal">
+        <p class="cs-marquee__reveal-head">and more.</p>
+        <p class="cs-marquee__reveal-sub">(we love a good encore)</p>
+        <a href="#case-studies" class="cs-marquee__reveal-btn">Explore our case studies &rarr;</a>
       </div>
     </div>
-  </div>
-
-  <div class="cs-nav">
-    <div class="cs-nav-dot active" data-index="0"></div>
-    <div class="cs-nav-dot" data-index="1"></div>
-    <div class="cs-nav-dot" data-index="2"></div>
   </div>
 </section>
-
-<div class="section-divider"></div>
-
 
 <!-- ============================================
      FINAL CTA
      ============================================ -->
 <section class="cta-section section" id="start">
-  <div class="cta-banner reveal">
-    <div class="cta-banner__text">
-      <h2>Stop dropping music. Start creating <em>moments.</em></h2>
-      <p>Free to start. Build your first release in minutes.</p>
-    </div>
-    <div class="cta-banner__actions">
-      <a href="#" class="cta-pill">
+  <div class="cta-duo reveal">
+
+    <!-- Primary — large pill block (2/3) -->
+    <a href="#" class="cta-block cta-block--primary">
+      <span class="cta-block__glow"></span>
+      <span class="cta-block__label">Ready?</span>
+      <span class="cta-block__headline">Stop dropping music.<br>Start creating moments.</span>
+      <span class="cta-block__sub">Free to start. Build your first release in minutes.</span>
+      <span class="cta-block__btn">
         Get Started - it's free!
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 7h12M8 2l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <a href="#" class="cta-circle">
-        <span class="cta-circle__text">Join our free<br>artist community</span>
-      </a>
-    </div>
+      </span>
+    </a>
+
+    <!-- Secondary — circle block (1/3) -->
+    <a href="#" class="cta-block cta-block--secondary">
+      <span class="cta-block__ring cta-block__ring--outer"></span>
+      <span class="cta-block__ring cta-block__ring--inner"></span>
+      <span class="cta-block__kicker">Not ready yet?</span>
+      <span class="cta-block__circle-headline">Join our free artist community</span>
+      <span class="cta-block__circle-desc">Learn, connect, and grow at your own pace</span>
+      <span class="cta-block__circle-note">New conversations every week</span>
+    </a>
+
   </div>
 </section>
 
@@ -6500,7 +6799,6 @@ document.querySelectorAll('.fcard').forEach(card => {
     const copyStep1 = document.querySelector('.swaps-copy-step1');
     const copyStep2 = document.querySelector('.swaps-copy-step2');
     const orbitEl = document.getElementById('keep-orbit');
-    const footnoteEl = document.getElementById('keep-footnote');
 
     let floorActive = true;
     let orbitShown = false;
@@ -6592,7 +6890,6 @@ document.querySelectorAll('.fcard').forEach(card => {
           });
 
           if (orbitEl) orbitEl.classList.remove('visible');
-          if (footnoteEl) footnoteEl.classList.remove('visible');
           orbitShown = false;
         }
 
@@ -6600,12 +6897,10 @@ document.querySelectorAll('.fcard').forEach(card => {
         if (p > 0.74 && !orbitShown) {
           orbitShown = true;
           if (orbitEl) orbitEl.classList.add('visible');
-          if (footnoteEl) footnoteEl.classList.add('visible');
         }
         if (p <= 0.68 && orbitShown) {
           orbitShown = false;
           if (orbitEl) orbitEl.classList.remove('visible');
-          if (footnoteEl) footnoteEl.classList.remove('visible');
         }
       }
     });
@@ -6613,109 +6908,80 @@ document.querySelectorAll('.fcard').forEach(card => {
 })();
 
 /* ============================================
-   CASE STUDIES — CENTERED DRAGGABLE SLIDER
+   CASE STUDIES — SCROLL-DRIVEN MARQUEE
    ============================================ */
-(function initCaseSlider() {
-  gsap.registerPlugin(Draggable);
+(function initCaseMarquee() {
+  const section = document.querySelector('.cs-marquee');
+  const pin = document.querySelector('.cs-marquee__pin');
+  const track = document.querySelector('.cs-marquee__track');
+  const cards = gsap.utils.toArray('.cs-marquee__card');
+  const reveal = document.querySelector('.cs-marquee__reveal');
 
-  const slides = gsap.utils.toArray('.cs-slide');
-  const dots = gsap.utils.toArray('.cs-nav-dot');
-  const circles = gsap.utils.toArray('.cs-circle');
-  const slider = document.querySelector('.cases-slider');
+  if (!section || !track || !cards.length) return;
 
-  if (!slides.length || !slider) return;
-
-  let currentIndex = 0;
-  let slideWidth = 0;
-  let snapPoints = [];
-
-  function measure() {
-    slideWidth = slides[0].offsetWidth;
-    const viewCenter = window.innerWidth / 2;
-    snapPoints = slides.map((s, i) => {
-      const slideCenter = s.offsetLeft + slideWidth / 2;
-      return -(slideCenter - viewCenter);
-    });
+  // How far the track needs to scroll horizontally
+  function getScrollDistance() {
+    return track.scrollWidth - pin.offsetWidth;
   }
 
-  function setActive(index) {
-    currentIndex = gsap.utils.clamp(0, slides.length - 1, index);
-    slides.forEach((s, i) => s.classList.toggle('active', i === currentIndex));
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-    circles.forEach((c, i) => c.classList.toggle('active', i === currentIndex));
-  }
-
-  function goTo(index, duration) {
-    index = gsap.utils.clamp(0, slides.length - 1, index);
-    setActive(index);
-    gsap.to(slider, {
-      x: snapPoints[index],
-      duration: duration !== undefined ? duration : 0.5,
-      ease: 'power2.out',
-      overwrite: true
-    });
-  }
-
-  // Measure + initial position
-  measure();
-  setActive(0);
-  gsap.set(slider, { x: snapPoints[0] });
-
-  // Draggable
-  Draggable.create(slider, {
-    type: 'x',
-    edgeResistance: 0.65,
-    bounds: {
-      minX: snapPoints[snapPoints.length - 1] - slideWidth * 0.3,
-      maxX: snapPoints[0] + slideWidth * 0.3
-    },
-    onPress() {
-      slider.classList.add('dragging');
-      gsap.killTweensOf(slider);
-    },
-    onDragEnd() {
-      slider.classList.remove('dragging');
-      // Find nearest snap point
-      const currentX = gsap.getProperty(slider, 'x');
-      let nearest = 0;
-      let minDist = Infinity;
-      snapPoints.forEach((pt, i) => {
-        const dist = Math.abs(currentX - pt);
-        if (dist < minDist) {
-          minDist = dist;
-          nearest = i;
-        }
-      });
-      // Flick detection: if dragged more than 40px, bias toward next/prev
-      const dragDelta = this.endX - this.startX;
-      if (Math.abs(dragDelta) > 40) {
-        // Dragged left (negative) = go to next slide (+1), right = prev (-1)
-        const direction = dragDelta < 0 ? 1 : -1;
-        nearest = gsap.utils.clamp(0, slides.length - 1, currentIndex + direction);
-      }
-      goTo(nearest);
+  // Main horizontal scroll timeline
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: section,
+      pin: pin,
+      scrub: 1,
+      start: 'top top',
+      end: function() { return '+=' + (getScrollDistance() * 1.2); },
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
     }
   });
 
-  // Nav dot clicks
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => goTo(i));
+  tl.to(track, {
+    x: function() { return -getScrollDistance(); },
+    ease: 'none',
+    duration: 1,
   });
 
-  // Circle toggle clicks
-  circles.forEach((circle, i) => {
-    circle.addEventListener('click', () => goTo(i));
+  // Per-card entrance: subtle float + fade as they scroll in
+  cards.forEach(function(card, i) {
+    gsap.fromTo(card, {
+      y: i % 2 === 0 ? 20 : -15,
+      opacity: 0.4,
+    }, {
+      y: 0,
+      opacity: 1,
+      ease: 'power1.out',
+      scrollTrigger: {
+        trigger: card,
+        containerAnimation: tl,
+        start: 'left 95%',
+        end: 'left 65%',
+        scrub: true,
+      }
+    });
   });
 
-  // Recalculate on resize
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      measure();
-      gsap.set(slider, { x: snapPoints[currentIndex] });
-    }, 150);
-  });
+  // "And more" reveal fade-in
+  if (reveal) {
+    gsap.fromTo(reveal, {
+      opacity: 0,
+      y: 30,
+      scale: 0.95,
+    }, {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: reveal,
+        containerAnimation: tl,
+        start: 'left 85%',
+        end: 'left 55%',
+        scrub: true,
+      }
+    });
+  }
 })();
 
 </script>
