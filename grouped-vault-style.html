@@ -1827,7 +1827,7 @@ a.nav-link:hover .nav-link__label::after {
   cursor: none;
   user-select: none;
   -webkit-user-select: none;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   position: relative;
 }
 
@@ -6309,12 +6309,17 @@ window.addEventListener('mouseup', () => {
 
 // ---- Touch drag ----
 let touchStartX = 0;
+let touchStartY = 0;
+let touchDirection = null; // 'horizontal' | 'vertical' | null
+const TOUCH_SENSITIVITY = window.innerWidth < 768 ? 120 : DRAG_SENSITIVITY;
 
 collection.addEventListener('touchstart', (e) => {
   if (snapTween) { snapTween.kill(); snapTween = null; }
 
   isDragging = true;
   touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchDirection = null;
   dragStartX = touchStartX;
   dragStartPosition = position.value;
   velocityTracker.samples = [];
@@ -6323,21 +6328,40 @@ collection.addEventListener('touchstart', (e) => {
   if (!hasInteracted) { hasInteracted = true; dragHint.classList.add('hidden'); }
 }, { passive: true });
 
-window.addEventListener('touchmove', (e) => {
+collection.addEventListener('touchmove', (e) => {
   if (!isDragging) return;
   const tx = e.touches[0].clientX;
+  const ty = e.touches[0].clientY;
+
+  // Determine swipe direction on first significant move
+  if (!touchDirection) {
+    const adx = Math.abs(tx - touchStartX);
+    const ady = Math.abs(ty - touchStartY);
+    if (adx < 5 && ady < 5) return; // too small to tell
+    touchDirection = adx > ady ? 'horizontal' : 'vertical';
+  }
+
+  // If vertical swipe, let the browser scroll normally
+  if (touchDirection === 'vertical') {
+    isDragging = false;
+    return;
+  }
+
+  // Horizontal swipe — prevent page scroll and move carousel
+  e.preventDefault();
   trackVelocity(tx);
 
   const dx = tx - dragStartX;
-  const dragCards = dx / DRAG_SENSITIVITY;
+  const dragCards = dx / TOUCH_SENSITIVITY;
   position.value = dragStartPosition - dragCards;
   renderCards();
   updateUI();
-}, { passive: true });
+}, { passive: false });
 
 window.addEventListener('touchend', () => {
   if (!isDragging) return;
   isDragging = false;
+  touchDirection = null;
 
   const velocity = getVelocity();
   const dragDistance = Math.abs(position.value - dragStartPosition);
