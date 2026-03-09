@@ -4311,6 +4311,7 @@ body::after {
   top: 0; left: 0; right: 0; bottom: 0;
   overflow: hidden;
   pointer-events: none;
+  z-index: 0;
 }
 .swaps-canvas__target {
   width: 100%;
@@ -4330,13 +4331,13 @@ body::after {
 /* Orbit rings — fade in after balls settle */
 .keep-orbit {
   position: absolute;
-  bottom: 4%;
+  bottom: 2%;
   left: 50%;
   transform: translateX(-50%);
-  width: 36%;
-  max-width: 380px;
+  width: 28%;
+  max-width: 300px;
   aspect-ratio: 1 / 1;
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.5s ease;
@@ -4384,7 +4385,7 @@ body::after {
 }
 
 @media (max-width: 768px) {
-  .keep-orbit { width: 55%; }
+  .keep-orbit { width: 45%; }
 }
 
 /* ============================================
@@ -5618,132 +5619,8 @@ body::after {
       <h2>Real artists. Real momentum.</h2>
     </div>
 
-    <div class="cs-marquee__track">
-      <!-- Card 1: Forrest Frank -->
-      <div class="cs-marquee__card" style="--card-rotate: -1.5deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=450&fit=crop&crop=faces'); background-color: #D4993E;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">+1.2M</div>
-            <div class="cs-marquee__stat-label">Instagram followers in 35 days</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"Never would have released if it wasn't for the vote."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(196,138,58,0.25), rgba(196,138,58,0.1)); color: var(--gold); border: 1px solid rgba(196,138,58,0.2)">FF</div>
-            <div>
-              <div class="cs-marquee__name">Forrest Frank</div>
-              <div class="cs-marquee__meta">Christian Pop · 15M+ streams</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743374-forrest-frank-gains-1-2m-followers-in-35-days-w-grouped" target="_blank">Read case study &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 2: MIKE. -->
-      <div class="cs-marquee__card" style="--card-rotate: 1deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&h=450&fit=crop&crop=faces'); background-color: #34d399;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">24/7</div>
-            <div class="cs-marquee__stat-label">Automated paid subscriber growth</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"Turns the feeling from being sold a subscription, to feeling like they 'won' something cool."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(52,211,153,0.2), rgba(52,211,153,0.08)); color: #34d399; border: 1px solid rgba(52,211,153,0.2)">MK</div>
-            <div>
-              <div class="cs-marquee__name">MIKE.</div>
-              <div class="cs-marquee__meta">@justmike · Paid community</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743709-mike-gets-new-paid-subscribers-while-he-sleeps-by-using-social-media-automations" target="_blank">Read case study &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 3: PardyAlone -->
-      <div class="cs-marquee__card" style="--card-rotate: -0.5deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=450&fit=crop&crop=faces'); background-color: #64a0ff;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">$35K+</div>
-            <div class="cs-marquee__stat-label">Annual recurring revenue · 82% retention</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"To fans, it seemed too cheap to turn down — fans would immediately sign up at the merch booth."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(100,160,255,0.2), rgba(100,160,255,0.08)); color: #64a0ff; border: 1px solid rgba(100,160,255,0.2)">PA</div>
-            <div>
-              <div class="cs-marquee__name">PardyAlone</div>
-              <div class="cs-marquee__meta">Tour M&amp;G · $5/mo tier</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="https://support.grouped.com/en/articles/10743729-pardyalone-turns-tour-m-g-tix-into-35-000-recurring-revenue-instead-of-a-one-time-purchase" target="_blank">Read case study &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 4: Surfaces -->
-      <div class="cs-marquee__card" style="--card-rotate: 1.5deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=450&fit=crop&crop=faces'); background-color: #14b8a6;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">10K+</div>
-            <div class="cs-marquee__stat-label">Surf Club members in first 3 months</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"Grouped gave us a home base that feels as chill as our music."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(20,184,166,0.2), rgba(20,184,166,0.08)); color: #14b8a6; border: 1px solid rgba(20,184,166,0.2)">SU</div>
-            <div>
-              <div class="cs-marquee__name">Surfaces</div>
-              <div class="cs-marquee__meta">Indie Pop · Surf Club</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="case-study-template.html">Read case study &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 5: Ali Gatie -->
-      <div class="cs-marquee__card" style="--card-rotate: -1deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1459749411175-04bf5292ceea?w=600&h=450&fit=crop'); background-color: #a78bfa;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">500K+</div>
-            <div class="cs-marquee__stat-label">Direct fan connections through The FAMAli</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"Finally a space where my fans feel like they belong — not just follow."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(167,139,250,0.2), rgba(167,139,250,0.08)); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2)">AG</div>
-            <div>
-              <div class="cs-marquee__name">Ali Gatie</div>
-              <div class="cs-marquee__meta">R&amp;B · The FAMAli</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="case-study-template.html">Read case study &rarr;</a>
-        </div>
-      </div>
-
-      <!-- Card 6: Devvon Terrell -->
-      <div class="cs-marquee__card" style="--card-rotate: 0.5deg">
-        <div class="cs-marquee__img" style="background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?w=600&h=450&fit=crop&crop=faces'); background-color: #fb7185;">
-          <div class="cs-marquee__stat-overlay">
-            <div class="cs-marquee__stat">3X</div>
-            <div class="cs-marquee__stat-label">Merch revenue increase through community drops</div>
-          </div>
-        </div>
-        <div class="cs-marquee__body">
-          <p class="cs-marquee__quote">"The Weirdo Company isn't just a fan club — it's a movement."</p>
-          <div class="cs-marquee__artist">
-            <div class="cs-marquee__avatar" style="background: linear-gradient(135deg, rgba(251,113,133,0.2), rgba(251,113,133,0.08)); color: #fb7185; border: 1px solid rgba(251,113,133,0.2)">DT</div>
-            <div>
-              <div class="cs-marquee__name">Devvon Terrell</div>
-              <div class="cs-marquee__meta">R&amp;B/Covers · The Weirdo Company</div>
-            </div>
-          </div>
-          <a class="cs-marquee__cta" href="case-study-template.html">Read case study &rarr;</a>
-        </div>
-      </div>
+    <div class="cs-marquee__track" id="cs-marquee-track">
+      <!-- Cards injected dynamically from case-studies.json -->
 
       <!-- "And more" reveal -->
       <div class="cs-marquee__reveal">
@@ -6931,9 +6808,9 @@ document.querySelectorAll('.fcard').forEach(card => {
     const orbitYScale  = 0.35; // elliptical compression for perspective
 
     // Final orbit (matches CSS outer ring — balls expand to here)
-    const cssOrbitSize     = Math.min(cw * (isMobile ? 0.55 : 0.36), 380);
+    const cssOrbitSize     = Math.min(cw * (isMobile ? 0.42 : 0.28), 300);
     const finalOrbitRadius = cssOrbitSize / 2;
-    const finalOrbitCenterY = ch - (ch * 0.04) - (cssOrbitSize / 2);
+    const finalOrbitCenterY = ch - (ch * 0.02) - (cssOrbitSize / 2);
     const finalOrbitYScale  = 1.0; // CSS rings are perfect circles
     const orbitExpandFrames = 150; // 2.5s ease to final position at 60fps
 
@@ -7288,77 +7165,133 @@ document.querySelectorAll('.fcard').forEach(card => {
 /* ============================================
    CASE STUDIES — SCROLL-DRIVEN MARQUEE
    ============================================ */
-(function initCaseMarquee() {
-  const section = document.querySelector('.cs-marquee');
-  const pin = document.querySelector('.cs-marquee__pin');
-  const track = document.querySelector('.cs-marquee__track');
-  const cards = gsap.utils.toArray('.cs-marquee__card');
-  const reveal = document.querySelector('.cs-marquee__reveal');
+(function loadAndInitCaseMarquee() {
+  var track = document.getElementById('cs-marquee-track');
+  if (!track) return;
 
-  if (!section || !track || !cards.length) return;
+  var rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5, -1.2, 0.8, -0.8, 1.2];
 
-  // How far the track needs to scroll horizontally
-  function getScrollDistance() {
-    return track.scrollWidth - pin.offsetWidth;
+  function renderCard(cs, i) {
+    var rot = rotations[i % rotations.length];
+    var isExternal = cs.ctaUrl.startsWith('http');
+    var targetAttr = isExternal ? ' target="_blank"' : '';
+    return '<div class="cs-marquee__card" style="--card-rotate: ' + rot + 'deg">' +
+      '<div class="cs-marquee__img" style="background-image: url(\'' + cs.imageUrl + '\'); background-color: ' + cs.imageBg + ';">' +
+        '<div class="cs-marquee__stat-overlay">' +
+          '<div class="cs-marquee__stat">' + cs.stat + '</div>' +
+          '<div class="cs-marquee__stat-label">' + cs.statLabel + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cs-marquee__body">' +
+        '<p class="cs-marquee__quote">' + cs.quote + '</p>' +
+        '<div class="cs-marquee__artist">' +
+          '<div class="cs-marquee__avatar" style="background: linear-gradient(135deg, ' + cs.avatarColor + ',0.25), ' + cs.avatarColor + ',0.1)); color: ' + cs.avatarColor + ',1); border: 1px solid ' + cs.avatarColor + ',0.2)">' + cs.initials + '</div>' +
+          '<div>' +
+            '<div class="cs-marquee__name">' + cs.name + '</div>' +
+            '<div class="cs-marquee__meta">' + cs.meta + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<a class="cs-marquee__cta" href="' + cs.ctaUrl + '"' + targetAttr + '>Read case study &rarr;</a>' +
+      '</div>' +
+    '</div>';
   }
 
-  // Main horizontal scroll timeline
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: section,
-      pin: pin,
-      scrub: 1,
-      start: 'top top',
-      end: function() { return '+=' + (getScrollDistance() * 1.2); },
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
+  fetch('case-studies.json')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      // Sort: featured first, then by date descending
+      data.sort(function(a, b) {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return new Date(b.date) - new Date(a.date);
+      });
+
+      // Max 10 cards
+      var cards = data.slice(0, 10);
+
+      // Render cards before the "and more" reveal
+      var reveal = track.querySelector('.cs-marquee__reveal');
+      var html = '';
+      cards.forEach(function(cs, i) { html += renderCard(cs, i); });
+
+      if (reveal) {
+        reveal.insertAdjacentHTML('beforebegin', html);
+      } else {
+        track.insertAdjacentHTML('beforeend', html);
+      }
+
+      // Now init GSAP scroll animation
+      initCaseMarqueeGSAP();
+    })
+    .catch(function(err) { console.error('Failed to load case studies:', err); });
+
+  function initCaseMarqueeGSAP() {
+    var section = document.querySelector('.cs-marquee');
+    var pin = document.querySelector('.cs-marquee__pin');
+    var allCards = gsap.utils.toArray('.cs-marquee__card');
+    var reveal = document.querySelector('.cs-marquee__reveal');
+
+    if (!section || !track || !allCards.length) return;
+
+    function getScrollDistance() {
+      return track.scrollWidth - pin.offsetWidth;
     }
-  });
 
-  tl.to(track, {
-    x: function() { return -getScrollDistance(); },
-    ease: 'none',
-    duration: 1,
-  });
-
-  // Per-card entrance: subtle float + fade as they scroll in
-  cards.forEach(function(card, i) {
-    gsap.fromTo(card, {
-      y: i % 2 === 0 ? 20 : -15,
-      opacity: 0.4,
-    }, {
-      y: 0,
-      opacity: 1,
-      ease: 'power1.out',
+    var tl = gsap.timeline({
       scrollTrigger: {
-        trigger: card,
-        containerAnimation: tl,
-        start: 'left 95%',
-        end: 'left 65%',
-        scrub: true,
+        trigger: section,
+        pin: pin,
+        scrub: 1,
+        start: 'top top',
+        end: function() { return '+=' + (getScrollDistance() * 1.2); },
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
       }
     });
-  });
 
-  // "And more" reveal fade-in
-  if (reveal) {
-    gsap.fromTo(reveal, {
-      opacity: 0,
-      y: 30,
-      scale: 0.95,
-    }, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: reveal,
-        containerAnimation: tl,
-        start: 'left 85%',
-        end: 'left 55%',
-        scrub: true,
-      }
+    tl.to(track, {
+      x: function() { return -getScrollDistance(); },
+      ease: 'none',
+      duration: 1,
     });
+
+    allCards.forEach(function(card, i) {
+      gsap.fromTo(card, {
+        y: i % 2 === 0 ? 20 : -15,
+        opacity: 0.4,
+      }, {
+        y: 0,
+        opacity: 1,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: tl,
+          start: 'left 95%',
+          end: 'left 65%',
+          scrub: true,
+        }
+      });
+    });
+
+    if (reveal) {
+      gsap.fromTo(reveal, {
+        opacity: 0,
+        y: 30,
+        scale: 0.95,
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: reveal,
+          containerAnimation: tl,
+          start: 'left 85%',
+          end: 'left 55%',
+          scrub: true,
+        }
+      });
+    }
   }
 })();
 
