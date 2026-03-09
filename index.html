@@ -1903,6 +1903,97 @@ a.nav-link:hover .nav-link__label::after {
   background: linear-gradient(170deg, rgba(30,36,50,1) 0%, var(--bg-base) 100%);
   padding: 0 1em 1.5em;
 }
+.screen-capture-img {
+  padding: 0;
+}
+.screen-capture-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.screen-connect-img {
+  padding: 0;
+}
+.screen-connect-img {
+  position: relative;
+}
+.screen-connect-img .connect-dashboard-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 35% top;
+  display: block;
+}
+.connect-thankyou-float {
+  position: absolute;
+  bottom: 15%;
+  left: 19%;
+  width: 62%;
+  z-index: 20;
+  border-radius: 0.8em;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12);
+  animation: floatGently 6s ease-in-out infinite;
+  animation-delay: -2s;
+}
+.connect-thankyou-float img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.screen-engage-img {
+  padding: 0;
+  position: relative;
+}
+.screen-engage-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.engage-vote-float {
+  position: absolute;
+  bottom: 18%;
+  left: 10%;
+  width: 65%;
+  height: 38%;
+  z-index: 20;
+  border-radius: 0.8em;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12);
+  animation: floatGently 6s ease-in-out infinite;
+  animation-delay: -3.5s;
+}
+.engage-vote-float img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.screen-grow-img {
+  padding: 0;
+}
+.screen-grow-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+.screen-compound-img {
+  padding: 0;
+}
+.screen-compound-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 65% top;
+  display: block;
+}
 .card-phone-status {
   display: flex;
   justify-content: space-between;
@@ -5047,216 +5138,58 @@ body::after {
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-capture">
-              <div class="card-phone-status">
-                <span>9:41</span>
-                <span>grouped.</span>
-              </div>
-              <div class="screen-capture-cover">
-                <div class="screen-capture-art">
-                  <div class="screen-capture-art-inner">
-                    <span style="font-size:2em;line-height:1">&#127926;</span>
-                  </div>
-                </div>
-                <div class="screen-capture-waveform">
-                  <span></span><span></span><span></span><span></span><span></span>
-                  <span></span><span></span><span></span><span></span><span></span>
-                  <span></span><span></span><span></span><span></span><span></span>
-                </div>
-              </div>
-              <div class="screen-capture-artist">Zari Banks</div>
-              <div class="screen-capture-subtitle">Exclusive Early Access</div>
-              <div class="screen-capture-field">
-                <span class="screen-capture-field-icon">&#9993;</span>
-                <span class="screen-capture-field-text">you@email.com<span class="screen-capture-cursor">|</span></span>
-              </div>
-              <div class="screen-capture-btn">Get Access</div>
-              <div class="screen-capture-toast">
-                <span class="screen-capture-toast-icon">&#10003;</span>
-                You're in! Check your inbox.
-              </div>
+            <div class="card-phone-screen screen-capture screen-capture-img">
+              <img src="capture-phone-screen.png" alt="Zari Banks - Exclusive Live Studio Performance swap page" />
             </div>
           </div>
         </div>
 
-        <!-- Card 2: Connect — Unified fan profile -->
+        <!-- Card 2: Connect — Dashboard + Thank You popup -->
         <div class="carousel-card" data-index="1">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-connect">
-              <div class="card-phone-status">
-                <span>9:41</span>
-                <span>grouped.</span>
-              </div>
-              <div class="screen-connect-avatar">Z</div>
-              <div class="screen-connect-name">Zari Banks</div>
-              <div class="screen-connect-since">Member since Nov 2024</div>
-              <div class="screen-connect-platforms">
-                <div class="screen-connect-badge">
-                  <span class="screen-connect-badge-check">&#10003;</span>
-                  Spotify
-                </div>
-                <div class="screen-connect-badge">
-                  <span class="screen-connect-badge-check">&#10003;</span>
-                  Instagram
-                </div>
-                <div class="screen-connect-badge">
-                  <span class="screen-connect-badge-check">&#10003;</span>
-                  TikTok
-                </div>
-              </div>
-              <div class="screen-connect-info">
-                <div class="screen-connect-row">
-                  <span class="screen-connect-row-label">Email</span>
-                  <span class="screen-connect-row-value">zari@email.com</span>
-                </div>
-                <div class="screen-connect-row">
-                  <span class="screen-connect-row-label">Phone</span>
-                  <span class="screen-connect-row-value">+1 (555) 012-3456</span>
-                </div>
-                <div class="screen-connect-row">
-                  <span class="screen-connect-row-label">Location</span>
-                  <span class="screen-connect-row-value">Los Angeles, CA</span>
-                </div>
-              </div>
-              <div class="screen-connect-score">
-                <span class="screen-connect-score-num">94</span>
-                <span class="screen-connect-score-label">Engagement Score</span>
+            <div class="card-phone-screen screen-connect screen-connect-img">
+              <img src="connect-dashboard-screen.png" alt="Grouped members dashboard showing fan data" class="connect-dashboard-bg" />
+              <div class="connect-thankyou-float">
+                <img src="connect-Thank-You-screen.png" alt="You're In! Fan confirmation notification" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 3: Engage — Group feed + notifications -->
+        <!-- Card 3: Engage — Feed + Fan Vote callout -->
         <div class="carousel-card" data-index="2">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-engage">
-              <div class="card-phone-status">
-                <span>9:41</span>
-                <span>grouped.</span>
-              </div>
-              <div class="screen-engage-notif">
-                <span class="screen-engage-notif-icon">&#128276;</span>
-                <div class="screen-engage-notif-text">
-                  <strong>New exclusive content</strong>
-                  <span>from Zari Banks</span>
-                </div>
-              </div>
-              <div class="screen-engage-feed">
-                <div class="screen-engage-post screen-engage-post-video">
-                  <div class="screen-engage-thumb">
-                    <span class="screen-engage-play">&#9654;</span>
-                  </div>
-                  <div class="screen-engage-post-body">
-                    <div class="screen-engage-post-author">Zari Banks</div>
-                    <div class="screen-engage-post-text">Behind the scenes from the studio session...</div>
-                    <div class="screen-engage-post-stats">
-                      <span>&#10084; 342</span>
-                      <span>&#128172; 48</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="screen-engage-post screen-engage-post-text-only">
-                  <div class="screen-engage-post-author">Zari Banks</div>
-                  <div class="screen-engage-post-quote">"New music is coming sooner than you think. Who's ready?"</div>
-                  <div class="screen-engage-post-stats">
-                    <span>&#10084; 518</span>
-                    <span>&#128172; 73</span>
-                  </div>
-                </div>
+            <div class="card-phone-screen screen-engage screen-engage-img">
+              <img src="engage-phone-screen.png" alt="Zari Banks exclusive content feed with comments and engagement" />
+              <div class="engage-vote-float">
+                <img src="engage-Fan Vote - Data Collection.png" alt="Fan vote poll results" />
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Card 4: Grow — Paid tiers -->
+        <!-- Card 4: Grow — Group join page -->
         <div class="carousel-card" data-index="3">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-grow">
-              <div class="card-phone-status">
-                <span>9:41</span>
-                <span>grouped.</span>
-              </div>
-              <div class="screen-grow-tiers">
-                <div class="screen-grow-tier screen-grow-tier-free">
-                  <div class="screen-grow-tier-name">Free</div>
-                  <div class="screen-grow-tier-price">$0<span>/mo</span></div>
-                  <ul class="screen-grow-perks">
-                    <li><span class="screen-grow-check">&#10003;</span> Group feed access</li>
-                    <li><span class="screen-grow-check">&#10003;</span> Push notifications</li>
-                    <li><span class="screen-grow-check">&#10003;</span> Community chat</li>
-                  </ul>
-                </div>
-                <div class="screen-grow-tier screen-grow-tier-vip">
-                  <div class="screen-grow-tier-badge">Popular</div>
-                  <div class="screen-grow-tier-name">VIP</div>
-                  <div class="screen-grow-tier-price">$12<span>/mo</span></div>
-                  <ul class="screen-grow-perks">
-                    <li><span class="screen-grow-check">&#10003;</span> Everything in Free</li>
-                    <li><span class="screen-grow-check">&#10003;</span> Exclusive content</li>
-                    <li><span class="screen-grow-check">&#10003;</span> Merch discounts</li>
-                    <li><span class="screen-grow-check">&#10003;</span> Presale access</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="screen-grow-cta">Upgrade to VIP</div>
+            <div class="card-phone-screen screen-grow screen-grow-img">
+              <img src="revenue-Group Join Page.png" alt="The SoMo Fanmily group join page with membership tiers" />
             </div>
           </div>
         </div>
 
-        <!-- Card 5: Compound — Dashboard + growth -->
+        <!-- Card 5: Compound — Swap analytics dashboard -->
         <div class="carousel-card" data-index="4">
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-compound">
-              <div class="card-phone-status">
-                <span>9:41</span>
-                <span>grouped.</span>
-              </div>
-              <div class="screen-compound-chart">
-                <svg viewBox="0 0 200 80" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stop-color="rgba(196,138,58,0.3)"/>
-                      <stop offset="100%" stop-color="rgba(196,138,58,0)"/>
-                    </linearGradient>
-                  </defs>
-                  <path d="M0 70 Q30 65 50 55 T100 35 T150 18 T200 5 L200 80 L0 80Z" fill="url(#chartGrad)"/>
-                  <path d="M0 70 Q30 65 50 55 T100 35 T150 18 T200 5" fill="none" stroke="var(--gold)" stroke-width="2"/>
-                </svg>
-              </div>
-              <div class="screen-compound-metrics">
-                <div class="screen-compound-metric">
-                  <span class="screen-compound-metric-val">20.4K</span>
-                  <span class="screen-compound-metric-label">Fans</span>
-                </div>
-                <div class="screen-compound-metric">
-                  <span class="screen-compound-metric-val">$4.2K</span>
-                  <span class="screen-compound-metric-label">Revenue</span>
-                </div>
-                <div class="screen-compound-metric">
-                  <span class="screen-compound-metric-val">87%</span>
-                  <span class="screen-compound-metric-label">Retention</span>
-                </div>
-              </div>
-              <div class="screen-compound-campaign">
-                <div class="screen-compound-campaign-icon">&#128260;</div>
-                <div class="screen-compound-campaign-body">
-                  <div class="screen-compound-campaign-title">Reactivation Campaign</div>
-                  <div class="screen-compound-campaign-desc">Re-engage 3,200 dormant fans</div>
-                </div>
-                <div class="screen-compound-campaign-arrow">&#8594;</div>
-              </div>
-              <div class="screen-compound-loop">
-                <span class="screen-compound-loop-icon">&#8635;</span>
-                Compound &#8594; Capture
-              </div>
+            <div class="card-phone-screen screen-compound screen-compound-img">
+              <img src="compound-Swap Details - Stats - Next Step Performance section.png" alt="Swap Details analytics dashboard with performance stats and revenue chart" />
             </div>
           </div>
         </div>
@@ -5271,6 +5204,10 @@ body::after {
       <div class="carousel-callout callout-left" data-stage="0">
         <span class="carousel-callout-value">847</span>
         <span class="carousel-callout-label">new fans this week</span>
+      </div>
+      <div class="carousel-callout callout-right" data-stage="0">
+        <span class="carousel-callout-value">Name, email &amp; phone</span>
+        <span class="carousel-callout-label">Fans give you their info directly</span>
       </div>
       <div class="carousel-callout callout-right" data-stage="1">
         <span class="carousel-callout-value">92%</span>
