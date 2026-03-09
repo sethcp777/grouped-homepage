@@ -1466,6 +1466,16 @@ a.nav-link:hover .nav-link__label::after {
   flex-direction: column;
   position: relative;
 }
+.hero-phone-video {
+  padding: 0;
+}
+.hero-phone-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
 /* Cover image area */
 .swap-cover {
   width: 100%;
@@ -1974,6 +1984,8 @@ a.nav-link:hover .nav-link__label::after {
   object-position: top center;
   display: block;
 }
+.screen-grow-video { padding: 0; }
+.screen-grow-video video { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .screen-grow-img {
   padding: 0;
 }
@@ -4958,27 +4970,10 @@ body::after {
           <div class="hero-visual">
             <div class="hero-phone">
               <div class="hero-phone-notch"></div>
-              <div class="hero-phone-screen">
-                <div class="swap-cover">
-                  <div class="swap-cover-visual"></div>
-                  <div class="swap-waveform">
-                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-                  </div>
-                </div>
-                <div class="swap-body">
-                  <div class="swap-artist">Zari Banks</div>
-                  <div class="swap-title">Exclusive Live Studio Performance</div>
-                  <div class="swap-fields">
-                    <div class="swap-field">Name</div>
-                    <div class="swap-field swap-field-typing">zari@email.com</div>
-                    <div class="swap-field">+1 Phone</div>
-                  </div>
-                  <div class="swap-btn">Get Access</div>
-                </div>
-                <div class="swap-success">
-                  <div class="swap-success-icon">&#10003;</div>
-                  Fan captured &amp; pre-save confirmed
-                </div>
+              <div class="hero-phone-screen hero-phone-video">
+                <video autoplay muted loop playsinline>
+                  <source src="hero-phone-recording.mp4" type="video/mp4">
+                </video>
               </div>
             </div>
             <div class="hero-float hero-float-1">
@@ -5177,8 +5172,10 @@ body::after {
           <div class="carousel-card-before"></div>
           <div class="carousel-card-inner">
             <div class="card-phone-notch"></div>
-            <div class="card-phone-screen screen-grow screen-grow-img">
-              <img src="revenue-Group Join Page.png" alt="The SoMo Fanmily group join page with membership tiers" />
+            <div class="card-phone-screen screen-grow screen-grow-video">
+              <video autoplay muted loop playsinline>
+                <source src="revenue-frdifam_03-09-2026 12-02-56_1.MP4" type="video/mp4">
+              </video>
             </div>
           </div>
         </div>
