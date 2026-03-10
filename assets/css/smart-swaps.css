@@ -1421,6 +1421,69 @@ a.nav-link:hover .nav-link__label::after {
 .swaps-compare__row-status--yes {
   color: var(--success);
 }
+.swaps-compare__row-status--partial {
+  color: #E5A84B;
+}
+
+/* --- Compare Tabs --- */
+.swaps-compare__tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 0 16px;
+}
+.swaps-compare__tabs::-webkit-scrollbar {
+  display: none;
+}
+.swaps-compare__tab {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: var(--radius-label);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+.swaps-compare__tab:hover {
+  border-color: var(--border-hover);
+  color: var(--white);
+}
+.swaps-compare__tab.active {
+  background: var(--white);
+  color: var(--text-inverse);
+  border-color: var(--white);
+  font-weight: 600;
+}
+
+/* --- Compare column content transition --- */
+.swaps-compare__col--old .swaps-compare__row-status,
+.swaps-compare__col--old .swaps-compare__row-feature,
+.swaps-compare__col--old .swaps-compare__col-label,
+.swaps-compare__col--old .swaps-compare__col-subtitle {
+  transition: opacity 0.25s ease;
+}
+.swaps-compare__col.is--switching .swaps-compare__row-status,
+.swaps-compare__col.is--switching .swaps-compare__row-feature,
+.swaps-compare__col.is--switching .swaps-compare__col-label,
+.swaps-compare__col.is--switching .swaps-compare__col-subtitle {
+  opacity: 0;
+}
 
 /* --- Use Cases --- */
 .swaps-uses__header {
@@ -1658,6 +1721,9 @@ a.nav-link:hover .nav-link__label::after {
   .swaps-stats__grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  .swaps-compare__tabs {
+    justify-content: flex-start;
+  }
   .swaps-compare__columns {
     grid-template-columns: 1fr;
     max-width: 440px;
@@ -1708,6 +1774,10 @@ a.nav-link:hover .nav-link__label::after {
   .swaps-cta__actions .btn-secondary {
     width: 100%;
     justify-content: center;
+  }
+  .swaps-compare__tab {
+    font-size: 10px;
+    padding: 5px 12px;
   }
   .swaps-pain__card-stat {
     font-size: 2.5rem;

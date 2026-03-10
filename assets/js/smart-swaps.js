@@ -159,18 +159,149 @@
   }
 
   /* ------------------------------------------
-     Compare columns
+     Compare columns + tabs
      ------------------------------------------ */
+  var compareTabsBar = document.querySelector('.swaps-compare__tabs');
   var compareCols = document.querySelectorAll('.swaps-compare__col');
-  if (compareCols.length) {
-    gsap.set(compareCols, { opacity: 0, y: 50 });
+  var compareEls = compareTabsBar ? [compareTabsBar].concat(Array.from(compareCols)) : Array.from(compareCols);
+
+  if (compareEls.length) {
+    gsap.set(compareEls, { opacity: 0, y: 50 });
     ScrollTrigger.create({
-      trigger: '.swaps-compare__columns',
+      trigger: compareTabsBar || '.swaps-compare__columns',
       start: 'top 75%',
       once: true,
       onEnter: function() {
-        gsap.to(compareCols, { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: 'power3.out' });
+        gsap.to(compareEls, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
       }
+    });
+  }
+
+  /* ------------------------------------------
+     Compare tab switching — competitor data
+     ------------------------------------------ */
+  var COMPETITOR_DATA = {
+    laylo: {
+      label: 'Laylo',
+      subtitle: 'Pre-save & drop pages',
+      rows: [
+        { feature: 'Fan email + phone capture', grouped: '\u2713 Built-in, one step', status: 'yes', text: '\u2713 Available' },
+        { feature: 'Pre-save integration', grouped: '\u2713 Native, one-step', status: 'yes', text: '\u2713 Available' },
+        { feature: 'Owned group community', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
+        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Starts fresh each drop' },
+        { feature: 'Push notifications', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
+        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'no', text: '\u2717 Paid only' }
+      ]
+    },
+    even: {
+      label: 'EVEN',
+      subtitle: 'Direct-to-fan sales platform',
+      rows: [
+        { feature: 'Fan capture without requiring payment', grouped: '\u2713 Free opt-in for fans', status: 'no', text: '\u2717 Fans must purchase to engage' },
+        { feature: 'Works for emerging artists (no existing fanbase required)', grouped: '\u2713 Built for growth', status: 'partial', text: '~ Best with existing fanbase' },
+        { feature: 'Owned group community layer', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
+        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Per-release only' },
+        { feature: 'Pre-save integration', grouped: '\u2713 Native one-step', status: 'no', text: '\u2717 Not included' },
+        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'no', text: '\u2717 Revenue share on all sales' }
+      ]
+    },
+    linktree: {
+      label: 'Linktree / Beacons',
+      subtitle: 'Link-in-bio tools',
+      rows: [
+        { feature: 'Fan email capture', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No' },
+        { feature: 'Phone number', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No' },
+        { feature: 'Pre-save integration', grouped: '\u2713 Native one-step', status: 'no', text: '\u2717 Redirect only' },
+        { feature: 'Fan relationship', grouped: '\u2713 Direct & owned', status: 'no', text: '\u2717 None' },
+        { feature: 'Data ownership', grouped: '\u2713 You own everything', status: 'no', text: '\u2717 Platform owns' },
+        { feature: 'Release compounding', grouped: '\u2713 Fans carry forward', status: 'no', text: '\u2717 Starts from zero' }
+      ]
+    },
+    discord: {
+      label: 'Discord',
+      subtitle: 'Community chat platform',
+      rows: [
+        { feature: 'Fan capture at point of discovery', grouped: '\u2713 Built-in via Swaps', status: 'no', text: '\u2717 Requires fans to seek you out' },
+        { feature: 'Email + phone in one step', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No contact capture' },
+        { feature: 'Algorithm-free reach', grouped: '\u2713 Yes', status: 'yes', text: '\u2713 Yes' },
+        { feature: 'Organized, low-noise fan space', grouped: '\u2713 Clean by design', status: 'no', text: '\u2717 Chaotic by default' },
+        { feature: 'Works without an existing fanbase', grouped: '\u2713 Designed for growth', status: 'no', text: '\u2717 Requires fans who already know you' },
+        { feature: 'Release compounding', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Manual, starts over each drop' }
+      ]
+    },
+    mailchimp: {
+      label: 'Mailchimp',
+      subtitle: 'Email marketing platform',
+      rows: [
+        { feature: 'Phone + pre-save capture', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Email only' },
+        { feature: 'Cost model', grouped: '\u2713 Per-send credits', status: 'no', text: '\u2717 Per-subscriber (costs grow as you do)' },
+        { feature: 'Built for music releases', grouped: '\u2713 Purpose-built', status: 'no', text: '\u2717 Generic' },
+        { feature: 'Fan compounding across releases', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Manual list management' },
+        { feature: 'Push notifications', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
+        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'partial', text: '~ Free up to 500 contacts only' }
+      ]
+    }
+  };
+
+  var compareTabs = document.querySelectorAll('.swaps-compare__tab');
+  var competitorCol = document.getElementById('compare-competitor');
+  var groupedCol = document.getElementById('compare-grouped');
+  var competitorLabel = document.getElementById('competitor-label');
+  var competitorSubtitle = document.getElementById('competitor-subtitle');
+
+  function setCompetitor(key) {
+    var data = COMPETITOR_DATA[key];
+    if (!data) return;
+
+    competitorLabel.textContent = data.label;
+    competitorSubtitle.textContent = data.subtitle;
+
+    data.rows.forEach(function(row, i) {
+      // Update competitor column
+      var statusEl = document.getElementById('competitor-row-' + i);
+      var featureEl = document.getElementById('competitor-feature-' + i);
+      if (statusEl) {
+        statusEl.classList.remove('swaps-compare__row-status--yes', 'swaps-compare__row-status--no', 'swaps-compare__row-status--partial');
+        statusEl.classList.add('swaps-compare__row-status--' + row.status);
+        statusEl.textContent = row.text;
+      }
+      if (featureEl) {
+        featureEl.textContent = row.feature;
+      }
+      // Update grouped column (row labels + text change per competitor)
+      var groupedFeatureEl = document.getElementById('grouped-feature-' + i);
+      var groupedStatusEl = document.getElementById('grouped-row-' + i);
+      if (groupedFeatureEl) {
+        groupedFeatureEl.textContent = row.feature;
+      }
+      if (groupedStatusEl) {
+        groupedStatusEl.textContent = row.grouped;
+      }
+    });
+  }
+
+  if (compareTabs.length && competitorCol) {
+    // Set initial state (Laylo is default)
+    setCompetitor('laylo');
+
+    compareTabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var key = tab.getAttribute('data-competitor');
+        if (tab.classList.contains('active')) return;
+
+        // Update active tab
+        compareTabs.forEach(function(t) { t.classList.remove('active'); });
+        tab.classList.add('active');
+
+        // Fade out both columns, swap content, fade in
+        competitorCol.classList.add('is--switching');
+        groupedCol.classList.add('is--switching');
+        setTimeout(function() {
+          setCompetitor(key);
+          competitorCol.classList.remove('is--switching');
+          groupedCol.classList.remove('is--switching');
+        }, 250);
+      });
     });
   }
 

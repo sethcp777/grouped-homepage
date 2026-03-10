@@ -338,65 +338,42 @@
   <div class="container">
     <div class="swaps-compare__header">
       <div class="label label-gold">Compare</div>
-      <h2 class="swaps-compare__title font-display">Smart Swaps vs. link-in-bio tools</h2>
+      <h2 class="swaps-compare__title font-display">Choose your opponent</h2>
     </div>
+
+    <!-- Tab bar -->
+    <div class="swaps-compare__tabs" id="compare-tabs">
+      <button class="swaps-compare__tab active" data-competitor="laylo">Laylo</button>
+      <button class="swaps-compare__tab" data-competitor="even">EVEN</button>
+      <button class="swaps-compare__tab" data-competitor="linktree">Linktree / Beacons</button>
+      <button class="swaps-compare__tab" data-competitor="discord">Discord</button>
+      <button class="swaps-compare__tab" data-competitor="mailchimp">Mailchimp</button>
+    </div>
+
     <div class="swaps-compare__columns">
-      <div class="swaps-compare__col swaps-compare__col--old">
-        <div class="swaps-compare__col-label">Traditional Link-in-Bio</div>
-        <div class="swaps-compare__col-subtitle">Linktree, Beacons, etc.</div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Fan email capture</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; No</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Phone number</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; No</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Pre-save integration</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; Redirect only</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Fan relationship</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; None</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Data ownership</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; Platform owns</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Release compounding</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--no">&#10005; Starts from zero</span>
-        </div>
+      <!-- LEFT: Competitor (dynamic) -->
+      <div class="swaps-compare__col swaps-compare__col--old" id="compare-competitor">
+        <div class="swaps-compare__col-label" id="competitor-label">Laylo</div>
+        <div class="swaps-compare__col-subtitle" id="competitor-subtitle">Pre-save &amp; drop pages</div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-0"></span><span class="swaps-compare__row-status" id="competitor-row-0"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-1"></span><span class="swaps-compare__row-status" id="competitor-row-1"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-2"></span><span class="swaps-compare__row-status" id="competitor-row-2"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-3"></span><span class="swaps-compare__row-status" id="competitor-row-3"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-4"></span><span class="swaps-compare__row-status" id="competitor-row-4"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="competitor-feature-5"></span><span class="swaps-compare__row-status" id="competitor-row-5"></span></div>
       </div>
-      <div class="swaps-compare__col swaps-compare__col--new">
+
+      <!-- RIGHT: Grouped (static header, dynamic rows) -->
+      <div class="swaps-compare__col swaps-compare__col--new" id="compare-grouped">
         <div class="swaps-compare__col-badge">YOUR UPGRADE</div>
         <div class="swaps-compare__col-label">Smart Swaps</div>
         <div class="swaps-compare__col-subtitle">by Grouped</div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Fan email capture</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; Built-in</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Phone number</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; Built-in</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Pre-save integration</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; Native one-step</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Fan relationship</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; Direct &amp; owned</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Data ownership</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; You own everything</span>
-        </div>
-        <div class="swaps-compare__row">
-          <span class="swaps-compare__row-feature">Release compounding</span>
-          <span class="swaps-compare__row-status swaps-compare__row-status--yes">&#10003; Fans carry forward</span>
-        </div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-0"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-0"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-1"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-1"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-2"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-2"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-3"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-3"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-4"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-4"></span></div>
+        <div class="swaps-compare__row"><span class="swaps-compare__row-feature" id="grouped-feature-5"></span><span class="swaps-compare__row-status swaps-compare__row-status--yes" id="grouped-row-5"></span></div>
       </div>
     </div>
   </div>
@@ -457,11 +434,11 @@
       </details>
       <details class="swaps-faq__item">
         <summary class="swaps-faq__question">
-          <span>How is this different from a link-in-bio tool?</span>
+          <span>How is this different from tools like Laylo or Linktree?</span>
           <span class="swaps-faq__toggle"></span>
         </summary>
         <div class="swaps-faq__answer">
-          <p>Traditional link-in-bio tools (Linktree, Beacons, etc.) send fans away to streaming platforms with zero data capture. Smart Swaps capture fan contact information before sending them to the music &mdash; turning every click into a relationship you own.</p>
+          <p>Link-in-bio tools like Linktree send fans away with zero data capture. Laylo captures data, but only as isolated drop alerts &mdash; there is no community layer and no compounding across releases. Smart Swaps capture fan contact information, build a direct relationship, and compound your audience with every release you put out.</p>
         </div>
       </details>
       <details class="swaps-faq__item">
