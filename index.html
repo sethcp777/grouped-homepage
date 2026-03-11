@@ -5285,9 +5285,10 @@ body::after {
     </div>
 
     <div data-filter-group="" role="group" class="filter-group">
-      <div class="filter-buttons reveal">
-        <button data-filter-target="all" data-filter-status="active" aria-pressed="true" aria-controls="feature-filter-list" class="filter-btn">All</button>
-        <button data-filter-target="live" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Live</button>
+      <!-- Filter buttons hidden for now — may re-enable later -->
+      <div class="filter-buttons reveal" style="display:none;">
+        <button data-filter-target="all" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">All</button>
+        <button data-filter-target="live" data-filter-status="active" aria-pressed="true" aria-controls="feature-filter-list" class="filter-btn">Live</button>
         <button data-filter-target="soon" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Coming Soon</button>
         <button data-filter-target="roadmap" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Roadmap</button>
       </div>
@@ -5330,21 +5331,21 @@ body::after {
           </div>
         </div>
 
-        <!-- 2. Smart Feed — Live -->
+        <!-- 2. Smart Feed — Coming Soon -->
         <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
           <div class="fcard">
             <div class="fcard-inner">
               <div class="fcard-front">
                 <span class="fcard-stage">Keep</span>
                 <div class="fcard-tag">
-                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                  <span data-filter-name-collect="soon" class="feature-tag feature-tag--soon">Coming Soon</span>
                 </div>
                 <div class="fcard-anim" data-lottie data-lottie-src="">
                   <div class="fcard-anim-icon">&#128225;</div>
                 </div>
                 <div class="fcard-content">
                   <div class="fcard-name">Smart Feed</div>
-                  <div class="fcard-summary">Set it up once. Auto-populates from your activity across platforms. Zero maintenance.</div>
+                  <div class="fcard-summary">Set it up once. Your fan page will auto-populate from your activity across platforms. Zero maintenance.</div>
                   <div class="fcard-flip-cue">Click to learn more &rarr;</div>
                 </div>
               </div>
@@ -5352,13 +5353,13 @@ body::after {
                 <span class="fcard-back-stage">Keep</span>
                 <div class="fcard-back-name">Smart Feed</div>
                 <div class="fcard-benefits">
-                  <div class="fcard-benefit">Auto-syncs Spotify, YouTube, Instagram</div>
-                  <div class="fcard-benefit">Fan hub runs quietly in the background</div>
+                  <div class="fcard-benefit">Will auto-sync Spotify, YouTube, Instagram</div>
+                  <div class="fcard-benefit">Fan hub that runs quietly in the background</div>
                   <div class="fcard-benefit">Always-fresh content with zero effort</div>
                 </div>
                 <div class="fcard-vs">
                   <div class="fcard-vs-label">vs. competitors</div>
-                  <div class="fcard-vs-text">Other fan pages need constant manual updates. Smart Feed runs itself.</div>
+                  <div class="fcard-vs-text">Other fan pages need constant manual updates. Smart Feed is coming &mdash; and it&rsquo;ll run itself.</div>
                 </div>
                 <div class="fcard-flip-hint">Tap to flip back</div>
               </div>
@@ -5394,7 +5395,7 @@ body::after {
                 </div>
                 <div class="fcard-vs">
                   <div class="fcard-vs-label">vs. competitors</div>
-                  <div class="fcard-vs-text">Mailchimp charges per subscriber. We charge per send — at a fraction of the cost.</div>
+                  <div class="fcard-vs-text">Full custom email campaigns coming soon. In the meantime, every Group post automatically becomes an email to your fans.</div>
                 </div>
                 <div class="fcard-flip-hint">Tap to flip back</div>
               </div>
@@ -5498,11 +5499,264 @@ body::after {
                 <div class="fcard-benefits">
                   <div class="fcard-benefit">Auto-enriched profiles with every visit</div>
                   <div class="fcard-benefit">Engagement scoring (Low / Med / High)</div>
-                  <div class="fcard-benefit">CRM sync — Mailchimp, HubSpot, etc.</div>
+                  <!-- VERIFY: confirm Fan Profiling is fully live before launch -->
+                  <div class="fcard-benefit">Export your fan data anytime</div>
                 </div>
                 <div class="fcard-vs">
                   <div class="fcard-vs-label">vs. competitors</div>
                   <div class="fcard-vs-text">Most tools treat fans as email rows. We build living profiles that get smarter over time.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Livestreams — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Engage</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#127909;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Livestreams</div>
+                  <div class="fcard-summary">Go live solo or host a virtual fan meetup. Free, tiered, or pay-what-you-want. Available for replay.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Engage</span>
+                <div class="fcard-back-name">Livestreams</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Go live with one click</div>
+                  <div class="fcard-benefit">Free, tiered, or pay-what-you-want pricing</div>
+                  <div class="fcard-benefit">Auto-saved replays for fans who miss it</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Instagram Live disappears. Twitch isn&rsquo;t built for music. Grouped Livestreams are yours to keep and monetize.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8. Email Lite — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Grow</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128231;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Email Lite</div>
+                  <div class="fcard-summary">Every Group post doubles as an email to your fans. Custom subject line, custom copy, straight to their inbox.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Grow</span>
+                <div class="fcard-back-name">Email Lite</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Every post becomes an email automatically</div>
+                  <div class="fcard-benefit">Custom subject lines and copy</div>
+                  <div class="fcard-benefit">No extra tools, no per-send cost</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Mailchimp charges per subscriber. Email Lite is built in &mdash; every Group post reaches inboxes at zero extra cost.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. Fan Voting / Polling — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Engage</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128499;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Fan Voting / Polling</div>
+                  <div class="fcard-summary">Let fans choose the single, the cover, the setlist. The data is yours and it compounds into every future release.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Engage</span>
+                <div class="fcard-back-name">Fan Voting / Polling</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Polls and votes in one tap</div>
+                  <div class="fcard-benefit">Fan data compounds across releases</div>
+                  <div class="fcard-benefit">Make better decisions with real audience signal</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Instagram polls vanish in 24 hours. Grouped polls stay, compound, and drive your next move.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10. Discussion Forums — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Engage</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128172;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Discussion Forums</div>
+                  <div class="fcard-summary">A Reddit-style space for your fans to connect, react, and go deep &mdash; with or without you.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Engage</span>
+                <div class="fcard-back-name">Discussion Forums</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Threaded discussions fans can start themselves</div>
+                  <div class="fcard-benefit">No moderation required</div>
+                  <div class="fcard-benefit">Fan-to-fan connection deepens loyalty</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Discord is noisy and hard to manage. Forums give fans structure without the chaos.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 11. Music Player — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Engage</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#127925;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Music Player</div>
+                  <div class="fcard-summary">Fans play your music in-app, in the background, screen off.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Engage</span>
+                <div class="fcard-back-name">Music Player</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Background playback, screen off</div>
+                  <div class="fcard-benefit">In-app listening &mdash; no redirect to streaming</div>
+                  <div class="fcard-benefit">Your music, your player, your data</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Streaming platforms own the player and the data. Grouped puts both in your hands.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 12. Pay What You Want — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Compound</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128176;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Pay What You Want</div>
+                  <div class="fcard-summary">Let fans set their price. Lower the barrier to entry, raise the connection.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Compound</span>
+                <div class="fcard-back-name">Pay What You Want</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Fan-set pricing for any content or tier</div>
+                  <div class="fcard-benefit">Lower barrier = more fans in the door</div>
+                  <div class="fcard-benefit">Superfans pay more because they want to</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Fixed pricing leaves money on the table or locks fans out. Flexible pricing does both.</div>
+                </div>
+                <div class="fcard-flip-hint">Tap to flip back</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 13. Media Folders — Live -->
+        <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
+          <div class="fcard">
+            <div class="fcard-inner">
+              <div class="fcard-front">
+                <span class="fcard-stage">Engage</span>
+                <div class="fcard-tag">
+                  <span data-filter-name-collect="live" class="feature-tag feature-tag--live">Live</span>
+                </div>
+                <div class="fcard-anim" data-lottie data-lottie-src="">
+                  <div class="fcard-anim-icon">&#128193;</div>
+                </div>
+                <div class="fcard-content">
+                  <div class="fcard-name">Media Folders</div>
+                  <div class="fcard-summary">Audio, video, and visuals bundled together. Shareable, gated, or both.</div>
+                  <div class="fcard-flip-cue">Click to learn more &rarr;</div>
+                </div>
+              </div>
+              <div class="fcard-back">
+                <span class="fcard-back-stage">Engage</span>
+                <div class="fcard-back-name">Media Folders</div>
+                <div class="fcard-benefits">
+                  <div class="fcard-benefit">Bundle audio, video, and visuals together</div>
+                  <div class="fcard-benefit">Gate content by tier or make it public</div>
+                  <div class="fcard-benefit">Shareable links for any folder</div>
+                </div>
+                <div class="fcard-vs">
+                  <div class="fcard-vs-label">vs. competitors</div>
+                  <div class="fcard-vs-text">Google Drive isn&rsquo;t built for fans. Media Folders are organized, gated, and on-brand.</div>
                 </div>
                 <div class="fcard-flip-hint">Tap to flip back</div>
               </div>
@@ -5525,6 +5779,39 @@ body::after {
 </section>
 
 <!-- ============================================
+     WHY FANS JOIN — VALUE PROPS
+     ============================================ -->
+<section class="section" id="why-fans-join" style="padding: 80px 0;">
+  <div class="container">
+    <div class="reveal" style="text-align:center; margin-bottom:48px;">
+      <div class="label label-gold">Why Fans Join</div>
+      <h2 class="font-display" style="font-size:clamp(28px,4vw,48px); color:var(--text-primary); margin-top:12px;">The reasons fans show up &mdash; and stay</h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:24px; max-width:1100px; margin:0 auto;">
+
+      <div class="reveal" style="background:var(--bg-raised); border:1px solid var(--border); border-radius:16px; padding:32px; text-align:left;">
+        <div style="font-size:28px; margin-bottom:16px;">&#127775;</div>
+        <h3 class="font-display" style="font-size:20px; color:var(--text-primary); margin-bottom:12px;">Premiere Access</h3>
+        <p style="font-size:15px; line-height:1.6; color:var(--text-secondary);">Fans get everything first. New music, tickets, videos &mdash; before it hits anywhere else. That&rsquo;s why they join. That&rsquo;s why they stay.</p>
+      </div>
+
+      <div class="reveal" style="background:var(--bg-raised); border:1px solid var(--border); border-radius:16px; padding:32px; text-align:left;">
+        <div style="font-size:28px; margin-bottom:16px;">&#128202;</div>
+        <h3 class="font-display" style="font-size:20px; color:var(--text-primary); margin-bottom:12px;">Focus Group</h3>
+        <p style="font-size:15px; line-height:1.6; color:var(--text-secondary);">Your fans don&rsquo;t just listen. They vote, react, and tell you what lands. Every release gets smarter because of them.</p>
+      </div>
+
+      <div class="reveal" style="background:var(--bg-raised); border:1px solid var(--border); border-radius:16px; padding:32px; text-align:left;">
+        <div style="font-size:28px; margin-bottom:16px;">&#127968;</div>
+        <h3 class="font-display" style="font-size:20px; color:var(--text-primary); margin-bottom:12px;">Home for Everything</h3>
+        <p style="font-size:15px; line-height:1.6; color:var(--text-secondary);">The home for what you&rsquo;re already doing that has no home anywhere else. One place. Every fan. Always yours.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
      CASE STUDIES — SCROLL-DRIVEN MARQUEE
      ============================================ -->
 <section class="cs-marquee section" id="case-studies">
@@ -5532,6 +5819,22 @@ body::after {
     <div class="cs-marquee__header reveal">
       <div class="label">Artists Using Grouped</div>
       <h2>Real artists. Real momentum.</h2>
+    </div>
+
+    <!-- Case study stat callouts -->
+    <div class="reveal" style="display:flex; flex-wrap:wrap; justify-content:center; gap:32px; margin-bottom:32px; padding:0 20px;">
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">+1.2M</div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Forrest Frank &mdash; Instagram followers in 35 days</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">4.8M</div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">PardyAlone &mdash; streams driven by a single fan vote</div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">120K</div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Surfaces &mdash; emails &rarr; sold-out tour</div>
+      </div>
     </div>
 
     <div class="cs-marquee__track" id="cs-marquee-track">
@@ -6480,7 +6783,9 @@ document.querySelectorAll('.fcard').forEach(card => {
       }
     };
 
-    let activeTarget = 'all';
+    // Detect initial active filter from button state (default: 'all')
+    const initialBtn = buttons.find(b => b.getAttribute('data-filter-status') === 'active');
+    let activeTarget = initialBtn ? (initialBtn.getAttribute('data-filter-target') || 'all').trim().toLowerCase() : 'all';
     const itemMatches = el => {
       if (!activeTarget || activeTarget === 'all') return true;
       return itemTokens.get(el).has(activeTarget);
@@ -6518,6 +6823,9 @@ document.querySelectorAll('.fcard').forEach(card => {
         paint(btn.getAttribute('data-filter-target'));
       }
     });
+
+    // Apply initial filter on load
+    if (activeTarget !== 'all') paint(activeTarget);
   });
 })();
 
@@ -6613,21 +6921,59 @@ document.querySelectorAll('.fcard').forEach(card => {
   let initialized = false;
   const isMobile = window.innerWidth <= 768;
 
-  // ── Fan avatar textures ──
-  function makeFanSVG(bg, fg, letter) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><circle cx="128" cy="128" r="128" fill="${bg}"/><text x="128" y="140" text-anchor="middle" font-family="sans-serif" font-size="100" font-weight="700" fill="${fg}">${letter}</text></svg>`;
+  // ── Platform logo bubbles ──
+  // Platform definitions: branded logos from Simple Icons CDN + generic icons
+  const platforms = [
+    // Streaming & Music
+    { name: 'Spotify',       bg: '#1DB954', logoUrl: 'https://cdn.simpleicons.org/spotify/white' },
+    { name: 'Apple Music',   bg: '#FA243C', logoUrl: 'https://cdn.simpleicons.org/applemusic/white' },
+    { name: 'SoundCloud',    bg: '#FF5500', logoUrl: 'https://cdn.simpleicons.org/soundcloud/white' },
+    { name: 'Bandcamp',      bg: '#408294', logoUrl: 'https://cdn.simpleicons.org/bandcamp/white' },
+    { name: 'YouTube Music', bg: '#FF0000', logoUrl: 'https://cdn.simpleicons.org/youtubemusic/white' },
+    { name: 'Tidal',         bg: '#000000', logoUrl: 'https://cdn.simpleicons.org/tidal/white' },
+    // Social
+    { name: 'Instagram',     bg: '#E4405F', logoUrl: 'https://cdn.simpleicons.org/instagram/white' },
+    { name: 'TikTok',        bg: '#000000', logoUrl: 'https://cdn.simpleicons.org/tiktok/white' },
+    { name: 'Facebook',      bg: '#0866FF', logoUrl: 'https://cdn.simpleicons.org/facebook/white' },
+    { name: 'X',             bg: '#000000', logoUrl: 'https://cdn.simpleicons.org/x/white' },
+    { name: 'YouTube',       bg: '#FF0000', logoUrl: 'https://cdn.simpleicons.org/youtube/white' },
+    // Ticketing & Live
+    { name: 'Ticketmaster',  bg: '#026CDF', logoUrl: 'https://cdn.simpleicons.org/ticketmaster/white' },
+    { name: 'Eventbrite',    bg: '#F05537', logoUrl: 'https://cdn.simpleicons.org/eventbrite/white' },
+    // Additional
+    { name: 'Google',        bg: '#4285F4', logoUrl: 'https://cdn.simpleicons.org/google/white' },
+    { name: 'Linktree',      bg: '#43E55E', logoUrl: 'https://cdn.simpleicons.org/linktree/white' },
+    { name: 'Patreon',       bg: '#FF424D', logoUrl: 'https://cdn.simpleicons.org/patreon/white' },
+    { name: 'Discord',       bg: '#5865F2', logoUrl: 'https://cdn.simpleicons.org/discord/white' },
+    // Generic / Direct / Owned (inline SVG icons on dark circle)
+    { name: 'Email',   bg: '#2a2a2a', logoSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>' },
+    { name: 'SMS',     bg: '#2a2a2a', logoSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/></svg>' },
+    { name: 'QR Code', bg: '#2a2a2a', logoSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>' },
+    { name: 'Website', bg: '#2a2a2a', logoSvg: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>' },
+  ];
+
+  // Pre-load logo images for canvas drawing
+  const platformLogos = [];
+  let logosLoaded = 0;
+  platforms.forEach((p, i) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    if (p.logoSvg) {
+      img.src = 'data:image/svg+xml,' + encodeURIComponent(p.logoSvg);
+    } else {
+      img.src = p.logoUrl;
+    }
+    img.onload = () => { logosLoaded++; };
+    img.onerror = () => { logosLoaded++; }; // graceful fallback
+    platformLogos[i] = img;
+  });
+
+  // Create physics sprite textures (colored circle + white logo placeholder)
+  function makePlatformSVG(bg) {
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><circle cx="128" cy="128" r="128" fill="${bg}"/></svg>`;
     return 'data:image/svg+xml,' + encodeURIComponent(svg);
   }
-  const textureArray = [
-    makeFanSVG('#C48A3A', '#fff', 'J'),
-    makeFanSVG('#34d399', '#111620', 'M'),
-    makeFanSVG('#64a0ff', '#fff', 'S'),
-    makeFanSVG('#8B7355', '#F0EBE3', 'K'),
-    makeFanSVG('#F0EBE3', '#111620', 'A'),
-    makeFanSVG('#C48A3A', '#111620', 'R'),
-    makeFanSVG('#5B8DEF', '#fff', 'T'),
-    makeFanSVG('#E8A849', '#fff', 'L'),
-  ];
+  const textureArray = platforms.map(p => makePlatformSVG(p.bg));
   let textureIndex = 0;
   function getNextTexture() {
     const t = textureArray[textureIndex];
@@ -6707,16 +7053,13 @@ document.querySelectorAll('.fcard').forEach(card => {
     const OFF = ch * 4;
 
     // Fan color lookup — matches textureArray order
-    const fanColors = [
-      { bg: '#C48A3A', fg: '#fff',    letter: 'J' },
-      { bg: '#34d399', fg: '#111620', letter: 'M' },
-      { bg: '#64a0ff', fg: '#fff',    letter: 'S' },
-      { bg: '#8B7355', fg: '#F0EBE3', letter: 'K' },
-      { bg: '#F0EBE3', fg: '#111620', letter: 'A' },
-      { bg: '#C48A3A', fg: '#111620', letter: 'R' },
-      { bg: '#5B8DEF', fg: '#fff',    letter: 'T' },
-      { bg: '#E8A849', fg: '#fff',    letter: 'L' },
-    ];
+    // Fan colors derived from platform definitions
+    const fanColors = platforms.map((p, i) => ({
+      bg: p.bg,
+      fg: '#fff',
+      name: p.name,
+      platformIdx: i,
+    }));
 
     // ── Spiral path parametric function ──
     // Side-view helix: sinusoidal x oscillation + linear y descent
@@ -6834,8 +7177,17 @@ document.querySelectorAll('.fcard').forEach(card => {
       ctx.stroke();
     }
 
+    // Helper: parse hex color to {r,g,b}
+    function hexToRgb(hex) {
+      const n = parseInt(hex.slice(1), 16);
+      return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+    }
+    function rgbToStr(r, g, b) { return `rgb(${r},${g},${b})`; }
+    const goldRgb = hexToRgb('#C48A3A'); // Grouped bronze
+
     function drawSpiralBalls(ctx) {
       const r = fanSize / 2;
+      const now = performance.now();
       spiralBalls.forEach(ball => {
         let x, y;
 
@@ -6867,20 +7219,64 @@ document.querySelectorAll('.fcard').forEach(card => {
 
           x = orbitCenterX + curRadius * Math.cos(ball.orbitAngle);
           y = curCenterY   + curRadius * Math.sin(ball.orbitAngle) * curYScale;
+
+          // Start bronze transition timer on first orbit frame
+          if (!ball._transitionStart) ball._transitionStart = now;
         }
 
-        // Draw circle
+        // ── Color transition: brand color → Grouped bronze when in orbit ──
+        let transitionT = 0; // 0 = full brand color, 1 = full bronze
+        if (ball._transitionStart) {
+          transitionT = Math.min(1, (now - ball._transitionStart) / 800); // 800ms
+          transitionT = transitionT < 0.5 ? 2 * transitionT * transitionT : 1 - Math.pow(-2 * transitionT + 2, 2) / 2; // ease-in-out
+        }
+
+        // Compute blended background color
+        let bgColor = ball.bg;
+        if (transitionT > 0) {
+          const from = hexToRgb(ball.bg);
+          const rr = Math.round(lerp(from.r, goldRgb.r, transitionT));
+          const gg = Math.round(lerp(from.g, goldRgb.g, transitionT));
+          const bb = Math.round(lerp(from.b, goldRgb.b, transitionT));
+          bgColor = rgbToStr(rr, gg, bb);
+        }
+
+        // Draw circle background
         ctx.beginPath();
         ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fillStyle = ball.bg;
+        ctx.fillStyle = bgColor;
         ctx.fill();
 
-        // Draw letter
-        ctx.fillStyle = ball.fg;
-        ctx.font = `bold ${Math.round(fanSize * 0.39)}px sans-serif`;
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText(ball.letter, x, y + 1);
+        // Draw platform logo (fades out during transition)
+        const logoOpacity = 1 - transitionT;
+        if (logoOpacity > 0.01) {
+          const logo = platformLogos[ball.platformIdx];
+          if (logo && logo.complete && logo.naturalWidth > 0) {
+            ctx.save();
+            ctx.globalAlpha = logoOpacity;
+            const logoSize = fanSize * 0.52;
+            ctx.drawImage(logo, x - logoSize / 2, y - logoSize / 2, logoSize, logoSize);
+            ctx.restore();
+          }
+        }
+      });
+    }
+
+    // Draw platform logos on top of physics bodies (floor/settling phase, before capture)
+    function drawPhysicsLogos(ctx) {
+      fans.forEach(fan => {
+        if (fan._captured) return;
+        const pos = fan.position;
+        // Skip if off-screen
+        if (pos.x < -100 || pos.x > cw + 100 || pos.y < -100 || pos.y > ch + 100) return;
+        const pIdx = fanColors[fan._colorIdx].platformIdx;
+        const logo = platformLogos[pIdx];
+        if (logo && logo.complete && logo.naturalWidth > 0) {
+          ctx.save();
+          const logoSize = fanSize * 0.52;
+          ctx.drawImage(logo, pos.x - logoSize / 2, pos.y - logoSize / 2, logoSize, logoSize);
+          ctx.restore();
+        }
       });
     }
 
@@ -6905,11 +7301,12 @@ document.querySelectorAll('.fcard').forEach(card => {
         fan._captured = true;
         const c = fanColors[fan._colorIdx];
         spiralBalls.push({
-          bg: c.bg, fg: c.fg, letter: c.letter,
+          bg: c.bg, fg: c.fg, platformIdx: c.platformIdx,
           startX: fan.position.x,            // where ball was on the floor
           startY: fan.position.y,            // for seamless lerp to spiral
           stagger: (i / fans.length) * totalStagger, // spread along spiral
           orbitAngle: (Math.PI * 2 / fans.length) * i, // evenly spaced in orbit
+          _transitionStart: null, // timestamp for bronze transition
         });
         // Hide physics body
         Body.setStatic(fan, true);
@@ -6922,6 +7319,9 @@ document.querySelectorAll('.fcard').forEach(card => {
       const ctx = render.context;
       ctx.save();
       ctx.lineCap = 'round';
+
+      // ── Platform logos on physics bodies (floor phase) ──
+      drawPhysicsLogos(ctx);
 
       // ── Spiral ribbon (blue helix) ──
       drawSpiralRibbon(ctx, spiralOpacity);
@@ -6941,10 +7341,9 @@ document.querySelectorAll('.fcard').forEach(card => {
     // ═══════════════════════════════════════
     // START RENDERER + DROP FANS
     // ═══════════════════════════════════════
+    const fans = [];
     Render.run(render);
     Runner.run(Runner.create(), engine);
-
-    const fans = [];
     let dropIdx = 0;
     (function drop() {
       if (dropIdx < fanCount) {
