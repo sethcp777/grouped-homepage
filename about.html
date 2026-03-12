@@ -9,6 +9,7 @@
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <link rel="stylesheet" href="assets/css/about.css">
 </head>
@@ -139,8 +140,8 @@
 <section class="about-hero">
   <div class="about-hero__inner">
     <div class="about-hero__label">About Grouped</div>
-    <h1 class="about-hero__title">We built a platform where artists matter and fans belong.</h1>
-    <p class="about-hero__sub">Grouped exists because the relationship between artists and fans deserves better than an algorithm. We're here to make sure it gets it.</p>
+    <h1 class="about-hero__title">Every artist deserves an audience that's actually theirs.</h1>
+    <p class="about-hero__sub">You're earning fans every day &mdash; but algorithms decide who sees your content, platforms own the data, and every release feels like starting over. Grouped exists to fix that.</p>
   </div>
 </section>
 
@@ -160,52 +161,180 @@
 <!-- OUR STORY -->
 <section class="about-story section" id="story">
   <div class="container">
-    <div class="about-story__inner">
-      <div class="about-story__label">Our Story</div>
+    <div class="about-story__label" style="text-align:center;">Our Story</div>
 
-      <div class="about-story__block">
-        <p class="about-story__text">The proof came first. Before Grouped was a platform for thousands of artists, it was one community: OnlySteves, the fan subscription group built around independent artist mike. Jon Kilmer ran it day to day, and what they built together became a seven-figure annual revenue stream. The model worked. The question was whether it could work for every artist, not just one.</p>
+    <!-- Draw-path timeline wrapper -->
+    <div class="about-timeline-v2" data-draw-scroll-wrap>
+
+      <!-- Desktop SVG path -->
+      <svg class="about-timeline-v2__svg about-timeline-v2__svg--desktop"
+           data-draw-scroll-desktop
+           preserveAspectRatio="none"
+           fill="none"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <path data-draw-scroll-path
+              class="about-timeline-v2__path"
+              d=""
+              stroke="#262F3F"
+              stroke-width="15"
+              stroke-linecap="round"
+              fill="none" />
+      </svg>
+
+      <!-- Mobile SVG path -->
+      <svg class="about-timeline-v2__svg about-timeline-v2__svg--mobile"
+           data-draw-scroll-mobile
+           preserveAspectRatio="none"
+           fill="none"
+           xmlns="http://www.w3.org/2000/svg"
+           aria-hidden="true">
+        <path data-draw-scroll-path
+              class="about-timeline-v2__path"
+              d=""
+              stroke="#262F3F"
+              stroke-width="10"
+              stroke-linecap="round"
+              fill="none" />
+      </svg>
+
+      <!-- Entry 1: The Proof — LEFT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--left" data-tl-entry="0">
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">The Proof</span>
+          <h3 class="about-timeline-v2__heading">One community. Seven figures.</h3>
+          <p class="about-timeline-v2__text">Before Grouped was a platform for thousands of artists, it was one community: OnlySteves, the fan subscription group built around independent artist mike. Jon Kilmer ran it day to day. What they built together became a seven-figure annual revenue stream. The model worked. The question was whether it could work for every artist, not just one.</p>
+          <div class="about-timeline-v2__cta-wrap">
+            <a href="https://grouped.com/blog/mike" target="_blank" rel="noopener" class="about-timeline-v2__cta">
+              <span class="about-timeline-v2__cta-name">mike.</span>
+              <span class="about-timeline-v2__cta-link">Read his story &rarr;</span>
+            </a>
+            <a href="https://grouped.com/blog/jon-kilmer" target="_blank" rel="noopener" class="about-timeline-v2__cta">
+              <span class="about-timeline-v2__cta-name">Jon Kilmer</span>
+              <span class="about-timeline-v2__cta-link">Read his story &rarr;</span>
+            </a>
+          </div>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
       </div>
 
-      <div class="about-story__block">
-        <p class="about-story__text">Tim Weber had spent 15 years in music asking exactly that question. He started GoodMusicAllDay at Notre Dame in 2009, grew it from a blog to over a million monthly readers, and helped break artists like Macklemore, G-Eazy, Chance the Rapper, and The Chainsmokers before selling the company in 2015. He saw what mike. and Jon had built with OnlySteves and knew it should be available to every independent artist in the world. What was missing was the right infrastructure: a platform that was free to start, white-labeled, and built entirely around the artist's interests.</p>
+      <!-- Entry 2: 2009 — RIGHT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--right" data-tl-entry="1">
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">2009</span>
+          <h3 class="about-timeline-v2__heading">The blog that broke artists.</h3>
+          <p class="about-timeline-v2__text">Tim Weber started GoodMusicAllDay at Notre Dame, grew it to over a million monthly readers, and helped break Macklemore, G-Eazy, Chance the Rapper, and The Chainsmokers before selling the company in 2015. He saw what mike. and Jon had built with OnlySteves and knew it should be available to every independent artist in the world. What was missing was the right infrastructure.</p>
+          <div class="about-timeline-v2__cta-wrap">
+            <a href="https://grouped.com/blog/tim-weber" target="_blank" rel="noopener" class="about-timeline-v2__cta">
+              <span class="about-timeline-v2__cta-name">Tim Weber</span>
+              <span class="about-timeline-v2__cta-link">Read his story &rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div class="about-story__block">
-        <p class="about-story__text">Finn Hodgins had built that infrastructure. Starting in 2021, he spent a year developing a white-label community platform from the ground up. When Tim and Finn connected, Tim brought his artist network in to test it. The fit was immediate. Finn scaled the development team and raised to build. Tim brought in mike. and Nic D as founding partners. Nic D is one of the biggest independent artists in the world, with a business sense that matched his creative output. He saw the platform's potential from the beginning and, alongside Jon Kilmer, went on to co-found NDPNDNT, a community and podcast for independent artists hosted on Grouped. Jon Kilmer joined as Head of Community, bringing the operational knowledge that only comes from actually doing it.</p>
+      <!-- Entry 3: 2021 — LEFT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--left" data-tl-entry="2">
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">2021</span>
+          <h3 class="about-timeline-v2__heading">The infrastructure gets built.</h3>
+          <p class="about-timeline-v2__text">Finn Hodgins spent a year developing a white-label community platform from the ground up. When Tim and Finn connected, Tim brought his artist network in to test it. The fit was immediate. Finn scaled the development team and raised to build.</p>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
       </div>
 
-      <div class="about-story__block">
-        <p class="about-story__text">From January through October 2023, the founding team ran a closed beta with artists from their combined networks, building features based on real feedback from real artists. Grouped opened publicly in October 2023. With no marketing budget and no social media presence, the platform grew from 40 communities to over 1,000 in three months.</p>
+      <!-- Entry 4: 2022 — RIGHT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--right" data-tl-entry="3">
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">2022</span>
+          <h3 class="about-timeline-v2__heading">The founding team forms.</h3>
+          <p class="about-timeline-v2__text">Tim brought in mike. and Nic D as founding partners. Nic D is one of the biggest independent artists in the world, with a business sense that matched his creative output. He and Jon Kilmer went on to co-found NDPNDNT, a community and podcast for independent artists hosted on Grouped. Kilmer joined as Head of Community, bringing the operational knowledge that only comes from actually doing it.</p>
+          <div class="about-timeline-v2__cta-wrap">
+            <a href="https://grouped.com/blog/nic-d" target="_blank" rel="noopener" class="about-timeline-v2__cta">
+              <span class="about-timeline-v2__cta-name">Nic D</span>
+              <span class="about-timeline-v2__cta-link">Read his story &rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div class="about-story__block">
-        <p class="about-story__text">That growth was not accidental. It was the result of a platform built by people who had spent years inside the music industry, who understood what artists actually needed, and who had already proven the model worked.</p>
+      <!-- Entry 5: 2023 — LEFT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--left" data-tl-entry="4">
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">2023</span>
+          <h3 class="about-timeline-v2__heading">Beta. Then liftoff.</h3>
+          <p class="about-timeline-v2__text">From January through October, the founding team ran a closed beta, building features from real feedback from real artists. Grouped opened publicly in October. No marketing budget. No social media presence. The platform grew from 40 communities to over 1,000 in three months.</p>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
       </div>
 
-      <!-- Founder stories -->
-      <div class="about-story__founders">
-        <a href="https://grouped.com/blog/tim-weber" target="_blank" rel="noopener" class="about-story__founder-card">
-          <span class="about-story__founder-role">Co-Founder</span>
-          <span class="about-story__founder-name">Tim Weber</span>
-          <span class="about-story__founder-cta">Read his story &rarr;</span>
-        </a>
-        <a href="https://grouped.com/blog/mike" target="_blank" rel="noopener" class="about-story__founder-card">
-          <span class="about-story__founder-role">Founding Partner</span>
-          <span class="about-story__founder-name">mike.</span>
-          <span class="about-story__founder-cta">Read his story &rarr;</span>
-        </a>
-        <a href="https://grouped.com/blog/nic-d" target="_blank" rel="noopener" class="about-story__founder-card">
-          <span class="about-story__founder-role">Founding Partner</span>
-          <span class="about-story__founder-name">Nic D</span>
-          <span class="about-story__founder-cta">Read his story &rarr;</span>
-        </a>
-        <a href="https://grouped.com/blog/jon-kilmer" target="_blank" rel="noopener" class="about-story__founder-card">
-          <span class="about-story__founder-role">Founding Partner</span>
-          <span class="about-story__founder-name">Jon Kilmer</span>
-          <span class="about-story__founder-cta">Read his story &rarr;</span>
-        </a>
+      <!-- Entry 6: 2025 — RIGHT -->
+      <div class="about-timeline-v2__entry about-timeline-v2__entry--right" data-tl-entry="5">
+        <div class="about-timeline-v2__img-wrap">
+          <div class="about-timeline-v2__img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+        </div>
+        <div class="about-timeline-v2__dot"></div>
+        <div class="about-timeline-v2__content">
+          <span class="about-timeline-v2__year">2025</span>
+          <h3 class="about-timeline-v2__heading">Tribly joins Grouped.</h3>
+          <p class="about-timeline-v2__text">Grouped acquired Tribly, a platform built by Seth, a full-time music artist with over a decade of experience releasing and touring. Seth had built Tribly to solve the problem he lived every day: getting fans in the door. Tribly helped artists turn listeners into contacts through swaps, email and phone capture, automated pre-saves, and release-day notifications that drove real first-week numbers. Grouped had already built what comes next: the communities, direct reach, and engagement tools that keep fans close and give them reasons to stay. Tribly caught the fan. Grouped kept them. Seth joined as Co-Founder and CEO.</p>
+          <div class="about-timeline-v2__cta-wrap">
+            <a href="https://grouped.com/blog/seth" target="_blank" rel="noopener" class="about-timeline-v2__cta">
+              <span class="about-timeline-v2__cta-name">Seth</span>
+              <span class="about-timeline-v2__cta-link">Read his story &rarr;</span>
+            </a>
+          </div>
+        </div>
       </div>
+
+    </div><!-- end .about-timeline-v2 -->
+
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<section class="about-proof section">
+  <div class="container">
+    <blockquote class="about-proof__quote">
+      <p>&ldquo;This is not social media. There is no algorithm. That&rsquo;s why I love Grouped.&rdquo;</p>
+      <cite>&mdash; Anees, The Cabin</cite>
+    </blockquote>
+    <div class="about-proof__grid">
+      <a href="case-study-mike.html" class="about-proof__card">
+        <span class="about-proof__card-name">mike.</span>
+        <span class="about-proof__card-stat">Sold out Red Rocks. Twice.</span>
+        <span class="about-proof__card-body">Pre-released tickets exclusively to paid community members. Sold out day one. No ads. No label. Just fans who were already in.</span>
+        <span class="about-proof__card-cta">Read case study &rarr;</span>
+      </a>
+      <a href="case-study-somo.html" class="about-proof__card">
+        <span class="about-proof__card-name">SoMo</span>
+        <span class="about-proof__card-stat">$966 per fan. 31 months and counting.</span>
+        <span class="about-proof__card-body">Top 15 fans have generated $14,000 at $35/month. When fans feel like they belong, they don&rsquo;t churn.</span>
+        <span class="about-proof__card-cta">Read case study &rarr;</span>
+      </a>
+      <a href="case-study-forrest-frank.html" class="about-proof__card">
+        <span class="about-proof__card-name">Forrest Frank</span>
+        <span class="about-proof__card-stat">Fans chose his biggest hit.</span>
+        <span class="about-proof__card-body">6,000 community members voted on 5 unreleased demos. Their pick became a #1 single, won a Dove Award, and gained 1.2M followers in 35 days.</span>
+        <span class="about-proof__card-cta">Read case study &rarr;</span>
+      </a>
     </div>
   </div>
 </section>
@@ -233,6 +362,11 @@
         <h3 class="about-belief-card__heading">Direct means direct.</h3>
         <p class="about-belief-card__body">When you want to reach your fans, you should be able to. No pay-to-play, no throttled reach, no guessing who sees what. Just you and your people.</p>
       </div>
+      <div class="about-belief-card">
+        <span class="about-belief-card__icon">&#9674;</span>
+        <h3 class="about-belief-card__heading">Every fan counts.</h3>
+        <p class="about-belief-card__body">This is not another super fan platform. Grouped is for all of your fans &mdash; from the curious first-time listener to the one who never misses a show. A fan's value goes way beyond their wallet.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -242,7 +376,7 @@
   <div class="container">
     <div class="about-stats__grid">
       <div class="about-stat">
-        <div class="about-stat__number">4,500+</div>
+        <div class="about-stat__number">6,000+</div>
         <div class="about-stat__label">Artists on Grouped</div>
       </div>
       <div class="about-stat">
@@ -250,12 +384,12 @@
         <div class="about-stat__label">Fans captured</div>
       </div>
       <div class="about-stat">
-        <div class="about-stat__number">8,000+</div>
-        <div class="about-stat__label">Releases powered</div>
+        <div class="about-stat__number">$3M+</div>
+        <div class="about-stat__label">Paid to artists</div>
       </div>
       <div class="about-stat">
-        <div class="about-stat__number">92%</div>
-        <div class="about-stat__label">Avg. Smart Swap opt-in</div>
+        <div class="about-stat__number">0</div>
+        <div class="about-stat__label">Gatekeepers</div>
       </div>
     </div>
   </div>
@@ -265,82 +399,113 @@
 <section class="about-team section" id="team">
   <div class="container">
     <div class="about-team__header">
-      <div class="about-team__label">The Team</div>
-      <h2 class="about-team__title">Built by people who've lived it.</h2>
-      <p class="about-team__sub">We're artists, managers, engineers, and music lovers who got tired of watching talent slip through the cracks of a broken system.</p>
+      <div class="about-team__label">Core Team</div>
+      <h2 class="about-team__title">Artist-led, fan first.</h2>
+      <p class="about-team__sub">Grouped was born from firsthand experience. Every problem we solve is one we lived through first.</p>
     </div>
     <div class="about-team__grid">
-      <!-- Team Member 1 -->
+      <!-- Seth — Co-Founder / CEO -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Founder Name</div>
-        <div class="about-team-card__role">Co-Founder & CEO</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
+        <div class="about-team-card__name">Seth</div>
+        <div class="about-team-card__role">Co-Founder / CEO</div>
+        <div class="about-team-card__note">Full-time music artist for 7 years. Founded Tribly, acquired by Grouped.</div>
+        <div class="about-team-card__socials">
+          <!-- CMS: only render <a> tags for platforms this person uses -->
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
       </div>
-      <!-- Team Member 2 -->
+      <!-- Tim — Co-Founder / President -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Co-Founder Name</div>
-        <div class="about-team-card__role">Co-Founder & CTO</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
+        <div class="about-team-card__name">Tim</div>
+        <div class="about-team-card__role">Co-Founder / President</div>
+        <div class="about-team-card__note">Founded GoodMusicAllDay (1M daily users). Sold businesses to Spotify and LiveNation.</div>
+        <div class="about-team-card__socials">
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
       </div>
-      <!-- Team Member 3 -->
+      <!-- Ben — CTO -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Head of Product</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
+        <div class="about-team-card__name">Ben</div>
+        <div class="about-team-card__role">Chief Technical Officer</div>
+        <div class="about-team-card__note">Co-founded and exited Navagis. 10+ years building high-growth tech startups.</div>
+        <div class="about-team-card__socials">
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
       </div>
-      <!-- Team Member 4 -->
+      <!-- Lucy — Head of Marketing -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Head of Artist Relations</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
+        <div class="about-team-card__name">Lucy</div>
+        <div class="about-team-card__role">Head of Marketing</div>
+        <div class="about-team-card__note">Former major label brand manager. 6 SaaS launches, 12 brands built from the ground up.</div>
+        <div class="about-team-card__socials">
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
       </div>
-      <!-- Team Member 5 -->
+      <!-- mike. — Artist Partner -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Lead Engineer</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
+        <div class="about-team-card__name">Mike</div>
+        <div class="about-team-card__role">Artist Partner</div>
+        <div class="about-team-card__note">One of the largest independent artists in the world. Built one of the best fan communities online.</div>
+        <div class="about-team-card__socials">
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        </div>
       </div>
-      <!-- Team Member 6 -->
+      <!-- Nic D — Artist Partner -->
       <div class="about-team-card">
         <div class="about-team-card__photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
         </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Design Lead</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
-      </div>
-      <!-- Team Member 7 -->
-      <div class="about-team-card">
-        <div class="about-team-card__photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
+        <div class="about-team-card__name">Nic D</div>
+        <div class="about-team-card__role">Artist Partner</div>
+        <div class="about-team-card__note">Pioneered artist education around going independent. One of the largest indie artists in the world.</div>
+        <div class="about-team-card__socials">
+          <a href="#" class="about-team-card__social" data-social="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="instagram" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="soundcloud" aria-label="SoundCloud"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.104.094.057 0 .09-.038.104-.096l.21-1.306-.21-1.334c-.014-.057-.047-.09-.104-.09m1.848-1.205c-.065 0-.105.05-.112.11l-.217 2.52.217 2.434c.007.065.047.112.112.112.063 0 .1-.047.112-.112l.25-2.434-.264-2.52c-.012-.06-.05-.11-.112-.11m.848-.2c-.074 0-.117.057-.122.12l-.213 2.72.213 2.434c.005.07.048.12.122.12.073 0 .112-.05.122-.12l.247-2.434-.247-2.72c-.01-.063-.05-.12-.122-.12m.874-.143c-.08 0-.127.06-.132.13l-.208 2.863.208 2.42c.005.075.052.13.132.13s.122-.055.132-.13l.24-2.42-.24-2.863c-.01-.07-.052-.13-.132-.13m.916-.18c-.09 0-.138.07-.143.14l-.195 3.043.195 2.404c.005.085.053.14.143.14.088 0 .133-.06.143-.14l.227-2.404-.227-3.043c-.01-.07-.055-.14-.143-.14m.95-.143c-.098 0-.15.075-.153.15l-.188 3.186.188 2.39c.003.09.055.15.153.15.097 0 .147-.06.153-.15l.217-2.39-.217-3.186c-.006-.075-.056-.15-.153-.15m.986-.128c-.108 0-.16.08-.163.16l-.182 3.314.182 2.37c.003.095.055.16.163.16.107 0 .157-.065.163-.16l.212-2.37-.212-3.314c-.006-.08-.056-.16-.163-.16m1.08-.26c-.067 0-.12.025-.16.065-.04.04-.065.09-.067.16l-.167 3.574.167 2.347c.002.055.027.105.067.145.04.04.093.06.16.06.065 0 .117-.02.157-.06.04-.04.065-.09.067-.145l.197-2.347-.197-3.574c-.002-.07-.027-.12-.067-.16-.04-.04-.092-.065-.157-.065m1.006-.07c-.072 0-.13.027-.174.07-.044.045-.07.1-.072.17l-.158 3.644.158 2.333c.002.06.028.115.072.16.044.044.102.067.174.067.07 0 .128-.023.172-.067.044-.045.07-.1.072-.16l.185-2.333-.185-3.643c-.002-.07-.028-.126-.072-.17-.044-.044-.102-.07-.172-.07m2.004-.18c-.05-.05-.116-.078-.19-.078-.076 0-.14.028-.192.078-.05.05-.08.115-.082.19l-.14 3.823.14 2.3c.002.08.032.146.082.196.052.05.116.078.192.078.074 0 .138-.028.19-.078.05-.05.08-.117.082-.196l.165-2.3-.165-3.824c-.002-.075-.032-.14-.082-.19m.964 0c-.055-.055-.127-.083-.205-.083-.08 0-.15.028-.207.083-.055.055-.083.122-.085.205l-.133 3.818.133 2.285c.002.085.03.155.085.21.057.055.127.083.207.083.078 0 .15-.028.205-.083.055-.055.085-.125.087-.21l.155-2.285-.155-3.818c-.002-.083-.032-.15-.087-.205m1.072-.128c-.063-.06-.14-.09-.228-.09-.09 0-.166.03-.23.09-.062.06-.093.135-.095.225l-.125 3.82.125 2.266c.002.09.033.165.095.227.064.06.14.09.23.09.087 0 .163-.03.226-.09.063-.062.095-.137.097-.227l.147-2.266-.147-3.82c-.002-.09-.034-.164-.097-.225m3.347 1.85c0-.12-.03-.234-.088-.34-.058-.107-.137-.197-.238-.268-.1-.07-.213-.12-.338-.148-.124-.03-.25-.04-.383-.04-.152 0-.297.017-.43.05-.135.033-.263.077-.386.13-.06-.47-.16-.925-.295-1.362-.134-.437-.308-.857-.516-1.26-.21-.4-.457-.78-.74-1.136-.284-.357-.6-.68-.95-.965-.35-.285-.733-.53-1.148-.73-.416-.2-.86-.352-1.338-.458-.476-.105-.98-.158-1.51-.158-.532 0-1.036.053-1.512.158-.477.106-.923.258-1.34.458-.414.2-.797.445-1.147.73-.35.286-.666.608-.95.965-.283.356-.53.736-.74 1.136-.208.403-.382.823-.516 1.26-.135.437-.235.89-.296 1.362-.06.47-.09.954-.09 1.45 0 .78.113 1.54.34 2.28.224.74.546 1.42.97 2.032l.002.003c.012.018.024.036.037.053l6.398 8.393c.12.157.305.25.5.25.198 0 .38-.093.502-.25l6.4-8.394c.014-.018.026-.036.038-.054l.002-.002c.42-.612.745-1.29.97-2.033.226-.74.34-1.5.34-2.28z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="spotify" aria-label="Spotify"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="tiktok" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.75a8.18 8.18 0 004.77 1.52V6.84a4.84 4.84 0 01-1-.15z"/></svg></a>
+          <a href="#" class="about-team-card__social" data-social="twitter" aria-label="X / Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
         </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Growth & Marketing</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
-      </div>
-      <!-- Team Member 8 -->
-      <div class="about-team-card">
-        <div class="about-team-card__photo">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 12a5 5 0 100-10 5 5 0 000 10zM3 21v-1a7 7 0 0114 0v1"/></svg>
-        </div>
-        <div class="about-team-card__name">Team Member</div>
-        <div class="about-team-card__role">Community Manager</div>
-        <div class="about-team-card__note">placeholder for fun fact</div>
       </div>
     </div>
   </div>
