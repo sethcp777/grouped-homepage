@@ -95,7 +95,7 @@
      ------------------------------------------ */
   var stageNav = document.getElementById('stage-nav');
   var stageItems = stageNav ? stageNav.querySelectorAll('.stage-nav__item') : [];
-  var stageIds = ['capture', 'keep', 'grow', 'compound', 'reactivate'];
+  var stageIds = ['capture', 'keep', 'reactivate'];
 
   // Track which stage is in view
   stageIds.forEach(function(id) {
