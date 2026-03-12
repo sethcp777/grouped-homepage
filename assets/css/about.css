@@ -677,6 +677,8 @@ a.nav-link:hover .nav-link__label::after {
     background: rgba(255,255,255,0.06);
   }
 }
+/* Hide mobile CTAs on desktop */
+.nav-mobile-cta { display: none; }
 /* Mobile nav */
 @media screen and (max-width: 767px) {
   .nav { width: 100vw; left: 0; right: auto; }
@@ -703,15 +705,17 @@ a.nav-link:hover .nav-link__label::after {
     justify-content: flex-start;
     align-items: stretch;
     height: 100%;
-    padding-top: 6em;
-    overflow: hidden scroll;
+    padding-top: 4.5em;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .nav-link {
     justify-content: space-between;
     width: 100%;
-    padding: 0.875em 1.25em;
+    padding: 0.75em 1.25em;
   }
-  .nav-link__label { font-size: 1.75em; }
+  .nav-link__label { font-size: 1.6em; }
   .nav-dropdown {
     opacity: 1;
     pointer-events: auto;
@@ -752,6 +756,7 @@ a.nav-link:hover .nav-link__label::after {
   }
   :root { --nav-bg-height: 100dvh; }
   [data-menu-status="open"] {
+    height: 100dvh;
     .nav-bg { height: var(--nav-bg-height); }
     .page-overlay { opacity: 1; }
     .nav-center {
@@ -776,6 +781,49 @@ a.nav-link:hover .nav-link__label::after {
   }
   [data-dropdown-toggle="open"] .nav-link__dropdown-icon {
     transform: rotate(180deg);
+  }
+  /* Mobile CTA buttons at bottom of menu */
+  .nav-mobile-cta {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75em;
+    padding: 1.25em 1.25em 1.5em;
+    margin-top: 0.5em;
+    border-top: 1px solid var(--border);
+  }
+  .nav-mobile-cta__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3em;
+    border-radius: 0.5em;
+    font-family: 'Satoshi', sans-serif;
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    letter-spacing: 0.01em;
+  }
+  .nav-mobile-cta__btn--primary {
+    background: var(--gold);
+    color: var(--text-inverse);
+  }
+  .nav-mobile-cta__btn--primary:hover {
+    background: var(--gold-light);
+  }
+  .nav-mobile-cta__btn--secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--gray-200);
+  }
+  .nav-mobile-cta__btn--secondary:hover {
+    border-color: var(--border-hover);
+    color: var(--white);
+  }
+  /* Separator between nav links and dropdowns */
+  .nav-center__list > li + li > .nav-link {
+    border-top: 1px solid var(--border);
   }
 }
 @media screen and (max-width: 479px) {

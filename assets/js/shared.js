@@ -17,8 +17,10 @@
     });
   }
   document.querySelectorAll('[data-dropdown-toggle]').forEach(toggle => {
-    toggle.addEventListener('click', () => {
+    toggle.addEventListener('click', (e) => {
       if (!isMobile()) return;
+      // Prevent <a> tags from navigating when they have a dropdown on mobile
+      if (toggle.tagName === 'A') e.preventDefault();
       const isOpen = toggle.dataset.dropdownToggle === 'open';
       document.querySelectorAll('[data-dropdown-toggle]').forEach(t => { if (t !== toggle) t.dataset.dropdownToggle = ''; });
       toggle.dataset.dropdownToggle = isOpen ? '' : 'open';
