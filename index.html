@@ -4730,7 +4730,7 @@ body::after {
                   <div class="nav-container">
                     <ul class="nav-dropdown__content">
                       <li class="nav-dropdown__content-li">
-                        <a href="#" class="nav-dropdown__link">
+                        <a href="resources.html#blog" class="nav-dropdown__link">
                           <div class="nav-dropdown__link-bg">
                             <div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(251,146,60,0.12), rgba(251,146,60,0.02))"></div>
                             <div class="nav-dropdown__img-overlay"></div>
@@ -4769,7 +4769,7 @@ body::after {
                         </a>
                       </li>
                       <li class="nav-dropdown__content-li">
-                        <a href="#" class="nav-dropdown__link">
+                        <a href="case-studies.html" class="nav-dropdown__link">
                           <div class="nav-dropdown__link-bg">
                             <div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(236,72,153,0.12), rgba(236,72,153,0.02))"></div>
                             <div class="nav-dropdown__img-overlay"></div>
@@ -4787,7 +4787,7 @@ body::after {
                         </a>
                       </li>
                       <li class="nav-dropdown__content-li">
-                        <a href="#" class="nav-dropdown__link">
+                        <a href="resources.html#artist-faqs" class="nav-dropdown__link">
                           <div class="nav-dropdown__link-bg">
                             <div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(56,189,248,0.12), rgba(56,189,248,0.02))"></div>
                             <div class="nav-dropdown__img-overlay"></div>
@@ -4803,7 +4803,7 @@ body::after {
                         </a>
                       </li>
                       <li class="nav-dropdown__content-li">
-                        <a href="#" class="nav-dropdown__link">
+                        <a href="https://support.grouped.com" target="_blank" rel="noopener" class="nav-dropdown__link">
                           <div class="nav-dropdown__link-bg">
                             <div class="nav-dropdown__gradient" style="background:linear-gradient(135deg, rgba(34,211,238,0.12), rgba(34,211,238,0.02))"></div>
                             <div class="nav-dropdown__img-overlay"></div>
@@ -5823,18 +5823,18 @@ body::after {
 
     <!-- Case study stat callouts -->
     <div class="reveal" style="display:flex; flex-wrap:wrap; justify-content:center; gap:32px; margin-bottom:32px; padding:0 20px;">
-      <div style="text-align:center;">
+      <a href="case-study-forrest-frank.html" style="text-align:center; text-decoration:none;">
         <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">+1.2M</div>
         <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Forrest Frank &mdash; Instagram followers in 35 days</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">4.8M</div>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">PardyAlone &mdash; streams driven by a single fan vote</div>
-      </div>
-      <div style="text-align:center;">
-        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">120K</div>
-        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Surfaces &mdash; emails &rarr; sold-out tour</div>
-      </div>
+      </a>
+      <a href="case-study-jake-scott.html" style="text-align:center; text-decoration:none;">
+        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">300</div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">Jake Scott &mdash; paid members in 24 hours</div>
+      </a>
+      <a href="case-study-somo.html" style="text-align:center; text-decoration:none;">
+        <div style="font-size:clamp(24px,3vw,36px); font-weight:700; color:var(--gold); font-family:var(--font-display);">Sold out</div>
+        <div style="font-size:13px; color:var(--text-secondary); margin-top:4px;">SoMo &mdash; album release party, thousands in ticket revenue</div>
+      </a>
     </div>
 
     <div class="cs-marquee__track" id="cs-marquee-track">
@@ -5901,6 +5901,7 @@ body::after {
           <a href="for-teams.html" class="footer-col__link" data-underline-link>For Teams</a>
           <a href="smart-swaps.html" class="footer-col__link" data-underline-link>Smart Swaps</a>
           <a href="groups.html" class="footer-col__link" data-underline-link>Groups</a>
+          <a href="resources.html" class="footer-col__link" data-underline-link>Resources</a>
         </div>
       </div>
 
@@ -7520,7 +7521,7 @@ document.querySelectorAll('.fcard').forEach(card => {
         '</div>' +
       '</div>' +
       '<div class="cs-marquee__body">' +
-        '<p class="cs-marquee__quote">' + cs.quote + '</p>' +
+        (cs.quote ? '<p class="cs-marquee__quote">' + cs.quote + '</p>' : '') +
         '<div class="cs-marquee__artist">' +
           '<div class="cs-marquee__avatar" style="background: linear-gradient(135deg, ' + cs.avatarColor + ',0.25), ' + cs.avatarColor + ',0.1)); color: ' + cs.avatarColor + ',1); border: 1px solid ' + cs.avatarColor + ',0.2)">' + cs.initials + '</div>' +
           '<div>' +

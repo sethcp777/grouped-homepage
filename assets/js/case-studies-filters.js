@@ -7,7 +7,6 @@
   var state = {
     search: '',
     genre: 'all',
-    stage: [],
     features: [],
     kpis: [],
     sort: 'recent'
@@ -48,10 +47,7 @@
       var matchKpis = state.kpis.length === 0 ||
         state.kpis.some(function(k) { return cardKpis.indexOf(k) !== -1; });
 
-      var matchStage = state.stage.length === 0 ||
-        state.stage.indexOf(card.dataset.stage) !== -1;
-
-      var visible = matchSearch && matchGenre && matchFeatures && matchKpis && matchStage;
+      var visible = matchSearch && matchGenre && matchFeatures && matchKpis;
       card.classList.toggle('hidden', !visible);
     });
 
@@ -72,14 +68,16 @@
   var clearAllBtn = document.getElementById('cs-clear-all');
 
   var filterLabels = {
-    pop: 'Pop', rnb: 'R&B', 'hip-hop': 'Hip-Hop',
-    indie: 'Indie', hyperpop: 'Hyperpop',
+    'christian-pop': 'Christian Pop', 'rnb-pop': 'R&B / Pop',
+    'hyperpop-pop': 'Hyperpop / Pop', 'indie-pop': 'Indie Pop',
+    'pop-singer-songwriter': 'Pop / Singer-Songwriter',
+    pop: 'Pop', 'experimental-hip-hop': 'Experimental Hip-Hop',
     'fan-voting': 'Fan Voting', subscriptions: 'Subscriptions',
-    'email-campaigns': 'Email', merch: 'Merch',
-    'direct-messages': 'DMs',
-    followers: 'Followers', streams: 'Streams',
-    revenue: 'Revenue', 'email-signups': 'Signups',
-    emerging: 'Emerging', rising: 'Rising', established: 'Established'
+    livestreams: 'Livestreams', merch: 'Merch',
+    'social-automations': 'Social Automations', 'premiere-access': 'Premiere Access',
+    followers: 'Followers', revenue: 'Revenue',
+    'ticket-sales': 'Ticket Sales', subscribers: 'Subscribers',
+    'merch-sales': 'Merch Sales'
   };
 
   function renderActivePills() {
@@ -90,9 +88,6 @@
     if (state.genre !== 'all') {
       pills.push({ group: 'genre', value: state.genre, label: filterLabels[state.genre] || state.genre });
     }
-    state.stage.forEach(function(s) {
-      pills.push({ group: 'stage', value: s, label: filterLabels[s] || s });
-    });
     state.features.forEach(function(f) {
       pills.push({ group: 'features', value: f, label: filterLabels[f] || f });
     });
@@ -123,11 +118,6 @@
         c.classList.toggle('active', isAll);
         c.setAttribute('aria-pressed', isAll ? 'true' : 'false');
       });
-    } else if (group === 'stage') {
-      var idxS = state.stage.indexOf(value);
-      if (idxS !== -1) state.stage.splice(idxS, 1);
-      var chipS = document.querySelector('.cs-chip[data-group="stage"][data-filter="' + value + '"]');
-      if (chipS) { chipS.classList.remove('active'); chipS.setAttribute('aria-pressed', 'false'); }
     } else if (group === 'features') {
       var idx = state.features.indexOf(value);
       if (idx !== -1) state.features.splice(idx, 1);
@@ -174,16 +164,6 @@
         kpiCount.classList.remove('has-count');
       }
     }
-    var stageCount = document.querySelector('[data-count="stage"]');
-    if (stageCount) {
-      if (state.stage.length > 0) {
-        stageCount.textContent = state.stage.length;
-        stageCount.classList.add('has-count');
-      } else {
-        stageCount.textContent = '';
-        stageCount.classList.remove('has-count');
-      }
-    }
   }
 
   function applySort() {
@@ -219,7 +199,6 @@
   function clearAll() {
     state.search = '';
     state.genre = 'all';
-    state.stage = [];
     state.features = [];
     state.kpis = [];
     searchInput.value = '';
@@ -273,18 +252,6 @@
           c.classList.toggle('active', isActive);
           c.setAttribute('aria-pressed', isActive ? 'true' : 'false');
         });
-      } else if (group === 'stage') {
-        // Multi-select toggle
-        var idxS = state.stage.indexOf(value);
-        if (idxS === -1) {
-          state.stage.push(value);
-          chip.classList.add('active');
-          chip.setAttribute('aria-pressed', 'true');
-        } else {
-          state.stage.splice(idxS, 1);
-          chip.classList.remove('active');
-          chip.setAttribute('aria-pressed', 'false');
-        }
       } else if (group === 'features') {
         // Multi-select toggle
         var idx = state.features.indexOf(value);
