@@ -98,6 +98,68 @@
   }
 
   /* ------------------------------------------
+     Case Studies — populate from JSON data source
+     (mirrors WordPress REST API / custom post type pattern)
+     ------------------------------------------ */
+  var csGrid = document.getElementById('cs-grid');
+
+  function renderCaseStudies(data) {
+    if (!csGrid || !data || !data.length) return;
+
+    // Sort by date descending (newest first)
+    data.sort(function(a, b) {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    var html = '';
+    data.forEach(function(cs) {
+      html += '<a href="' + cs.ctaUrl + '" class="res-cs-card" data-resource>'
+        + '<div class="res-cs-card__img" style="background-color:' + cs.imageBg + ';">'
+        + '<img src="' + cs.imageUrl + '" alt="' + cs.name + '" loading="lazy">'
+        + '</div>'
+        + '<h3 class="res-cs-card__name">' + cs.name + '</h3>'
+        + '<div class="res-cs-card__meta">' + cs.meta + '</div>'
+        + '<div class="res-cs-card__stat">'
+        + '<span class="res-cs-card__stat-value">' + cs.stat + '</span>'
+        + '<span class="res-cs-card__stat-label">' + cs.statLabel + '</span>'
+        + '</div>'
+        + '</a>';
+    });
+
+    csGrid.innerHTML = html;
+
+    // Re-query searchable items so dynamically added cards are included
+    allResources = document.querySelectorAll('[data-resource]');
+    sections = document.querySelectorAll('.res-section');
+
+    // Animate cards in if GSAP is available
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      var csCards = csGrid.querySelectorAll('.res-cs-card');
+      gsap.set(csCards, { opacity: 0, y: 40 });
+      ScrollTrigger.create({
+        trigger: csGrid,
+        start: 'top 80%',
+        once: true,
+        onEnter: function() {
+          gsap.to(csCards, {
+            opacity: 1, y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power3.out'
+          });
+        }
+      });
+    }
+  }
+
+  if (csGrid) {
+    fetch('case-studies.json?v=2')
+      .then(function(res) { return res.json(); })
+      .then(renderCaseStudies)
+      .catch(function(err) { console.warn('Could not load case studies:', err); });
+  }
+
+  /* ------------------------------------------
      Smooth scroll for category cards
      ------------------------------------------ */
   categoryCards.forEach(function(card) {
