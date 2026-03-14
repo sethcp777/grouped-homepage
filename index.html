@@ -2705,48 +2705,6 @@ a.nav-link:hover .nav-link__label::after {
   position: absolute;
 }
 
-/* Paginate: show only first 6 by default */
-.filter-list__item:nth-child(n+7) {
-  display: none;
-}
-.filter-list.is--expanded .filter-list__item:nth-child(n+7) {
-  display: block;
-}
-
-/* "See all / Show less" toggle */
-.features-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 28px;
-}
-.features-toggle__btn {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--gold);
-  background: transparent;
-  border: 1px solid rgba(196,138,58,0.3);
-  border-radius: 9999px;
-  padding: 10px 28px;
-  cursor: pointer;
-  transition: all 0.3s var(--ease-out);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.features-toggle__btn:hover {
-  background: rgba(196,138,58,0.08);
-  border-color: var(--gold);
-}
-.features-toggle__btn svg {
-  width: 14px;
-  height: 14px;
-  transition: transform 0.3s var(--ease-out);
-}
-.filter-list.is--expanded ~ .features-toggle .features-toggle__btn svg {
-  transform: rotate(180deg);
-}
-
 @media (max-width: 1024px) {
   .filter-list { grid-template-columns: repeat(2, 1fr); }
 }
@@ -5704,13 +5662,6 @@ body::after {
       </div>
     </div>
 
-    <div class="features-toggle">
-      <button class="features-toggle__btn" id="features-toggle-btn">
-        <span class="features-toggle__text">See all features</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
-      </button>
-    </div>
-
     <div class="features-bottom reveal" style="display:flex; align-items:center; justify-content:center; gap:20px; margin-top:40px; flex-wrap:wrap;">
       <span style="font-size:14px; color:var(--text-secondary);">Don't see what you need? We build what artists ask for.</span>
       <button class="btn-primary feature-modal-btn" id="feature-modal-trigger" style="font-size:14px; padding:11px 24px; cursor:pointer; box-shadow: 0 0 20px var(--gold-glow);">
@@ -6685,18 +6636,6 @@ document.querySelectorAll('.fcard').forEach(card => {
     card.classList.toggle('is-flipped');
   });
 });
-
-// Feature pagination toggle
-(function() {
-  var btn = document.getElementById('features-toggle-btn');
-  var list = document.getElementById('feature-filter-list');
-  if (!btn || !list) return;
-  var label = btn.querySelector('.features-toggle__text');
-  btn.addEventListener('click', function() {
-    var expanded = list.classList.toggle('is--expanded');
-    if (label) label.textContent = expanded ? 'Show less' : 'See all features';
-  });
-})();
 
 // Feature filter — multi-match pattern
 (function initFeatureFilter() {
