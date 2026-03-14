@@ -2705,6 +2705,52 @@ a.nav-link:hover .nav-link__label::after {
   position: absolute;
 }
 
+/* ── Feature pagination slider ── */
+.features-slider {
+  position: relative;
+  overflow: hidden;
+}
+.features-slider__track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.features-slider__page {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+.features-slider__page .filter-list {
+  /* inherit the normal grid */
+}
+.features-pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+.features-pager__btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(196,138,58,0.3);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  font-family: 'Satoshi', sans-serif;
+}
+.features-pager__btn:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+.features-pager__btn.is--active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--bg-base);
+}
+
 @media (max-width: 1024px) {
   .filter-list { grid-template-columns: repeat(2, 1fr); }
 }
@@ -5287,13 +5333,17 @@ body::after {
     <div data-filter-group="" role="group" class="filter-group">
       <!-- Filter buttons hidden for now — may re-enable later -->
       <div class="filter-buttons reveal" style="display:none;">
-        <button data-filter-target="all" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">All</button>
-        <button data-filter-target="live" data-filter-status="active" aria-pressed="true" aria-controls="feature-filter-list" class="filter-btn">Live</button>
+        <button data-filter-target="all" data-filter-status="active" aria-pressed="true" aria-controls="feature-filter-list" class="filter-btn">All</button>
+        <button data-filter-target="live" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Live</button>
         <button data-filter-target="soon" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Coming Soon</button>
         <button data-filter-target="roadmap" data-filter-status="not-active" aria-pressed="false" aria-controls="feature-filter-list" class="filter-btn">Roadmap</button>
       </div>
 
-      <div aria-live="polite" role="list" id="feature-filter-list" class="filter-list">
+      <div class="features-slider" id="features-slider">
+        <div class="features-slider__track" id="features-slider-track">
+          <!-- Page 1 -->
+          <div class="features-slider__page">
+            <div aria-live="polite" role="list" id="feature-filter-list" class="filter-list">
 
         <!-- 1. Smart Swaps — Live -->
         <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
@@ -5494,6 +5544,13 @@ body::after {
           </div>
         </div>
 
+            </div><!-- /.filter-list (page 1) -->
+          </div><!-- /.features-slider__page (page 1) -->
+
+          <!-- Page 2 -->
+          <div class="features-slider__page">
+            <div role="list" class="filter-list">
+
         <!-- 9. Fan Voting / Polling — Live -->
         <div role="listitem" data-filter-name="" data-filter-status="active" class="filter-list__item">
           <div class="fcard">
@@ -5659,7 +5716,16 @@ body::after {
           </div>
         </div>
 
+            </div><!-- /.filter-list (page 2) -->
+          </div><!-- /.features-slider__page (page 2) -->
+        </div><!-- /.features-slider__track -->
+      </div><!-- /.features-slider -->
+
+      <div class="features-pager" id="features-pager">
+        <button class="features-pager__btn is--active" data-page="0">1</button>
+        <button class="features-pager__btn" data-page="1">2</button>
       </div>
+
     </div>
 
     <div class="features-bottom reveal" style="display:flex; align-items:center; justify-content:center; gap:20px; margin-top:40px; flex-wrap:wrap;">
@@ -6636,6 +6702,26 @@ document.querySelectorAll('.fcard').forEach(card => {
     card.classList.toggle('is-flipped');
   });
 });
+
+// Feature pagination slider
+(function() {
+  var track = document.getElementById('features-slider-track');
+  var pager = document.getElementById('features-pager');
+  if (!track || !pager) return;
+  var buttons = pager.querySelectorAll('.features-pager__btn');
+  var currentPage = 0;
+
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var page = parseInt(btn.getAttribute('data-page'), 10);
+      if (page === currentPage) return;
+      currentPage = page;
+      track.style.transform = 'translateX(-' + (page * 100) + '%)';
+      buttons.forEach(function(b) { b.classList.remove('is--active'); });
+      btn.classList.add('is--active');
+    });
+  });
+})();
 
 // Feature filter — multi-match pattern
 (function initFeatureFilter() {
