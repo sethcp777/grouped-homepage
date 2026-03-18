@@ -687,17 +687,13 @@
 (function initWhatWeAre() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  var label = document.querySelector('.what-we-are__label');
   var sub = document.querySelector('.what-we-are__sub');
-  var headline = document.querySelector('.what-we-are__headline');
   var body = document.querySelector('.what-we-are__body');
-  if (!headline) return;
+  if (!body) return;
 
   var els = [];
-  if (label) els.push(label);
   if (sub) els.push(sub);
-  els.push(headline);
-  if (body) els.push(body);
+  els.push(body);
 
   gsap.set(els, { opacity: 0, y: 30 });
   ScrollTrigger.create({
