@@ -99,6 +99,7 @@ button { border: none; background: none; cursor: pointer; font: inherit; color: 
   --radius-full: 9999px;
   --container: 1200px;
   --section-pad: clamp(80px, 10vw, 140px);
+  --eyebrow-h: 42px;
 }
 
 /* ============================================
@@ -138,8 +139,11 @@ h3 { line-height: 1.15; letter-spacing: -0.015em; }
   background: linear-gradient(90deg, rgba(196,138,58,0.12), rgba(196,138,58,0.06));
   border-bottom: 1px solid rgba(196,138,58,0.15);
   padding: 10px 0;
-  position: relative;
-  z-index: 110;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
 }
 .eyebrow-banner.is-hidden { display: none; }
 .eyebrow-banner__inner {
@@ -235,7 +239,7 @@ h3 { line-height: 1.15; letter-spacing: -0.015em; }
   z-index: 1000;
   color: var(--white);
   position: fixed;
-  top: 0;
+  top: var(--eyebrow-h);
   left: 0;
   right: 0;
   transition: color var(--nav-fast) var(--nav-cubic);
@@ -1105,7 +1109,7 @@ a.nav-link:hover .nav-link__label::after {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: max(120px, 12vh) 32px 40px;
+  padding: calc(max(120px, 12vh) + var(--eyebrow-h)) 32px 40px;
   position: relative;
   overflow: hidden;
 }

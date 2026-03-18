@@ -664,14 +664,19 @@
   var closeBtn = document.getElementById('eyebrow-close');
   if (!banner || !closeBtn) return;
 
+  function hideEyebrow() {
+    banner.classList.add('is-hidden');
+    document.documentElement.style.setProperty('--eyebrow-h', '0px');
+  }
+
   // Check if already dismissed
   if (localStorage.getItem('eyebrow-dismissed') === '1') {
-    banner.classList.add('is-hidden');
+    hideEyebrow();
     return;
   }
 
   closeBtn.addEventListener('click', function() {
-    banner.classList.add('is-hidden');
+    hideEyebrow();
     localStorage.setItem('eyebrow-dismissed', '1');
   });
 })();
