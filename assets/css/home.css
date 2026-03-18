@@ -1516,3 +1516,185 @@ a.nav-link:hover .nav-link__label::after {
   .hero { padding: max(100px, 10vh) 20px 32px; }
 }
 
+/* ============================================
+   SOCIAL PROOF
+   ============================================ */
+.social-proof {
+  padding: var(--section-pad) 0;
+  position: relative;
+  overflow: hidden;
+}
+.social-proof-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.social-proof-headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(24px, 3vw, 42px);
+  line-height: 1.15;
+  color: var(--white);
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto clamp(40px, 6vw, 72px);
+  padding: 0 32px;
+  letter-spacing: -0.02em;
+  font-weight: normal;
+}
+
+/* ---- Artist Marquee ---- */
+.artist-marquee {
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
+}
+.artist-marquee-track {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  width: max-content;
+  will-change: transform;
+}
+
+/* ---- Artist Bubble ---- */
+.artist-bubble {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.4s var(--ease-out);
+}
+.artist-bubble img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.artist-bubble:hover {
+  transform: scale(1.2);
+  z-index: 5;
+}
+.artist-bubble:hover img {
+  border-color: var(--gold);
+  box-shadow: 0 0 24px rgba(196,138,58,0.25);
+}
+
+/* ---- Bubble Hover Info ---- */
+.artist-bubble-info {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  min-width: 160px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
+  box-shadow: var(--shadow-lg);
+  z-index: 10;
+}
+.artist-bubble-info::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--bg-raised);
+}
+.artist-bubble:hover .artist-bubble-info {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.artist-bubble-name {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.artist-bubble-group {
+  display: block;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.artist-bubble-cta {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  transition: color 0.2s;
+}
+.artist-bubble:hover .artist-bubble-cta {
+  color: var(--gold-light);
+}
+
+/* ---- CTA ---- */
+.social-proof-cta {
+  margin-top: clamp(32px, 5vw, 56px);
+  text-align: center;
+}
+
+/* ---- Metrics Bar ---- */
+.social-proof-metrics {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: clamp(32px, 5vw, 56px);
+  padding: 16px 32px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-label);
+}
+.social-proof-metric {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+.social-proof-metric-value {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700;
+  color: var(--white);
+}
+.social-proof-metric-label {
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+.social-proof-metric-divider {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gray-500);
+  flex-shrink: 0;
+}
+
+/* ---- Social Proof Responsive ---- */
+@media (max-width: 768px) {
+  .social-proof-metrics {
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 16px;
+    padding: 24px 32px;
+  }
+  .social-proof-metric-divider { display: none; }
+  .artist-bubble { width: 64px; height: 64px; }
+  .artist-marquee-track { gap: 24px; }
+}
+@media (max-width: 480px) {
+  .social-proof-headline { font-size: clamp(22px, 6vw, 32px); }
+}
+

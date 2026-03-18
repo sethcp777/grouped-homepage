@@ -201,3 +201,65 @@
 
   // Total cycle: ~24s
 })();
+
+/* ============================================
+   ARTIST MARQUEE — Infinite horizontal scroll
+   ============================================ */
+(function initArtistMarquee() {
+  if (typeof gsap === 'undefined') return;
+
+  var track = document.getElementById('artist-marquee-track');
+  var marquee = document.getElementById('artist-marquee');
+  if (!track || !marquee) return;
+
+  // Duplicate the bubbles for seamless loop
+  var items = track.innerHTML;
+  track.innerHTML = items + items;
+
+  // Measure one set width
+  var allBubbles = track.querySelectorAll('.artist-bubble');
+  var halfCount = allBubbles.length / 2;
+  var singleSetWidth = 0;
+  for (var i = 0; i < halfCount; i++) {
+    singleSetWidth += allBubbles[i].offsetWidth + 32; // 32 = gap
+  }
+
+  // GSAP tween: scroll the track left by one full set, then repeat seamlessly
+  var speed = 40; // pixels per second
+  var duration = singleSetWidth / speed;
+
+  var scrollTween = gsap.to(track, {
+    x: -singleSetWidth,
+    duration: duration,
+    ease: 'none',
+    repeat: -1,
+    modifiers: {
+      x: function(x) {
+        return (parseFloat(x) % singleSetWidth) + 'px';
+      }
+    }
+  });
+
+  // Hover: slow down smoothly and stop
+  var isHovered = false;
+
+  marquee.addEventListener('mouseenter', function() {
+    isHovered = true;
+    gsap.to(scrollTween, { timeScale: 0, duration: 0.6, ease: 'power2.out' });
+  });
+
+  marquee.addEventListener('mouseleave', function() {
+    isHovered = false;
+    gsap.to(scrollTween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut' });
+  });
+
+  // Touch: pause on touch, resume on release
+  marquee.addEventListener('touchstart', function() {
+    gsap.to(scrollTween, { timeScale: 0, duration: 0.4, ease: 'power2.out' });
+  }, { passive: true });
+
+  marquee.addEventListener('touchend', function() {
+    gsap.to(scrollTween, { timeScale: 1, duration: 0.6, ease: 'power2.inOut' });
+  }, { passive: true });
+
+})();
