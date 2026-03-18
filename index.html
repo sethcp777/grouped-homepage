@@ -7,11 +7,25 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
+
+<!-- ============================================
+     EYEBROW BANNER
+     ============================================ -->
+<div class="eyebrow-banner" id="eyebrow-banner">
+  <div class="eyebrow-banner__inner">
+    <span class="eyebrow-banner__text">Are you an artist? Get a free music video.</span>
+    <a href="#" class="eyebrow-banner__cta">Claim Your Spot <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    <button class="eyebrow-banner__close" id="eyebrow-close" aria-label="Dismiss banner">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4l8 8M12 4l-8 8"/></svg>
+    </button>
+  </div>
+</div>
 
 <!-- ============================================
      NAVIGATION
@@ -120,14 +134,14 @@
     <!-- Left column: text -->
     <div class="hero-text">
       <h1 class="hero-headline font-display">Keep every fan<br>you earn.</h1>
+      <span class="hero-annotation">*on autopilot</span>
       <div class="hero-sub">
-        <p>Your music is already finding fans on stages, in playlists, and across feeds. Grouped captures the ones worth keeping. It gives them somewhere to land, builds their profile automatically, and ensures they're still there for your next release.</p>
-        <p>Not just your superfans. Every fan. In a channel you own.</p>
+        <p>Grouped captures every fan your music creates and keeps them engaged between releases. When you're ready to move, they're already there. You make the music. The growth takes care of itself.</p>
       </div>
       <div class="hero-ctas">
-        <a href="#start" class="btn-primary">Start your first release free</a>
-        <a href="#how-it-works" class="hero-cta-link">
-          See how it works for artists like you
+        <a href="#" class="btn-primary">Sign Up</a>
+        <a href="#case-studies" class="hero-cta-link">
+          See How It Works
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
       </div>
@@ -365,170 +379,182 @@
 </section>
 
 <!-- ============================================
-     BENEFITS
+     PROBLEM STATEMENT
      ============================================ -->
-<section class="benefits" id="benefits">
-  <div class="benefits-header">
-    <h2 class="benefits-headline font-display">You're already earning fans.<br>Here's how to actually keep them.</h2>
-    <span class="benefits-headline-accent"></span>
+<div class="problem-statement" id="problem">
+  <p class="problem-statement__text font-display">Potential fans slip through your fingers with every release. Not because your music missed. Because there was nowhere for them to land.</p>
+</div>
+
+<!-- ============================================
+     SOLUTION INTRO / "THE MAGIC"
+     ============================================ -->
+<section class="solution-intro" id="solution">
+  <div class="solution-intro__inner">
+    <h2 class="solution-intro__headline font-display">The magic behind some of the world's largest independent artists.</h2>
+    <p class="solution-intro__sub">One place to identify your real fans, reach them directly, and grow your career with every release.</p>
   </div>
+</section>
 
-  <!-- Scroll progress dots -->
-  <div class="benefits-progress" id="benefits-progress">
-    <div class="benefits-progress-dot" data-target="1"></div>
-    <div class="benefits-progress-dot" data-target="2"></div>
-    <div class="benefits-progress-dot" data-target="3"></div>
+<!-- ============================================
+     THREE PILLARS: Identify / Reach / Grow
+     ============================================ -->
+<section class="pillars" id="pillars">
+  <div class="pillars__inner">
+    <div class="pillars__grid">
+
+      <div class="pillar" data-pillar="identify">
+        <h3 class="pillar__word font-display">Identify</h3>
+        <p class="pillar__tagline">Know who's actually a fan.</p>
+        <ul class="pillar__bullets">
+          <li>Find the fans you already have but don't know yet</li>
+          <li>Separate real fans from passive followers</li>
+          <li>Know exactly who shows up for every release</li>
+        </ul>
+      </div>
+
+      <div class="pillar" data-pillar="reach">
+        <h3 class="pillar__word font-display">Reach</h3>
+        <p class="pillar__tagline">A direct line. No middleman, no per-send fees.</p>
+        <ul class="pillar__bullets">
+          <li>Reach every fan every time, not just the algorithm's pick</li>
+          <li>Direct reach that doesn't punish you as you grow</li>
+          <li>Host content, send updates, stay connected in one place you own</li>
+        </ul>
+      </div>
+
+      <div class="pillar" data-pillar="grow">
+        <h3 class="pillar__word font-display">Grow</h3>
+        <p class="pillar__tagline">More streams. More revenue. Never starting over.</p>
+        <ul class="pillar__bullets">
+          <li>More followers, more streams, more ticket sales</li>
+          <li>Your fans become your focus group</li>
+          <li>Every release builds on the last one</li>
+        </ul>
+      </div>
+
+    </div>
   </div>
+</section>
 
-  <div class="benefits-stack">
+<!-- ============================================
+     HOW IT WORKS — 1-2-3 Steps
+     ============================================ -->
+<section class="how-it-works" id="how-it-works">
+  <div class="how-it-works__inner">
+    <div class="how-it-works__header">
+      <div class="label label-gold">How it works</div>
+      <h2 class="how-it-works__headline font-display">From first listen to forever fan.</h2>
+    </div>
 
-    <!-- Card 1: Smart Swaps -->
-    <div class="benefit-card" data-card="1">
-      <div class="benefit-card-inner">
-        <div class="benefit-card-number">1</div>
-        <div class="benefit-text">
-          <div class="benefit-label label label-gold">01 &mdash; Smart Swaps</div>
-          <h3 class="benefit-title font-display">Know which followers are actually fans.</h3>
-          <div class="benefit-points">
-            <div class="benefit-point">
-              <p>Smart Swaps trade early access for fan identity. Fans give you their name, email, and phone &mdash; voluntarily, because the moment is worth it.</p>
-            </div>
-            <div class="benefit-point">
-              <p><strong>92% average swap completion rate.</strong> Fans show up when the offer is real.</p>
-            </div>
-            <div class="benefit-point">
-              <p>Every fan builds a profile automatically over time &mdash; engagement level, location, how they found you &mdash; all at your fingertips.</p>
-            </div>
-          </div>
-          <a href="smart-swaps.html" class="btn-primary">See how Smart Swaps work</a>
+    <div class="how-it-works__steps">
+
+      <div class="hiw-step" data-step="1">
+        <div class="hiw-step__number">1</div>
+        <div class="hiw-step__content">
+          <h3 class="hiw-step__title font-display">Create a moment worth showing up for</h3>
+          <p class="hiw-step__desc">Set up an early access swap. Fans unlock your music or exclusive content by sharing their contact info. You own the relationship. They get something real.</p>
         </div>
-        <div class="benefit-visual">
-          <div class="benefit-mockup benefit-mockup-swap">
-            <div class="mockup-swap-art"></div>
-            <div class="mockup-swap-label">NOVA JAMES</div>
-            <div class="mockup-swap-title">Unlock early access</div>
-            <div class="mockup-swap-field"><span>Your name</span></div>
-            <div class="mockup-swap-field"><span>Email</span></div>
-            <div class="mockup-swap-btn">Get Access</div>
-          </div>
-          <div class="benefit-stat" id="benefit-stat-92">
-            <span class="benefit-stat-value" data-target="92">0</span><span class="benefit-stat-percent">%</span>
-            <span class="benefit-stat-label">completion rate</span>
+        <div class="hiw-step__visual">
+          <div class="hiw-step__placeholder">
+            <span class="hiw-step__placeholder-label">Visual: Swap page UI, fan entering email to unlock early access</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Card 2: Direct Reach -->
-    <div class="benefit-card" data-card="2">
-      <div class="benefit-card-inner">
-        <div class="benefit-card-number">2</div>
-        <div class="benefit-text">
-          <div class="benefit-label label label-gold">02 &mdash; Direct Reach</div>
-          <h3 class="benefit-title font-display">A direct line to every fan. No per-send bill.</h3>
-          <div class="benefit-points">
-            <div class="benefit-point">
-              <p>A direct message to your fans isn't a marketing expense. It's the relationship itself. Whether they're paying subscribers or just the people who showed up for your last release, reaching them directly is what Grouped is built for &mdash; and it doesn't cost you extra to do it.</p>
-            </div>
-            <div class="benefit-point">
-              <p>Send an email to your fans with the click of a button every time you have a new update. No separate email platform. No per-send cost. One post reaches everyone.</p>
-            </div>
-            <div class="benefit-point">
-              <p>Your fans opted in because they wanted to hear from you. A direct channel you own beats an algorithm that decides whether to show your post.</p>
-            </div>
-          </div>
-          <a href="groups.html" class="btn-primary">Explore how Groups reach fans</a>
+      <div class="hiw-step" data-step="2">
+        <div class="hiw-step__number">2</div>
+        <div class="hiw-step__content">
+          <h3 class="hiw-step__title font-display">Drop them in a space you actually own</h3>
+          <p class="hiw-step__desc">Every fan who unlocks lands on your media page. They can listen, comment, share. Not a link. A home.</p>
         </div>
-        <div class="benefit-visual">
-          <div class="benefit-mockup benefit-mockup-inbox">
-            <div class="mockup-inbox-header">
-              <div class="mockup-inbox-bell">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-              </div>
-              <span>Updates</span>
-            </div>
-            <div class="mockup-inbox-msg">
-              <div class="mockup-inbox-dot"></div>
-              <div class="mockup-inbox-msg-body">
-                <div class="mockup-inbox-msg-title">New single drops Friday</div>
-                <div class="mockup-inbox-msg-sub">Pre-save link inside &rarr;</div>
-              </div>
-            </div>
-            <div class="mockup-inbox-msg">
-              <div class="mockup-inbox-dot"></div>
-              <div class="mockup-inbox-msg-body">
-                <div class="mockup-inbox-msg-title">Tour dates just announced</div>
-                <div class="mockup-inbox-msg-sub">Presale code for Group members</div>
-              </div>
-            </div>
-            <div class="mockup-inbox-msg mockup-inbox-msg--read">
-              <div class="mockup-inbox-msg-body">
-                <div class="mockup-inbox-msg-title">Behind the scenes: studio session</div>
-                <div class="mockup-inbox-msg-sub">Watch the new video</div>
-              </div>
-            </div>
-            <div class="mockup-inbox-send">Send to all fans <span class="mockup-inbox-count">3</span></div>
-          </div>
-          <div class="benefit-badge">
-            <span>$0 per send</span>
+        <div class="hiw-step__visual">
+          <div class="hiw-step__placeholder">
+            <span class="hiw-step__placeholder-label">Visual: Media page with audio player, comments, share actions</span>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Card 3: Compounding -->
-    <div class="benefit-card" data-card="3">
-      <div class="benefit-card-inner">
-        <div class="benefit-card-number">3</div>
-        <div class="benefit-text">
-          <div class="benefit-label label label-gold">03 &mdash; Compounding Growth</div>
-          <h3 class="benefit-title font-display">Every release builds on the last.</h3>
-          <div class="benefit-points">
-            <div class="benefit-point">
-              <p>Every fan who opts in through a swap lands in your Group &mdash; a home base that stays active between releases without requiring daily posts from you.</p>
-            </div>
-            <div class="benefit-point">
-              <p>What took mike. 15 years of manual relationship-building, Grouped starts doing automatically from your very first release.</p>
-            </div>
-            <div class="benefit-point">
-              <p>SoMo sold out an album release party and generated thousands in direct ticket revenue by going to his Group first. Forrest Frank gained 1.2M Instagram followers in 60 days after letting his top fans steer his next release.</p>
-            </div>
-          </div>
-          <a href="case-studies.html" class="btn-primary">See what artists are building</a>
+      <div class="hiw-step" data-step="3">
+        <div class="hiw-step__number">3</div>
+        <div class="hiw-step__content">
+          <h3 class="hiw-step__title font-display">Send them anywhere, or bring them into your Group</h3>
+          <p class="hiw-step__desc">After the moment, decide where they go. Send fans to any destination you want, or pull them into your Group, where you can reach them again and again.</p>
         </div>
-        <div class="benefit-visual">
-          <div class="benefit-mockup benefit-mockup-chart">
-            <div class="mockup-chart-label">Fan growth</div>
-            <svg class="mockup-chart-svg" viewBox="0 0 300 160" fill="none" preserveAspectRatio="none">
-              <path class="mockup-chart-fill" d="M0 150 Q50 145 75 135 Q100 125 125 110 Q150 90 175 65 Q200 40 225 25 Q250 15 275 8 Q290 5 300 3 L300 160 L0 160 Z" fill="url(#chartFillGrad)" opacity="0.3"/>
-              <path class="mockup-chart-line" d="M0 150 Q50 145 75 135 Q100 125 125 110 Q150 90 175 65 Q200 40 225 25 Q250 15 275 8 Q290 5 300 3" stroke="url(#chartGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-              <!-- Data points at each release milestone -->
-              <circle class="mockup-chart-dot-pulse" cx="0" cy="150" r="4" data-dot="1"/>
-              <circle class="mockup-chart-dot" cx="0" cy="150" r="3.5" data-dot="1"/>
-              <circle class="mockup-chart-dot-pulse" cx="100" cy="125" r="4" data-dot="2"/>
-              <circle class="mockup-chart-dot" cx="100" cy="125" r="3.5" data-dot="2"/>
-              <circle class="mockup-chart-dot-pulse" cx="200" cy="40" r="4" data-dot="3"/>
-              <circle class="mockup-chart-dot" cx="200" cy="40" r="3.5" data-dot="3"/>
-              <circle class="mockup-chart-dot-pulse" cx="300" cy="3" r="4" data-dot="4"/>
-              <circle class="mockup-chart-dot" cx="300" cy="3" r="3.5" data-dot="4"/>
-              <defs>
-                <linearGradient id="chartGrad" x1="0" y1="0" x2="300" y2="0"><stop offset="0%" stop-color="#C48A3A" stop-opacity="0.4"/><stop offset="100%" stop-color="#C48A3A"/></linearGradient>
-                <linearGradient id="chartFillGrad" x1="0" y1="0" x2="0" y2="160"><stop offset="0%" stop-color="#C48A3A" stop-opacity="0.2"/><stop offset="100%" stop-color="#C48A3A" stop-opacity="0"/></linearGradient>
-              </defs>
-            </svg>
-            <div class="mockup-chart-releases">
-              <span>Release 1</span><span>Release 2</span><span>Release 3</span><span>Release 4</span>
-            </div>
-          </div>
-          <div class="benefit-badge benefit-badge-compare">
-            <span class="benefit-badge-old">mike. &mdash; 15 years</span>
-            <span class="benefit-badge-arrow">&rarr;</span>
-            <span class="benefit-badge-new">You &mdash; Release 1</span>
+        <div class="hiw-step__visual">
+          <div class="hiw-step__placeholder">
+            <span class="hiw-step__placeholder-label">Visual: CATA banner animation showing "Join OnlySteves" Group invite</span>
           </div>
         </div>
       </div>
+
     </div>
 
+    <a href="smart-swaps.html" class="how-it-works__secondary-cta">Learn more about Smart Swaps <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<!-- ============================================
+     WHY ARTISTS / WHY FANS — Two-Panel Video Section
+     ============================================ -->
+<section class="why-split" id="why-split">
+  <div class="why-split__inner">
+    <div class="why-split__header">
+      <h2 class="why-split__headline font-display">Artists build careers here. Fans keep coming back.</h2>
+    </div>
+    <div class="why-split__panels">
+
+      <div class="why-split__panel" data-panel="artists">
+        <div class="why-split__video-wrap">
+          <div class="why-split__video-placeholder">
+            <span class="why-split__placeholder-label">Artist testimonial video</span>
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
+          </div>
+        </div>
+        <div class="why-split__panel-label">Why artists use it</div>
+      </div>
+
+      <div class="why-split__panel" data-panel="fans">
+        <div class="why-split__video-wrap">
+          <div class="why-split__video-placeholder">
+            <span class="why-split__placeholder-label">Fan experience video</span>
+            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
+          </div>
+        </div>
+        <div class="why-split__panel-label">Why fans stay</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================
+     A/B COMPARISON — Old Way vs. Grouped
+     ============================================ -->
+<section class="comparison" id="comparison">
+  <div class="comparison__inner">
+    <p class="comparison__intro">CRMs punish you for growth. Grouped offers direct, repeatable reach at scale.</p>
+    <div class="comparison__rows">
+      <div class="comparison__row">
+        <div class="comparison__old">Guess which song will resonate with your audience</div>
+        <div class="comparison__new">Ask your fans. Let them pick.</div>
+      </div>
+      <div class="comparison__row">
+        <div class="comparison__old">Pay $30K-$50K to message 1 million fans</div>
+        <div class="comparison__new">Reach 1 million fans for $20-$50 a month</div>
+      </div>
+      <div class="comparison__row">
+        <div class="comparison__old">Every release starts from zero</div>
+        <div class="comparison__new">Every release builds on the last</div>
+      </div>
+      <div class="comparison__row">
+        <div class="comparison__old">Your fans are owned by the platform</div>
+        <div class="comparison__new">You own the contact. You own the relationship.</div>
+      </div>
+      <div class="comparison__row">
+        <div class="comparison__old">Ask fans to do something</div>
+        <div class="comparison__new">Offer fans a moment worth showing up for</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -551,40 +577,116 @@
 </div>
 
 <!-- ============================================
-     WHY THEY STAY — Value Props
+     CASE STUDIES — Video Hover Cards
      ============================================ -->
-<section class="why-stay" id="why-stay">
-  <div class="why-stay__inner">
-    <div class="why-stay__header">
-      <div class="label label-gold">The fan experience</div>
-      <h2 class="why-stay__headline font-display">Why they stay.</h2>
+<section class="case-studies-grid" id="case-studies">
+  <div class="case-studies-grid__inner">
+    <div class="case-studies-grid__header">
+      <div class="label label-gold">Proof</div>
+      <h2 class="case-studies-grid__headline font-display">See how it works.</h2>
     </div>
-    <div class="why-stay__grid">
+    <div class="case-studies-grid__cards">
 
-      <div class="why-stay__card" data-card="premiere">
-        <div class="why-stay__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      <a href="case-study-forrest-frank.html" class="cs-card" style="--cs-accent: #D4993E">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/FORREST-FRANK.png" alt="Forrest Frank" loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
         </div>
-        <h3 class="why-stay__title font-display">Premiere Access</h3>
-        <p class="why-stay__desc">Fans get everything first. New music, tickets, videos &mdash; before it hits anywhere else. That's why they join. That's why they stay.</p>
-      </div>
-
-      <div class="why-stay__card" data-card="focus">
-        <div class="why-stay__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+        <div class="cs-card__info">
+          <div class="cs-card__name">Forrest Frank</div>
+          <div class="cs-card__stat">+1.2M Instagram followers in 60 days</div>
         </div>
-        <h3 class="why-stay__title font-display">Focus Group</h3>
-        <p class="why-stay__desc">Your fans don't just listen. They vote, react, and tell you what lands. Every release gets smarter because of them.</p>
-      </div>
+      </a>
 
-      <div class="why-stay__card" data-card="home">
-        <div class="why-stay__icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <a href="case-study-mike.html" class="cs-card" style="--cs-accent: #34d399">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/MIKE_.png" alt="MIKE." loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
         </div>
-        <h3 class="why-stay__title font-display">Home for Everything</h3>
-        <p class="why-stay__desc">The home for what you're already doing that has no home anywhere else. One place. Every fan. Always yours.</p>
-      </div>
+        <div class="cs-card__info">
+          <div class="cs-card__name">MIKE.</div>
+          <div class="cs-card__stat">24/7 automated paid subscriber growth</div>
+        </div>
+      </a>
 
+      <a href="case-study-nic-d.html" class="cs-card" style="--cs-accent: #64a0ff">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/NIC-D.png" alt="Nic D" loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
+        </div>
+        <div class="cs-card__info">
+          <div class="cs-card__name">Nic D</div>
+          <div class="cs-card__stat">Early album access + merch bundle at $35</div>
+        </div>
+      </a>
+
+      <a href="case-study-somo.html" class="cs-card" style="--cs-accent: #14b8a6">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/SOMO.png" alt="SoMo" loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
+        </div>
+        <div class="cs-card__info">
+          <div class="cs-card__name">SoMo</div>
+          <div class="cs-card__stat">Sold out private album release party</div>
+        </div>
+      </a>
+
+      <a href="case-study-pardyalone.html" class="cs-card" style="--cs-accent: #64a0ff">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/PARDYALONE.png" alt="PardyAlone" loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
+        </div>
+        <div class="cs-card__info">
+          <div class="cs-card__name">PardyAlone</div>
+          <div class="cs-card__stat">$35K+ annual recurring revenue</div>
+        </div>
+      </a>
+
+      <a href="case-study-jake-scott.html" class="cs-card" style="--cs-accent: #fb7185">
+        <div class="cs-card__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/JAKE-SCOTT.png" alt="Jake Scott" loading="lazy">
+          <div class="cs-card__play"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="15" stroke="currentColor" stroke-width="1.5"/><polygon points="13,10 23,16 13,22" fill="currentColor"/></svg></div>
+        </div>
+        <div class="cs-card__info">
+          <div class="cs-card__name">Jake Scott</div>
+          <div class="cs-card__stat">300 paid members in 24 hours</div>
+        </div>
+      </a>
+
+    </div>
+    <a href="case-studies.html" class="case-studies-grid__cta">See how it works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<!-- ============================================
+     PLATFORM FEATURES SHOWCASE
+     ============================================ -->
+<section class="features-showcase" id="features-showcase">
+  <div class="features-showcase__inner">
+    <div class="features-showcase__header">
+      <h2 class="features-showcase__headline font-display">Everything you need. Nothing you don't.</h2>
+    </div>
+    <div class="features-showcase__grid">
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Smart Feed</span></div><div class="feat-tile__label">Smart Feed</div></div>
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Polls</span></div><div class="feat-tile__label">Polls</div></div>
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Audio Player</span></div><div class="feat-tile__label">Audio</div></div>
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Fan Passes</span></div><div class="feat-tile__label">Fan Passes</div></div>
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Livestream</span></div><div class="feat-tile__label">Livestream</div></div>
+      <div class="feat-tile"><div class="feat-tile__placeholder"><span>Animated GIF: Own Your Data</span></div><div class="feat-tile__label">Own Your Data</div></div>
+    </div>
+    <a href="features.html" class="features-showcase__cta">See everything Grouped can do <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+
+<!-- ============================================
+     FINAL CTA
+     ============================================ -->
+<section class="final-cta" id="final-cta">
+  <div class="final-cta__inner">
+    <h2 class="final-cta__headline font-display">Your next release doesn't have to disappear.</h2>
+    <div class="final-cta__buttons">
+      <a href="#" class="btn-primary">Sign Up</a>
+      <a href="#case-studies" class="final-cta__link">See how it works <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
     </div>
   </div>
 </section>

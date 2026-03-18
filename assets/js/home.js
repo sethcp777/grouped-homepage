@@ -529,6 +529,33 @@
 })();
 
 /* ============================================
+   THREE PILLARS — Stagger Reveal
+   ============================================ */
+(function initPillars() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  var pillars = document.querySelectorAll('.pillar');
+  if (!pillars.length) return;
+
+  gsap.set(pillars, { opacity: 0, y: 40 });
+
+  ScrollTrigger.create({
+    trigger: '.pillars',
+    start: 'top 70%',
+    once: true,
+    onEnter: function() {
+      gsap.to(pillars, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power2.out'
+      });
+    }
+  });
+})();
+
+/* ============================================
    WHY THEY STAY — Stagger Reveal
    ============================================ */
 (function initWhyStay() {
@@ -573,4 +600,222 @@
       });
     }
   });
+})();
+
+/* ============================================
+   EYEBROW BANNER — Dismiss + localStorage
+   ============================================ */
+(function initEyebrowBanner() {
+  var banner = document.getElementById('eyebrow-banner');
+  var closeBtn = document.getElementById('eyebrow-close');
+  if (!banner || !closeBtn) return;
+
+  // Check if already dismissed
+  if (localStorage.getItem('eyebrow-dismissed') === '1') {
+    banner.classList.add('is-hidden');
+    return;
+  }
+
+  closeBtn.addEventListener('click', function() {
+    banner.classList.add('is-hidden');
+    localStorage.setItem('eyebrow-dismissed', '1');
+  });
+})();
+
+/* ============================================
+   PROBLEM STATEMENT + SOLUTION INTRO — Scroll Reveals
+   ============================================ */
+(function initProblemSolution() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  // Problem statement
+  var problemText = document.querySelector('.problem-statement__text');
+  if (problemText) {
+    gsap.set(problemText, { opacity: 0, y: 30 });
+    ScrollTrigger.create({
+      trigger: '.problem-statement',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(problemText, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: 'power2.out'
+        });
+      }
+    });
+  }
+
+  // Solution intro
+  var solutionHeadline = document.querySelector('.solution-intro__headline');
+  var solutionSub = document.querySelector('.solution-intro__sub');
+  if (solutionHeadline) {
+    var els = [solutionHeadline];
+    if (solutionSub) els.push(solutionSub);
+    gsap.set(els, { opacity: 0, y: 20 });
+    ScrollTrigger.create({
+      trigger: '.solution-intro',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(els, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: 'power2.out'
+        });
+      }
+    });
+  }
+})();
+
+/* ============================================
+   HOW IT WORKS — Step Stagger Reveal
+   ============================================ */
+(function initHowItWorks() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  var header = document.querySelector('.how-it-works__header');
+  var steps = document.querySelectorAll('.hiw-step');
+  var cta = document.querySelector('.how-it-works__secondary-cta');
+  if (!steps.length) return;
+
+  var headerEls = [];
+  if (header) {
+    var label = header.querySelector('.label');
+    var headline = header.querySelector('.how-it-works__headline');
+    if (label) headerEls.push(label);
+    if (headline) headerEls.push(headline);
+  }
+  gsap.set(headerEls, { opacity: 0, y: 20 });
+  gsap.set(steps, { opacity: 0, y: 30 });
+  if (cta) gsap.set(cta, { opacity: 0, y: 15 });
+
+  ScrollTrigger.create({
+    trigger: '.how-it-works',
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      gsap.to(headerEls, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out'
+      });
+      gsap.to(steps, {
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.2, delay: 0.25, ease: 'power2.out'
+      });
+      if (cta) {
+        gsap.to(cta, {
+          opacity: 1, y: 0, duration: 0.5, delay: 0.9, ease: 'power2.out'
+        });
+      }
+    }
+  });
+})();
+
+/* ============================================
+   WHY SPLIT + COMPARISON — Stagger Reveals
+   ============================================ */
+(function initWhySplitComparison() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  // Why Split panels
+  var splitHeadline = document.querySelector('.why-split__headline');
+  var panels = document.querySelectorAll('.why-split__panel');
+  if (splitHeadline) gsap.set(splitHeadline, { opacity: 0, y: 20 });
+  if (panels.length) gsap.set(panels, { opacity: 0, y: 30 });
+
+  if (splitHeadline) {
+    ScrollTrigger.create({
+      trigger: '.why-split',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(splitHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.to(panels, { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, delay: 0.2, ease: 'power2.out' });
+      }
+    });
+  }
+
+  // Comparison rows
+  var compIntro = document.querySelector('.comparison__intro');
+  var compRows = document.querySelectorAll('.comparison__row');
+  if (compIntro) gsap.set(compIntro, { opacity: 0, y: 20 });
+  if (compRows.length) gsap.set(compRows, { opacity: 0, y: 20 });
+
+  if (compIntro) {
+    ScrollTrigger.create({
+      trigger: '.comparison',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(compIntro, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.to(compRows, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.2, ease: 'power2.out' });
+      }
+    });
+  }
+})();
+
+/* ============================================
+   CASE STUDIES + FEATURES + FINAL CTA — Reveals
+   ============================================ */
+(function initBottomSections() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  // Case studies cards
+  var csHeader = document.querySelector('.case-studies-grid__header');
+  var csCards = document.querySelectorAll('.cs-card');
+  if (csHeader) {
+    var csLabel = csHeader.querySelector('.label');
+    var csHeadline = csHeader.querySelector('.case-studies-grid__headline');
+    var csHeaderEls = [];
+    if (csLabel) csHeaderEls.push(csLabel);
+    if (csHeadline) csHeaderEls.push(csHeadline);
+    gsap.set(csHeaderEls, { opacity: 0, y: 20 });
+    gsap.set(csCards, { opacity: 0, y: 25 });
+
+    ScrollTrigger.create({
+      trigger: '.case-studies-grid',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(csHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
+        gsap.to(csCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, delay: 0.2, ease: 'power2.out' });
+      }
+    });
+  }
+
+  // Features showcase
+  var featHeadline = document.querySelector('.features-showcase__headline');
+  var featTiles = document.querySelectorAll('.feat-tile');
+  if (featHeadline) {
+    gsap.set(featHeadline, { opacity: 0, y: 20 });
+    gsap.set(featTiles, { opacity: 0, y: 20 });
+    ScrollTrigger.create({
+      trigger: '.features-showcase',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(featHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        gsap.to(featTiles, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, delay: 0.15, ease: 'power2.out' });
+      }
+    });
+  }
+
+  // Final CTA
+  var finalHeadline = document.querySelector('.final-cta__headline');
+  var finalBtns = document.querySelector('.final-cta__buttons');
+  if (finalHeadline) {
+    gsap.set(finalHeadline, { opacity: 0, y: 20 });
+    if (finalBtns) gsap.set(finalBtns, { opacity: 0, y: 15 });
+    ScrollTrigger.create({
+      trigger: '.final-cta',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(finalHeadline, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
+        if (finalBtns) gsap.to(finalBtns, { opacity: 1, y: 0, duration: 0.5, delay: 0.2, ease: 'power2.out' });
+      }
+    });
+  }
 })();
