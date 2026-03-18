@@ -529,27 +529,66 @@
 })();
 
 /* ============================================
-   THREE PILLARS — Stagger Reveal
+   THREE PILLARS — Header + Steps Stagger Reveal
    ============================================ */
 (function initPillars() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  var pillars = document.querySelectorAll('.pillar');
-  if (!pillars.length) return;
+  // Header reveal
+  var headerLabel = document.querySelector('.pillars__label');
+  var headerHeadline = document.querySelector('.pillars__headline');
+  var headerSub = document.querySelector('.pillars__sub');
+  var headerEls = [];
+  if (headerLabel) headerEls.push(headerLabel);
+  if (headerHeadline) headerEls.push(headerHeadline);
+  if (headerSub) headerEls.push(headerSub);
 
-  gsap.set(pillars, { opacity: 0, y: 40 });
+  if (headerEls.length) {
+    gsap.set(headerEls, { opacity: 0, y: 30 });
+    ScrollTrigger.create({
+      trigger: '.pillars__header',
+      start: 'top 78%',
+      once: true,
+      onEnter: function() {
+        gsap.to(headerEls, {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.12,
+          ease: 'power2.out'
+        });
+      }
+    });
+  }
+
+  // Steps reveal + line draw
+  var steps = document.querySelectorAll('.pillars__step');
+  var line = document.querySelector('.pillars__line');
+  if (!steps.length) return;
+
+  gsap.set(steps, { opacity: 0, y: 40 });
 
   ScrollTrigger.create({
-    trigger: '.pillars',
-    start: 'top 70%',
+    trigger: '.pillars__steps',
+    start: 'top 75%',
     once: true,
     onEnter: function() {
-      gsap.to(pillars, {
+      // Draw connecting line
+      if (line) {
+        gsap.to(line, {
+          scaleX: 1,
+          duration: 1.2,
+          delay: 0.2,
+          ease: 'power2.out'
+        });
+      }
+      // Stagger steps in
+      gsap.to(steps, {
         opacity: 1,
         y: 0,
         duration: 0.7,
-        stagger: 0.15,
-        ease: 'power2.out'
+        stagger: 0.18,
+        ease: 'power3.out'
       });
     }
   });
