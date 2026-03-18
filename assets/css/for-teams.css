@@ -801,7 +801,7 @@ a.nav-link:hover .nav-link__label::after {
 }
 .footer-columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: clamp(24px, 4vw, 60px);
   margin-bottom: clamp(60px, 8vw, 120px);
 }
