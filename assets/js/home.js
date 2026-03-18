@@ -556,6 +556,60 @@
 })();
 
 /* ============================================
+   FEATURE BREAKDOWN — Stagger Reveal
+   ============================================ */
+(function initFeatureBreakdown() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  var fbCards = document.querySelectorAll('.fb-card');
+  if (!fbCards.length) return;
+
+  gsap.set(fbCards, { opacity: 0, y: 30 });
+
+  ScrollTrigger.create({
+    trigger: '.feature-breakdown',
+    start: 'top 70%',
+    once: true,
+    onEnter: function() {
+      gsap.to(fbCards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power2.out'
+      });
+    }
+  });
+})();
+
+/* ============================================
+   USE CASES — Stagger Reveal
+   ============================================ */
+(function initUseCases() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  var ucHeadline = document.querySelector('.use-cases__headline');
+  var ucCards = document.querySelectorAll('.uc-card');
+  var ucCta = document.querySelector('.use-cases__cta-wrap');
+  if (!ucCards.length) return;
+
+  if (ucHeadline) gsap.set(ucHeadline, { opacity: 0, y: 20 });
+  gsap.set(ucCards, { opacity: 0, y: 30 });
+  if (ucCta) gsap.set(ucCta, { opacity: 0, y: 15 });
+
+  ScrollTrigger.create({
+    trigger: '.use-cases',
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      if (ucHeadline) gsap.to(ucHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+      gsap.to(ucCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, delay: 0.15, ease: 'power2.out' });
+      if (ucCta) gsap.to(ucCta, { opacity: 1, y: 0, duration: 0.5, delay: 0.6, ease: 'power2.out' });
+    }
+  });
+})();
+
+/* ============================================
    WHY THEY STAY — Stagger Reveal
    ============================================ */
 (function initWhyStay() {
