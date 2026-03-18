@@ -265,3 +265,120 @@
   }, { passive: true });
 
 })();
+
+/* ============================================
+   BENEFITS — Sticky Card Stack + Scroll Reveals
+   ============================================ */
+(function initBenefits() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  var cards = document.querySelectorAll('.benefit-card');
+  if (!cards.length) return;
+
+  // --- Card stacking: dim + scale previous cards as next ones enter ---
+  cards.forEach(function(card, i) {
+    if (i === cards.length - 1) return; // last card doesn't need to shrink
+
+    ScrollTrigger.create({
+      trigger: cards[i + 1],
+      start: 'top 85%',
+      end: 'top 40%',
+      scrub: true,
+      onUpdate: function(self) {
+        var progress = self.progress;
+        gsap.set(card.querySelector('.benefit-card-inner'), {
+          scale: 1 - (progress * 0.05),
+          opacity: 1 - (progress * 0.4),
+          filter: 'brightness(' + (1 - progress * 0.2) + ')'
+        });
+      }
+    });
+  });
+
+  // --- Content stagger reveal per card ---
+  cards.forEach(function(card) {
+    var label = card.querySelector('.benefit-label');
+    var title = card.querySelector('.benefit-title');
+    var points = card.querySelectorAll('.benefit-point');
+    var cta = card.querySelector('.btn-primary');
+    var visual = card.querySelector('.benefit-visual');
+
+    var elements = [];
+    if (label) elements.push(label);
+    if (title) elements.push(title);
+    points.forEach(function(p) { elements.push(p); });
+    if (cta) elements.push(cta);
+
+    gsap.set(elements, { opacity: 0, y: 25 });
+    if (visual) gsap.set(visual, { opacity: 0, scale: 0.97 });
+
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 70%',
+      once: true,
+      onEnter: function() {
+        gsap.to(elements, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: 'power2.out'
+        });
+        if (visual) {
+          gsap.to(visual, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            delay: 0.2,
+            ease: 'power2.out'
+          });
+        }
+      }
+    });
+  });
+
+  // --- 92% stat counter ---
+  var statEl = document.querySelector('#benefit-stat-92 .benefit-stat-value');
+  if (statEl) {
+    var target = parseInt(statEl.getAttribute('data-target'), 10) || 92;
+    ScrollTrigger.create({
+      trigger: '#benefit-stat-92',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        gsap.to(statEl, {
+          innerText: target,
+          duration: 1.5,
+          ease: 'power2.out',
+          snap: { innerText: 1 },
+          onUpdate: function() {
+            statEl.textContent = Math.round(parseFloat(statEl.textContent));
+          }
+        });
+      }
+    });
+  }
+
+  // --- Chart line draw ---
+  var chartLine = document.querySelector('.mockup-chart-line');
+  if (chartLine) {
+    var lineLength = chartLine.getTotalLength ? chartLine.getTotalLength() : 500;
+    gsap.set(chartLine, { strokeDasharray: lineLength, strokeDashoffset: lineLength });
+
+    ScrollTrigger.create({
+      trigger: '.benefit-mockup-chart',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(chartLine, {
+          strokeDashoffset: 0,
+          duration: 2,
+          ease: 'power2.out'
+        });
+      }
+    });
+  }
+
+})();
