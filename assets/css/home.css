@@ -1831,40 +1831,64 @@ a.nav-link:hover .nav-link__label::after {
   text-align: center;
 }
 .what-we-are__inner {
-  max-width: 760px;
+  max-width: 800px;
   margin: 0 auto;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: clamp(40px, 5vw, 72px) clamp(32px, 4vw, 64px);
+  position: relative;
+  overflow: hidden;
 }
-.what-we-are__label {
-  display: inline-block;
-  margin-bottom: 24px;
-  padding: 6px 16px;
-  border: 1px solid rgba(196, 138, 58, 0.25);
-  border-radius: 100px;
-  background: rgba(196, 138, 58, 0.06);
+.what-we-are__inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  border-radius: 2px;
+}
+.what-we-are__inner::after {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 300px;
+  background: radial-gradient(ellipse, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.5;
 }
 .what-we-are__sub {
-  font-size: clamp(16px, 1.5vw, 19px);
+  font-size: clamp(14px, 1.3vw, 16px);
   line-height: 1.6;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-}
-.what-we-are__headline {
-  font-family: 'Anacrusis', serif;
-  font-size: clamp(28px, 3.5vw, 48px);
-  line-height: 1.15;
-  color: var(--white);
-  font-weight: normal;
-  letter-spacing: -0.025em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
   margin-bottom: 24px;
+  position: relative;
+  z-index: 1;
 }
 .what-we-are__body {
-  font-size: clamp(16px, 1.5vw, 19px);
-  line-height: 1.7;
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.6;
   color: var(--text-secondary);
   margin: 0;
+  position: relative;
+  z-index: 1;
+}
+.what-we-are__body .wwa-highlight {
+  color: var(--white);
+  font-weight: 600;
 }
 @media (max-width: 600px) {
   .what-we-are { padding: var(--section-pad) 20px; }
+  .what-we-are__inner { padding: 32px 24px; border-radius: 16px; }
 }
 
 /* ============================================

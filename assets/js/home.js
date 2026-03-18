@@ -687,26 +687,42 @@
 (function initWhatWeAre() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
+  var inner = document.querySelector('.what-we-are__inner');
   var sub = document.querySelector('.what-we-are__sub');
   var body = document.querySelector('.what-we-are__body');
-  if (!body) return;
+  if (!inner) return;
 
+  // Card entrance
+  gsap.set(inner, { opacity: 0, y: 50, scale: 0.97 });
+
+  // Content elements
   var els = [];
   if (sub) els.push(sub);
-  els.push(body);
+  if (body) els.push(body);
+  gsap.set(els, { opacity: 0, y: 20 });
 
-  gsap.set(els, { opacity: 0, y: 30 });
   ScrollTrigger.create({
     trigger: '.what-we-are',
-    start: 'top 75%',
+    start: 'top 78%',
     once: true,
     onEnter: function() {
-      gsap.to(els, {
+      // Card slides up first
+      gsap.to(inner, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out'
+        scale: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+        onComplete: function() {
+          // Then content staggers in
+          gsap.to(els, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.2,
+            ease: 'power2.out'
+          });
+        }
       });
     }
   });
