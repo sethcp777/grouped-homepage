@@ -1824,60 +1824,41 @@ a.nav-link:hover .nav-link__label::after {
 }
 
 /* ============================================
-   PROBLEM STATEMENT
+   WHAT WE ARE
    ============================================ */
-.problem-statement {
+.what-we-are {
   padding: var(--section-pad) 32px;
   text-align: center;
 }
-.problem-statement__label {
+.what-we-are__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.what-we-are__label {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
   padding: 6px 16px;
   border: 1px solid rgba(196, 138, 58, 0.25);
   border-radius: 100px;
   background: rgba(196, 138, 58, 0.06);
 }
-.problem-statement__text {
+.what-we-are__headline {
   font-family: 'Anacrusis', serif;
   font-size: clamp(28px, 3.5vw, 48px);
   line-height: 1.15;
   color: var(--white);
-  max-width: 800px;
-  margin: 0 auto;
   font-weight: normal;
   letter-spacing: -0.025em;
+  margin-bottom: 24px;
 }
-
-/* ============================================
-   SOLUTION INTRO / "THE MAGIC"
-   ============================================ */
-.solution-intro {
-  padding: 0 32px clamp(48px, 6vw, 80px);
-  text-align: center;
-}
-.solution-intro__inner {
-  max-width: 700px;
-  margin: 0 auto;
-}
-.solution-intro__headline {
-  font-family: 'Anacrusis', serif;
-  font-size: clamp(26px, 3vw, 40px);
-  line-height: 1.2;
-  color: var(--gold);
-  font-weight: normal;
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
-}
-.solution-intro__sub {
-  font-size: clamp(15px, 1.4vw, 18px);
-  line-height: 1.6;
+.what-we-are__body {
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.7;
   color: var(--text-secondary);
   margin: 0;
 }
 @media (max-width: 600px) {
-  .problem-statement { padding: var(--section-pad) 20px; }
-  .solution-intro { padding: 0 20px clamp(40px, 6vw, 60px); }
+  .what-we-are { padding: var(--section-pad) 20px; }
 }
 
 /* ============================================

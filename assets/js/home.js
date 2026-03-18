@@ -682,57 +682,36 @@
 })();
 
 /* ============================================
-   PROBLEM STATEMENT + SOLUTION INTRO — Scroll Reveals
+   WHAT WE ARE — Scroll Reveal
    ============================================ */
-(function initProblemSolution() {
+(function initWhatWeAre() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  // Problem statement — pill label + text stagger reveal
-  var problemLabel = document.querySelector('.problem-statement__label');
-  var problemText = document.querySelector('.problem-statement__text');
-  if (problemText) {
-    var problemEls = [];
-    if (problemLabel) problemEls.push(problemLabel);
-    problemEls.push(problemText);
-    gsap.set(problemEls, { opacity: 0, y: 30 });
-    ScrollTrigger.create({
-      trigger: '.problem-statement',
-      start: 'top 75%',
-      once: true,
-      onEnter: function() {
-        gsap.to(problemEls, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: 'power2.out'
-        });
-      }
-    });
-  }
+  var label = document.querySelector('.what-we-are__label');
+  var headline = document.querySelector('.what-we-are__headline');
+  var body = document.querySelector('.what-we-are__body');
+  if (!headline) return;
 
-  // Solution intro
-  var solutionHeadline = document.querySelector('.solution-intro__headline');
-  var solutionSub = document.querySelector('.solution-intro__sub');
-  if (solutionHeadline) {
-    var els = [solutionHeadline];
-    if (solutionSub) els.push(solutionSub);
-    gsap.set(els, { opacity: 0, y: 20 });
-    ScrollTrigger.create({
-      trigger: '.solution-intro',
-      start: 'top 75%',
-      once: true,
-      onEnter: function() {
-        gsap.to(els, {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.15,
-          ease: 'power2.out'
-        });
-      }
-    });
-  }
+  var els = [];
+  if (label) els.push(label);
+  els.push(headline);
+  if (body) els.push(body);
+
+  gsap.set(els, { opacity: 0, y: 30 });
+  ScrollTrigger.create({
+    trigger: '.what-we-are',
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      gsap.to(els, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: 'power2.out'
+      });
+    }
+  });
 })();
 
 /* ============================================
