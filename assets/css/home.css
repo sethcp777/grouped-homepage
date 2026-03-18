@@ -2339,3 +2339,121 @@ a.nav-link:hover .nav-link__label::after {
   }
 }
 
+/* ============================================
+   WHY THEY STAY — Value Prop Cards
+   ============================================ */
+.why-stay {
+  padding: var(--section-pad) 32px;
+  position: relative;
+}
+.why-stay__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+}
+.why-stay__header {
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+.why-stay__headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(28px, 3.5vw, 48px);
+  color: var(--white);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: normal;
+  margin-top: 16px;
+}
+
+/* ---- Card Grid ---- */
+.why-stay__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ---- Individual Card ---- */
+.why-stay__card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(28px, 3vw, 40px);
+  transition: transform 0.5s var(--ease-out), border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+  position: relative;
+}
+.why-stay__card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 24px;
+  right: 24px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.why-stay__card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(196,138,58,0.15);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 60px rgba(196,138,58,0.05);
+}
+.why-stay__card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ---- Icon ---- */
+.why-stay__icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(196,138,58,0.08);
+  border: 1px solid rgba(196,138,58,0.12);
+  margin-bottom: 20px;
+  transition: transform 0.4s var(--ease-out), background 0.4s var(--ease-out);
+}
+.why-stay__icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--gold);
+}
+.why-stay__card:hover .why-stay__icon {
+  transform: scale(1.1);
+  background: rgba(196,138,58,0.14);
+}
+
+/* ---- Title ---- */
+.why-stay__title {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(18px, 1.8vw, 22px);
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 12px;
+  font-weight: normal;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Description ---- */
+.why-stay__desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  .why-stay__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 520px;
+  }
+}
+@media (max-width: 600px) {
+  .why-stay {
+    padding: var(--section-pad) 20px;
+  }
+}
+

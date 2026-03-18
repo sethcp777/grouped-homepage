@@ -527,3 +527,50 @@
   }
 
 })();
+
+/* ============================================
+   WHY THEY STAY — Stagger Reveal
+   ============================================ */
+(function initWhyStay() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+  var section = document.querySelector('.why-stay');
+  if (!section) return;
+
+  var headline = section.querySelector('.why-stay__headline');
+  var label = section.querySelector('.label');
+  var cards = section.querySelectorAll('.why-stay__card');
+
+  // Set initial state
+  var headerEls = [];
+  if (label) headerEls.push(label);
+  if (headline) headerEls.push(headline);
+  gsap.set(headerEls, { opacity: 0, y: 20 });
+  gsap.set(cards, { opacity: 0, y: 30 });
+
+  // Reveal header
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top 75%',
+    once: true,
+    onEnter: function() {
+      gsap.to(headerEls, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.12,
+        ease: 'power2.out'
+      });
+
+      // Stagger cards in after header
+      gsap.to(cards, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        delay: 0.3,
+        ease: 'power2.out'
+      });
+    }
+  });
+})();
