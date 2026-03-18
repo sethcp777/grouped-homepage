@@ -1824,6 +1824,14 @@ a.nav-link:hover .nav-link__label::after {
   padding: var(--section-pad) 32px;
   text-align: center;
 }
+.problem-statement__label {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 6px 16px;
+  border: 1px solid rgba(196, 138, 58, 0.25);
+  border-radius: 100px;
+  background: rgba(196, 138, 58, 0.06);
+}
 .problem-statement__text {
   font-family: 'Anacrusis', serif;
   font-size: clamp(24px, 3vw, 42px);

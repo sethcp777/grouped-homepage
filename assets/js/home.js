@@ -682,19 +682,24 @@
 (function initProblemSolution() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  // Problem statement
+  // Problem statement — pill label + text stagger reveal
+  var problemLabel = document.querySelector('.problem-statement__label');
   var problemText = document.querySelector('.problem-statement__text');
   if (problemText) {
-    gsap.set(problemText, { opacity: 0, y: 30 });
+    var problemEls = [];
+    if (problemLabel) problemEls.push(problemLabel);
+    problemEls.push(problemText);
+    gsap.set(problemEls, { opacity: 0, y: 30 });
     ScrollTrigger.create({
       trigger: '.problem-statement',
       start: 'top 75%',
       once: true,
       onEnter: function() {
-        gsap.to(problemText, {
+        gsap.to(problemEls, {
           opacity: 1,
           y: 0,
           duration: 0.8,
+          stagger: 0.15,
           ease: 'power2.out'
         });
       }
