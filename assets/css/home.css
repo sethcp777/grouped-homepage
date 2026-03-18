@@ -1842,6 +1842,12 @@ a.nav-link:hover .nav-link__label::after {
   border-radius: 100px;
   background: rgba(196, 138, 58, 0.06);
 }
+.what-we-are__sub {
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
 .what-we-are__headline {
   font-family: 'Anacrusis', serif;
   font-size: clamp(28px, 3.5vw, 48px);
