@@ -216,16 +216,18 @@
   var items = track.innerHTML;
   track.innerHTML = items + items;
 
-  // Measure one set width
+  // Measure one set width (overlapping: bubble width + negative margin)
   var allBubbles = track.querySelectorAll('.artist-bubble');
   var halfCount = allBubbles.length / 2;
   var singleSetWidth = 0;
+  var bubbleStyle = getComputedStyle(allBubbles[0]);
+  var marginLeft = parseFloat(bubbleStyle.marginLeft) || 0;
   for (var i = 0; i < halfCount; i++) {
-    singleSetWidth += allBubbles[i].offsetWidth + 32; // 32 = gap
+    singleSetWidth += allBubbles[i].offsetWidth + (i > 0 ? marginLeft : 0);
   }
 
   // GSAP tween: scroll the track left by one full set, then repeat seamlessly
-  var speed = 40; // pixels per second
+  var speed = 35; // pixels per second (slightly slower for bigger bubbles)
   var duration = singleSetWidth / speed;
 
   var scrollTween = gsap.to(track, {

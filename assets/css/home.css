@@ -1529,30 +1529,18 @@ a.nav-link:hover .nav-link__label::after {
   flex-direction: column;
   align-items: center;
 }
-.social-proof-headline {
-  font-family: 'Anacrusis', serif;
-  font-size: clamp(24px, 3vw, 42px);
-  line-height: 1.15;
-  color: var(--white);
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto clamp(40px, 6vw, 72px);
-  padding: 0 32px;
-  letter-spacing: -0.02em;
-  font-weight: normal;
-}
 
 /* ---- Artist Marquee ---- */
 .artist-marquee {
   width: 100%;
   overflow: hidden;
-  padding: 20px 0;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
-  mask-image: linear-gradient(to right, transparent, black 80px, black calc(100% - 80px), transparent);
+  padding: 40px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
+  mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
 .artist-marquee-track {
   display: flex;
-  gap: 32px;
+  gap: 0;
   align-items: center;
   width: max-content;
   will-change: transform;
@@ -1560,95 +1548,97 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Artist Bubble ---- */
 .artist-bubble {
+  --bubble-size: 120px;
   flex-shrink: 0;
-  width: 80px;
-  height: 80px;
-  min-width: 80px;
-  min-height: 80px;
+  width: var(--bubble-size);
+  height: var(--bubble-size);
+  min-width: var(--bubble-size);
+  min-height: var(--bubble-size);
   position: relative;
   cursor: pointer;
   text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.4s var(--ease-out);
+  display: block;
+  margin-left: -16px;
+  border-radius: 50%;
+  transition: width 0.45s var(--ease-out),
+              min-width 0.45s var(--ease-out),
+              border-radius 0.45s var(--ease-out),
+              margin-left 0.45s var(--ease-out),
+              z-index 0s;
 }
+.artist-bubble:first-child { margin-left: 0; }
 .artist-bubble img {
-  width: 80px !important;
-  height: 80px !important;
-  min-width: 80px;
-  min-height: 80px;
-  max-width: 80px;
-  max-height: 80px;
+  width: var(--bubble-size) !important;
+  height: var(--bubble-size) !important;
+  min-width: var(--bubble-size);
+  min-height: var(--bubble-size);
+  max-width: var(--bubble-size);
+  max-height: var(--bubble-size);
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--border);
+  border: 3px solid var(--bg-base);
   display: block;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.artist-bubble:hover {
-  transform: scale(1.2);
-  z-index: 5;
-}
-.artist-bubble:hover img {
-  border-color: var(--gold);
-  box-shadow: 0 0 24px rgba(196,138,58,0.25);
+  box-shadow: var(--shadow-md);
+  transition: border-radius 0.45s var(--ease-out),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
 }
 
-/* ---- Bubble Hover Info ---- */
-.artist-bubble-info {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) translateY(6px);
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 12px 16px;
-  min-width: 160px;
-  text-align: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
-  box-shadow: var(--shadow-lg);
+/* Hover: morph to rounded rectangle */
+.artist-bubble:hover {
+  --bubble-size: 120px;
+  width: 200px;
+  min-width: 200px;
+  border-radius: 20px;
+  margin-left: 8px;
   z-index: 10;
 }
-.artist-bubble-info::after {
-  content: '';
+.artist-bubble:hover + .artist-bubble {
+  margin-left: 8px;
+}
+.artist-bubble:hover img {
+  border-radius: 20px;
+  border-color: var(--gold);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,138,58,0.15);
+}
+
+/* ---- Info Overlay (inside the bubble on hover) ---- */
+.artist-bubble-info {
   position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 6px solid transparent;
-  border-top-color: var(--bg-raised);
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  border-radius: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 2;
 }
 .artist-bubble:hover .artist-bubble-info {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
 }
 .artist-bubble-name {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--white);
-  margin-bottom: 2px;
+  line-height: 1.2;
+  margin-bottom: 1px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .artist-bubble-group {
   display: block;
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-bottom: 8px;
+  font-size: 11px;
+  color: rgba(240,235,227,0.7);
+  line-height: 1.3;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
 }
 .artist-bubble-cta {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gold);
-  transition: color 0.2s;
-}
-.artist-bubble:hover .artist-bubble-cta {
-  color: var(--gold-light);
+  display: none;
 }
 
 /* ---- CTA ---- */
@@ -1700,11 +1690,29 @@ a.nav-link:hover .nav-link__label::after {
     padding: 24px 32px;
   }
   .social-proof-metric-divider { display: none; }
-  .artist-bubble { width: 64px; height: 64px; min-width: 64px; min-height: 64px; }
-  .artist-bubble img { width: 64px !important; height: 64px !important; min-width: 64px; min-height: 64px; max-width: 64px; max-height: 64px; }
-  .artist-marquee-track { gap: 24px; }
+  .artist-bubble {
+    --bubble-size: 90px;
+    margin-left: -12px;
+  }
+  .artist-bubble:hover {
+    width: 160px;
+    min-width: 160px;
+  }
+  .artist-bubble img {
+    border-width: 2px;
+  }
 }
 @media (max-width: 480px) {
-  .social-proof-headline { font-size: clamp(22px, 6vw, 32px); }
+  .artist-bubble {
+    --bubble-size: 72px;
+    margin-left: -10px;
+  }
+  .artist-bubble:hover {
+    width: 140px;
+    min-width: 140px;
+  }
+  .artist-bubble-name { font-size: 13px; }
+  .artist-bubble-group { font-size: 10px; }
+  .artist-bubble-info { padding: 10px; }
 }
 
