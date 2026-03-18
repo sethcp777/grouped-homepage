@@ -1731,6 +1731,7 @@ a.nav-link:hover .nav-link__label::after {
 .benefits-header {
   text-align: center;
   padding: var(--section-pad) 0 clamp(48px, 6vw, 80px);
+  position: relative;
 }
 .benefits-headline {
   font-family: 'Anacrusis', serif;
@@ -1742,10 +1743,57 @@ a.nav-link:hover .nav-link__label::after {
   letter-spacing: -0.02em;
   font-weight: normal;
 }
+.benefits-headline-accent {
+  display: block;
+  width: 48px;
+  height: 3px;
+  margin: 24px auto 0;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.benefits-headline-accent.is-visible {
+  opacity: 1;
+  transform: scaleX(1);
+}
 .benefits-stack {
   max-width: var(--container);
   margin: 0 auto;
   position: relative;
+}
+
+/* ---- Scroll Progress Dots ---- */
+.benefits-progress {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+.benefits-progress.is-visible { opacity: 1; }
+.benefits-progress-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(196,138,58,0.3);
+  background: transparent;
+  transition: all 0.4s var(--ease-out);
+  cursor: pointer;
+}
+.benefits-progress-dot:hover {
+  border-color: var(--gold);
+}
+.benefits-progress-dot.is-active {
+  background: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(196,138,58,0.4);
 }
 
 /* ---- Benefit Card ---- */
@@ -1767,6 +1815,41 @@ a.nav-link:hover .nav-link__label::after {
   border-radius: 20px;
   padding: 48px;
   box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.02);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+/* Subtle top edge gradient accent */
+.benefit-card-inner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, var(--gold) 50%, transparent 95%);
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+.benefit-card.is-active .benefit-card-inner {
+  border-color: rgba(196,138,58,0.15);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(196,138,58,0.08), 0 0 80px rgba(196,138,58,0.04);
+}
+.benefit-card.is-active .benefit-card-inner::before {
+  opacity: 0.6;
+}
+/* Large faded card number */
+.benefit-card-number {
+  position: absolute;
+  top: -20px;
+  right: 24px;
+  font-size: 160px;
+  font-weight: 900;
+  color: rgba(240,235,227,0.02);
+  line-height: 1;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
 }
 
 /* ---- Text Column ---- */
@@ -1796,6 +1879,10 @@ a.nav-link:hover .nav-link__label::after {
 .benefit-point {
   padding-left: 16px;
   border-left: 2px solid rgba(196,138,58,0.25);
+  transition: border-color 0.3s var(--ease-out);
+}
+.benefit-card.is-active .benefit-point {
+  border-left-color: rgba(196,138,58,0.45);
 }
 .benefit-point p {
   font-size: 15px;
@@ -1806,6 +1893,13 @@ a.nav-link:hover .nav-link__label::after {
 .benefit-point strong {
   color: var(--gold);
   font-weight: 600;
+}
+.benefit-card .btn-primary {
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+}
+.benefit-card .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196,138,58,0.25);
 }
 
 /* ---- Visual Column ---- */
@@ -1826,6 +1920,12 @@ a.nav-link:hover .nav-link__label::after {
   border-radius: 16px;
   padding: 24px;
   box-shadow: var(--shadow-md);
+  transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+}
+.benefit-card.is-active .benefit-mockup {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg), 0 0 40px rgba(196,138,58,0.06);
+  border-color: rgba(196,138,58,0.12);
 }
 
 /* ---- Card 1: Swap Mockup ---- */
@@ -1843,6 +1943,25 @@ a.nav-link:hover .nav-link__label::after {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 50% 60%, rgba(196,138,58,0.25), transparent 70%);
+}
+/* Shimmer sweep on the art area */
+.mockup-swap-art::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(196,138,58,0.08), transparent);
+  z-index: 1;
+}
+.benefit-card.is-active .mockup-swap-art::before {
+  animation: shimmer-sweep 3s ease-in-out infinite;
+}
+@keyframes shimmer-sweep {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
 }
 .mockup-swap-label {
   font-size: 10px;
@@ -1865,6 +1984,29 @@ a.nav-link:hover .nav-link__label::after {
   margin-bottom: 8px;
   font-size: 12px;
   color: var(--text-tertiary);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease-out);
+}
+.mockup-swap-field.is-typing {
+  border-color: rgba(196,138,58,0.3);
+}
+.mockup-swap-field .typed-text {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.mockup-swap-field .type-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: var(--gold);
+  margin-left: 1px;
+  vertical-align: middle;
+  animation: cursor-blink 0.8s ease-in-out infinite;
+}
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 .mockup-swap-btn {
   background: var(--gold);
@@ -1875,6 +2017,26 @@ a.nav-link:hover .nav-link__label::after {
   font-weight: 600;
   text-align: center;
   margin-top: 4px;
+  position: relative;
+  overflow: hidden;
+}
+/* Pulse glow on the CTA button */
+.mockup-swap-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: var(--gold);
+  opacity: 0;
+  z-index: -1;
+  filter: blur(8px);
+}
+.benefit-card.is-active .mockup-swap-btn::after {
+  animation: btn-pulse 2.5s ease-in-out infinite;
+}
+@keyframes btn-pulse {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.3; }
 }
 
 /* ---- Stat Badge ---- */
@@ -1887,6 +2049,11 @@ a.nav-link:hover .nav-link__label::after {
   border-radius: 12px;
   padding: 10px 18px;
   box-shadow: var(--shadow-sm);
+  transition: border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.benefit-card.is-active .benefit-stat {
+  border-color: rgba(196,138,58,0.2);
+  box-shadow: var(--shadow-sm), 0 0 20px rgba(196,138,58,0.08);
 }
 .benefit-stat-value {
   font-size: 32px;
@@ -1920,11 +2087,43 @@ a.nav-link:hover .nav-link__label::after {
 .mockup-inbox-bell {
   width: 20px;
   height: 20px;
+  position: relative;
 }
 .mockup-inbox-bell svg {
   width: 100%;
   height: 100%;
   stroke: var(--gold);
+  transform-origin: top center;
+}
+.benefit-card.is-active .mockup-inbox-bell svg {
+  animation: bell-ring 2s ease-in-out infinite;
+}
+@keyframes bell-ring {
+  0%, 100% { transform: rotate(0); }
+  5% { transform: rotate(12deg); }
+  10% { transform: rotate(-10deg); }
+  15% { transform: rotate(8deg); }
+  20% { transform: rotate(-5deg); }
+  25% { transform: rotate(0); }
+}
+/* Notification badge on bell */
+.mockup-inbox-bell::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #E05252;
+  border: 1.5px solid var(--bg-base);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s var(--ease-spring);
+}
+.benefit-card.is-active .mockup-inbox-bell::after {
+  opacity: 1;
+  transform: scale(1);
 }
 .mockup-inbox-msg {
   display: flex;
@@ -1963,6 +2162,22 @@ a.nav-link:hover .nav-link__label::after {
   font-weight: 600;
   text-align: center;
   margin-top: 14px;
+  position: relative;
+  overflow: hidden;
+}
+/* Count badge on send button */
+.mockup-inbox-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(17,22,32,0.25);
+  font-size: 10px;
+  font-weight: 700;
+  margin-left: 6px;
+  vertical-align: middle;
 }
 
 /* ---- Badge ---- */
@@ -1978,6 +2193,11 @@ a.nav-link:hover .nav-link__label::after {
   font-weight: 600;
   color: var(--gold);
   box-shadow: var(--shadow-sm);
+  transition: border-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.benefit-card.is-active .benefit-badge {
+  border-color: rgba(196,138,58,0.2);
+  box-shadow: var(--shadow-sm), 0 0 20px rgba(196,138,58,0.08);
 }
 .benefit-badge-compare {
   gap: 10px;
@@ -2018,6 +2238,29 @@ a.nav-link:hover .nav-link__label::after {
   stroke-dasharray: 500;
   stroke-dashoffset: 500;
 }
+/* Data point dots on the chart */
+.mockup-chart-dot {
+  fill: var(--gold);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+.mockup-chart-dot.is-visible {
+  opacity: 1;
+}
+/* Pulse ring around active dot */
+.mockup-chart-dot-pulse {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1;
+  opacity: 0;
+}
+.mockup-chart-dot-pulse.is-visible {
+  animation: dot-pulse 2s ease-in-out infinite;
+}
+@keyframes dot-pulse {
+  0% { r: 4; opacity: 0.5; }
+  100% { r: 12; opacity: 0; }
+}
 .mockup-chart-releases {
   display: flex;
   justify-content: space-between;
@@ -2025,6 +2268,13 @@ a.nav-link:hover .nav-link__label::after {
   font-size: 10px;
   color: var(--text-tertiary);
   letter-spacing: 0.02em;
+}
+.mockup-chart-releases span {
+  transition: color 0.3s var(--ease-out);
+}
+.mockup-chart-releases span.is-highlight {
+  color: var(--gold);
+  font-weight: 600;
 }
 
 /* ---- Benefits Responsive ---- */
@@ -2040,6 +2290,8 @@ a.nav-link:hover .nav-link__label::after {
   }
   .benefit-visual { order: -1; }
   .benefit-mockup { max-width: 280px; }
+  .benefit-card-number { font-size: 100px; top: -10px; right: 16px; }
+  .benefits-progress { display: none; }
 }
 @media (max-width: 600px) {
   .benefits { padding: 0 20px; }
@@ -2047,5 +2299,83 @@ a.nav-link:hover .nav-link__label::after {
   .benefit-title { font-size: clamp(20px, 5vw, 26px); }
   .benefit-point p { font-size: 14px; }
   .benefits-headline { font-size: clamp(24px, 6vw, 36px); }
+  .benefit-card-number { font-size: 80px; top: -5px; right: 12px; }
+}
+
+/* ============================================
+   INTERSTITIAL BAND — Gold CTA strip
+   ============================================ */
+.interstitial-band {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  background: linear-gradient(145deg, #D4993E 0%, #C48A3A 40%, #A8742F 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 -1px 0 rgba(0,0,0,0.1),
+    0 -20px 60px rgba(0,0,0,0.35),
+    0 20px 60px rgba(0,0,0,0.35);
+  padding: clamp(28px, 4vw, 40px) 0;
+}
+.interstitial-band__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+}
+.interstitial-band__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.interstitial-band__headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(22px, 2.8vw, 34px);
+  color: var(--bg-base);
+  line-height: 1.2;
+  font-weight: normal;
+}
+.interstitial-band__sub {
+  font-size: clamp(13px, 1.2vw, 16px);
+  color: rgba(17,22,32,0.65);
+  line-height: 1.5;
+}
+.interstitial-band__cta {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(14px, 1.2vw, 16px);
+  font-weight: 600;
+  color: var(--bg-base);
+  padding: 14px 32px;
+  border: 2px solid rgba(17,22,32,0.2);
+  border-radius: 100px;
+  background: rgba(17,22,32,0.08);
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.19,1,0.22,1);
+}
+.interstitial-band__cta:hover {
+  background: rgba(17,22,32,0.15);
+  border-color: rgba(17,22,32,0.35);
+  gap: 14px;
+}
+.interstitial-band__cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s cubic-bezier(0.19,1,0.22,1);
+}
+.interstitial-band__cta:hover svg {
+  transform: translateX(3px);
+}
+@media (max-width: 600px) {
+  .interstitial-band__inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
 }
 

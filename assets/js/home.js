@@ -267,7 +267,7 @@
 })();
 
 /* ============================================
-   BENEFITS — Sticky Card Stack + Scroll Reveals
+   BENEFITS — Sticky Card Stack + Interactive Mockups
    ============================================ */
 (function initBenefits() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -277,9 +277,84 @@
   var cards = document.querySelectorAll('.benefit-card');
   if (!cards.length) return;
 
+  var progressContainer = document.getElementById('benefits-progress');
+  var progressDots = document.querySelectorAll('.benefits-progress-dot');
+  var headlineAccent = document.querySelector('.benefits-headline-accent');
+  var activeCardIndex = -1;
+  var typingStarted = false;
+
+  // --- Headline accent reveal ---
+  if (headlineAccent) {
+    ScrollTrigger.create({
+      trigger: '.benefits-header',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        headlineAccent.classList.add('is-visible');
+      }
+    });
+  }
+
+  // --- Progress dots: show/hide based on section visibility ---
+  if (progressContainer) {
+    ScrollTrigger.create({
+      trigger: '.benefits-stack',
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: function() { progressContainer.classList.add('is-visible'); },
+      onLeave: function() { progressContainer.classList.remove('is-visible'); },
+      onEnterBack: function() { progressContainer.classList.add('is-visible'); },
+      onLeaveBack: function() { progressContainer.classList.remove('is-visible'); }
+    });
+
+    // Click dots to scroll to cards
+    progressDots.forEach(function(dot) {
+      dot.addEventListener('click', function() {
+        var targetCard = document.querySelector('.benefit-card[data-card="' + dot.getAttribute('data-target') + '"]');
+        if (targetCard) targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  }
+
+  // --- Set active card + update progress dots ---
+  function setActiveCard(index) {
+    if (index === activeCardIndex) return;
+    activeCardIndex = index;
+
+    cards.forEach(function(c, i) {
+      if (i === index) {
+        c.classList.add('is-active');
+      } else {
+        c.classList.remove('is-active');
+      }
+    });
+
+    progressDots.forEach(function(dot, i) {
+      if (i === index) {
+        dot.classList.add('is-active');
+      } else {
+        dot.classList.remove('is-active');
+      }
+    });
+
+    // Trigger card-specific animations
+    if (index === 0 && !typingStarted) startTypingAnimation();
+  }
+
+  // --- Active card tracking via scroll ---
+  cards.forEach(function(card, i) {
+    ScrollTrigger.create({
+      trigger: card,
+      start: 'top 55%',
+      end: 'bottom 45%',
+      onEnter: function() { setActiveCard(i); },
+      onEnterBack: function() { setActiveCard(i); }
+    });
+  });
+
   // --- Card stacking: dim + scale previous cards as next ones enter ---
   cards.forEach(function(card, i) {
-    if (i === cards.length - 1) return; // last card doesn't need to shrink
+    if (i === cards.length - 1) return;
 
     ScrollTrigger.create({
       trigger: cards[i + 1],
@@ -361,21 +436,91 @@
     });
   }
 
-  // --- Chart line draw ---
+  // --- Card 1: Typing animation for swap fields ---
+  function startTypingAnimation() {
+    typingStarted = true;
+    var fields = document.querySelectorAll('.mockup-swap-field');
+    if (!fields.length) return;
+
+    var texts = ['Sarah Johnson', 'sarah@email.com'];
+
+    fields.forEach(function(field, i) {
+      var delay = i * 1800 + 600;
+      setTimeout(function() {
+        var placeholder = field.querySelector('span');
+        if (!placeholder) return;
+
+        field.classList.add('is-typing');
+        var originalText = placeholder.textContent;
+        placeholder.innerHTML = '<span class="typed-text"></span><span class="type-cursor"></span>';
+        var typedSpan = placeholder.querySelector('.typed-text');
+        var text = texts[i] || 'text';
+        var charIndex = 0;
+
+        var typeInterval = setInterval(function() {
+          if (charIndex < text.length) {
+            typedSpan.textContent += text[charIndex];
+            charIndex++;
+          } else {
+            clearInterval(typeInterval);
+            setTimeout(function() {
+              var cursor = placeholder.querySelector('.type-cursor');
+              if (cursor) cursor.style.display = 'none';
+              field.classList.remove('is-typing');
+            }, 800);
+          }
+        }, 55);
+      }, delay);
+    });
+  }
+
+  // --- Card 3: Chart line draw + data points ---
   var chartLine = document.querySelector('.mockup-chart-line');
   if (chartLine) {
     var lineLength = chartLine.getTotalLength ? chartLine.getTotalLength() : 500;
     gsap.set(chartLine, { strokeDasharray: lineLength, strokeDashoffset: lineLength });
+
+    var chartDots = document.querySelectorAll('.mockup-chart-dot');
+    var chartPulses = document.querySelectorAll('.mockup-chart-dot-pulse');
+    var releaseLabels = document.querySelectorAll('.mockup-chart-releases span');
 
     ScrollTrigger.create({
       trigger: '.benefit-mockup-chart',
       start: 'top 75%',
       once: true,
       onEnter: function() {
+        // Draw the line
         gsap.to(chartLine, {
           strokeDashoffset: 0,
           duration: 2,
           ease: 'power2.out'
+        });
+
+        // Reveal data points with stagger
+        chartDots.forEach(function(dot, i) {
+          setTimeout(function() {
+            dot.classList.add('is-visible');
+          }, 500 + (i * 450));
+        });
+
+        // Start pulse rings
+        chartPulses.forEach(function(pulse, i) {
+          setTimeout(function() {
+            pulse.classList.add('is-visible');
+          }, 700 + (i * 450));
+        });
+
+        // Highlight release labels sequentially
+        releaseLabels.forEach(function(label, i) {
+          setTimeout(function() {
+            label.classList.add('is-highlight');
+            // Remove highlight from previous (keep last one)
+            if (i > 0 && i < releaseLabels.length - 1) {
+              setTimeout(function() {
+                label.classList.remove('is-highlight');
+              }, 600);
+            }
+          }, 600 + (i * 450));
         });
       }
     });

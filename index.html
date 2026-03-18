@@ -370,12 +370,22 @@
 <section class="benefits" id="benefits">
   <div class="benefits-header">
     <h2 class="benefits-headline font-display">You're already earning fans.<br>Here's how to actually keep them.</h2>
+    <span class="benefits-headline-accent"></span>
   </div>
+
+  <!-- Scroll progress dots -->
+  <div class="benefits-progress" id="benefits-progress">
+    <div class="benefits-progress-dot" data-target="1"></div>
+    <div class="benefits-progress-dot" data-target="2"></div>
+    <div class="benefits-progress-dot" data-target="3"></div>
+  </div>
+
   <div class="benefits-stack">
 
     <!-- Card 1: Smart Swaps -->
     <div class="benefit-card" data-card="1">
       <div class="benefit-card-inner">
+        <div class="benefit-card-number">1</div>
         <div class="benefit-text">
           <div class="benefit-label label label-gold">01 &mdash; Smart Swaps</div>
           <h3 class="benefit-title font-display">Know which followers are actually fans.</h3>
@@ -412,6 +422,7 @@
     <!-- Card 2: Direct Reach -->
     <div class="benefit-card" data-card="2">
       <div class="benefit-card-inner">
+        <div class="benefit-card-number">2</div>
         <div class="benefit-text">
           <div class="benefit-label label label-gold">02 &mdash; Direct Reach</div>
           <h3 class="benefit-title font-display">A direct line to every fan. No per-send bill.</h3>
@@ -456,7 +467,7 @@
                 <div class="mockup-inbox-msg-sub">Watch the new video</div>
               </div>
             </div>
-            <div class="mockup-inbox-send">Send to all fans</div>
+            <div class="mockup-inbox-send">Send to all fans <span class="mockup-inbox-count">3</span></div>
           </div>
           <div class="benefit-badge">
             <span>$0 per send</span>
@@ -468,6 +479,7 @@
     <!-- Card 3: Compounding -->
     <div class="benefit-card" data-card="3">
       <div class="benefit-card-inner">
+        <div class="benefit-card-number">3</div>
         <div class="benefit-text">
           <div class="benefit-label label label-gold">03 &mdash; Compounding Growth</div>
           <h3 class="benefit-title font-display">Every release builds on the last.</h3>
@@ -488,8 +500,17 @@
           <div class="benefit-mockup benefit-mockup-chart">
             <div class="mockup-chart-label">Fan growth</div>
             <svg class="mockup-chart-svg" viewBox="0 0 300 160" fill="none" preserveAspectRatio="none">
-              <path class="mockup-chart-line" d="M0 150 Q50 145 75 135 Q100 125 125 110 Q150 90 175 65 Q200 40 225 25 Q250 15 275 8 Q290 5 300 3" stroke="url(#chartGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
               <path class="mockup-chart-fill" d="M0 150 Q50 145 75 135 Q100 125 125 110 Q150 90 175 65 Q200 40 225 25 Q250 15 275 8 Q290 5 300 3 L300 160 L0 160 Z" fill="url(#chartFillGrad)" opacity="0.3"/>
+              <path class="mockup-chart-line" d="M0 150 Q50 145 75 135 Q100 125 125 110 Q150 90 175 65 Q200 40 225 25 Q250 15 275 8 Q290 5 300 3" stroke="url(#chartGrad)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Data points at each release milestone -->
+              <circle class="mockup-chart-dot-pulse" cx="0" cy="150" r="4" data-dot="1"/>
+              <circle class="mockup-chart-dot" cx="0" cy="150" r="3.5" data-dot="1"/>
+              <circle class="mockup-chart-dot-pulse" cx="100" cy="125" r="4" data-dot="2"/>
+              <circle class="mockup-chart-dot" cx="100" cy="125" r="3.5" data-dot="2"/>
+              <circle class="mockup-chart-dot-pulse" cx="200" cy="40" r="4" data-dot="3"/>
+              <circle class="mockup-chart-dot" cx="200" cy="40" r="3.5" data-dot="3"/>
+              <circle class="mockup-chart-dot-pulse" cx="300" cy="3" r="4" data-dot="4"/>
+              <circle class="mockup-chart-dot" cx="300" cy="3" r="3.5" data-dot="4"/>
               <defs>
                 <linearGradient id="chartGrad" x1="0" y1="0" x2="300" y2="0"><stop offset="0%" stop-color="#C48A3A" stop-opacity="0.4"/><stop offset="100%" stop-color="#C48A3A"/></linearGradient>
                 <linearGradient id="chartFillGrad" x1="0" y1="0" x2="0" y2="160"><stop offset="0%" stop-color="#C48A3A" stop-opacity="0.2"/><stop offset="100%" stop-color="#C48A3A" stop-opacity="0"/></linearGradient>
@@ -510,6 +531,22 @@
 
   </div>
 </section>
+
+<!-- ============================================
+     INTERSTITIAL BAND — Built Different
+     ============================================ -->
+<div class="interstitial-band">
+  <div class="interstitial-band__inner">
+    <div class="interstitial-band__text">
+      <div class="interstitial-band__headline font-display">Built different. On purpose.</div>
+      <div class="interstitial-band__sub">No labels. No middlemen. No agenda. Just artists building for artists.</div>
+    </div>
+    <a href="about.html" class="interstitial-band__cta">
+      Our story
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
 
 </div>
 
