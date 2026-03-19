@@ -242,16 +242,68 @@
     }
   });
 
+  // ---- Orbit scale (3D ring/orbit illusion) ----
+  var viewportW = window.innerWidth;
+  var centerX = viewportW / 2;
+  var ORBIT_MIN = 0.55;
+  var ORBIT_MAX = 1.0;
+  var OPACITY_MIN = 0.65;
+  var OPACITY_MAX = 1.0;
+  var HOVER_SCALE = 1.8; // 200 * 1.8 = 360px visual
+
+  window.addEventListener('resize', function() {
+    viewportW = window.innerWidth;
+    centerX = viewportW / 2;
+  });
+
+  function updateOrbitScale() {
+    for (var i = 0; i < allBubbles.length; i++) {
+      var bubble = allBubbles[i];
+      var rect = bubble.getBoundingClientRect();
+      var bubbleCenterX = rect.left + rect.width / 2;
+
+      // 0 = viewport center, 1 = viewport edge
+      var dist = Math.abs(bubbleCenterX - centerX) / centerX;
+      dist = Math.min(dist, 1);
+
+      // Cosine falloff for natural lens feel
+      var t = Math.cos(dist * Math.PI * 0.5);
+
+      if (bubble.matches(':hover')) {
+        bubble.style.transform = 'scale(' + HOVER_SCALE + ')';
+        bubble.style.opacity = '1';
+      } else {
+        var s = ORBIT_MIN + (ORBIT_MAX - ORBIT_MIN) * t;
+        var o = OPACITY_MIN + (OPACITY_MAX - OPACITY_MIN) * t;
+        bubble.style.transform = 'scale(' + s + ')';
+        bubble.style.opacity = o;
+      }
+    }
+  }
+
+  // Attach to GSAP's render cycle
+  scrollTween.eventCallback('onUpdate', updateOrbitScale);
+  updateOrbitScale();
+
   // Hover: slow down smoothly and stop
   var isHovered = false;
+  var orbitRAF = null;
+
+  function orbitTick() {
+    updateOrbitScale();
+    if (isHovered) orbitRAF = requestAnimationFrame(orbitTick);
+  }
 
   marquee.addEventListener('mouseenter', function() {
     isHovered = true;
     gsap.to(scrollTween, { timeScale: 0, duration: 0.6, ease: 'power2.out' });
+    // Keep orbit scale updating while paused so hover detection works
+    orbitTick();
   });
 
   marquee.addEventListener('mouseleave', function() {
     isHovered = false;
+    if (orbitRAF) cancelAnimationFrame(orbitRAF);
     gsap.to(scrollTween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut' });
   });
 

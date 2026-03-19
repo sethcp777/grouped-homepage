@@ -1612,8 +1612,10 @@ a.nav-link:hover .nav-link__label::after {
 /* ---- Artist Marquee ---- */
 .artist-marquee {
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
+  height: 280px;
   padding: 40px 0;
+  clip-path: inset(-100px 0);
   -webkit-mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
   mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
@@ -1640,12 +1642,8 @@ a.nav-link:hover .nav-link__label::after {
   margin-left: -24px;
   border-radius: 50%;
   overflow: hidden;
-  transition: width 0.5s var(--ease-out),
-              height 0.5s var(--ease-out),
-              min-width 0.5s var(--ease-out),
-              min-height 0.5s var(--ease-out),
-              border-radius 0.5s var(--ease-out),
-              margin-left 0.5s var(--ease-out),
+  will-change: transform, opacity;
+  transition: border-radius 0.5s var(--ease-out),
               z-index 0s;
 }
 .artist-bubble:first-child { margin-left: 0; }
@@ -1664,18 +1662,11 @@ a.nav-link:hover .nav-link__label::after {
               transform 0.6s var(--ease-out);
 }
 
-/* Hover: morph to big rounded rectangle with zoom */
+/* Hover: morph to rounded rectangle via JS scale (no layout push) */
 .artist-bubble:hover {
-  width: 360px;
-  height: 360px;
-  min-width: 360px;
-  min-height: 360px;
   border-radius: 24px;
-  margin-left: 16px;
   z-index: 10;
-}
-.artist-bubble:hover + .artist-bubble {
-  margin-left: 16px;
+  overflow: visible;
 }
 .artist-bubble:hover img {
   border-radius: 24px;
@@ -1702,6 +1693,14 @@ a.nav-link:hover .nav-link__label::after {
 .artist-bubble:hover .artist-bubble-info {
   opacity: 1;
   pointer-events: auto;
+  /* Counter parent scale(1.8) so text renders at native size */
+  inset: auto;
+  top: 0;
+  left: 0;
+  width: 180%;
+  height: 180%;
+  transform: scale(calc(1 / 1.8));
+  transform-origin: top left;
 }
 .artist-bubble-name {
   display: block;
@@ -1790,15 +1789,10 @@ a.nav-link:hover .nav-link__label::after {
     padding: 24px 32px;
   }
   .social-proof-metric-divider { display: none; }
+  .artist-marquee { height: 220px; }
   .artist-bubble {
     --bubble-size: 140px;
     margin-left: -16px;
-  }
-  .artist-bubble:hover {
-    width: 260px;
-    height: 260px;
-    min-width: 260px;
-    min-height: 260px;
   }
   .artist-bubble img {
     border-width: 2px;
@@ -1808,15 +1802,10 @@ a.nav-link:hover .nav-link__label::after {
   .artist-bubble-info { padding: 18px; }
 }
 @media (max-width: 480px) {
+  .artist-marquee { height: 190px; }
   .artist-bubble {
     --bubble-size: 110px;
     margin-left: -12px;
-  }
-  .artist-bubble:hover {
-    width: 200px;
-    height: 200px;
-    min-width: 200px;
-    min-height: 200px;
   }
   .artist-bubble-name { font-size: 16px; }
   .artist-bubble-group { font-size: 11px; }
