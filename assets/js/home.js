@@ -573,8 +573,8 @@
   var stepsContainer = document.querySelector('.pillars__steps');
   if (!masks.length) return;
 
-  // Start hidden
-  gsap.set(masks, { yPercent: 150, scale: 0.6, opacity: 0 });
+  // Start hidden — steps begin off-screen to the right
+  gsap.set(steps, { xPercent: 120, opacity: 0 });
   gsap.set(stepsContainer, { opacity: 1 });
 
   ScrollTrigger.create({
@@ -583,31 +583,30 @@
     once: true,
     onEnter: function() {
       var tl = gsap.timeline({
-        defaults: { ease: 'expo.inOut' }
+        defaults: { ease: 'expo.out' }
       });
 
-      // Phase 1: Circles slide up from below with scale — dramatic entrance
-      tl.to(masks, {
-        yPercent: 0,
-        scale: 1,
+      // Phase 1: Steps slide in from the right with stagger
+      tl.to(steps, {
+        xPercent: 0,
         opacity: 1,
-        duration: 1.8,
+        duration: 1.4,
         stagger: {
-          each: 0.12,
+          each: 0.15,
           from: 'start'
         }
       });
 
-      // Phase 2: Slight overshoot settle (bounce back)
-      tl.to(masks, {
-        yPercent: -3,
-        duration: 0.4,
+      // Phase 2: Subtle overshoot settle (bounce back from the left)
+      tl.to(steps, {
+        xPercent: -2,
+        duration: 0.3,
         ease: 'power2.out'
       }, '-=0.3');
 
-      tl.to(masks, {
-        yPercent: 0,
-        duration: 0.5,
+      tl.to(steps, {
+        xPercent: 0,
+        duration: 0.4,
         ease: 'power2.inOut'
       }, '-=0.05');
 
@@ -617,7 +616,7 @@
           scaleX: 1,
           duration: 1.6,
           ease: 'expo.inOut'
-        }, '-=1.8');
+        }, '-=1.4');
       }
     }
   });
@@ -633,8 +632,9 @@
   var currentSlide = 0;
   var animating = false;
   var isExpanded = false;
+  var firstStep = steps[0];
 
-  // Scroll-triggered expansion: steps → full screen
+  // Clip-path expansion: the expanded panel opens outward from step 01
   ScrollTrigger.create({
     trigger: '.pillars__steps',
     start: 'bottom 50%',
@@ -643,20 +643,43 @@
     onUpdate: function(self) {
       var p = self.progress;
 
-      if (p > 0.05 && !isExpanded) {
+      if (p > 0.01 && !isExpanded) {
         isExpanded = true;
         expanded.classList.add('is--active');
       }
-
-      if (p <= 0.05 && isExpanded) {
+      if (p <= 0.01 && isExpanded) {
         isExpanded = false;
         expanded.classList.remove('is--active');
       }
 
-      // Fade steps + header out, expand in
-      if (stepsContainer) gsap.set(stepsContainer, { opacity: 1 - p * 3 });
+      // Get step 01 rect (relative to viewport)
+      var rect = firstStep.getBoundingClientRect();
+      var vw = window.innerWidth;
+      var vh = window.innerHeight;
+
+      // Inset values: how far each edge is clipped inward
+      // At p=0 → clipped to step 01's exact bounds
+      // At p=1 → inset(0 0 0 0) = full screen
+      var insetTop = rect.top;
+      var insetRight = vw - rect.right;
+      var insetBottom = vh - rect.bottom;
+      var insetLeft = rect.left;
+      var radius = 16; // match card border-radius
+
+      // Ease the progress for a smooth physical feel
+      var ep = 1 - Math.pow(1 - p, 2.5); // easeOutQuint-ish
+
+      var t = insetTop * (1 - ep);
+      var r = insetRight * (1 - ep);
+      var b = insetBottom * (1 - ep);
+      var l = insetLeft * (1 - ep);
+      var rad = radius * (1 - ep);
+
+      expanded.style.clipPath = 'inset(' + t + 'px ' + r + 'px ' + b + 'px ' + l + 'px round ' + rad + 'px)';
+
+      // Fade steps + header out quickly
+      if (stepsContainer) gsap.set(stepsContainer, { opacity: 1 - p * 4 });
       if (pillarsHeader) gsap.set(pillarsHeader, { opacity: 1 - p * 3 });
-      gsap.set(expanded, { opacity: Math.min(p * 2.5, 1) });
     }
   });
 
