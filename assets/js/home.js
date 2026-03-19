@@ -721,50 +721,64 @@
 })();
 
 /* ============================================
-   WHAT WE ARE — Scroll Reveal
+   WHAT WE ARE — Sub Reveal + Highlight Text on Scroll
    ============================================ */
 (function initWhatWeAre() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  var inner = document.querySelector('.what-we-are__inner');
   var sub = document.querySelector('.what-we-are__sub');
-  var body = document.querySelector('.what-we-are__body');
-  if (!inner) return;
 
-  // Card entrance
-  gsap.set(inner, { opacity: 0, y: 50, scale: 0.97 });
+  // Sub line: soft fade-up reveal
+  if (sub) {
+    gsap.set(sub, { opacity: 0, y: 20 });
+    ScrollTrigger.create({
+      trigger: '.what-we-are',
+      start: 'top 80%',
+      once: true,
+      onEnter: function() {
+        gsap.to(sub, {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power2.out'
+        });
+      }
+    });
+  }
 
-  // Content elements
-  var els = [];
-  if (sub) els.push(sub);
-  if (body) els.push(body);
-  gsap.set(els, { opacity: 0, y: 20 });
+  // Body: highlight text on scroll (SplitText)
+  if (typeof SplitText !== 'undefined') {
+    gsap.registerPlugin(SplitText);
+    var targets = document.querySelectorAll('[data-highlight-text]');
+    targets.forEach(function(el) {
+      var scrollStart = el.getAttribute('data-highlight-scroll-start') || 'top 90%';
+      var scrollEnd = el.getAttribute('data-highlight-scroll-end') || 'center 40%';
+      var fadedValue = parseFloat(el.getAttribute('data-highlight-fade')) || 0.15;
+      var staggerValue = parseFloat(el.getAttribute('data-highlight-stagger')) || 0.08;
 
-  ScrollTrigger.create({
-    trigger: '.what-we-are',
-    start: 'top 78%',
-    once: true,
-    onEnter: function() {
-      // Card slides up first
-      gsap.to(inner, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.9,
-        ease: 'power3.out',
-        onComplete: function() {
-          // Then content staggers in
-          gsap.to(els, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            stagger: 0.2,
-            ease: 'power2.out'
+      new SplitText(el, {
+        type: 'words, chars',
+        autoSplit: true,
+        onSplit: function(self) {
+          gsap.context(function() {
+            gsap.timeline({
+              scrollTrigger: {
+                scrub: true,
+                trigger: el,
+                start: scrollStart,
+                end: scrollEnd
+              }
+            }).from(self.chars, {
+              autoAlpha: fadedValue,
+              stagger: staggerValue,
+              ease: 'linear'
+            });
           });
+          return;
         }
       });
-    }
-  });
+    });
+  }
 })();
 
 /* ============================================
