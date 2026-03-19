@@ -1693,14 +1693,14 @@ a.nav-link:hover .nav-link__label::after {
 .artist-bubble:hover .artist-bubble-info {
   opacity: 1;
   pointer-events: auto;
-  /* Counter parent scale(1.8) so text renders at native size */
+  /* Counter parent scale(1.35) so text renders at native size */
   inset: auto;
-  top: 0;
-  left: 0;
-  width: 180%;
-  height: 180%;
-  transform: scale(calc(1 / 1.8));
-  transform-origin: top left;
+  top: 50%;
+  left: 50%;
+  width: 135%;
+  height: 135%;
+  transform: translate(-50%, -50%) scale(calc(1 / 1.35));
+  transform-origin: center center;
 }
 .artist-bubble-name {
   display: block;

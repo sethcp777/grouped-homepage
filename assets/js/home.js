@@ -249,7 +249,7 @@
   var ORBIT_MAX = 1.0;
   var OPACITY_MIN = 0.65;
   var OPACITY_MAX = 1.0;
-  var HOVER_SCALE = 1.8; // 200 * 1.8 = 360px visual
+  var HOVER_SCALE = 1.35; // 200 * 1.35 = 270px visual
 
   window.addEventListener('resize', function() {
     viewportW = window.innerWidth;
