@@ -1919,18 +1919,18 @@ a.nav-link:hover .nav-link__label::after {
 /* ---- Steps 1-2-3 ---- */
 .pillars__steps {
   display: flex;
-  gap: 0;
+  gap: 24px;
   position: relative;
   max-width: 960px;
   margin: 0 auto;
 }
 .pillars__line {
   position: absolute;
-  top: 24px;
-  left: 15%;
-  right: 15%;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(196,138,58,0.05), rgba(196,138,58,0.3) 50%, rgba(196,138,58,0.05));
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,138,58,0.2) 20%, rgba(196,138,58,0.2) 80%, transparent);
   z-index: 0;
   transform: scaleX(0);
   transform-origin: left;
@@ -1943,8 +1943,18 @@ a.nav-link:hover .nav-link__label::after {
   text-align: center;
   position: relative;
   z-index: 1;
-  padding: 20px 20px 10px;
   overflow: hidden;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: clamp(28px, 3vw, 40px) clamp(20px, 2vw, 28px);
+  cursor: pointer;
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.5s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.pillars__step:hover {
+  border-color: rgba(196,138,58,0.2);
+  box-shadow: 0 0 40px rgba(196,138,58,0.08), 0 8px 32px rgba(0,0,0,0.2);
+  transform: translateY(-4px);
 }
 /* Mask wrapper for crisp reveal */
 .pillars__step-mask {
@@ -1954,8 +1964,8 @@ a.nav-link:hover .nav-link__label::after {
   will-change: transform;
 }
 .pillars__step-num {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   border: 2px solid var(--gold);
   background: var(--bg-base);
@@ -1963,10 +1973,15 @@ a.nav-link:hover .nav-link__label::after {
   align-items: center;
   justify-content: center;
   font-family: 'Anacrusis', serif;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--gold);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   flex-shrink: 0;
+  transition: background 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.pillars__step:hover .pillars__step-num {
+  background: rgba(196,138,58,0.08);
+  box-shadow: 0 0 20px rgba(196,138,58,0.15);
 }
 .pillars__step-title {
   font-family: 'Anacrusis', serif;
@@ -1975,15 +1990,37 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--white);
   margin-bottom: 0;
   letter-spacing: -0.015em;
+  transition: color 0.3s ease;
+}
+/* Hover description */
+.pillars__step-hover-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease-out), opacity 0.4s var(--ease-out), margin-top 0.4s var(--ease-out);
+}
+.pillars__step:hover .pillars__step-hover-desc {
+  max-height: 120px;
+  opacity: 1;
+  margin-top: 14px;
 }
 @media (max-width: 768px) {
   .pillars__steps {
     flex-direction: column;
-    gap: 40px;
+    gap: 16px;
     max-width: 420px;
     margin: 0 auto;
   }
   .pillars__line { display: none; }
+  .pillars__step-hover-desc {
+    max-height: 120px;
+    opacity: 1;
+    margin-top: 14px;
+  }
 }
 @media (max-width: 600px) {
   .pillars { padding: 0 20px clamp(60px, 8vw, 100px); }
