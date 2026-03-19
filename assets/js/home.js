@@ -1104,19 +1104,16 @@
     });
   }
 
-  // Final CTA
-  var finalHeadline = document.querySelector('.final-cta__headline');
-  var finalBtns = document.querySelector('.final-cta__buttons');
-  if (finalHeadline) {
-    gsap.set(finalHeadline, { opacity: 0, y: 20 });
-    if (finalBtns) gsap.set(finalBtns, { opacity: 0, y: 15 });
+  // Final CTA — duo blocks
+  var ctaBlocks = document.querySelectorAll('.cta-block');
+  if (ctaBlocks.length) {
+    gsap.set(ctaBlocks, { opacity: 0, y: 30 });
     ScrollTrigger.create({
-      trigger: '.final-cta',
+      trigger: '.cta-section',
       start: 'top 75%',
       once: true,
       onEnter: function() {
-        gsap.to(finalHeadline, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' });
-        if (finalBtns) gsap.to(finalBtns, { opacity: 1, y: 0, duration: 0.5, delay: 0.2, ease: 'power2.out' });
+        gsap.to(ctaBlocks, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power2.out' });
       }
     });
   }
