@@ -529,12 +529,15 @@
 })();
 
 /* ============================================
-   THREE PILLARS — Header + Steps Stagger Reveal
+   THREE PILLARS — Header Reveal + Crisp Loading + Expansion
    ============================================ */
 (function initPillars() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  if (typeof CustomEase !== 'undefined') {
+    gsap.registerPlugin(CustomEase);
+  }
 
-  // Header reveal
+  // --- Header reveal (unchanged) ---
   var headerLabel = document.querySelector('.pillars__label');
   var headerHeadline = document.querySelector('.pillars__headline');
   var headerSub = document.querySelector('.pillars__sub');
@@ -561,34 +564,74 @@
     });
   }
 
-  // Steps reveal + line draw
-  var steps = document.querySelectorAll('.pillars__step');
+  // --- Crisp loading animation for steps ---
+  var masks = document.querySelectorAll('.pillars__step-mask');
   var line = document.querySelector('.pillars__line');
-  if (!steps.length) return;
+  var steps = document.querySelectorAll('.pillars__step');
+  if (!masks.length) return;
 
-  gsap.set(steps, { opacity: 0, y: 40 });
+  // Start hidden: masks pushed below their overflow-hidden containers
+  gsap.set(masks, { yPercent: 120 });
 
   ScrollTrigger.create({
     trigger: '.pillars__steps',
-    start: 'top 75%',
+    start: 'top 78%',
     once: true,
     onEnter: function() {
-      // Draw connecting line
+      var tl = gsap.timeline();
+
+      // Steps cascade up with crisp expo timing
+      tl.to(masks, {
+        yPercent: 0,
+        duration: 1.2,
+        stagger: 0.15,
+        ease: 'expo.out'
+      });
+
+      // Line draws in alongside
       if (line) {
-        gsap.to(line, {
+        tl.to(line, {
           scaleX: 1,
-          duration: 1.2,
-          delay: 0.2,
-          ease: 'power2.out'
-        });
+          duration: 1.4,
+          ease: 'expo.out'
+        }, 0.1);
       }
-      // Stagger steps in
-      gsap.to(steps, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.18,
-        ease: 'power3.out'
+    }
+  });
+
+  // --- Expansion: step 01 → benefit card 1 ---
+  var step01 = document.querySelector('[data-pillar-step="1"]');
+  var step02 = document.querySelector('[data-pillar-step="2"]');
+  var step03 = document.querySelector('[data-pillar-step="3"]');
+  var benefitCard1 = document.querySelector('.benefit-card[data-card="1"]');
+  if (!step01 || !benefitCard1) return;
+
+  // Set initial state for benefit card (starts small + transparent)
+  gsap.set(benefitCard1, { scale: 0.85, opacity: 0, transformOrigin: 'top center' });
+
+  ScrollTrigger.create({
+    trigger: '.pillars__steps',
+    start: 'bottom 60%',
+    end: 'bottom 10%',
+    scrub: 1,
+    onUpdate: function(self) {
+      var p = self.progress;
+
+      // Fade out steps 02, 03 and line
+      if (step02) gsap.set(step02, { opacity: 1 - p * 2, y: p * 20 });
+      if (step03) gsap.set(step03, { opacity: 1 - p * 2, y: p * 20 });
+      if (line) gsap.set(line, { opacity: 1 - p * 2 });
+
+      // Step 01 scales up slightly
+      gsap.set(step01, {
+        scale: 1 + p * 0.15,
+        opacity: 1 - p
+      });
+
+      // Benefit card fades in from step 01 position
+      gsap.set(benefitCard1, {
+        scale: 0.85 + p * 0.15,
+        opacity: p
       });
     }
   });

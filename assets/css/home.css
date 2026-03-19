@@ -1944,10 +1944,18 @@ a.nav-link:hover .nav-link__label::after {
   position: relative;
   z-index: 1;
   padding: 0 20px;
+  overflow: hidden;
+}
+/* Mask wrapper for crisp reveal */
+.pillars__step-mask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
 }
 .pillars__step-num {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   border: 2px solid var(--gold);
   background: var(--bg-base);
@@ -1955,9 +1963,9 @@ a.nav-link:hover .nav-link__label::after {
   align-items: center;
   justify-content: center;
   font-family: 'Anacrusis', serif;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--gold);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-shrink: 0;
 }
 .pillars__step-title {
@@ -1965,13 +1973,8 @@ a.nav-link:hover .nav-link__label::after {
   font-size: clamp(20px, 2vw, 26px);
   font-weight: normal;
   color: var(--white);
-  margin-bottom: 12px;
+  margin-bottom: 0;
   letter-spacing: -0.015em;
-}
-.pillars__step-desc {
-  font-size: clamp(14px, 1.2vw, 16px);
-  color: var(--text-secondary);
-  line-height: 1.65;
 }
 @media (max-width: 768px) {
   .pillars__steps {

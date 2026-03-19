@@ -11,6 +11,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
 <link rel="stylesheet" href="assets/css/home.css">
 </head>
 <body>
@@ -400,25 +401,28 @@
       <p class="pillars__sub">One place to identify your real fans, reach them directly, and grow your career with every release.</p>
     </div>
 
-    <div class="pillars__steps">
+    <div class="pillars__steps" data-pillars-crisp>
       <div class="pillars__line"></div>
 
-      <div class="pillars__step">
-        <div class="pillars__step-num font-display">01</div>
-        <h3 class="pillars__step-title">Identify</h3>
-        <p class="pillars__step-desc">Know who's actually a fan. Find the fans you already have but don't know yet and separate real fans from passive followers.</p>
+      <div class="pillars__step" data-pillar-step="1">
+        <div class="pillars__step-mask">
+          <div class="pillars__step-num font-display">01</div>
+          <h3 class="pillars__step-title">Identify</h3>
+        </div>
       </div>
 
-      <div class="pillars__step">
-        <div class="pillars__step-num font-display">02</div>
-        <h3 class="pillars__step-title">Reach</h3>
-        <p class="pillars__step-desc">A direct line to every fan. No middleman, no per-send fees. Reach every fan every time, not just the algorithm's pick.</p>
+      <div class="pillars__step" data-pillar-step="2">
+        <div class="pillars__step-mask">
+          <div class="pillars__step-num font-display">02</div>
+          <h3 class="pillars__step-title">Reach</h3>
+        </div>
       </div>
 
-      <div class="pillars__step">
-        <div class="pillars__step-num font-display">03</div>
-        <h3 class="pillars__step-title">Grow</h3>
-        <p class="pillars__step-desc">Every release builds on the last one. More streams, more revenue, more ticket sales. Your fans become your focus group.</p>
+      <div class="pillars__step" data-pillar-step="3">
+        <div class="pillars__step-mask">
+          <div class="pillars__step-num font-display">03</div>
+          <h3 class="pillars__step-title">Grow</h3>
+        </div>
       </div>
 
     </div>
