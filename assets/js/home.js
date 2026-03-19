@@ -566,35 +566,58 @@
 
   // --- Crisp loading animation for steps ---
   var masks = document.querySelectorAll('.pillars__step-mask');
+  var nums = document.querySelectorAll('.pillars__step-num');
+  var titles = document.querySelectorAll('.pillars__step-title');
   var line = document.querySelector('.pillars__line');
   var steps = document.querySelectorAll('.pillars__step');
+  var stepsContainer = document.querySelector('.pillars__steps');
   if (!masks.length) return;
 
-  // Start hidden: masks pushed below their overflow-hidden containers
-  gsap.set(masks, { yPercent: 120 });
+  // Start hidden
+  gsap.set(masks, { yPercent: 150, scale: 0.6, opacity: 0 });
+  gsap.set(stepsContainer, { opacity: 1 });
 
   ScrollTrigger.create({
     trigger: '.pillars__steps',
-    start: 'top 78%',
+    start: 'top 82%',
     once: true,
     onEnter: function() {
-      var tl = gsap.timeline();
-
-      // Steps cascade up with crisp expo timing
-      tl.to(masks, {
-        yPercent: 0,
-        duration: 1.2,
-        stagger: 0.15,
-        ease: 'expo.out'
+      var tl = gsap.timeline({
+        defaults: { ease: 'expo.inOut' }
       });
 
-      // Line draws in alongside
+      // Phase 1: Circles slide up from below with scale — dramatic entrance
+      tl.to(masks, {
+        yPercent: 0,
+        scale: 1,
+        opacity: 1,
+        duration: 1.8,
+        stagger: {
+          each: 0.12,
+          from: 'start'
+        }
+      });
+
+      // Phase 2: Slight overshoot settle (bounce back)
+      tl.to(masks, {
+        yPercent: -3,
+        duration: 0.4,
+        ease: 'power2.out'
+      }, '-=0.3');
+
+      tl.to(masks, {
+        yPercent: 0,
+        duration: 0.5,
+        ease: 'power2.inOut'
+      }, '-=0.05');
+
+      // Phase 3: Line draws across with crisp timing
       if (line) {
         tl.to(line, {
           scaleX: 1,
-          duration: 1.4,
-          ease: 'expo.out'
-        }, 0.1);
+          duration: 1.6,
+          ease: 'expo.inOut'
+        }, '-=1.8');
       }
     }
   });
