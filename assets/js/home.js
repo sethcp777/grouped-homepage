@@ -622,41 +622,92 @@
     }
   });
 
-  // --- Expansion: step 01 → benefit card 1 ---
-  var step01 = document.querySelector('[data-pillar-step="1"]');
-  var step02 = document.querySelector('[data-pillar-step="2"]');
-  var step03 = document.querySelector('[data-pillar-step="3"]');
-  var benefitCard1 = document.querySelector('.benefit-card[data-card="1"]');
-  if (!step01 || !benefitCard1) return;
+  // --- Full-screen expansion + slideshow ---
+  var expanded = document.getElementById('pillars-expanded');
+  var slides = document.querySelectorAll('.pillars__slide');
+  var thumbs = document.querySelectorAll('.pillars__slide-thumb');
+  var pillarsSection = document.querySelector('.pillars');
+  var pillarsHeader = document.querySelector('.pillars__header');
+  if (!expanded || !slides.length) return;
 
-  // Set initial state for benefit card (starts small + transparent)
-  gsap.set(benefitCard1, { scale: 0.85, opacity: 0, transformOrigin: 'top center' });
+  var currentSlide = 0;
+  var animating = false;
+  var isExpanded = false;
 
+  // Scroll-triggered expansion: steps → full screen
   ScrollTrigger.create({
     trigger: '.pillars__steps',
-    start: 'bottom 60%',
-    end: 'bottom 10%',
+    start: 'bottom 50%',
+    end: 'bottom -50%',
     scrub: 1,
     onUpdate: function(self) {
       var p = self.progress;
 
-      // Fade out steps 02, 03 and line
-      if (step02) gsap.set(step02, { opacity: 1 - p * 2, y: p * 20 });
-      if (step03) gsap.set(step03, { opacity: 1 - p * 2, y: p * 20 });
-      if (line) gsap.set(line, { opacity: 1 - p * 2 });
+      if (p > 0.05 && !isExpanded) {
+        isExpanded = true;
+        expanded.classList.add('is--active');
+      }
 
-      // Step 01 scales up slightly
-      gsap.set(step01, {
-        scale: 1 + p * 0.15,
-        opacity: 1 - p
-      });
+      if (p <= 0.05 && isExpanded) {
+        isExpanded = false;
+        expanded.classList.remove('is--active');
+      }
 
-      // Benefit card fades in from step 01 position
-      gsap.set(benefitCard1, {
-        scale: 0.85 + p * 0.15,
-        opacity: p
-      });
+      // Fade steps + header out, expand in
+      if (stepsContainer) gsap.set(stepsContainer, { opacity: 1 - p * 3 });
+      if (pillarsHeader) gsap.set(pillarsHeader, { opacity: 1 - p * 3 });
+      gsap.set(expanded, { opacity: Math.min(p * 2.5, 1) });
     }
+  });
+
+  // Pin the section while expanded
+  ScrollTrigger.create({
+    trigger: pillarsSection,
+    start: 'top top',
+    end: '+=200%',
+    pin: true,
+    pinSpacing: true
+  });
+
+  // --- Slideshow navigation ---
+  function navigateSlide(targetIndex) {
+    if (animating || targetIndex === currentSlide) return;
+    animating = true;
+
+    var currentEl = slides[currentSlide];
+    var targetEl = slides[targetIndex];
+    var direction = targetIndex > currentSlide ? 1 : -1;
+
+    // Update thumbs
+    thumbs[currentSlide].classList.remove('is--current');
+    thumbs[targetIndex].classList.add('is--current');
+
+    var tl = gsap.timeline({
+      defaults: { duration: 1, ease: 'expo.inOut' },
+      onStart: function() {
+        targetEl.classList.add('is--current');
+      },
+      onComplete: function() {
+        currentEl.classList.remove('is--current');
+        currentSlide = targetIndex;
+        animating = false;
+      }
+    });
+
+    // Current slide exits
+    tl.to(currentEl, { xPercent: -direction * 100, opacity: 0 }, 0);
+    // New slide enters
+    tl.fromTo(targetEl,
+      { xPercent: direction * 100, opacity: 0 },
+      { xPercent: 0, opacity: 1 },
+    0);
+  }
+
+  // Thumb click handlers
+  thumbs.forEach(function(thumb, i) {
+    thumb.addEventListener('click', function() {
+      navigateSlide(i);
+    });
   });
 })();
 
