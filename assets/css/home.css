@@ -2607,6 +2607,17 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--gold);
   font-weight: 600;
 }
+.benefit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  color: var(--gold);
+  font-weight: 600;
+  transition: gap 0.3s var(--ease-out);
+}
+.benefit-link:hover { gap: 10px; }
+.benefit-link svg { width: 14px; height: 14px; }
 .benefit-card .btn-primary {
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
