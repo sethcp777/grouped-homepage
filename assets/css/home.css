@@ -1865,17 +1865,16 @@ a.nav-link:hover .nav-link__label::after {
   z-index: 1;
 }
 .what-we-are__body {
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1.5;
-  color: var(--white);
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.65;
+  color: var(--text-secondary);
   margin: 0;
   position: relative;
   z-index: 1;
-  font-weight: 400;
+  max-width: 640px;
 }
 @media (max-width: 600px) {
   .what-we-are { padding: var(--section-pad) 20px; }
-  .what-we-are__body { font-size: clamp(18px, 5vw, 24px); }
 }
 
 /* ============================================
