@@ -1910,6 +1910,20 @@ a.nav-link:hover .nav-link__label::after {
   font-weight: normal;
   letter-spacing: -0.025em;
   margin-bottom: 16px;
+  position: relative;
+}
+.pillars-handwritten {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(20px, 2vw, 28px);
+  color: var(--gold);
+  font-weight: normal;
+  letter-spacing: 0;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: -20px;
+  width: fit-content;
+  transform: rotate(-2deg);
 }
 .pillars__sub {
   font-size: clamp(16px, 1.4vw, 19px);
