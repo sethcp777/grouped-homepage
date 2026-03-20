@@ -1609,7 +1609,7 @@ a.nav-link:hover .nav-link__label::after {
    SOCIAL PROOF
    ============================================ */
 .social-proof {
-  padding: 1rem 0 var(--section-pad);
+  padding: 1rem 0 0;
   margin-top: 0;
   position: relative;
   overflow: hidden;
@@ -1785,8 +1785,8 @@ a.nav-link:hover .nav-link__label::after {
   display: inline-flex;
   align-items: center;
   gap: 24px;
-  margin-top: clamp(32px, 5vw, 56px);
-  padding: 16px 32px;
+  margin-bottom: clamp(24px, 3vw, 36px);
+  padding: 14px 28px;
   background: var(--bg-raised);
   border: 1px solid var(--border);
   border-radius: var(--radius-label);
@@ -1817,12 +1817,11 @@ a.nav-link:hover .nav-link__label::after {
 /* ---- Social Proof Responsive ---- */
 @media (max-width: 768px) {
   .social-proof-metrics {
-    flex-direction: column;
-    gap: 12px;
-    border-radius: 16px;
-    padding: 24px 32px;
+    gap: 16px;
+    padding: 12px 20px;
   }
   .social-proof-metric-divider { display: none; }
+  .social-proof-metric { flex-direction: column; gap: 2px; text-align: center; }
   .artist-bubble {
     --bubble-w: 160px;
     --bubble-h: 150px;
@@ -1847,13 +1846,16 @@ a.nav-link:hover .nav-link__label::after {
    WHAT WE ARE
    ============================================ */
 .what-we-are {
-  padding: var(--section-pad) 32px;
+  padding: clamp(40px, 5vw, 64px) 32px var(--section-pad);
   text-align: center;
 }
 .what-we-are__inner {
   max-width: 760px;
   margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 /* Soft pulsing bronze glow */
 .what-we-are__inner::before {
@@ -1880,7 +1882,7 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--white);
   font-weight: normal;
   letter-spacing: -0.02em;
-  margin-bottom: 28px;
+  margin-bottom: clamp(20px, 2.5vw, 32px);
   position: relative;
   z-index: 1;
 }
