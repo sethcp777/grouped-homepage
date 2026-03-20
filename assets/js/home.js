@@ -673,65 +673,26 @@
     }
   });
 
-  // --- Inline expanded card: scroll-triggered entry ---
-  var expanded = document.getElementById('pillars-expanded');
-  var slides = document.querySelectorAll('.pillars__slide');
-  if (!expanded || !slides.length) return;
-
-  gsap.set(expanded, { opacity: 0, scale: 0.96, y: 30 });
-
-  ScrollTrigger.create({
-    trigger: expanded,
-    start: 'top 80%',
-    once: true,
-    onEnter: function() {
-      gsap.to(expanded, {
-        opacity: 1,
-        scale: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out'
+  // --- Pillar detail cards: stagger reveal on scroll ---
+  var pillarCards = document.querySelectorAll('.pillar-card');
+  if (pillarCards.length) {
+    gsap.set(pillarCards, { opacity: 0, y: 40 });
+    pillarCards.forEach(function(card, i) {
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 82%',
+        once: true,
+        onEnter: function() {
+          gsap.to(card, {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: 'power2.out'
+          });
+        }
       });
-    }
-  });
-
-  // --- Carousel navigation via step cards ---
-  var currentSlide = 0;
-  var animating = false;
-
-  function navigateSlide(targetIndex) {
-    if (animating || targetIndex === currentSlide) return;
-    animating = true;
-
-    var currentEl = slides[currentSlide];
-    var targetEl = slides[targetIndex];
-
-    // Update step card active states
-    steps[currentSlide].classList.remove('is--active');
-    steps[targetIndex].classList.add('is--active');
-
-    var tl = gsap.timeline({
-      onStart: function() {
-        targetEl.classList.add('is--current');
-      },
-      onComplete: function() {
-        currentEl.classList.remove('is--current');
-        currentSlide = targetIndex;
-        animating = false;
-      }
     });
-
-    // Crossfade: current fades out, target fades in
-    tl.to(currentEl, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
-    tl.to(targetEl, { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, 0.15);
   }
-
-  // Step card click handlers
-  steps.forEach(function(step, i) {
-    step.addEventListener('click', function() {
-      navigateSlide(i);
-    });
-  });
 })();
 
 /* ============================================

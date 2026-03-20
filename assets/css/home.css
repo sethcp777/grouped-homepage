@@ -2017,49 +2017,42 @@ a.nav-link:hover .nav-link__label::after {
   .pillars { padding: 0 20px clamp(60px, 8vw, 100px); }
 }
 
-/* ---- Inline Expanded Card Carousel ---- */
-.pillars__expanded {
-  position: relative;
-  width: 100%;
+/* ============================================
+   PILLAR DETAIL CARDS — Stacked Section
+   ============================================ */
+.pillar-cards {
+  padding: 0 32px clamp(80px, 10vw, 140px);
+}
+.pillar-cards__inner {
   max-width: var(--container);
-  margin: 0 auto clamp(32px, 4vw, 48px);
-  background: var(--bg-raised);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 3vw, 40px);
 }
-.pillars__slides {
-  width: 100%;
-  position: relative;
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 100%;
-  overflow: hidden;
-}
-.pillars__slide {
-  grid-area: 1 / 1 / -1 / -1;
+.pillar-card {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(32px, 4vw, 64px);
   align-items: center;
   padding: clamp(40px, 5vw, 64px);
-  opacity: 0;
-  pointer-events: none;
-  will-change: opacity;
-  position: relative;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
-.pillars__slide.is--current {
-  opacity: 1;
-  pointer-events: auto;
+.pillar-card:hover {
+  border-color: rgba(196,138,58,0.12);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 40px rgba(196,138,58,0.03);
 }
-.pillars__slide-text {
+.pillar-card__text {
   display: flex;
   flex-direction: column;
   gap: 0;
   max-width: 560px;
 }
-.pillars__slide-text .benefit-label { margin-bottom: 16px; }
-.pillars__slide-title {
+.pillar-card__text .benefit-label { margin-bottom: 16px; }
+.pillar-card__title {
   font-family: 'Anacrusis', serif;
   font-size: clamp(24px, 3vw, 40px);
   line-height: 1.1;
@@ -2068,13 +2061,13 @@ a.nav-link:hover .nav-link__label::after {
   letter-spacing: -0.025em;
   margin-bottom: 28px;
 }
-.pillars__slide-text .benefit-points {
+.pillar-card__text .benefit-points {
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin-bottom: 28px;
 }
-.pillars__slide-visual {
+.pillar-card__visual {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2082,36 +2075,18 @@ a.nav-link:hover .nav-link__label::after {
   gap: 16px;
 }
 
-/* Active step card — highlights which slide is showing */
-.pillars__step.is--active {
-  border-color: var(--gold);
-  box-shadow: 0 0 30px rgba(196,138,58,0.1), 0 0 60px rgba(196,138,58,0.05);
-}
-.pillars__step.is--active .pillars__step-num {
-  background: rgba(196,138,58,0.12);
-  box-shadow: 0 0 24px rgba(196,138,58,0.2);
-}
-.pillars__step.is--active .pillars__step-title {
-  color: var(--gold);
-}
-.pillars__step {
-  cursor: pointer;
-}
-
-/* ---- Expanded Responsive ---- */
+/* ---- Pillar Cards Responsive ---- */
 @media (max-width: 900px) {
-  .pillars__slide {
+  .pillar-card {
     grid-template-columns: 1fr;
     gap: 24px;
     padding: 32px 24px;
   }
-  .pillars__slide-visual { order: -1; max-width: 260px; margin: 0 auto; }
+  .pillar-card__visual { order: -1; max-width: 260px; margin: 0 auto; }
 }
 @media (max-width: 768px) {
-  .pillars__expanded {
-    border-radius: 16px;
-    margin-bottom: 24px;
-  }
+  .pillar-cards { padding: 0 20px clamp(60px, 8vw, 100px); }
+  .pillar-card { border-radius: 16px; }
 }
 
 /* ============================================
