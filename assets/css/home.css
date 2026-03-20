@@ -1624,7 +1624,7 @@ a.nav-link:hover .nav-link__label::after {
 .artist-marquee {
   width: 100%;
   overflow: hidden;
-  height: 220px;
+  height: auto;
   padding: 40px 0;
   -webkit-mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
   mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
@@ -1640,7 +1640,7 @@ a.nav-link:hover .nav-link__label::after {
 /* ---- Artist Bubble ---- */
 .artist-bubble {
   --bubble-w: 240px;
-  --bubble-h: 160px;
+  --bubble-h: 190px;
   flex-shrink: 0;
   width: var(--bubble-w);
   height: var(--bubble-h);
@@ -1649,22 +1649,20 @@ a.nav-link:hover .nav-link__label::after {
   position: relative;
   cursor: pointer;
   text-decoration: none;
-  display: block;
-  margin-left: -8px;
-  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0;
   overflow: hidden;
 }
-.artist-bubble:first-child { margin-left: 0; }
 .artist-bubble img {
   width: 100% !important;
-  height: 100% !important;
-  border-radius: inherit;
+  flex: 1 1 0;
+  min-height: 0;
+  border-radius: 0;
   object-fit: cover;
-  border: 3px solid var(--bg-base);
+  border: none;
   display: block;
-  box-shadow: var(--shadow-md);
-  transition: border-color 0.3s ease,
-              box-shadow 0.3s ease;
+  transition: brightness 0.3s ease;
 }
 
 /* Hover */
@@ -1672,30 +1670,25 @@ a.nav-link:hover .nav-link__label::after {
   z-index: 10;
 }
 .artist-bubble:hover img {
-  border-color: var(--gold);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,138,58,0.15);
+  filter: brightness(1.1);
 }
 
-/* ---- Persistent name label (always visible) ---- */
+/* ---- Persistent name label (below image) ---- */
 .artist-bubble-label {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 6px 10px;
-  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-  border-radius: 0 0 12px 12px;
+  flex-shrink: 0;
+  padding: 8px 10px;
+  background: var(--bg-base);
   text-align: center;
-  z-index: 2;
   pointer-events: none;
 }
 .artist-bubble-label span {
   display: block;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--white);
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1.2;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1709,7 +1702,7 @@ a.nav-link:hover .nav-link__label::after {
   flex-direction: column;
   justify-content: flex-end;
   padding: 24px;
-  border-radius: 12px;
+  border-radius: 0;
   background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
   opacity: 0;
   pointer-events: none;
@@ -1750,8 +1743,7 @@ a.nav-link:hover .nav-link__label::after {
   z-index: 10;
 }
 .artist-bubble.is--tapped img {
-  border-color: var(--gold);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,138,58,0.15);
+  filter: brightness(1.1);
 }
 .artist-bubble.is--tapped .artist-bubble-info {
   opacity: 1;
@@ -1831,27 +1823,20 @@ a.nav-link:hover .nav-link__label::after {
     padding: 24px 32px;
   }
   .social-proof-metric-divider { display: none; }
-  .artist-marquee { height: 180px; }
   .artist-bubble {
-    --bubble-w: 180px;
-    --bubble-h: 120px;
-    margin-left: -6px;
-  }
-  .artist-bubble img {
-    border-width: 2px;
+    --bubble-w: 160px;
+    --bubble-h: 150px;
   }
   .artist-bubble-name { font-size: 18px; }
   .artist-bubble-group { font-size: 12px; }
   .artist-bubble-info { padding: 18px; }
-  .artist-bubble-label { padding: 5px 8px; border-radius: 0 0 10px 10px; }
+  .artist-bubble-label { padding: 6px 8px; }
   .artist-bubble-label span { font-size: 10px; }
 }
 @media (max-width: 480px) {
-  .artist-marquee { height: 150px; }
   .artist-bubble {
-    --bubble-w: 150px;
-    --bubble-h: 100px;
-    margin-left: -4px;
+    --bubble-w: 130px;
+    --bubble-h: 125px;
   }
   .artist-bubble-name { font-size: 16px; }
   .artist-bubble-group { font-size: 11px; }
