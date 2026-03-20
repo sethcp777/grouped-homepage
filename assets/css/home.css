@@ -1686,6 +1686,31 @@ a.nav-link:hover .nav-link__label::after {
   transform: scale(1.08);
 }
 
+/* ---- Persistent name label (always visible) ---- */
+.artist-bubble-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 10px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  border-radius: 0 0 24px 24px;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.artist-bubble-label span {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.2;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ---- Info Overlay (inside the bubble on hover) ---- */
 .artist-bubble-info {
   position: absolute;
@@ -1699,7 +1724,7 @@ a.nav-link:hover .nav-link__label::after {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
-  z-index: 2;
+  z-index: 3;
 }
 .artist-bubble:hover .artist-bubble-info {
   opacity: 1;
@@ -1811,6 +1836,8 @@ a.nav-link:hover .nav-link__label::after {
   .artist-bubble-name { font-size: 18px; }
   .artist-bubble-group { font-size: 12px; }
   .artist-bubble-info { padding: 18px; }
+  .artist-bubble-label { padding: 5px 8px; border-radius: 0 0 20px 20px; }
+  .artist-bubble-label span { font-size: 10px; }
 }
 @media (max-width: 480px) {
   .artist-marquee { height: 190px; }
