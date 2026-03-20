@@ -1623,10 +1623,9 @@ a.nav-link:hover .nav-link__label::after {
 /* ---- Artist Marquee ---- */
 .artist-marquee {
   width: 100%;
-  overflow: visible;
+  overflow: hidden;
   height: 220px;
   padding: 40px 0;
-  clip-path: inset(-60px 0);
   -webkit-mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
   mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
@@ -1654,9 +1653,6 @@ a.nav-link:hover .nav-link__label::after {
   margin-left: -8px;
   border-radius: 12px;
   overflow: hidden;
-  will-change: transform, opacity;
-  transition: border-radius 0.5s var(--ease-out),
-              z-index 0s;
 }
 .artist-bubble:first-child { margin-left: 0; }
 .artist-bubble img {
@@ -1667,24 +1663,17 @@ a.nav-link:hover .nav-link__label::after {
   border: 3px solid var(--bg-base);
   display: block;
   box-shadow: var(--shadow-md);
-  transform: scale(1);
-  transition: border-radius 0.5s var(--ease-out),
-              border-color 0.3s ease,
-              box-shadow 0.3s ease,
-              transform 0.6s var(--ease-out);
+  transition: border-color 0.3s ease,
+              box-shadow 0.3s ease;
 }
 
-/* Hover: morph to rounded rectangle via JS scale (no layout push) */
+/* Hover */
 .artist-bubble:hover {
-  border-radius: 16px;
   z-index: 10;
-  overflow: visible;
 }
 .artist-bubble:hover img {
-  border-radius: 16px;
   border-color: var(--gold);
-  box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 30px rgba(196,138,58,0.15);
-  transform: scale(1.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,138,58,0.15);
 }
 
 /* ---- Persistent name label (always visible) ---- */
@@ -1730,14 +1719,6 @@ a.nav-link:hover .nav-link__label::after {
 .artist-bubble:hover .artist-bubble-info {
   opacity: 1;
   pointer-events: auto;
-  /* Counter parent scale(1.35) so text renders at native size */
-  inset: auto;
-  top: 50%;
-  left: 50%;
-  width: 135%;
-  height: 135%;
-  transform: translate(-50%, -50%) scale(calc(1 / 1.35));
-  transform-origin: center center;
 }
 .artist-bubble-name {
   display: block;
@@ -1766,27 +1747,15 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Mobile tap-to-preview state ---- */
 .artist-bubble.is--tapped {
-  border-radius: 16px;
   z-index: 10;
-  overflow: visible;
 }
 .artist-bubble.is--tapped img {
-  border-radius: 16px;
   border-color: var(--gold);
-  box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 30px rgba(196,138,58,0.15);
-  transform: scale(1.08);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,138,58,0.15);
 }
 .artist-bubble.is--tapped .artist-bubble-info {
   opacity: 1;
   pointer-events: auto;
-  /* Counter parent scale(1.35) so text renders at native size */
-  inset: auto;
-  top: 50%;
-  left: 50%;
-  width: 135%;
-  height: 135%;
-  transform: translate(-50%, -50%) scale(calc(1 / 1.35));
-  transform-origin: center center;
 }
 .artist-bubble.is--tapped .artist-bubble-cta {
   display: block;
