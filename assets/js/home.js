@@ -673,92 +673,44 @@
     }
   });
 
-  // --- Full-screen expansion + slideshow ---
+  // --- Inline expanded card: scroll-triggered entry ---
   var expanded = document.getElementById('pillars-expanded');
   var slides = document.querySelectorAll('.pillars__slide');
-  var thumbs = document.querySelectorAll('.pillars__slide-thumb');
-  var pillarsSection = document.querySelector('.pillars');
-  var pillarsHeader = document.querySelector('.pillars__header');
   if (!expanded || !slides.length) return;
 
-  var currentSlide = 0;
-  var animating = false;
-  var isExpanded = false;
-  var firstStep = steps[0];
+  gsap.set(expanded, { opacity: 0, scale: 0.96, y: 30 });
 
-  // Clip-path expansion: the expanded panel opens outward from step 01
   ScrollTrigger.create({
-    trigger: '.pillars__steps',
-    start: 'bottom 50%',
-    end: 'bottom -50%',
-    scrub: 1,
-    onUpdate: function(self) {
-      var p = self.progress;
-
-      if (p > 0.01 && !isExpanded) {
-        isExpanded = true;
-        expanded.classList.add('is--active');
-      }
-      if (p <= 0.01 && isExpanded) {
-        isExpanded = false;
-        expanded.classList.remove('is--active');
-      }
-
-      // Get step 01 rect (relative to viewport)
-      var rect = firstStep.getBoundingClientRect();
-      var vw = window.innerWidth;
-      var vh = window.innerHeight;
-
-      // Inset values: how far each edge is clipped inward
-      // At p=0 → clipped to step 01's exact bounds
-      // At p=1 → inset(0 0 0 0) = full screen
-      var insetTop = rect.top;
-      var insetRight = vw - rect.right;
-      var insetBottom = vh - rect.bottom;
-      var insetLeft = rect.left;
-      var radius = 16; // match card border-radius
-
-      // Ease the progress for a smooth physical feel
-      var ep = 1 - Math.pow(1 - p, 2.5); // easeOutQuint-ish
-
-      var t = insetTop * (1 - ep);
-      var r = insetRight * (1 - ep);
-      var b = insetBottom * (1 - ep);
-      var l = insetLeft * (1 - ep);
-      var rad = radius * (1 - ep);
-
-      expanded.style.clipPath = 'inset(' + t + 'px ' + r + 'px ' + b + 'px ' + l + 'px round ' + rad + 'px)';
-
-      // Fade steps + header out quickly
-      if (stepsContainer) gsap.set(stepsContainer, { opacity: 1 - p * 4 });
-      if (pillarsHeader) gsap.set(pillarsHeader, { opacity: 1 - p * 3 });
+    trigger: expanded,
+    start: 'top 80%',
+    once: true,
+    onEnter: function() {
+      gsap.to(expanded, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
     }
   });
 
-  // Pin the section while expanded
-  ScrollTrigger.create({
-    trigger: pillarsSection,
-    start: 'top top',
-    end: '+=200%',
-    pin: true,
-    pinSpacing: true
-  });
+  // --- Carousel navigation via step cards ---
+  var currentSlide = 0;
+  var animating = false;
 
-  // --- Slideshow navigation ---
   function navigateSlide(targetIndex) {
     if (animating || targetIndex === currentSlide) return;
     animating = true;
 
     var currentEl = slides[currentSlide];
     var targetEl = slides[targetIndex];
-    var direction = targetIndex > currentSlide ? 1 : -1;
 
-    // Update thumbs
-    thumbs[currentSlide].classList.remove('is--current');
-    thumbs[targetIndex].classList.add('is--current');
+    // Update step card active states
+    steps[currentSlide].classList.remove('is--active');
+    steps[targetIndex].classList.add('is--active');
 
     var tl = gsap.timeline({
-      defaults: { duration: 1, ease: 'expo.inOut' },
       onStart: function() {
         targetEl.classList.add('is--current');
       },
@@ -769,18 +721,14 @@
       }
     });
 
-    // Current slide exits
-    tl.to(currentEl, { xPercent: -direction * 100, opacity: 0 }, 0);
-    // New slide enters
-    tl.fromTo(targetEl,
-      { xPercent: direction * 100, opacity: 0 },
-      { xPercent: 0, opacity: 1 },
-    0);
+    // Crossfade: current fades out, target fades in
+    tl.to(currentEl, { opacity: 0, duration: 0.4, ease: 'power2.inOut' }, 0);
+    tl.to(targetEl, { opacity: 1, duration: 0.4, ease: 'power2.inOut' }, 0.15);
   }
 
-  // Thumb click handlers
-  thumbs.forEach(function(thumb, i) {
-    thumb.addEventListener('click', function() {
+  // Step card click handlers
+  steps.forEach(function(step, i) {
+    step.addEventListener('click', function() {
       navigateSlide(i);
     });
   });
