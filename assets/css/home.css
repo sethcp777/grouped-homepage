@@ -1624,9 +1624,9 @@ a.nav-link:hover .nav-link__label::after {
 .artist-marquee {
   width: 100%;
   overflow: visible;
-  height: 280px;
+  height: 220px;
   padding: 40px 0;
-  clip-path: inset(-100px 0);
+  clip-path: inset(-60px 0);
   -webkit-mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
   mask-image: linear-gradient(to right, transparent, black 100px, black calc(100% - 100px), transparent);
 }
@@ -1640,18 +1640,19 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Artist Bubble ---- */
 .artist-bubble {
-  --bubble-size: 200px;
+  --bubble-w: 240px;
+  --bubble-h: 160px;
   flex-shrink: 0;
-  width: var(--bubble-size);
-  height: var(--bubble-size);
-  min-width: var(--bubble-size);
-  min-height: var(--bubble-size);
+  width: var(--bubble-w);
+  height: var(--bubble-h);
+  min-width: var(--bubble-w);
+  min-height: var(--bubble-h);
   position: relative;
   cursor: pointer;
   text-decoration: none;
   display: block;
-  margin-left: -24px;
-  border-radius: 50%;
+  margin-left: -8px;
+  border-radius: 12px;
   overflow: hidden;
   will-change: transform, opacity;
   transition: border-radius 0.5s var(--ease-out),
@@ -1675,12 +1676,12 @@ a.nav-link:hover .nav-link__label::after {
 
 /* Hover: morph to rounded rectangle via JS scale (no layout push) */
 .artist-bubble:hover {
-  border-radius: 24px;
+  border-radius: 16px;
   z-index: 10;
   overflow: visible;
 }
 .artist-bubble:hover img {
-  border-radius: 24px;
+  border-radius: 16px;
   border-color: var(--gold);
   box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 30px rgba(196,138,58,0.15);
   transform: scale(1.08);
@@ -1694,7 +1695,7 @@ a.nav-link:hover .nav-link__label::after {
   right: 0;
   padding: 6px 10px;
   background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
-  border-radius: 0 0 24px 24px;
+  border-radius: 0 0 12px 12px;
   text-align: center;
   z-index: 2;
   pointer-events: none;
@@ -1719,7 +1720,7 @@ a.nav-link:hover .nav-link__label::after {
   flex-direction: column;
   justify-content: flex-end;
   padding: 24px;
-  border-radius: 24px;
+  border-radius: 12px;
   background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.35) 45%, transparent 100%);
   opacity: 0;
   pointer-events: none;
@@ -1765,12 +1766,12 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Mobile tap-to-preview state ---- */
 .artist-bubble.is--tapped {
-  border-radius: 24px;
+  border-radius: 16px;
   z-index: 10;
   overflow: visible;
 }
 .artist-bubble.is--tapped img {
-  border-radius: 24px;
+  border-radius: 16px;
   border-color: var(--gold);
   box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 30px rgba(196,138,58,0.15);
   transform: scale(1.08);
@@ -1861,10 +1862,11 @@ a.nav-link:hover .nav-link__label::after {
     padding: 24px 32px;
   }
   .social-proof-metric-divider { display: none; }
-  .artist-marquee { height: 220px; }
+  .artist-marquee { height: 180px; }
   .artist-bubble {
-    --bubble-size: 140px;
-    margin-left: -16px;
+    --bubble-w: 180px;
+    --bubble-h: 120px;
+    margin-left: -6px;
   }
   .artist-bubble img {
     border-width: 2px;
@@ -1872,14 +1874,15 @@ a.nav-link:hover .nav-link__label::after {
   .artist-bubble-name { font-size: 18px; }
   .artist-bubble-group { font-size: 12px; }
   .artist-bubble-info { padding: 18px; }
-  .artist-bubble-label { padding: 5px 8px; border-radius: 0 0 20px 20px; }
+  .artist-bubble-label { padding: 5px 8px; border-radius: 0 0 10px 10px; }
   .artist-bubble-label span { font-size: 10px; }
 }
 @media (max-width: 480px) {
-  .artist-marquee { height: 190px; }
+  .artist-marquee { height: 150px; }
   .artist-bubble {
-    --bubble-size: 110px;
-    margin-left: -12px;
+    --bubble-w: 150px;
+    --bubble-h: 100px;
+    margin-left: -4px;
   }
   .artist-bubble-name { font-size: 16px; }
   .artist-bubble-group { font-size: 11px; }
