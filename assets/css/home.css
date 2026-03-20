@@ -1147,6 +1147,17 @@ a.nav-link:hover .nav-link__label::after {
   font-weight: normal;
   letter-spacing: -0.02em;
 }
+.hero-handwritten {
+  display: block;
+  font-family: 'Caveat', cursive;
+  font-size: clamp(22px, 2.2vw, 30px);
+  color: var(--gold);
+  margin-top: 6px;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(8px) rotate(-2deg);
+  animation: annotation-in 0.6s 1.2s var(--ease-out) forwards;
+}
 .hero-annotation {
   display: inline-block;
   font-family: 'Caveat', cursive;
@@ -1842,10 +1853,13 @@ a.nav-link:hover .nav-link__label::after {
   0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
   50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
 }
-.what-we-are__sub {
-  font-size: clamp(16px, 1.5vw, 19px);
-  line-height: 1.6;
-  color: var(--text-secondary);
+.what-we-are__headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  line-height: 1.12;
+  color: var(--white);
+  font-weight: normal;
+  letter-spacing: -0.02em;
   margin-bottom: 28px;
   position: relative;
   z-index: 1;
@@ -1982,21 +1996,14 @@ a.nav-link:hover .nav-link__label::after {
   letter-spacing: -0.015em;
   transition: color 0.3s ease;
 }
-/* Hover description */
+/* Description — always visible */
 .pillars__step-hover-desc {
   font-size: 14px;
   line-height: 1.6;
   color: var(--text-secondary);
-  margin-top: 0;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.5s var(--ease-out), opacity 0.4s var(--ease-out), margin-top 0.4s var(--ease-out);
-}
-.pillars__step:hover .pillars__step-hover-desc {
-  max-height: 120px;
-  opacity: 1;
   margin-top: 14px;
+  max-height: none;
+  opacity: 1;
 }
 @media (max-width: 768px) {
   .pillars__steps {
@@ -2006,11 +2013,6 @@ a.nav-link:hover .nav-link__label::after {
     margin: 0 auto;
   }
   .pillars__line { display: none; }
-  .pillars__step-hover-desc {
-    max-height: 120px;
-    opacity: 1;
-    margin-top: 14px;
-  }
 }
 @media (max-width: 600px) {
   .pillars { padding: 0 20px clamp(60px, 8vw, 100px); }

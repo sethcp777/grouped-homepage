@@ -918,17 +918,17 @@
 (function initWhatWeAre() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  var sub = document.querySelector('.what-we-are__sub');
+  var headline = document.querySelector('.what-we-are__headline');
 
-  // Sub line: soft fade-up reveal
-  if (sub) {
-    gsap.set(sub, { opacity: 0, y: 20 });
+  // Headline: soft fade-up reveal
+  if (headline) {
+    gsap.set(headline, { opacity: 0, y: 20 });
     ScrollTrigger.create({
       trigger: '.what-we-are',
       start: 'top 80%',
       once: true,
       onEnter: function() {
-        gsap.to(sub, {
+        gsap.to(headline, {
           opacity: 1,
           y: 0,
           duration: 1,
