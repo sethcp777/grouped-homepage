@@ -1756,6 +1756,42 @@ a.nav-link:hover .nav-link__label::after {
 }
 .artist-bubble-cta {
   display: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Mobile tap-to-preview state ---- */
+.artist-bubble.is--tapped {
+  border-radius: 24px;
+  z-index: 10;
+  overflow: visible;
+}
+.artist-bubble.is--tapped img {
+  border-radius: 24px;
+  border-color: var(--gold);
+  box-shadow: 0 12px 60px rgba(0,0,0,0.6), 0 0 30px rgba(196,138,58,0.15);
+  transform: scale(1.08);
+}
+.artist-bubble.is--tapped .artist-bubble-info {
+  opacity: 1;
+  pointer-events: auto;
+  /* Counter parent scale(1.35) so text renders at native size */
+  inset: auto;
+  top: 50%;
+  left: 50%;
+  width: 135%;
+  height: 135%;
+  transform: translate(-50%, -50%) scale(calc(1 / 1.35));
+  transform-origin: center center;
+}
+.artist-bubble.is--tapped .artist-bubble-cta {
+  display: block;
+}
+.artist-bubble.is--tapped .artist-bubble-label {
+  opacity: 0;
 }
 
 /* ---- Social Proof Headline + CTA ---- */

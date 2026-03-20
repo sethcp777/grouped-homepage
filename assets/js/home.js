@@ -269,7 +269,7 @@
       // Cosine falloff for natural lens feel
       var t = Math.cos(dist * Math.PI * 0.5);
 
-      if (bubble.matches(':hover')) {
+      if (bubble.matches(':hover') || bubble.classList.contains('is--tapped')) {
         bubble.style.transform = 'scale(' + HOVER_SCALE + ')';
         bubble.style.opacity = '1';
       } else {
@@ -285,36 +285,145 @@
   scrollTween.eventCallback('onUpdate', updateOrbitScale);
   updateOrbitScale();
 
-  // Hover: slow down smoothly and stop
-  var isHovered = false;
-  var orbitRAF = null;
+  // ---- Mobile vs Desktop behavior ----
+  var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
-  function orbitTick() {
-    updateOrbitScale();
-    if (isHovered) orbitRAF = requestAnimationFrame(orbitTick);
+  if (isTouchDevice) {
+    // ======== MOBILE: Swipe-to-browse + Tap-to-preview ========
+    scrollTween.pause();
+
+    var touchStartX = 0;
+    var touchCurrentX = 0;
+    var trackStartX = 0;
+    var isDragging = false;
+    var hasMoved = false;
+    var touchStartTime = 0;
+    var activeBubble = null;
+
+    function getTrackX() {
+      var style = getComputedStyle(track);
+      var matrix = new DOMMatrix(style.transform);
+      return matrix.m41;
+    }
+
+    function wrapX(val) {
+      val = val % singleSetWidth;
+      if (val > 0) val -= singleSetWidth;
+      return val;
+    }
+
+    function closeBubblePreview() {
+      if (activeBubble) {
+        activeBubble.classList.remove('is--tapped');
+        activeBubble = null;
+      }
+    }
+
+    marquee.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      trackStartX = getTrackX();
+      isDragging = true;
+      hasMoved = false;
+      touchStartTime = Date.now();
+      gsap.killTweensOf(track);
+    }, { passive: true });
+
+    marquee.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      touchCurrentX = e.touches[0].clientX;
+      var delta = touchCurrentX - touchStartX;
+      if (Math.abs(delta) > 12) {
+        hasMoved = true;
+        closeBubblePreview();
+      }
+      gsap.set(track, { x: wrapX(trackStartX + delta) });
+      updateOrbitScale();
+    }, { passive: true });
+
+    marquee.addEventListener('touchend', function(e) {
+      if (!isDragging) return;
+      isDragging = false;
+
+      if (!hasMoved) {
+        // It's a TAP
+        var touch = e.changedTouches[0];
+        var target = document.elementFromPoint(touch.clientX, touch.clientY);
+        var bubble = target ? target.closest('.artist-bubble') : null;
+
+        if (activeBubble && activeBubble === bubble) {
+          // Second tap on same bubble — navigate to group
+          closeBubblePreview();
+          if (bubble && bubble.href) window.open(bubble.href, '_blank');
+          return;
+        }
+
+        closeBubblePreview();
+
+        if (bubble) {
+          activeBubble = bubble;
+          bubble.classList.add('is--tapped');
+          updateOrbitScale();
+        }
+        return;
+      }
+
+      // SWIPE: momentum throw
+      var elapsed = Date.now() - touchStartTime;
+      var velocity = (touchCurrentX - touchStartX) / Math.max(elapsed, 1);
+      var throwDist = Math.max(-600, Math.min(600, velocity * 400));
+      var fromX = getTrackX();
+
+      gsap.to(track, {
+        x: wrapX(fromX + throwDist),
+        duration: Math.min(Math.abs(throwDist) / 500, 1.2),
+        ease: 'power3.out',
+        onUpdate: updateOrbitScale
+      });
+    }, { passive: true });
+
+    // Prevent default link navigation on tap (handled above)
+    marquee.addEventListener('click', function(e) {
+      var bubble = e.target.closest('.artist-bubble');
+      if (bubble) e.preventDefault();
+    });
+
+    // Close preview when tapping outside marquee
+    document.addEventListener('touchstart', function(e) {
+      if (activeBubble && !marquee.contains(e.target)) {
+        closeBubblePreview();
+      }
+    }, { passive: true });
+
+    // Keep orbit updating
+    function mobileOrbitLoop() {
+      if (!isDragging) updateOrbitScale();
+      requestAnimationFrame(mobileOrbitLoop);
+    }
+    mobileOrbitLoop();
+
+  } else {
+    // ======== DESKTOP: Hover pause + orbit ========
+    var isHovered = false;
+    var orbitRAF = null;
+
+    function orbitTick() {
+      updateOrbitScale();
+      if (isHovered) orbitRAF = requestAnimationFrame(orbitTick);
+    }
+
+    marquee.addEventListener('mouseenter', function() {
+      isHovered = true;
+      gsap.to(scrollTween, { timeScale: 0, duration: 0.6, ease: 'power2.out' });
+      orbitTick();
+    });
+
+    marquee.addEventListener('mouseleave', function() {
+      isHovered = false;
+      if (orbitRAF) cancelAnimationFrame(orbitRAF);
+      gsap.to(scrollTween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut' });
+    });
   }
-
-  marquee.addEventListener('mouseenter', function() {
-    isHovered = true;
-    gsap.to(scrollTween, { timeScale: 0, duration: 0.6, ease: 'power2.out' });
-    // Keep orbit scale updating while paused so hover detection works
-    orbitTick();
-  });
-
-  marquee.addEventListener('mouseleave', function() {
-    isHovered = false;
-    if (orbitRAF) cancelAnimationFrame(orbitRAF);
-    gsap.to(scrollTween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut' });
-  });
-
-  // Touch: pause on touch, resume on release
-  marquee.addEventListener('touchstart', function() {
-    gsap.to(scrollTween, { timeScale: 0, duration: 0.4, ease: 'power2.out' });
-  }, { passive: true });
-
-  marquee.addEventListener('touchend', function() {
-    gsap.to(scrollTween, { timeScale: 1, duration: 0.6, ease: 'power2.inOut' });
-  }, { passive: true });
 
 })();
 
