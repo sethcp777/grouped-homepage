@@ -1206,6 +1206,13 @@ a.nav-link:hover .nav-link__label::after {
   align-items: center;
   position: relative;
 }
+.hero-gif {
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+}
 .hero-phone {
   width: 280px;
   background: var(--bg-base);
