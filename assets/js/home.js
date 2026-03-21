@@ -1224,7 +1224,56 @@
 (function initBottomSections() {
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  // Case studies cards
+  // Differentiators section — stagger reveal
+  var diffCards = document.querySelectorAll('.diff-card');
+  var diffHeader = document.querySelector('.differentiators__header');
+  if (diffHeader && diffCards.length) {
+    var diffHeaderEls = diffHeader.querySelectorAll('.label, .differentiators__headline');
+    gsap.set(diffHeaderEls, { opacity: 0, y: 20 });
+    gsap.set(diffCards, { opacity: 0, y: 25 });
+    ScrollTrigger.create({
+      trigger: '.differentiators',
+      start: 'top 75%',
+      once: true,
+      onEnter: function() {
+        gsap.to(diffHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
+        gsap.to(diffCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, delay: 0.2, ease: 'power2.out' });
+      }
+    });
+  }
+
+  // Case studies — scrollable expand cards
+  var csScrollCards = document.querySelectorAll('.cs-scroll-card');
+  if (csScrollCards.length) {
+    csScrollCards.forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        // Don't collapse if clicking the CTA link
+        if (e.target.closest('.cs-scroll-card__cta')) return;
+        var wasExpanded = card.classList.contains('is--expanded');
+        csScrollCards.forEach(function(c) { c.classList.remove('is--expanded'); });
+        if (!wasExpanded) card.classList.add('is--expanded');
+      });
+    });
+
+    // Scroll reveal
+    var csScrollHeader = document.querySelector('.case-studies-scroll__header');
+    if (csScrollHeader) {
+      var csScrollHeaderEls = csScrollHeader.querySelectorAll('.label, .case-studies-scroll__headline');
+      gsap.set(csScrollHeaderEls, { opacity: 0, y: 20 });
+      gsap.set(csScrollCards, { opacity: 0, y: 25 });
+      ScrollTrigger.create({
+        trigger: '.case-studies-scroll',
+        start: 'top 75%',
+        once: true,
+        onEnter: function() {
+          gsap.to(csScrollHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
+          gsap.to(csScrollCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.2, ease: 'power2.out' });
+        }
+      });
+    }
+  }
+
+  // Legacy case studies cards (old grid — may still be referenced)
   var csHeader = document.querySelector('.case-studies-grid__header');
   var csCards = document.querySelectorAll('.cs-card');
   if (csHeader) {
