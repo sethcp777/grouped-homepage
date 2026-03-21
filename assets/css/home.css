@@ -3467,7 +3467,290 @@ a.nav-link:hover .nav-link__label::after {
 }
 
 /* ============================================
-   CASE STUDIES — Scrollable Expand Cards
+   CASE STUDIES — Fan-Rotation Carousel
+   ============================================ */
+.cs-carousel {
+  position: relative;
+  padding: var(--section-pad) 0 60px;
+  text-align: center;
+}
+.cs-carousel__header {
+  padding: 0 32px;
+  margin-bottom: 32px;
+}
+.cs-carousel__headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  color: var(--white);
+  line-height: 1.12;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  margin-top: 16px;
+}
+.cs-carousel__inner {
+  position: relative;
+  overflow: hidden;
+}
+.cs-carousel__slider {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+/* Decorative circle */
+.cs-carousel__deco {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 238em;
+  aspect-ratio: 3481 / 1740.5;
+  pointer-events: none;
+  z-index: 0;
+}
+.cs-carousel__deco svg { width: 100%; height: 100%; }
+/* Card collection */
+.cs-carousel__collection {
+  width: 75em;
+  max-width: 100%;
+  user-select: none;
+  touch-action: pan-y pinch-zoom;
+  position: relative;
+}
+.cs-carousel__list {
+  position: relative;
+  will-change: transform;
+  display: flex;
+}
+/* Individual card */
+.cs-card {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 22%;
+  flex: none;
+  border-radius: 16px;
+  overflow: hidden;
+  transform-origin: 50% 310%;
+  will-change: transform, opacity;
+  cursor: grab;
+}
+.cs-card:active { cursor: grabbing; }
+.cs-card__ratio { padding-top: 130%; }
+.cs-card__inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 2px solid rgba(235,225,210,0.10);
+  background: var(--bg-base);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(240,235,227,0.04);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.cs-card.active .cs-card__inner {
+  border-color: rgba(196,138,58,0.22);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 50px rgba(196,138,58,0.06);
+}
+.cs-card__inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Bottom fade */
+.cs-carousel__fade {
+  background-image: linear-gradient(180deg, transparent, var(--bg-base));
+  pointer-events: none;
+  width: 100%;
+  height: 10em;
+  position: relative;
+  margin-top: -10em;
+  z-index: 2;
+}
+/* Floating callouts */
+.cs-carousel__callouts {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+.cs-carousel__callout {
+  position: absolute;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  animation: csFloatGently 6s ease-in-out infinite;
+}
+.cs-carousel__callout.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.cs-callout--left { top: 22%; right: calc(50% + 8em); animation-delay: -1s; }
+.cs-callout--right { top: 26%; left: calc(50% + 8em); animation-delay: -2.5s; }
+@keyframes csFloatGently {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.cs-carousel__callout-val {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.2;
+}
+.cs-carousel__callout-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+/* Stage copy */
+.cs-carousel__stage {
+  position: relative;
+  z-index: 3;
+  min-height: 10em;
+  padding: 0 32px;
+}
+.cs-carousel__stage-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 32px;
+}
+.cs-carousel__stage-item.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.cs-carousel__stage-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin-bottom: 8px;
+}
+.cs-carousel__stage-headline {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(24px, 3vw, 36px);
+  color: var(--white);
+  font-weight: normal;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.cs-carousel__stage-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin: 0 auto 16px;
+}
+.cs-carousel__stage-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  transition: gap 0.3s var(--ease-out);
+}
+.cs-carousel__stage-cta:hover { gap: 10px; }
+.cs-carousel__stage-cta svg { width: 14px; height: 14px; }
+/* Pill nav */
+.cs-carousel__pills {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  position: relative;
+  z-index: 3;
+  flex-wrap: wrap;
+  padding: 0 32px;
+}
+.cs-carousel__pill {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.19,1,0.22,1);
+}
+.cs-carousel__pill:hover {
+  border-color: rgba(196,138,58,0.2);
+  color: var(--white);
+}
+.cs-carousel__pill.active {
+  background: var(--white);
+  color: var(--text-inverse);
+  border-color: var(--white);
+  font-weight: 600;
+}
+/* Controls */
+.cs-carousel__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  position: relative;
+  z-index: 3;
+}
+.cs-carousel__dots { display: flex; gap: 6px; }
+.cs-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gray-600);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.cs-dot.active { background: var(--gold); transform: scale(1.25); }
+.cs-dot.filled { background: var(--gray-400); }
+.cs-carousel__drag-hint {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+  transition: opacity 0.4s ease;
+}
+.cs-carousel__drag-hint.hidden { opacity: 0; pointer-events: none; }
+.cs-carousel__drag-hint svg { width: 16px; height: 16px; }
+/* See all link */
+.cs-carousel__see-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold);
+  transition: gap 0.3s var(--ease-out);
+  position: relative;
+  z-index: 3;
+}
+.cs-carousel__see-all:hover { gap: 12px; }
+.cs-carousel__see-all svg { width: 16px; height: 16px; }
+/* Responsive */
+@media (max-width: 900px) {
+  .cs-card { width: 30%; }
+  .cs-callout--left, .cs-callout--right { display: none; }
+}
+@media (max-width: 600px) {
+  .cs-card { width: 40%; }
+  .cs-carousel { padding: var(--section-pad) 0 40px; }
+  .cs-carousel__header { padding: 0 20px; }
+}
+
+/* ============================================
+   CASE STUDIES — Scrollable Expand Cards (legacy)
    ============================================ */
 .case-studies-scroll {
   padding: var(--section-pad) 0;
