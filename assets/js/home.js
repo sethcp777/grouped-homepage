@@ -719,24 +719,47 @@
     }
   });
 
-  // --- Pillar detail cards: stagger reveal on scroll ---
+  // --- Pillar detail cards: sequenced timeline reveal ---
   var pillarCards = document.querySelectorAll('.pillar-card');
+  var connectors = document.querySelectorAll('.pillar-cards__connector');
+
   if (pillarCards.length) {
-    gsap.set(pillarCards, { opacity: 0, y: 40 });
+    // Initial states (cards already hidden via CSS opacity:0 / translateY)
+    gsap.set(connectors, { scaleY: 0 });
+    gsap.set('.pillar-card__watermark', { opacity: 0 });
+
+    var cardTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#pillar-cards',
+        start: 'top 75%',
+        once: true
+      }
+    });
+
     pillarCards.forEach(function(card, i) {
-      ScrollTrigger.create({
-        trigger: card,
-        start: 'top 82%',
-        once: true,
-        onEnter: function() {
-          gsap.to(card, {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: 'power2.out'
-          });
-        }
-      });
+      var watermark = card.querySelector('.pillar-card__watermark');
+
+      // Dot pops in
+      cardTimeline.add(function() { card.classList.add('is--timeline-active'); });
+
+      // Card fades up
+      cardTimeline.to(card, {
+        opacity: 1, y: 0, duration: 0.7, ease: 'power2.out'
+      }, '-=0.2');
+
+      // Watermark fades in
+      if (watermark) {
+        cardTimeline.to(watermark, {
+          opacity: 1, duration: 0.5, ease: 'power2.out'
+        }, '-=0.5');
+      }
+
+      // Connector draws down (if not last card)
+      if (connectors[i]) {
+        cardTimeline.to(connectors[i], {
+          scaleY: 1, duration: 0.4, ease: 'power2.inOut'
+        }, '-=0.15');
+      }
     });
   }
 })();

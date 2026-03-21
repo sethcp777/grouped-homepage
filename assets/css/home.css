@@ -2059,20 +2059,17 @@ a.nav-link:hover .nav-link__label::after {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 3vw, 40px);
+  align-items: center;
+  gap: 0;
   position: relative;
-  padding-left: 56px;
 }
-/* ---- Vertical timeline spine ---- */
-.pillar-cards__inner::before {
-  content: '';
-  position: absolute;
-  left: 24px;
-  top: 0;
-  bottom: 0;
+/* ---- Timeline connector between cards ---- */
+.pillar-cards__connector {
   width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(196,138,58,0.15) 10%, rgba(196,138,58,0.15) 90%, transparent);
-  pointer-events: none;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(196,138,58,0.08), rgba(196,138,58,0.2), rgba(196,138,58,0.08));
+  transform: scaleY(0);
+  transform-origin: top;
 }
 .pillar-card {
   display: grid;
@@ -2084,22 +2081,29 @@ a.nav-link:hover .nav-link__label::after {
   border: 1px solid var(--border);
   border-radius: 20px;
   position: relative;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
   transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
 }
-/* ---- Timeline dot ---- */
+/* ---- Timeline dot (centered above card) ---- */
 .pillar-card::before {
   content: '';
   position: absolute;
-  left: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background: var(--gold);
   border: 2px solid var(--bg-base);
-  box-shadow: 0 0 12px rgba(196,138,58,0.3);
+  box-shadow: 0 0 16px rgba(196,138,58,0.3);
   z-index: 2;
+}
+.pillar-card.is--timeline-active::before {
+  transform: translateX(-50%) scale(1);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .pillar-card:hover {
   border-color: rgba(196,138,58,0.12);
@@ -2157,10 +2161,8 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Pillar Cards Responsive ---- */
 @media (max-width: 900px) {
-  .pillar-cards__inner {
-    padding-left: 0;
-  }
-  .pillar-cards__inner::before { display: none; }
+  .pillar-cards__inner { gap: clamp(24px, 3vw, 40px); }
+  .pillar-cards__connector { display: none; }
   .pillar-card::before { display: none; }
   .pillar-card {
     grid-template-columns: 1fr;
