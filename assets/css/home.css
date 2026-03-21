@@ -1131,7 +1131,7 @@ a.nav-link:hover .nav-link__label::after {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
-  align-items: center;
+  align-items: stretch;
 }
 .hero-text {
   display: flex;
@@ -1176,6 +1176,7 @@ a.nav-link:hover .nav-link__label::after {
   font-size: clamp(16px, 1.8vw, 19px);
   color: var(--text-secondary);
   line-height: 1.65;
+  margin-top: auto;
   margin-bottom: 28px;
   max-width: 464px;
 }
