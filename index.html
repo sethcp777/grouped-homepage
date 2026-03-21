@@ -12,7 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
-<link rel="stylesheet" href="assets/css/home.css?v=20260321b">
+<link rel="stylesheet" href="assets/css/home.css?v=20260321c">
 </head>
 <body>
 
@@ -503,7 +503,8 @@
 <section class="why-split" id="why-split">
   <div class="why-split__inner">
     <div class="why-split__header">
-      <h2 class="why-split__headline font-display">Artists build careers here. Fans keep coming back.</h2>
+      <h2 class="why-split__headline font-display">Artists build careers here.<br>Fans keep coming back.</h2>
+      <span class="why-split__handwritten">but don't just take our word for it</span>
     </div>
     <div class="why-split__panels">
 
@@ -529,121 +530,74 @@
 
     </div>
 
+    <!-- Scrolling testimonial strip -->
+    <div class="testimonial-strip">
+      <div class="testimonial-strip__track">
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"Never would have released if it wasn't for the vote."</span>
+          <span class="testimonial-strip__name">&mdash; Forrest Frank</span>
+        </div>
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"Grouped changed how I connect with my fans."</span>
+          <span class="testimonial-strip__name">&mdash; MIKE.</span>
+        </div>
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"Sold out merch in 48 hours through my Group."</span>
+          <span class="testimonial-strip__name">&mdash; Nic D</span>
+        </div>
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"My fans feel like they're part of something real."</span>
+          <span class="testimonial-strip__name">&mdash; Aha Gazelle</span>
+        </div>
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"This is the home for what I'm already doing."</span>
+          <span class="testimonial-strip__name">&mdash; Macy Nicole</span>
+        </div>
+        <div class="testimonial-strip__item">
+          <span class="testimonial-strip__quote">"I finally own the relationship with my audience."</span>
+          <span class="testimonial-strip__name">&mdash; Ali Gatie</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ============================================
-     CASE STUDIES — Fan-Rotation Carousel
+     CASE STUDIES — Horizontal Scroll Marquee
      ============================================ -->
-<section class="cs-carousel" id="case-studies">
-  <div class="cs-carousel__header">
-    <div class="label label-gold">Proof</div>
-    <h2 class="cs-carousel__headline font-display">See how it works.</h2>
-  </div>
-
-  <div class="cs-carousel__inner">
-    <div class="cs-carousel__slider">
-
-      <!-- Decorative circle -->
-      <div class="cs-carousel__deco">
-        <svg viewBox="0 0 3481 1741" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="1740.5" cy="870.5" r="869.5" stroke="rgba(196,138,58,0.07)" stroke-width="1"/>
-          <circle cx="1740.5" cy="870.5" r="780" stroke="rgba(196,138,58,0.04)" stroke-width="1"/>
-        </svg>
-      </div>
-
-      <!-- Draggable cards -->
-      <div class="cs-carousel__collection" id="cs-carousel-collection">
-        <div class="cs-carousel__list" id="cs-carousel-list">
-
-          <div class="cs-card" data-index="0">
-            <div class="cs-card__ratio"></div>
-            <div class="cs-card__inner">
-              <img src="https://grouped.com/wp-content/uploads/2025/04/FORREST-FRANK.png" alt="Forrest Frank" loading="lazy">
-            </div>
-          </div>
-
-          <div class="cs-card" data-index="1">
-            <div class="cs-card__ratio"></div>
-            <div class="cs-card__inner">
-              <img src="https://grouped.com/wp-content/uploads/2025/04/MIKE_.png" alt="MIKE." loading="lazy">
-            </div>
-          </div>
-
-          <div class="cs-card" data-index="2">
-            <div class="cs-card__ratio"></div>
-            <div class="cs-card__inner">
-              <img src="https://grouped.com/wp-content/uploads/2025/04/NIC-D.png" alt="Nic D" loading="lazy">
-            </div>
-          </div>
-
-        </div>
-      </div>
-
+<section class="cs-marquee section" id="case-studies">
+  <div class="cs-marquee__pin">
+    <div class="cs-marquee__header reveal">
+      <div class="label label-gold">Artists Using Grouped</div>
+      <h2 class="cs-marquee__heading font-display">Real artists. Real momentum.</h2>
     </div>
 
-    <!-- Floating callouts -->
-    <div class="cs-carousel__callouts">
-      <div class="cs-carousel__callout cs-callout--left" data-stage="0">
-        <span class="cs-carousel__callout-val">+1.2M</span>
-        <span class="cs-carousel__callout-label">followers in 60 days</span>
-      </div>
-      <div class="cs-carousel__callout cs-callout--right" data-stage="1">
-        <span class="cs-carousel__callout-val">24/7</span>
-        <span class="cs-carousel__callout-label">automated subscriber growth</span>
-      </div>
-      <div class="cs-carousel__callout cs-callout--left" data-stage="2">
-        <span class="cs-carousel__callout-val">48hrs</span>
-        <span class="cs-carousel__callout-label">merch bundle sold out</span>
+    <!-- Stat callouts -->
+    <div class="cs-marquee__stats reveal">
+      <a href="case-study-forrest-frank.html" class="cs-marquee__stat-link">
+        <div class="cs-marquee__stat-val font-display">+1.2M</div>
+        <div class="cs-marquee__stat-sub">Forrest Frank &mdash; Instagram followers in 60 days</div>
+      </a>
+      <a href="case-study-mike.html" class="cs-marquee__stat-link">
+        <div class="cs-marquee__stat-val font-display">24/7</div>
+        <div class="cs-marquee__stat-sub">MIKE. &mdash; automated paid subscriber growth</div>
+      </a>
+      <a href="case-study-nic-d.html" class="cs-marquee__stat-link">
+        <div class="cs-marquee__stat-val font-display">48hrs</div>
+        <div class="cs-marquee__stat-sub">Nic D &mdash; merch bundle sold out</div>
+      </a>
+    </div>
+
+    <div class="cs-marquee__track" id="cs-marquee-track">
+      <!-- Cards loaded from case-studies.json via JS -->
+      <div class="cs-marquee__reveal">
+        <p class="cs-marquee__reveal-head font-display">and more.</p>
+        <p class="cs-marquee__reveal-sub">(we love a good encore)</p>
+        <a href="case-studies.html" class="cs-marquee__reveal-btn">Explore our case studies &rarr;</a>
       </div>
     </div>
   </div>
-
-  <div class="cs-carousel__fade"></div>
-
-  <!-- Stage copy -->
-  <div class="cs-carousel__stage" id="cs-carousel-stage">
-    <div class="cs-carousel__stage-item active" data-stage="0">
-      <div class="cs-carousel__stage-label">Forrest Frank</div>
-      <div class="cs-carousel__stage-headline font-display">Fan voting drove a viral moment.</div>
-      <div class="cs-carousel__stage-desc">Used Grouped's focus group feature to let fans vote on his next single. The engagement drove a viral moment and a massive follower spike.</div>
-      <a href="case-study-forrest-frank.html" class="cs-carousel__stage-cta">Read full case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="cs-carousel__stage-item" data-stage="1">
-      <div class="cs-carousel__stage-label">MIKE.</div>
-      <div class="cs-carousel__stage-headline font-display">Subscribers on autopilot.</div>
-      <div class="cs-carousel__stage-desc">Built a premium subscriber base through smart swaps and consistent drops to his Group. Growth runs 24/7 without extra effort.</div>
-      <a href="case-study-mike.html" class="cs-carousel__stage-cta">Read full case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-    <div class="cs-carousel__stage-item" data-stage="2">
-      <div class="cs-carousel__stage-label">Nic D</div>
-      <div class="cs-carousel__stage-headline font-display">Sold out in 48 hours.</div>
-      <div class="cs-carousel__stage-desc">Launched a merch bundle through his Group using premiere access. Fans got early access, and it sold out in two days.</div>
-      <a href="case-study-nic-d.html" class="cs-carousel__stage-cta">Read full case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-    </div>
-  </div>
-
-  <!-- Pill navigation -->
-  <div class="cs-carousel__pills" id="cs-carousel-pills">
-    <div class="cs-carousel__pill active" data-index="0">Forrest Frank</div>
-    <div class="cs-carousel__pill" data-index="1">MIKE.</div>
-    <div class="cs-carousel__pill" data-index="2">Nic D</div>
-  </div>
-
-  <!-- Controls -->
-  <div class="cs-carousel__controls">
-    <span class="cs-carousel__dots" id="cs-carousel-dots">
-      <span class="cs-dot active"></span>
-      <span class="cs-dot"></span>
-      <span class="cs-dot"></span>
-    </span>
-    <div class="cs-carousel__drag-hint" id="cs-drag-hint">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Drag to explore
-    </div>
-  </div>
-
-  <a href="case-studies.html" class="cs-carousel__see-all">See all case studies <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
 </section>
 
 <!-- ============================================
@@ -824,7 +778,7 @@
 <!-- JS -->
 <script src="assets/js/shared.js"></script>
 <script src="assets/js/media-setup.js"></script>
-<script src="assets/js/home.js?v=20260321b"></script>
+<script src="assets/js/home.js?v=20260321c"></script>
 
 </body>
 </html>

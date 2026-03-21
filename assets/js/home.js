@@ -1298,262 +1298,130 @@
 })();
 
 /* ============================================
-   CASE STUDIES — Fan-Rotation Carousel
+   TESTIMONIAL QUOTE STRIP — Seamless Loop
    ============================================ */
-(function initCaseStudyCarousel() {
-  if (typeof gsap === 'undefined') return;
+(function initTestimonialStrip() {
+  var stripTrack = document.querySelector('.testimonial-strip__track');
+  if (stripTrack) stripTrack.innerHTML += stripTrack.innerHTML;
+})();
 
-  var collection = document.getElementById('cs-carousel-collection');
-  var list = document.getElementById('cs-carousel-list');
-  var csCards = document.querySelectorAll('.cs-card');
-  var csPills = document.querySelectorAll('.cs-carousel__pill');
-  var csDots = document.querySelectorAll('.cs-dot');
-  var csDragHint = document.getElementById('cs-drag-hint');
-  var csCallouts = document.querySelectorAll('.cs-carousel__callout');
-  var csStageItems = document.querySelectorAll('.cs-carousel__stage-item');
+/* ============================================
+   CASE STUDIES — Horizontal Scroll Marquee
+   ============================================ */
+(function initCaseMarquee() {
+  var track = document.getElementById('cs-marquee-track');
+  if (!track || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-  if (!collection || !csCards.length) return;
+  var rotations = [-1.5, 1, -0.5, 1.5, -1, 0.5, -1.2, 0.8, -0.8, 1.2];
 
-  var totalCards = csCards.length;
-  var currentIndex = 0;
-  var prevStageIndex = -1;
-  var isDragging = false;
-  var hasInteracted = false;
-
-  var ROTATE_PER_CARD = 20;
-  var DRAG_SENSITIVITY = 200;
-
-  var position = { value: 0 };
-  var snapTween = null;
-
-  // Velocity tracking
-  var velSamples = [];
-  function trackVel(x) {
-    var now = performance.now();
-    velSamples.push({ x: x, t: now });
-    while (velSamples.length > 0 && now - velSamples[0].t > 100) velSamples.shift();
-  }
-  function getVel() {
-    if (velSamples.length < 2) return 0;
-    var first = velSamples[0], last = velSamples[velSamples.length - 1];
-    var dt = last.t - first.t;
-    return dt === 0 ? 0 : (last.x - first.x) / dt;
-  }
-
-  function initListHeight() {
-    if (csCards[0]) {
-      list.style.height = csCards[0].offsetHeight + 'px';
-      list.style.position = 'relative';
-    }
+  function renderCard(cs, i) {
+    var rot = rotations[i % rotations.length];
+    var isExternal = cs.ctaUrl && cs.ctaUrl.indexOf('http') === 0;
+    var targetAttr = isExternal ? ' target="_blank"' : '';
+    return '<div class="cs-marquee__card" style="--card-rotate: ' + rot + 'deg">' +
+      '<div class="cs-marquee__img" style="background-image: url(\'' + cs.imageUrl + '\'); background-color: ' + (cs.imageBg || '#333') + ';">' +
+        '<div class="cs-marquee__stat-overlay">' +
+          '<div class="cs-marquee__stat">' + cs.stat + '</div>' +
+          '<div class="cs-marquee__stat-label">' + cs.statLabel + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="cs-marquee__body">' +
+        (cs.quote ? '<p class="cs-marquee__quote">' + cs.quote + '</p>' : '') +
+        '<div class="cs-marquee__artist">' +
+          '<div class="cs-marquee__avatar" style="background: linear-gradient(135deg, ' + (cs.avatarColor || 'rgba(196,138,58') + ',0.25), ' + (cs.avatarColor || 'rgba(196,138,58') + ',0.1)); color: ' + (cs.avatarColor || 'rgba(196,138,58') + ',1); border: 1px solid ' + (cs.avatarColor || 'rgba(196,138,58') + ',0.2);">' + cs.initials + '</div>' +
+          '<div>' +
+            '<div class="cs-marquee__name">' + cs.name + '</div>' +
+            '<div class="cs-marquee__meta">' + (cs.meta || '') + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<a class="cs-marquee__cta" href="' + cs.ctaUrl + '"' + targetAttr + '>Read case study &rarr;</a>' +
+      '</div>' +
+    '</div>';
   }
 
-  function wrapOffset(rawIdx, center) {
-    var diff = rawIdx - center;
-    var half = totalCards / 2;
-    while (diff > half) diff -= totalCards;
-    while (diff < -half) diff += totalCards;
-    return diff;
-  }
+  fetch('case-studies.json')
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      data.sort(function(a, b) {
+        if (a.featured && !b.featured) return -1;
+        if (!a.featured && b.featured) return 1;
+        return new Date(b.date) - new Date(a.date);
+      });
 
-  function renderCards() {
-    var center = position.value;
-    for (var i = 0; i < csCards.length; i++) {
-      var card = csCards[i];
-      var offset = wrapOffset(i, center);
-      var absOff = Math.abs(offset);
-      var rotation = offset * ROTATE_PER_CARD;
-      var status = absOff < 0.5 ? 'active' : absOff < 1.5 ? 'inview' : 'not-active';
-      var opacity = status === 'active' ? 1 : status === 'inview' ? 0.45 : 0.2;
-      var zIndex = 10 - Math.round(absOff);
+      var cards = data.slice(0, 10);
+      var reveal = track.querySelector('.cs-marquee__reveal');
+      var html = '';
+      for (var i = 0; i < cards.length; i++) { html += renderCard(cards[i], i); }
 
-      card.style.transform = 'translate(-50%, 0%) rotate(' + rotation + 'deg)';
-      card.style.opacity = opacity;
-      card.style.zIndex = zIndex;
-      card.style.transition = 'none';
+      if (reveal) reveal.insertAdjacentHTML('beforebegin', html);
+      else track.insertAdjacentHTML('beforeend', html);
 
-      if (status === 'active') card.classList.add('active');
-      else card.classList.remove('active');
-    }
-  }
+      initMarqueeGSAP();
+    })
+    .catch(function(err) { console.error('Failed to load case studies:', err); });
 
-  function updateUI() {
-    var nearest = Math.round(position.value);
-    nearest = ((nearest % totalCards) + totalCards) % totalCards;
-    currentIndex = nearest;
+  function initMarqueeGSAP() {
+    var section = document.querySelector('.cs-marquee');
+    var pin = document.querySelector('.cs-marquee__pin');
+    var allCards = gsap.utils.toArray('.cs-marquee__card');
+    var reveal = document.querySelector('.cs-marquee__reveal');
 
-    for (var i = 0; i < csPills.length; i++) {
-      if (i === currentIndex) csPills[i].classList.add('active');
-      else csPills[i].classList.remove('active');
-    }
-    for (var d = 0; d < csDots.length; d++) {
-      if (d < currentIndex) { csDots[d].classList.add('filled'); csDots[d].classList.remove('active'); }
-      else if (d === currentIndex) { csDots[d].classList.add('active'); csDots[d].classList.remove('filled'); }
-      else { csDots[d].classList.remove('active'); csDots[d].classList.remove('filled'); }
+    if (!section || !track || !allCards.length) return;
+
+    function getScrollDist() {
+      return track.scrollWidth - pin.offsetWidth;
     }
 
-    if (currentIndex !== prevStageIndex) {
-      prevStageIndex = currentIndex;
-      for (var s = 0; s < csStageItems.length; s++) {
-        var stage = parseInt(csStageItems[s].getAttribute('data-stage'), 10);
-        var isActive = stage === currentIndex;
-        if (isActive) csStageItems[s].classList.add('active');
-        else csStageItems[s].classList.remove('active');
-        gsap.to(csStageItems[s], { opacity: isActive ? 1 : 0, duration: 0.35, ease: 'power2.out', overwrite: true });
-      }
-      for (var c = 0; c < csCallouts.length; c++) {
-        var cStage = parseInt(csCallouts[c].getAttribute('data-stage'), 10);
-        var show = cStage === currentIndex;
-        if (show) csCallouts[c].classList.add('visible');
-        else csCallouts[c].classList.remove('visible');
-        gsap.to(csCallouts[c], { opacity: show ? 1 : 0, y: show ? 0 : 6, duration: 0.4, ease: 'power2.out', overwrite: true });
-      }
-    }
-  }
-
-  function goToCard(targetIdx, animated) {
-    if (snapTween) { snapTween.kill(); snapTween = null; }
-    targetIdx = ((targetIdx % totalCards) + totalCards) % totalCards;
-    var diff = targetIdx - position.value;
-    while (diff > totalCards / 2) diff -= totalCards;
-    while (diff < -totalCards / 2) diff += totalCards;
-    var finalVal = position.value + diff;
-
-    if (animated === false) {
-      position.value = finalVal;
-      renderCards(); updateUI();
-      return;
-    }
-
-    snapTween = gsap.to(position, {
-      value: finalVal, duration: 0.6, ease: 'expo.out',
-      onUpdate: function() { renderCards(); updateUI(); },
-      onComplete: function() {
-        position.value = ((finalVal % totalCards) + totalCards) % totalCards;
-        currentIndex = Math.round(position.value);
-        renderCards(); updateUI();
-        snapTween = null;
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        pin: pin,
+        scrub: 1,
+        start: 'top top',
+        end: function() { return '+=' + (getScrollDist() * 1.2); },
+        anticipatePin: 1,
+        invalidateOnRefresh: true
       }
     });
-  }
 
-  function throwToSnap(velPxMs) {
-    if (snapTween) { snapTween.kill(); snapTween = null; }
-    var throwDist = -(velPxMs * 1000 / DRAG_SENSITIVITY) / 5;
-    var snap = Math.round(position.value + throwDist);
-    snap = ((snap % totalCards) + totalCards) % totalCards;
-    var diff = snap - position.value;
-    while (diff > totalCards / 2) diff -= totalCards;
-    while (diff < -totalCards / 2) diff += totalCards;
-    var finalVal = position.value + diff;
-    var dur = Math.min(0.6, Math.max(0.2, Math.abs(diff) * 0.3));
-
-    snapTween = gsap.to(position, {
-      value: finalVal, duration: dur, ease: 'expo.out',
-      onUpdate: function() { renderCards(); updateUI(); },
-      onComplete: function() {
-        position.value = ((finalVal % totalCards) + totalCards) % totalCards;
-        currentIndex = Math.round(position.value);
-        renderCards(); updateUI();
-        snapTween = null;
-      }
+    tl.to(track, {
+      x: function() { return -getScrollDist(); },
+      ease: 'none',
+      duration: 1
     });
+
+    allCards.forEach(function(card, i) {
+      gsap.fromTo(card, {
+        y: i % 2 === 0 ? 20 : -15,
+        opacity: 0.4
+      }, {
+        y: 0,
+        opacity: 1,
+        ease: 'power1.out',
+        scrollTrigger: {
+          trigger: card,
+          containerAnimation: tl,
+          start: 'left 95%',
+          end: 'left 65%',
+          scrub: true
+        }
+      });
+    });
+
+    if (reveal) {
+      gsap.fromTo(reveal, {
+        opacity: 0, y: 30, scale: 0.95
+      }, {
+        opacity: 1, y: 0, scale: 1,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: reveal,
+          containerAnimation: tl,
+          start: 'left 85%',
+          end: 'left 55%',
+          scrub: true
+        }
+      });
+    }
   }
-
-  // Drag state
-  var dragStartX = 0, dragStartPos = 0;
-
-  collection.addEventListener('mousedown', function(e) {
-    if (snapTween) { snapTween.kill(); snapTween = null; }
-    isDragging = true;
-    dragStartX = e.clientX;
-    dragStartPos = position.value;
-    velSamples = [];
-    trackVel(e.clientX);
-    if (!hasInteracted && csDragHint) { hasInteracted = true; csDragHint.classList.add('hidden'); }
-    e.preventDefault();
-  });
-
-  window.addEventListener('mousemove', function(e) {
-    if (!isDragging) return;
-    trackVel(e.clientX);
-    position.value = dragStartPos - (e.clientX - dragStartX) / DRAG_SENSITIVITY;
-    renderCards(); updateUI();
-  });
-
-  window.addEventListener('mouseup', function() {
-    if (!isDragging) return;
-    isDragging = false;
-    var vel = getVel();
-    if (Math.abs(vel) > 0.3 || Math.abs(position.value - dragStartPos) > 0.25) throwToSnap(vel);
-    else {
-      var n = Math.round(position.value);
-      goToCard(((n % totalCards) + totalCards) % totalCards);
-    }
-  });
-
-  // Touch drag
-  var tStartX = 0, tStartY = 0, tDir = null;
-  var TOUCH_SENS = window.innerWidth < 768 ? 120 : DRAG_SENSITIVITY;
-
-  collection.addEventListener('touchstart', function(e) {
-    if (snapTween) { snapTween.kill(); snapTween = null; }
-    isDragging = true;
-    tStartX = e.touches[0].clientX;
-    tStartY = e.touches[0].clientY;
-    tDir = null;
-    dragStartX = tStartX;
-    dragStartPos = position.value;
-    velSamples = [];
-    trackVel(tStartX);
-    if (!hasInteracted && csDragHint) { hasInteracted = true; csDragHint.classList.add('hidden'); }
-  }, { passive: true });
-
-  collection.addEventListener('touchmove', function(e) {
-    if (!isDragging) return;
-    var tx = e.touches[0].clientX, ty = e.touches[0].clientY;
-    if (!tDir) {
-      if (Math.abs(tx - tStartX) < 5 && Math.abs(ty - tStartY) < 5) return;
-      tDir = Math.abs(tx - tStartX) > Math.abs(ty - tStartY) ? 'h' : 'v';
-    }
-    if (tDir === 'v') { isDragging = false; return; }
-    e.preventDefault();
-    trackVel(tx);
-    position.value = dragStartPos - (tx - dragStartX) / TOUCH_SENS;
-    renderCards(); updateUI();
-  }, { passive: false });
-
-  window.addEventListener('touchend', function() {
-    if (!isDragging) return;
-    isDragging = false; tDir = null;
-    var vel = getVel();
-    if (Math.abs(vel) > 0.3 || Math.abs(position.value - dragStartPos) > 0.25) throwToSnap(vel);
-    else {
-      var n = Math.round(position.value);
-      goToCard(((n % totalCards) + totalCards) % totalCards);
-    }
-  });
-
-  // Pill clicks
-  for (var p = 0; p < csPills.length; p++) {
-    (function(idx) {
-      csPills[idx].addEventListener('click', function() { goToCard(idx); });
-    })(p);
-  }
-
-  // Keyboard
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowRight') goToCard(currentIndex + 1);
-    if (e.key === 'ArrowLeft') goToCard(currentIndex - 1);
-  });
-
-  // Init
-  initListHeight();
-  window.addEventListener('resize', initListHeight);
-  goToCard(0, false);
-
-  // Auto-rotate
-  var autoInt = setInterval(function() {
-    if (hasInteracted) { clearInterval(autoInt); return; }
-    goToCard(currentIndex + 1);
-  }, 3500);
 })();
