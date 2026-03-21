@@ -2060,6 +2060,19 @@ a.nav-link:hover .nav-link__label::after {
   display: flex;
   flex-direction: column;
   gap: clamp(24px, 3vw, 40px);
+  position: relative;
+  padding-left: 56px;
+}
+/* ---- Vertical timeline spine ---- */
+.pillar-cards__inner::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(196,138,58,0.15) 10%, rgba(196,138,58,0.15) 90%, transparent);
+  pointer-events: none;
 }
 .pillar-card {
   display: grid;
@@ -2070,17 +2083,49 @@ a.nav-link:hover .nav-link__label::after {
   background: var(--bg-raised);
   border: 1px solid var(--border);
   border-radius: 20px;
+  position: relative;
   transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+/* ---- Timeline dot ---- */
+.pillar-card::before {
+  content: '';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--bg-base);
+  box-shadow: 0 0 12px rgba(196,138,58,0.3);
+  z-index: 2;
 }
 .pillar-card:hover {
   border-color: rgba(196,138,58,0.12);
   box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 40px rgba(196,138,58,0.03);
+}
+/* ---- Watermark number (v1 style) ---- */
+.pillar-card__watermark {
+  font-family: 'Anacrusis', serif;
+  font-size: clamp(100px, 12vw, 160px);
+  font-weight: normal;
+  color: rgba(196,138,58,0.06);
+  line-height: 0.85;
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  z-index: 0;
+  pointer-events: none;
+  letter-spacing: -0.02em;
 }
 .pillar-card__text {
   display: flex;
   flex-direction: column;
   gap: 0;
   max-width: 560px;
+  position: relative;
+  z-index: 1;
 }
 .pillar-card__text .benefit-label { margin-bottom: 16px; }
 .pillar-card__title {
@@ -2104,12 +2149,19 @@ a.nav-link:hover .nav-link__label::after {
   align-items: center;
   justify-content: center;
   gap: 16px;
+  position: relative;
+  z-index: 1;
 }
 /* Reverse: visual on left, text on right */
 .pillar-card--reverse .pillar-card__visual { order: -1; }
 
 /* ---- Pillar Cards Responsive ---- */
 @media (max-width: 900px) {
+  .pillar-cards__inner {
+    padding-left: 0;
+  }
+  .pillar-cards__inner::before { display: none; }
+  .pillar-card::before { display: none; }
   .pillar-card {
     grid-template-columns: 1fr;
     gap: 24px;
@@ -2120,6 +2172,7 @@ a.nav-link:hover .nav-link__label::after {
 @media (max-width: 768px) {
   .pillar-cards { padding: 0 20px clamp(60px, 8vw, 100px); }
   .pillar-card { border-radius: 16px; }
+  .pillar-card__watermark { font-size: clamp(80px, 20vw, 120px); }
 }
 
 /* ============================================
