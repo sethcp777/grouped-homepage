@@ -741,6 +741,17 @@
     }
   });
 
+  // --- Step cards click → scroll to corresponding detail card ---
+  var stepCards = document.querySelectorAll('.pillars__step');
+  var detailCards = document.querySelectorAll('.pillar-card');
+  stepCards.forEach(function(step, i) {
+    step.addEventListener('click', function() {
+      if (detailCards[i]) {
+        detailCards[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
+
   // --- Pillar detail cards: scroll-linked progression + hover parallax ---
   var pillarCards = gsap.utils.toArray('.pillar-card');
   var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
