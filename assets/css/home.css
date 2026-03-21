@@ -114,13 +114,22 @@ h1 { line-height: 1.05; letter-spacing: -0.03em; }
 h2 { line-height: 1.1; letter-spacing: -0.025em; }
 h3 { line-height: 1.15; letter-spacing: -0.015em; }
 .label {
+  display: inline-block;
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-tertiary);
   font-weight: 700;
+  padding: 6px 16px;
+  border-radius: var(--radius-label);
+  background: rgba(240,235,227,0.04);
+  border: 1px solid var(--border);
 }
-.label-gold { color: var(--gold); }
+.label-gold {
+  color: var(--gold);
+  background: rgba(196,138,58,0.06);
+  border-color: rgba(196,138,58,0.12);
+}
 
 /* ============================================
    LAYOUT
