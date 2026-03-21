@@ -1306,6 +1306,44 @@
 })();
 
 /* ============================================
+   VINYL FLIP — Side A / Side B Video Card
+   ============================================ */
+(function initVinylFlip() {
+  var flip = document.getElementById('vinyl-flip');
+  if (!flip) return;
+  var tabs = flip.querySelectorAll('.vinyl-flip__tab');
+  var hint = document.getElementById('vinyl-flip-hint');
+  var card = flip.querySelector('.vinyl-flip__card');
+
+  function setFlipped(isB) {
+    if (isB) flip.classList.add('is--flipped');
+    else flip.classList.remove('is--flipped');
+    tabs.forEach(function(t) {
+      t.classList.toggle('is--active', t.getAttribute('data-side') === (isB ? 'b' : 'a'));
+    });
+    if (hint) hint.textContent = isB ? 'Flip to Side A \u21BB' : 'Flip to Side B \u21BB';
+  }
+
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      setFlipped(tab.getAttribute('data-side') === 'b');
+    });
+  });
+
+  if (hint) {
+    hint.addEventListener('click', function() {
+      setFlipped(!flip.classList.contains('is--flipped'));
+    });
+  }
+
+  if (card) {
+    card.addEventListener('click', function() {
+      setFlipped(!flip.classList.contains('is--flipped'));
+    });
+  }
+})();
+
+/* ============================================
    CASE STUDIES — Horizontal Scroll Marquee
    ============================================ */
 (function initCaseMarquee() {

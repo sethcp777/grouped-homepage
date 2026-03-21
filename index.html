@@ -506,28 +506,37 @@
       <h2 class="why-split__headline font-display">Artists build careers here.<br>Fans keep coming back.</h2>
       <span class="why-split__handwritten">but don't just take our word for it</span>
     </div>
-    <div class="why-split__panels">
-
-      <div class="why-split__panel" data-panel="artists">
-        <div class="why-split__video-wrap">
-          <div class="why-split__video-placeholder">
-            <span class="why-split__placeholder-label">Artist testimonial video</span>
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
-          </div>
-        </div>
-        <div class="why-split__panel-label">Why artists use it</div>
+    <!-- Flip-the-record video card -->
+    <div class="vinyl-flip" id="vinyl-flip">
+      <div class="vinyl-flip__tabs">
+        <button class="vinyl-flip__tab is--active" data-side="a">Side A</button>
+        <button class="vinyl-flip__tab" data-side="b">Side B</button>
       </div>
-
-      <div class="why-split__panel" data-panel="fans">
-        <div class="why-split__video-wrap">
-          <div class="why-split__video-placeholder">
-            <span class="why-split__placeholder-label">Fan experience video</span>
-            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
+      <div class="vinyl-flip__card">
+        <!-- Front: Side A (Artist) -->
+        <div class="vinyl-flip__face vinyl-flip__front">
+          <div class="vinyl-flip__label">Side A</div>
+          <div class="vinyl-flip__video-wrap">
+            <div class="vinyl-flip__placeholder">
+              <span class="vinyl-flip__placeholder-text">Artist testimonial video</span>
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
+            </div>
           </div>
+          <div class="vinyl-flip__caption">Why artists use it</div>
         </div>
-        <div class="why-split__panel-label">Why fans stay</div>
+        <!-- Back: Side B (Fan) -->
+        <div class="vinyl-flip__face vinyl-flip__back">
+          <div class="vinyl-flip__label">Side B</div>
+          <div class="vinyl-flip__video-wrap">
+            <div class="vinyl-flip__placeholder">
+              <span class="vinyl-flip__placeholder-text">Fan experience video</span>
+              <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="currentColor" stroke-width="1.5"/><polygon points="19,15 35,24 19,33" fill="currentColor"/></svg>
+            </div>
+          </div>
+          <div class="vinyl-flip__caption">Why fans stay</div>
+        </div>
       </div>
-
+      <div class="vinyl-flip__hint" id="vinyl-flip-hint">Flip to Side B &#8635;</div>
     </div>
 
     <!-- Scrolling testimonial strip -->
