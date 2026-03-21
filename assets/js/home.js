@@ -203,6 +203,28 @@
 })();
 
 /* ============================================
+   HERO PARALLAX — Phone GIF depth effect
+   ============================================ */
+(function initHeroParallax() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  var heroVisual = document.querySelector('.hero-visual');
+  if (!heroVisual) return;
+  // Skip on mobile
+  if (window.matchMedia('(max-width: 900px)').matches) return;
+
+  gsap.to(heroVisual, {
+    y: 80,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 0.5
+    }
+  });
+})();
+
+/* ============================================
    ARTIST MARQUEE — Infinite horizontal scroll
    ============================================ */
 (function initArtistMarquee() {
@@ -721,12 +743,10 @@
 
   // --- Pillar detail cards: scroll-linked progression + hover parallax ---
   var pillarCards = gsap.utils.toArray('.pillar-card');
-  var connectors = gsap.utils.toArray('.pillar-cards__connector');
   var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
   if (pillarCards.length) {
     // Initial states
-    gsap.set(connectors, { scaleY: 0 });
     gsap.set('.pillar-card__watermark', { opacity: 0 });
 
     // === Phase 1: Initial reveal (sequenced, once) ===
@@ -756,11 +776,9 @@
         }, '-=0.5');
       }
 
-      // Connector draws
-      if (connectors[i]) {
-        cardTimeline.to(connectors[i], {
-          scaleY: 1, duration: 0.4, ease: 'power2.inOut'
-        }, '-=0.15');
+      // Small pause between cards for rhythm
+      if (i < pillarCards.length - 1) {
+        cardTimeline.to({}, { duration: 0.1 });
       }
     });
 
@@ -785,20 +803,7 @@
       }
     });
 
-    // === Phase 3: Scroll-linked connector draw ===
-    connectors.forEach(function(conn) {
-      ScrollTrigger.create({
-        trigger: conn,
-        start: 'top 85%',
-        end: 'bottom 65%',
-        scrub: 0.3,
-        onUpdate: function(self) {
-          gsap.set(conn, { scaleY: self.progress });
-        }
-      });
-    });
-
-    // === Phase 4: Active card detection (gold highlight) ===
+    // === Phase 3: Active card detection (watermark glow) ===
     ScrollTrigger.create({
       trigger: '#pillar-cards',
       start: 'top bottom',
@@ -1199,20 +1204,23 @@
     });
   }
 
-  // Comparison rows
-  var compIntro = document.querySelector('.comparison__intro');
-  var compRows = document.querySelectorAll('.comparison__row');
-  if (compIntro) gsap.set(compIntro, { opacity: 0, y: 20 });
-  if (compRows.length) gsap.set(compRows, { opacity: 0, y: 20 });
+  // Comparison — slide cards in from sides
+  var compHeadline = document.querySelector('.comparison__headline');
+  var compOld = document.querySelector('.comparison__card--old');
+  var compGrouped = document.querySelector('.comparison__card--grouped');
+  if (compHeadline) gsap.set(compHeadline, { opacity: 0, y: 20 });
+  if (compOld) gsap.set(compOld, { opacity: 0, x: -40 });
+  if (compGrouped) gsap.set(compGrouped, { opacity: 0, x: 40 });
 
-  if (compIntro) {
+  if (compHeadline) {
     ScrollTrigger.create({
       trigger: '.comparison',
       start: 'top 75%',
       once: true,
       onEnter: function() {
-        gsap.to(compIntro, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(compRows, { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, delay: 0.2, ease: 'power2.out' });
+        gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
+        if (compOld) gsap.to(compOld, { opacity: 1, x: 0, duration: 0.7, delay: 0.2, ease: 'power2.out' });
+        if (compGrouped) gsap.to(compGrouped, { opacity: 1, x: 0, duration: 0.7, delay: 0.35, ease: 'power2.out' });
       }
     });
   }
@@ -1230,14 +1238,14 @@
   if (diffHeader && diffCards.length) {
     var diffHeaderEls = diffHeader.querySelectorAll('.label, .differentiators__headline');
     gsap.set(diffHeaderEls, { opacity: 0, y: 20 });
-    gsap.set(diffCards, { opacity: 0, y: 25 });
+    gsap.set(diffCards, { opacity: 0, y: 30, rotation: 2 });
     ScrollTrigger.create({
       trigger: '.differentiators',
       start: 'top 75%',
       once: true,
       onEnter: function() {
         gsap.to(diffHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
-        gsap.to(diffCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.12, delay: 0.2, ease: 'power2.out' });
+        gsap.to(diffCards, { opacity: 1, y: 0, rotation: 0, duration: 0.7, stagger: 0.15, delay: 0.2, ease: 'power2.out' });
       }
     });
   }
