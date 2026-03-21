@@ -819,49 +819,7 @@
       }
     });
 
-    // === Phase 5: Hover parallax tilt (desktop only) ===
-    if (!isTouchDevice) {
-      pillarCards.forEach(function(card) {
-        var watermark = card.querySelector('.pillar-card__watermark');
-
-        card.addEventListener('mousemove', function(e) {
-          var rect = card.getBoundingClientRect();
-          var x = (e.clientX - rect.left) / rect.width - 0.5;
-          var y = (e.clientY - rect.top) / rect.height - 0.5;
-
-          gsap.to(card, {
-            rotateY: x * 4,
-            rotateX: -y * 4,
-            duration: 0.4,
-            ease: 'power2.out',
-            overwrite: 'auto'
-          });
-
-          if (watermark) {
-            gsap.to(watermark, {
-              x: -x * 20,
-              y: -y * 15,
-              duration: 0.4,
-              ease: 'power2.out'
-            });
-          }
-        });
-
-        card.addEventListener('mouseleave', function() {
-          gsap.to(card, {
-            rotateY: 0, rotateX: 0,
-            duration: 0.6, ease: 'power2.out'
-          });
-          if (watermark) {
-            gsap.to(watermark, {
-              x: 0, y: 0, duration: 0.6, ease: 'power2.out'
-            });
-          }
-        });
-      });
-    }
-
-    // === Phase 6: Auto-cycling benefit point highlights ===
+    // === Phase 5: Auto-cycling benefit point highlights ===
     initPillarPointCycling(pillarCards);
   }
 
