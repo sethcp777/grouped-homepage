@@ -1683,32 +1683,45 @@ a.nav-link:hover .nav-link__label::after {
   object-fit: cover;
   border: none;
   display: block;
-  transition: brightness 0.3s ease;
+  filter: grayscale(100%) sepia(30%) hue-rotate(5deg) saturate(180%) brightness(0.8) contrast(1.1);
+  transition: filter 0.5s ease;
 }
 
-/* Hover */
+/* Hover — reveal full color */
 .artist-bubble:hover {
   z-index: 10;
 }
 .artist-bubble:hover img {
-  filter: brightness(1.1);
+  filter: none;
 }
 
 /* ---- Persistent name label (below image) ---- */
 .artist-bubble-label {
   flex-shrink: 0;
-  padding: 8px 10px;
+  padding: 10px 12px;
   background: var(--bg-base);
   text-align: center;
   pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
-.artist-bubble-label span {
+.artist-bubble-label__name {
   display: block;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.artist-bubble-label__group {
+  display: block;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  letter-spacing: 0.03em;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
@@ -1764,7 +1777,7 @@ a.nav-link:hover .nav-link__label::after {
   z-index: 10;
 }
 .artist-bubble.is--tapped img {
-  filter: brightness(1.1);
+  filter: none;
 }
 .artist-bubble.is--tapped .artist-bubble-info {
   opacity: 1;
