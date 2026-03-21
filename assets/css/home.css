@@ -2062,6 +2062,7 @@ a.nav-link:hover .nav-link__label::after {
   align-items: center;
   gap: 0;
   position: relative;
+  perspective: 1200px;
 }
 /* ---- Timeline connector between cards ---- */
 .pillar-cards__connector {
@@ -2084,7 +2085,14 @@ a.nav-link:hover .nav-link__label::after {
   width: 100%;
   opacity: 0;
   transform: translateY(30px);
+  transform-style: preserve-3d;
+  will-change: transform, opacity, filter;
   transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+/* ---- Scroll-linked active / passed states ---- */
+.pillar-card.is--active {
+  border-color: rgba(196,138,58,0.18);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25), 0 0 48px rgba(196,138,58,0.06);
 }
 /* ---- Timeline dot (centered above card) ---- */
 .pillar-card::before {
@@ -2122,6 +2130,7 @@ a.nav-link:hover .nav-link__label::after {
   z-index: 0;
   pointer-events: none;
   letter-spacing: -0.02em;
+  will-change: transform;
 }
 .pillar-card__text {
   display: flex;

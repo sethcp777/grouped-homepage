@@ -719,15 +719,17 @@
     }
   });
 
-  // --- Pillar detail cards: sequenced timeline reveal ---
-  var pillarCards = document.querySelectorAll('.pillar-card');
-  var connectors = document.querySelectorAll('.pillar-cards__connector');
+  // --- Pillar detail cards: scroll-linked progression + hover parallax ---
+  var pillarCards = gsap.utils.toArray('.pillar-card');
+  var connectors = gsap.utils.toArray('.pillar-cards__connector');
+  var isTouchDevice = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
   if (pillarCards.length) {
-    // Initial states (cards already hidden via CSS opacity:0 / translateY)
+    // Initial states
     gsap.set(connectors, { scaleY: 0 });
     gsap.set('.pillar-card__watermark', { opacity: 0 });
 
+    // === Phase 1: Initial reveal (sequenced, once) ===
     var cardTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: '#pillar-cards',
@@ -754,13 +756,110 @@
         }, '-=0.5');
       }
 
-      // Connector draws down (if not last card)
+      // Connector draws
       if (connectors[i]) {
         cardTimeline.to(connectors[i], {
           scaleY: 1, duration: 0.4, ease: 'power2.inOut'
         }, '-=0.15');
       }
     });
+
+    // === Phase 2: Scroll-linked dimming (previous cards recede) ===
+    pillarCards.forEach(function(card, i) {
+      if (i > 0) {
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 80%',
+          end: 'top 35%',
+          scrub: 0.5,
+          onUpdate: function(self) {
+            var prev = pillarCards[i - 1];
+            var p = self.progress;
+            gsap.set(prev, {
+              opacity: 1 - (p * 0.45),
+              scale: 1 - (p * 0.03),
+              filter: 'brightness(' + (1 - p * 0.15) + ')'
+            });
+          }
+        });
+      }
+    });
+
+    // === Phase 3: Scroll-linked connector draw ===
+    connectors.forEach(function(conn) {
+      ScrollTrigger.create({
+        trigger: conn,
+        start: 'top 85%',
+        end: 'bottom 65%',
+        scrub: 0.3,
+        onUpdate: function(self) {
+          gsap.set(conn, { scaleY: self.progress });
+        }
+      });
+    });
+
+    // === Phase 4: Active card detection (gold highlight) ===
+    ScrollTrigger.create({
+      trigger: '#pillar-cards',
+      start: 'top bottom',
+      end: 'bottom top',
+      onUpdate: function() {
+        var viewCenter = window.innerHeight * 0.5;
+        var closest = null;
+        var closestDist = Infinity;
+        pillarCards.forEach(function(card) {
+          var rect = card.getBoundingClientRect();
+          var cardCenter = rect.top + rect.height / 2;
+          var dist = Math.abs(cardCenter - viewCenter);
+          if (dist < closestDist) { closestDist = dist; closest = card; }
+        });
+        pillarCards.forEach(function(card) {
+          card.classList.toggle('is--active', card === closest);
+        });
+      }
+    });
+
+    // === Phase 5: Hover parallax tilt (desktop only) ===
+    if (!isTouchDevice) {
+      pillarCards.forEach(function(card) {
+        var watermark = card.querySelector('.pillar-card__watermark');
+
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = (e.clientX - rect.left) / rect.width - 0.5;
+          var y = (e.clientY - rect.top) / rect.height - 0.5;
+
+          gsap.to(card, {
+            rotateY: x * 4,
+            rotateX: -y * 4,
+            duration: 0.4,
+            ease: 'power2.out',
+            overwrite: 'auto'
+          });
+
+          if (watermark) {
+            gsap.to(watermark, {
+              x: -x * 20,
+              y: -y * 15,
+              duration: 0.4,
+              ease: 'power2.out'
+            });
+          }
+        });
+
+        card.addEventListener('mouseleave', function() {
+          gsap.to(card, {
+            rotateY: 0, rotateX: 0,
+            duration: 0.6, ease: 'power2.out'
+          });
+          if (watermark) {
+            gsap.to(watermark, {
+              x: 0, y: 0, duration: 0.6, ease: 'power2.out'
+            });
+          }
+        });
+      });
+    }
   }
 })();
 
