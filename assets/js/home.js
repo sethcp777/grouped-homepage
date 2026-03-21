@@ -1321,7 +1321,7 @@
     tabs.forEach(function(t) {
       t.classList.toggle('is--active', t.getAttribute('data-side') === (isB ? 'b' : 'a'));
     });
-    if (hint) hint.textContent = isB ? 'Flip to Side A \u21BB' : 'Flip to Side B \u21BB';
+    if (hint) hint.textContent = isB ? 'flip to hear the artist side \u21BB' : 'flip to hear the fan side \u21BB';
   }
 
   tabs.forEach(function(tab) {
