@@ -2990,8 +2990,8 @@ a.nav-link:hover .nav-link__label::after {
 
 /* ---- Pillar card point cycling ---- */
 .pillar-card.is--cycling .benefit-point {
-  opacity: 0.35;
-  border-left-color: rgba(196,138,58,0.08);
+  opacity: 0.6;
+  border-left-color: rgba(196,138,58,0.12);
   transition: opacity 0.5s ease, border-left-color 0.5s ease;
   cursor: pointer;
 }
@@ -3012,24 +3012,24 @@ a.nav-link:hover .nav-link__label::after {
 .benefit-mockup-swap .mockup-swap-title { transition: opacity 0.5s ease; }
 
 .benefit-mockup-swap[data-visual-state="0"] .mockup-swap-field,
-.benefit-mockup-swap[data-visual-state="0"] .mockup-swap-btn { opacity: 0.35; }
+.benefit-mockup-swap[data-visual-state="0"] .mockup-swap-btn { opacity: 0.5; }
 
 .benefit-mockup-swap[data-visual-state="2"] .mockup-swap-art,
 .benefit-mockup-swap[data-visual-state="2"] .mockup-swap-label,
-.benefit-mockup-swap[data-visual-state="2"] .mockup-swap-title { opacity: 0.35; }
+.benefit-mockup-swap[data-visual-state="2"] .mockup-swap-title { opacity: 0.5; }
 
 .benefit-mockup-inbox .mockup-inbox-msg,
 .benefit-mockup-inbox .mockup-inbox-send,
 .benefit-mockup-inbox .mockup-inbox-header { transition: opacity 0.5s ease; }
 
-.benefit-mockup-inbox[data-visual-state="0"] .mockup-inbox-msg { opacity: 0.4; }
+.benefit-mockup-inbox[data-visual-state="0"] .mockup-inbox-msg { opacity: 0.55; }
 .benefit-mockup-inbox[data-visual-state="2"] .mockup-inbox-header,
-.benefit-mockup-inbox[data-visual-state="2"] .mockup-inbox-msg { opacity: 0.35; }
+.benefit-mockup-inbox[data-visual-state="2"] .mockup-inbox-msg { opacity: 0.5; }
 
 /* Stat / badge emphasis on active point */
 .benefit-stat, .benefit-badge { transition: opacity 0.5s ease, transform 0.5s ease; }
 .pillar-card.is--cycling .benefit-stat,
-.pillar-card.is--cycling .benefit-badge { opacity: 0.4; }
+.pillar-card.is--cycling .benefit-badge { opacity: 0.6; }
 .pillar-card.is--cycling[data-active-point="2"] .benefit-stat,
 .pillar-card.is--cycling[data-active-point="2"] .benefit-badge { opacity: 1; transform: scale(1.03); }
 
