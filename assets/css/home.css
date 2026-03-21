@@ -1152,8 +1152,9 @@ a.nav-link:hover .nav-link__label::after {
   font-family: 'Caveat', cursive;
   font-size: clamp(22px, 2.2vw, 30px);
   color: var(--gold);
-  margin-top: 4px;
+  margin-top: -2px;
   margin-bottom: 16px;
+  margin-left: clamp(80px, 12vw, 180px);
   opacity: 0;
   transform: translateY(8px) rotate(-2deg);
   animation: annotation-in 0.6s 1.2s var(--ease-out) forwards;
