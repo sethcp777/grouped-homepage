@@ -1104,14 +1104,17 @@ a.nav-link:hover .nav-link__label::after {
    HERO
    ============================================ */
 .hero {
-  min-height: 90vh;
+  min-height: 0;
+  height: 100vh;
+  max-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: calc(max(120px, 12vh) + var(--eyebrow-h)) 32px 40px;
+  padding: calc(max(80px, 8vh) + var(--eyebrow-h)) 32px 32px;
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 .hero::before {
   content: '';
@@ -1130,7 +1133,7 @@ a.nav-link:hover .nav-link__label::after {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  gap: 40px;
   align-items: center;
 }
 .hero-text {
@@ -1215,8 +1218,10 @@ a.nav-link:hover .nav-link__label::after {
 }
 .hero-gif {
   width: 100%;
-  max-width: 520px;
+  max-width: 480px;
+  max-height: 65vh;
   height: auto;
+  object-fit: contain;
   border-radius: 0;
   display: block;
 }
