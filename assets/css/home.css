@@ -3370,10 +3370,14 @@ a.nav-link:hover .nav-link__label::after {
   gap: 24px;
 }
 .diff-card {
-  padding: clamp(28px, 3vw, 40px);
+  padding: clamp(32px, 3.5vw, 44px);
   background: var(--bg-raised);
   border: 1px solid var(--border);
   border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-out);
 }
 .diff-card:hover {
@@ -3381,11 +3385,32 @@ a.nav-link:hover .nav-link__label::after {
   box-shadow: 0 8px 32px rgba(0,0,0,0.2), 0 0 40px rgba(196,138,58,0.04);
   transform: translateY(-4px);
 }
-.diff-card__icon {
-  width: 40px;
-  height: 40px;
+/* Gold accent line at top */
+.diff-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold), rgba(196,138,58,0.2));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.diff-card:hover .diff-card__accent { opacity: 1; }
+/* Step number */
+.diff-card__num {
+  font-family: 'Anacrusis', serif;
+  font-size: 13px;
   color: var(--gold);
-  margin-bottom: 20px;
+  letter-spacing: 0.08em;
+  margin-bottom: 12px;
+  display: block;
+}
+.diff-card__icon {
+  width: 36px;
+  height: 36px;
+  color: var(--gold);
+  margin-bottom: 16px;
 }
 .diff-card__icon svg {
   width: 100%;
@@ -3397,13 +3422,22 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--white);
   font-weight: normal;
   line-height: 1.15;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+}
+/* Bold lead-in line */
+.diff-card__lead {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--white);
+  margin: 0 0 12px;
 }
 .diff-card__desc {
-  font-size: 15px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--text-secondary);
   margin: 0;
+  flex: 1;
 }
 .diff-card__link {
   display: inline-flex;
@@ -3411,8 +3445,8 @@ a.nav-link:hover .nav-link__label::after {
   gap: 6px;
   color: var(--gold);
   font-weight: 600;
-  font-size: 14px;
-  margin-top: 16px;
+  font-size: 13px;
+  margin-top: 20px;
   transition: gap 0.3s var(--ease-out);
 }
 .diff-card__link:hover { gap: 10px; }
@@ -3422,7 +3456,7 @@ a.nav-link:hover .nav-link__label::after {
   font-family: 'Caveat', cursive;
   color: var(--gold);
   font-size: clamp(18px, 2vw, 22px);
-  margin-top: 16px;
+  margin-top: 20px;
   transform: rotate(-1deg);
 }
 @media (max-width: 900px) {
