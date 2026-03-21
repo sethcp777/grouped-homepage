@@ -3675,6 +3675,9 @@ a.nav-link:hover .nav-link__label::after {
     0 -20px 60px rgba(0,0,0,0.35),
     0 20px 60px rgba(0,0,0,0.35);
   margin-top: clamp(40px, 5vw, 64px);
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
   position: relative;
   z-index: 3;
 }
