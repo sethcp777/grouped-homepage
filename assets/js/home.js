@@ -860,6 +860,131 @@
         });
       });
     }
+
+    // === Phase 6: Auto-cycling benefit point highlights ===
+    initPillarPointCycling(pillarCards);
+  }
+
+  function initPillarPointCycling(pillarCards) {
+    var CYCLE_MS = 4000;
+
+    pillarCards.forEach(function(card) {
+      var points = card.querySelectorAll('.benefit-point');
+      var mockup = card.querySelector('.benefit-mockup');
+      if (!points.length) return;
+
+      var current = 0;
+      var timer = null;
+
+      function activate(idx) {
+        current = idx;
+        points.forEach(function(p, i) {
+          p.classList.toggle('is--point-active', i === idx);
+        });
+        card.setAttribute('data-active-point', idx);
+        if (mockup) mockup.setAttribute('data-visual-state', idx);
+        animateVisual(card, mockup, idx);
+      }
+
+      function start() {
+        if (timer) return;
+        card.classList.add('is--cycling');
+        activate(0);
+        timer = setInterval(function() {
+          activate((current + 1) % points.length);
+        }, CYCLE_MS);
+      }
+
+      function stop() {
+        if (timer) { clearInterval(timer); timer = null; }
+        card.classList.remove('is--cycling');
+        card.removeAttribute('data-active-point');
+        points.forEach(function(p) { p.classList.remove('is--point-active'); });
+        if (mockup) mockup.removeAttribute('data-visual-state');
+      }
+
+      // Viewport-aware start/stop
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 70%',
+        end: 'bottom 30%',
+        onEnter: start,
+        onLeave: stop,
+        onEnterBack: start,
+        onLeaveBack: stop
+      });
+
+      // Click point to jump + reset timer
+      points.forEach(function(point, i) {
+        point.addEventListener('click', function() {
+          if (timer) { clearInterval(timer); timer = null; }
+          activate(i);
+          timer = setInterval(function() {
+            activate((current + 1) % points.length);
+          }, CYCLE_MS);
+        });
+      });
+    });
+  }
+
+  function animateVisual(card, mockup, idx) {
+    if (!mockup) return;
+
+    // Card 1: Swap mockup
+    if (mockup.classList.contains('benefit-mockup-swap')) {
+      var fields = mockup.querySelectorAll('.mockup-swap-field');
+      var btn = mockup.querySelector('.mockup-swap-btn');
+      if (idx === 1 && fields.length) {
+        gsap.fromTo(fields, { scale: 0.96 }, { scale: 1, duration: 0.4, stagger: 0.12, ease: 'power2.out' });
+      } else if (idx === 2 && btn) {
+        gsap.fromTo(btn, { boxShadow: '0 0 0px rgba(196,138,58,0)' },
+          { boxShadow: '0 0 24px rgba(196,138,58,0.45)', duration: 0.6, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+      }
+    }
+
+    // Card 2: Inbox mockup
+    if (mockup.classList.contains('benefit-mockup-inbox')) {
+      var bell = mockup.querySelector('.mockup-inbox-bell svg');
+      var sendBtn = mockup.querySelector('.mockup-inbox-send');
+      var msgs = mockup.querySelectorAll('.mockup-inbox-msg');
+      if (idx === 1 && bell) {
+        gsap.fromTo(bell, { rotation: 0 }, { rotation: 12, duration: 0.12, yoyo: true, repeat: 5, ease: 'power1.inOut' });
+        // Pulse notification dots
+        msgs.forEach(function(m) {
+          var dot = m.querySelector('.mockup-inbox-dot');
+          if (dot) gsap.fromTo(dot, { scale: 1 }, { scale: 1.5, duration: 0.3, yoyo: true, repeat: 1, ease: 'power2.out' });
+        });
+      } else if (idx === 2 && sendBtn) {
+        gsap.fromTo(sendBtn, { boxShadow: '0 0 0px rgba(196,138,58,0)' },
+          { boxShadow: '0 0 24px rgba(196,138,58,0.45)', duration: 0.6, yoyo: true, repeat: 1, ease: 'power2.inOut' });
+      }
+    }
+
+    // Card 3: Chart mockup
+    if (mockup.classList.contains('benefit-mockup-chart')) {
+      var dots = mockup.querySelectorAll('.mockup-chart-dot');
+      var labels = mockup.querySelectorAll('.mockup-chart-releases span');
+      var badge = card.querySelector('.benefit-badge');
+      // Reset labels
+      labels.forEach(function(l) { l.classList.remove('is-highlight'); });
+
+      if (idx === 0) {
+        gsap.to([dots[0], dots[1]], { opacity: 1, duration: 0.4 });
+        if (dots[2]) gsap.to(dots[2], { opacity: 0.2, duration: 0.4 });
+        if (dots[3]) gsap.to(dots[3], { opacity: 0.2, duration: 0.4 });
+        if (labels[0]) labels[0].classList.add('is-highlight');
+        if (labels[1]) labels[1].classList.add('is-highlight');
+      } else if (idx === 1) {
+        gsap.to(dots, { opacity: 1, duration: 0.4, stagger: 0.1 });
+        labels.forEach(function(l) { l.classList.add('is-highlight'); });
+      } else {
+        gsap.to(dots, { opacity: 1, duration: 0.3 });
+        labels.forEach(function(l) { l.classList.add('is-highlight'); });
+        if (badge) {
+          gsap.fromTo(badge, { scale: 1 }, { scale: 1.05, duration: 0.4, yoyo: true, repeat: 1, ease: 'power2.out' });
+        }
+      }
+    }
   }
 })();
 
