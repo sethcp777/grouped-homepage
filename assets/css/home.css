@@ -3967,14 +3967,14 @@ a.nav-link:hover .nav-link__label::after {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: clamp(32px, 4vw, 48px);
-  font-size: 15px;
+  margin-top: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--gold);
   transition: gap 0.3s var(--ease-out);
 }
 .cs-section__see-all:hover { gap: 12px; }
-.cs-section__see-all svg { width: 16px; height: 16px; }
+.cs-section__see-all svg { width: 14px; height: 14px; }
 /* Responsive */
 @media (max-width: 900px) {
   .cs-item.is--expanded { flex-direction: column; }
