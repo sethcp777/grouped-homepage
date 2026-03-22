@@ -3802,43 +3802,9 @@ a.nav-link:hover .nav-link__label::after {
 .cs-item:not(.is--expanded):hover .cs-item__cover img {
   filter: grayscale(60%) sepia(25%) hue-rotate(180deg) saturate(160%) brightness(0.9);
 }
-/* Gradient overlay */
-.cs-item__cover::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60%;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 1;
-}
-/* Stat badge on image */
-.cs-item__stat-badge {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  font-family: 'Anacrusis', 'Satoshi', sans-serif;
-  font-size: 40px;
-  font-weight: normal;
-  color: var(--white);
-  text-shadow: 0 2px 16px rgba(0,0,0,0.7);
-  z-index: 2;
-  line-height: 1;
-}
-/* Collapsed: show stat small */
-.cs-item:not(.is--expanded) .cs-item__stat-badge {
-  font-size: 16px;
-  bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--gold);
-  white-space: nowrap;
-}
 /* Body content */
 .cs-item__body {
-  padding: 12px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -3849,60 +3815,85 @@ a.nav-link:hover .nav-link__label::after {
   justify-content: center;
   flex: 1;
 }
+/* Name — always visible */
 .cs-item__name {
   font-family: 'Satoshi', sans-serif;
   font-weight: 700;
-  font-size: 11px;
+  font-size: 12px;
   color: var(--white);
-  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 .cs-item.is--expanded .cs-item__name {
   font-size: 24px;
-  text-align: left;
+  margin-bottom: 4px;
 }
-.cs-item__meta {
-  font-size: 12px;
-  color: var(--text-tertiary);
-  margin-top: 4px;
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.4s var(--ease-out), opacity 0.3s ease;
-}
-.cs-item.is--expanded .cs-item__meta {
-  max-height: 24px;
-  opacity: 1;
-}
-.cs-item__stat-label {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
+/* Stat — always visible: big number + label */
+.cs-item__stat {
+  font-family: 'Anacrusis', 'Satoshi', sans-serif;
+  font-size: 20px;
   color: var(--gold);
-  margin-top: 16px;
-  padding: 6px 14px;
-  background: rgba(196,138,58,0.08);
-  border: 1px solid rgba(196,138,58,0.15);
-  border-radius: var(--radius-label);
-  max-height: 0;
+  line-height: 1.2;
+  margin-top: 6px;
+  white-space: nowrap;
   overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s var(--ease-out), opacity 0.4s ease;
-  width: fit-content;
+  text-overflow: ellipsis;
 }
-.cs-item.is--expanded .cs-item__stat-label {
-  max-height: 44px;
-  opacity: 1;
+.cs-item__stat span {
+  font-family: 'Satoshi', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  margin-left: 4px;
 }
+.cs-item.is--expanded .cs-item__stat {
+  font-size: 32px;
+  margin-top: 8px;
+}
+.cs-item.is--expanded .cs-item__stat span {
+  font-size: 13px;
+  display: block;
+  margin-left: 0;
+  margin-top: 2px;
+  color: var(--text-secondary);
+}
+/* Feature pills — always visible */
+.cs-item__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.cs-item__pill {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--text-tertiary);
+  padding: 3px 10px;
+  background: rgba(240,235,227,0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-label);
+  white-space: nowrap;
+}
+.cs-item.is--expanded .cs-item__pill {
+  font-size: 11px;
+  padding: 4px 12px;
+  color: var(--text-secondary);
+}
+/* Collapsed: hide pills that overflow */
+.cs-item:not(.is--expanded) .cs-item__pills {
+  max-height: 28px;
+  overflow: hidden;
+}
+/* Quote — expand only */
 .cs-item__quote {
-  font-size: 15px;
+  font-size: 14px;
   font-style: italic;
   line-height: 1.6;
   color: var(--text-secondary);
   margin-top: 16px;
-  padding-left: 16px;
+  padding-left: 14px;
   border-left: 2px solid rgba(196,138,58,0.3);
   max-height: 0;
   overflow: hidden;
@@ -3913,6 +3904,7 @@ a.nav-link:hover .nav-link__label::after {
   max-height: 160px;
   opacity: 1;
 }
+/* CTA — expand only */
 .cs-item__cta {
   display: none;
   align-items: center;
@@ -3920,7 +3912,7 @@ a.nav-link:hover .nav-link__label::after {
   font-size: 13px;
   font-weight: 600;
   color: var(--gold);
-  margin-top: 20px;
+  margin-top: 16px;
   transition: gap 0.3s var(--ease-out);
 }
 .cs-item.is--expanded .cs-item__cta {
