@@ -2801,82 +2801,66 @@ a.nav-link:hover .nav-link__label::after {
   margin: 0 auto;
 }
 /* Two-column cards */
-.comparison__cards {
+/* Column labels */
+.comparison__labels {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
   gap: 24px;
+  margin-bottom: 16px;
+  padding: 0 4px;
 }
-.comparison__card {
-  padding: clamp(28px, 3.5vw, 44px);
-  border-radius: var(--radius-sleeve);
-  border: 1px solid var(--border);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-.comparison__card--old {
-  background: rgba(194,122,107,0.04);
-  border-color: rgba(194,122,107,0.12);
-}
-.comparison__card--grouped {
-  background: rgba(196,138,58,0.05);
-  border-color: rgba(196,138,58,0.15);
-}
-.comparison__card--grouped:hover {
-  border-color: rgba(196,138,58,0.3);
-  box-shadow: 0 8px 40px rgba(0,0,0,0.2), 0 0 48px rgba(196,138,58,0.05);
-}
-.comparison__card-label {
+.comparison__label {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--border);
 }
-.comparison__card--old .comparison__card-label {
-  color: rgba(194,122,107,0.6);
-}
-.comparison__card--grouped .comparison__card-label {
-  color: var(--gold);
-}
-.comparison__list {
-  list-style: none;
+.comparison__label--from { color: var(--text-tertiary); }
+.comparison__label--to { color: var(--gold); text-align: right; }
+/* Rows */
+.comparison__rows {
   display: flex;
   flex-direction: column;
-  gap: 16px;
 }
-.comparison__list li {
-  font-size: clamp(14px, 1.2vw, 16px);
-  line-height: 1.55;
-  padding-left: 28px;
-  position: relative;
+.comparison__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: clamp(18px, 2vw, 24px) 4px;
+  border-bottom: 1px solid var(--border);
 }
-.comparison__list li::before {
-  position: absolute;
-  left: 0;
-  top: 1px;
-  font-size: 14px;
-  font-weight: 700;
-}
-/* Old way: ✕ markers */
-.comparison__card--old .comparison__list li {
+.comparison__row:last-child { border-bottom: none; }
+.comparison__from {
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.5;
   color: var(--text-tertiary);
 }
-.comparison__card--old .comparison__list li::before {
-  content: '\2715';
-  color: rgba(194,122,107,0.5);
-}
-/* Grouped way: ✓ markers */
-.comparison__card--grouped .comparison__list li {
-  color: var(--text-primary);
-}
-.comparison__card--grouped .comparison__list li::before {
-  content: '\2713';
+.comparison__arrow {
+  font-size: 18px;
   color: var(--gold);
+  flex-shrink: 0;
+  opacity: 0.6;
+}
+.comparison__to {
+  font-size: clamp(15px, 1.3vw, 17px);
+  line-height: 1.5;
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
 }
 @media (max-width: 768px) {
-  .comparison__cards { grid-template-columns: 1fr; }
   .comparison { padding: var(--section-pad) 20px; }
+  .comparison__row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    text-align: left;
+  }
+  .comparison__labels { display: none; }
+  .comparison__arrow { display: none; }
+  .comparison__to { text-align: left; }
+  .comparison__from::before { content: 'From: '; font-weight: 700; color: var(--text-muted); }
+  .comparison__to::before { content: 'To: '; font-weight: 700; color: var(--gold); }
 }
 
 /* ============================================
