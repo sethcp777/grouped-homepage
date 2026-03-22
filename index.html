@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
-<link rel="stylesheet" href="assets/css/home.css?v=20260321f">
+<link rel="stylesheet" href="assets/css/home.css?v=20260321g">
 </head>
 <body>
 
@@ -628,39 +628,76 @@
 </section>
 
 <!-- ============================================
-     CASE STUDIES — Horizontal Scroll Marquee
+     CASE STUDIES — Expandable Cards
      ============================================ -->
-<section class="cs-marquee section" id="case-studies">
-  <div class="cs-marquee__pin">
-    <div class="cs-marquee__header reveal">
-      <div class="label label-gold">Artists Using Grouped</div>
-      <h2 class="cs-marquee__heading font-display">Real artists. Real momentum.</h2>
+<section class="cs-section" id="case-studies">
+  <div class="cs-section__inner">
+    <div class="cs-section__header">
+      <div class="label label-gold">Proof</div>
+      <h2 class="cs-section__headline font-display">Real artists. Real momentum.</h2>
     </div>
 
-    <!-- Stat callouts -->
-    <div class="cs-marquee__stats reveal">
-      <a href="case-study-forrest-frank.html" class="cs-marquee__stat-link">
-        <div class="cs-marquee__stat-val font-display">+1.2M</div>
-        <div class="cs-marquee__stat-sub">Forrest Frank &mdash; Instagram followers in 60 days</div>
-      </a>
-      <a href="case-study-mike.html" class="cs-marquee__stat-link">
-        <div class="cs-marquee__stat-val font-display">24/7</div>
-        <div class="cs-marquee__stat-sub">MIKE. &mdash; automated paid subscriber growth</div>
-      </a>
-      <a href="case-study-nic-d.html" class="cs-marquee__stat-link">
-        <div class="cs-marquee__stat-val font-display">48hrs</div>
-        <div class="cs-marquee__stat-sub">Nic D &mdash; merch bundle sold out</div>
-      </a>
-    </div>
+    <div class="cs-grid">
 
-    <div class="cs-marquee__track" id="cs-marquee-track">
-      <!-- Cards loaded from case-studies.json via JS -->
-      <div class="cs-marquee__reveal">
-        <p class="cs-marquee__reveal-head font-display">and more.</p>
-        <p class="cs-marquee__reveal-sub">(we love a good encore)</p>
-        <a href="case-studies.html" class="cs-marquee__reveal-btn">Explore our case studies &rarr;</a>
+      <div class="cs-item is--expanded" data-cs="forrest-frank">
+        <div class="cs-item__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/FORREST-FRANK.png" alt="Forrest Frank" loading="lazy">
+          <div class="cs-item__stat-badge">+1.2M</div>
+        </div>
+        <div class="cs-item__body">
+          <div class="cs-item__name">Forrest Frank</div>
+          <div class="cs-item__meta">Christian Pop · The Tree House</div>
+          <div class="cs-item__stat-label">Instagram followers in 60 days</div>
+          <p class="cs-item__quote">"Never would have released if it wasn't for the vote. Now it's my most-streamed song."</p>
+          <a href="case-study-forrest-frank.html" class="cs-item__cta">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
       </div>
+
+      <div class="cs-item" data-cs="mike">
+        <div class="cs-item__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/MIKE_.png" alt="MIKE." loading="lazy">
+          <div class="cs-item__stat-badge">24/7</div>
+        </div>
+        <div class="cs-item__body">
+          <div class="cs-item__name">MIKE.</div>
+          <div class="cs-item__meta">Experimental Hip-Hop · OnlySteves</div>
+          <div class="cs-item__stat-label">Automated paid subscriber growth</div>
+          <p class="cs-item__quote">Built a premium subscriber base through smart swaps and consistent drops to his Group.</p>
+          <a href="case-study-mike.html" class="cs-item__cta">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="cs-item" data-cs="nic-d">
+        <div class="cs-item__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/NIC-D.png" alt="Nic D" loading="lazy">
+          <div class="cs-item__stat-badge">48hrs</div>
+        </div>
+        <div class="cs-item__body">
+          <div class="cs-item__name">Nic D</div>
+          <div class="cs-item__meta">Pop / Singer-Songwriter · FRDi Fam</div>
+          <div class="cs-item__stat-label">Merch bundle sold out</div>
+          <p class="cs-item__quote">Launched a merch bundle through his Group using premiere access. Sold out in two days.</p>
+          <a href="case-study-nic-d.html" class="cs-item__cta">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
+      <div class="cs-item" data-cs="somo">
+        <div class="cs-item__cover">
+          <img src="https://grouped.com/wp-content/uploads/2025/04/SOMO.png" alt="SoMo" loading="lazy">
+          <div class="cs-item__stat-badge">Sold out</div>
+        </div>
+        <div class="cs-item__body">
+          <div class="cs-item__name">SoMo</div>
+          <div class="cs-item__meta">R&amp;B / Pop · The Fanmily</div>
+          <div class="cs-item__stat-label">Private album release party</div>
+          <p class="cs-item__quote">Activated his Grouped community with exclusive access to his album release party and livestreamed it for members.</p>
+          <a href="case-study-somo.html" class="cs-item__cta">Read case study <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+
     </div>
+
+    <a href="case-studies.html" class="cs-section__see-all">See all case studies <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
   </div>
 </section>
 
@@ -849,7 +886,7 @@
 <!-- JS -->
 <script src="assets/js/shared.js"></script>
 <script src="assets/js/media-setup.js"></script>
-<script src="assets/js/home.js?v=20260321f"></script>
+<script src="assets/js/home.js?v=20260321g"></script>
 
 </body>
 </html>

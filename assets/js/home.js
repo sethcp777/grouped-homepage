@@ -1363,7 +1363,24 @@
 })();
 
 /* ============================================
-   CASE STUDIES — Horizontal Scroll Marquee
+   CASE STUDIES — Expandable Cards
+   ============================================ */
+(function initCaseStudyCards() {
+  var csItems = document.querySelectorAll('.cs-item');
+  if (!csItems.length) return;
+
+  csItems.forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      if (e.target.closest('.cs-item__cta')) return;
+      var wasExpanded = item.classList.contains('is--expanded');
+      csItems.forEach(function(c) { c.classList.remove('is--expanded'); });
+      if (!wasExpanded) item.classList.add('is--expanded');
+    });
+  });
+})();
+
+/* ============================================
+   CASE STUDIES — Horizontal Scroll Marquee (legacy)
    ============================================ */
 (function initCaseMarquee() {
   var track = document.getElementById('cs-marquee-track');
