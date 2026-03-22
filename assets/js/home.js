@@ -1215,28 +1215,24 @@
     });
   }
 
-  // Switchboard — stagger tracks in, click to toggle
+  // Split comparison — slide in from sides
   var compHeadline = document.querySelector('.comparison__headline');
-  var setlistTracks = document.querySelectorAll('.setlist__track');
+  var splitOld = document.querySelector('.split-compare__old');
+  var splitGrouped = document.querySelector('.split-compare__grouped');
   if (compHeadline) gsap.set(compHeadline, { opacity: 0, y: 20 });
-  if (setlistTracks.length) gsap.set(setlistTracks, { opacity: 0, y: 15 });
+  if (splitOld) gsap.set(splitOld, { opacity: 0, x: -30 });
+  if (splitGrouped) gsap.set(splitGrouped, { opacity: 0, x: 30 });
 
-  if (compHeadline && setlistTracks.length) {
+  if (compHeadline) {
     ScrollTrigger.create({
       trigger: '.comparison',
       start: 'top 75%',
       once: true,
       onEnter: function() {
         gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(setlistTracks, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'expo.out' });
+        if (splitOld) gsap.to(splitOld, { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: 'expo.out' });
+        if (splitGrouped) gsap.to(splitGrouped, { opacity: 1, x: 0, duration: 0.8, delay: 0.35, ease: 'expo.out' });
       }
-    });
-
-    // Click to toggle individual switch
-    setlistTracks.forEach(function(track) {
-      track.addEventListener('click', function() {
-        track.classList.toggle('is--active');
-      });
     });
   }
 })();
