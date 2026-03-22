@@ -1215,13 +1215,11 @@
     });
   }
 
-  // Comparison — slide cards in from sides
+  // Comparison — stagger rows in
   var compHeadline = document.querySelector('.comparison__headline');
-  var compOld = document.querySelector('.comparison__card--old');
-  var compGrouped = document.querySelector('.comparison__card--grouped');
+  var compRows = document.querySelectorAll('.comparison__row');
   if (compHeadline) gsap.set(compHeadline, { opacity: 0, y: 20 });
-  if (compOld) gsap.set(compOld, { opacity: 0, x: -40 });
-  if (compGrouped) gsap.set(compGrouped, { opacity: 0, x: 40 });
+  if (compRows.length) gsap.set(compRows, { opacity: 0, y: 20 });
 
   if (compHeadline) {
     ScrollTrigger.create({
@@ -1230,8 +1228,7 @@
       once: true,
       onEnter: function() {
         gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        if (compOld) gsap.to(compOld, { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: 'expo.out' });
-        if (compGrouped) gsap.to(compGrouped, { opacity: 1, x: 0, duration: 0.8, delay: 0.35, ease: 'expo.out' });
+        gsap.to(compRows, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'expo.out' });
       }
     });
   }
