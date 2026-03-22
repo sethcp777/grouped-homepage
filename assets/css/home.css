@@ -2189,11 +2189,17 @@ a.nav-link:hover .nav-link__label::after {
   position: relative;
   z-index: 1;
 }
-.pillar-card__text .benefit-label { margin-bottom: 16px; }
-.pillar-card__title {
-  font-family: 'Satoshi', sans-serif;
+.pillar-card__text .benefit-label {
+  font-size: 11px;
   font-weight: 700;
-  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.pillar-card__title {
+  font-family: 'Anacrusis', 'Satoshi', sans-serif;
+  font-size: clamp(24px, 3vw, 40px);
   line-height: 1.1;
   color: var(--white);
   font-weight: normal;
