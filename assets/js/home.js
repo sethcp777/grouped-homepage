@@ -1215,7 +1215,7 @@
     });
   }
 
-  // Setlist — stagger tracks in + auto-cycle active
+  // Switchboard — stagger tracks in, click to toggle
   var compHeadline = document.querySelector('.comparison__headline');
   var setlistTracks = document.querySelectorAll('.setlist__track');
   if (compHeadline) gsap.set(compHeadline, { opacity: 0, y: 20 });
@@ -1229,22 +1229,13 @@
       onEnter: function() {
         gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
         gsap.to(setlistTracks, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'expo.out' });
-
-        // Auto-cycle active track
-        var current = 0;
-        setInterval(function() {
-          setlistTracks.forEach(function(t) { t.classList.remove('is--active'); });
-          current = (current + 1) % setlistTracks.length;
-          setlistTracks[current].classList.add('is--active');
-        }, 3000);
       }
     });
 
-    // Click to select track
+    // Click to toggle individual switch
     setlistTracks.forEach(function(track) {
       track.addEventListener('click', function() {
-        setlistTracks.forEach(function(t) { t.classList.remove('is--active'); });
-        track.classList.add('is--active');
+        track.classList.toggle('is--active');
       });
     });
   }
