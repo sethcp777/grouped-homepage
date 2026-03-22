@@ -145,8 +145,8 @@ h3 { line-height: 1.15; letter-spacing: -0.015em; }
    EYEBROW BANNER
    ============================================ */
 .eyebrow-banner {
-  background: rgba(124,187,223,0.3);
-  border-bottom: 1px solid rgba(124,187,223,0.35);
+  background: rgba(124,187,223,0.9);
+  border-bottom: 1px solid rgba(124,187,223,0.95);
   padding: 10px 0;
   position: fixed;
   top: 0;
@@ -166,13 +166,13 @@ h3 { line-height: 1.15; letter-spacing: -0.015em; }
   font-size: 13px;
 }
 .eyebrow-banner__text {
-  color: var(--text-primary);
+  color: var(--text-inverse);
 }
 .eyebrow-banner__cta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--focus);
+  color: var(--text-inverse);
   font-weight: 700;
   transition: gap 0.3s var(--ease-out);
 }
@@ -191,11 +191,11 @@ h3 { line-height: 1.15; letter-spacing: -0.015em; }
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-tertiary);
+  color: rgba(17,22,32,0.5);
   transition: color 0.2s;
   cursor: pointer;
 }
-.eyebrow-banner__close:hover { color: var(--text-primary); }
+.eyebrow-banner__close:hover { color: var(--text-inverse); }
 .eyebrow-banner__close svg { width: 14px; height: 14px; }
 @media (max-width: 600px) {
   .eyebrow-banner__inner { font-size: 11px; gap: 8px; padding: 0 40px 0 16px; }
