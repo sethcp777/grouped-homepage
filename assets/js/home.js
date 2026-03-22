@@ -1215,21 +1215,37 @@
     });
   }
 
-  // Comparison — stagger rows in
+  // Setlist — stagger tracks in + auto-cycle active
   var compHeadline = document.querySelector('.comparison__headline');
-  var compRows = document.querySelectorAll('.comparison__row');
+  var setlistTracks = document.querySelectorAll('.setlist__track');
   if (compHeadline) gsap.set(compHeadline, { opacity: 0, y: 20 });
-  if (compRows.length) gsap.set(compRows, { opacity: 0, y: 20 });
+  if (setlistTracks.length) gsap.set(setlistTracks, { opacity: 0, y: 15 });
 
-  if (compHeadline) {
+  if (compHeadline && setlistTracks.length) {
     ScrollTrigger.create({
       trigger: '.comparison',
       start: 'top 75%',
       once: true,
       onEnter: function() {
         gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(compRows, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'expo.out' });
+        gsap.to(setlistTracks, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'expo.out' });
+
+        // Auto-cycle active track
+        var current = 0;
+        setInterval(function() {
+          setlistTracks.forEach(function(t) { t.classList.remove('is--active'); });
+          current = (current + 1) % setlistTracks.length;
+          setlistTracks[current].classList.add('is--active');
+        }, 3000);
       }
+    });
+
+    // Click to select track
+    setlistTracks.forEach(function(track) {
+      track.addEventListener('click', function() {
+        setlistTracks.forEach(function(t) { t.classList.remove('is--active'); });
+        track.classList.add('is--active');
+      });
     });
   }
 })();
