@@ -814,7 +814,23 @@
       }
     });
 
-    // === Phase 3: Active card detection (watermark glow) ===
+    // === Phase 3: Gold line fills on scroll ===
+    var fillLine = document.querySelector('.pillar-cards__inner');
+    if (fillLine) {
+      ScrollTrigger.create({
+        trigger: '#pillar-cards',
+        start: 'top 70%',
+        end: 'bottom 30%',
+        scrub: 0.6,
+        onUpdate: function(self) {
+          gsap.set(fillLine, {
+            '--line-progress': self.progress
+          });
+        }
+      });
+    }
+
+    // === Phase 4: Active card detection (watermark glow + dot pulse) ===
     ScrollTrigger.create({
       trigger: '#pillar-cards',
       start: 'top bottom',

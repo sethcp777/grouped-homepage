@@ -2121,7 +2121,7 @@ a.nav-link:hover .nav-link__label::after {
   gap: 0;
   position: relative;
 }
-/* Continuous center line */
+/* Continuous center line — base track */
 .pillar-cards__inner::before {
   content: '';
   position: absolute;
@@ -2129,10 +2129,28 @@ a.nav-link:hover .nav-link__label::after {
   top: 0;
   bottom: 0;
   width: 1px;
-  background: linear-gradient(to bottom, transparent, rgba(196,138,58,0.18) 8%, rgba(196,138,58,0.18) 92%, transparent);
+  background: linear-gradient(to bottom, transparent, rgba(196,138,58,0.08) 8%, rgba(196,138,58,0.08) 92%, transparent);
   transform: translateX(-50%);
   pointer-events: none;
   z-index: 0;
+}
+/* Gold fill line — draws on scroll via --line-progress */
+.pillar-cards__inner {
+  --line-progress: 0;
+}
+.pillar-cards__inner::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--gold), rgba(196,138,58,0.4));
+  transform: translateX(-50%) scaleY(var(--line-progress));
+  transform-origin: top;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 2px;
 }
 /* Hide old connectors */
 .pillar-cards__connector { display: none; }
@@ -2173,6 +2191,15 @@ a.nav-link:hover .nav-link__label::after {
 .pillar-card.is--timeline-active::before {
   transform: translate(-50%, -50%) scale(1);
   transition: transform 0.5s var(--ease-spring);
+}
+/* Active dot pulses */
+.pillar-card.is--active::before {
+  box-shadow: 0 0 20px rgba(196,138,58,0.5);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(196,138,58,0.35); }
+  50% { box-shadow: 0 0 32px rgba(196,138,58,0.6), 0 0 8px rgba(196,138,58,0.8); }
 }
 
 /* Active card — watermark glows */
