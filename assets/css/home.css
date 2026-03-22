@@ -3802,6 +3802,48 @@ a.nav-link:hover .nav-link__label::after {
 .cs-item:not(.is--expanded):hover .cs-item__cover img {
   filter: grayscale(60%) sepia(25%) hue-rotate(180deg) saturate(160%) brightness(0.9);
 }
+/* Gradient overlay for stat readability */
+.cs-item__cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* Stat overlay on image */
+.cs-item__cover-stat {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  right: 14px;
+  z-index: 2;
+  line-height: 1.1;
+}
+.cs-item__cover-stat-num {
+  display: block;
+  font-family: 'Anacrusis', 'Satoshi', sans-serif;
+  font-size: 28px;
+  color: var(--white);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+.cs-item__cover-stat-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  margin-top: 2px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.cs-item.is--expanded .cs-item__cover-stat-num {
+  font-size: 42px;
+}
+.cs-item.is--expanded .cs-item__cover-stat-label {
+  font-size: 12px;
+}
 /* Body content */
 .cs-item__body {
   padding: 14px;
