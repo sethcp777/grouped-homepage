@@ -60,7 +60,7 @@
     var label = fieldEl ? fieldEl.querySelector('.demo-field-label') : null;
     var cursor = fieldEl ? fieldEl.querySelector('.demo-field-cursor') : null;
 
-    if (label) gsap.to(label, { opacity: 0, duration: 0.15 });
+    if (label) gsap.to(label, { opacity: 0, duration: 0.3 });
     if (cursor) gsap.set(cursor, { opacity: 1 });
 
     valueEl.textContent = '';
@@ -777,14 +777,14 @@
 
       // Card fades up
       cardTimeline.to(card, {
-        opacity: 1, y: 0, duration: 0.7, ease: 'power2.out'
+        opacity: 1, y: 0, duration: 0.8, ease: 'expo.out'
       }, '-=0.2');
 
       // Watermark fades in
       if (watermark) {
         cardTimeline.to(watermark, {
-          opacity: 1, duration: 0.5, ease: 'power2.out'
-        }, '-=0.5');
+          opacity: 1, duration: 0.6, ease: 'power2.out'
+        }, '-=0.6');
       }
 
       // Small pause between cards for rhythm
@@ -799,15 +799,15 @@
         ScrollTrigger.create({
           trigger: card,
           start: 'top 80%',
-          end: 'top 35%',
-          scrub: 0.5,
+          end: 'top 30%',
+          scrub: 0.8,
           onUpdate: function(self) {
             var prev = pillarCards[i - 1];
             var p = self.progress;
             gsap.set(prev, {
-              opacity: 1 - (p * 0.45),
-              scale: 1 - (p * 0.03),
-              filter: 'brightness(' + (1 - p * 0.15) + ')'
+              opacity: 1 - (p * 0.4),
+              scale: 1 - (p * 0.02),
+              filter: 'brightness(' + (1 - p * 0.12) + ')'
             });
           }
         });
@@ -922,7 +922,7 @@
       var sendBtn = mockup.querySelector('.mockup-inbox-send');
       var msgs = mockup.querySelectorAll('.mockup-inbox-msg');
       if (idx === 1 && bell) {
-        gsap.fromTo(bell, { rotation: 0 }, { rotation: 12, duration: 0.12, yoyo: true, repeat: 5, ease: 'power1.inOut' });
+        gsap.fromTo(bell, { rotation: 0 }, { rotation: 10, duration: 0.2, yoyo: true, repeat: 3, ease: 'power2.inOut' });
         // Pulse notification dots
         msgs.forEach(function(m) {
           var dot = m.querySelector('.mockup-inbox-dot');
@@ -982,7 +982,7 @@
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.15,
+        stagger: 0.1,
         ease: 'power2.out'
       });
     }
@@ -1010,8 +1010,8 @@
     once: true,
     onEnter: function() {
       if (ucHeadline) gsap.to(ucHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      gsap.to(ucCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, delay: 0.15, ease: 'power2.out' });
-      if (ucCta) gsap.to(ucCta, { opacity: 1, y: 0, duration: 0.5, delay: 0.6, ease: 'power2.out' });
+      gsap.to(ucCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.15, ease: 'power2.out' });
+      if (ucCta) gsap.to(ucCta, { opacity: 1, y: 0, duration: 0.6, delay: 0.6, ease: 'power2.out' });
     }
   });
 })();
@@ -1055,7 +1055,7 @@
         opacity: 1,
         y: 0,
         duration: 0.6,
-        stagger: 0.15,
+        stagger: 0.1,
         delay: 0.3,
         ease: 'power2.out'
       });
@@ -1180,11 +1180,11 @@
         opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out'
       });
       gsap.to(steps, {
-        opacity: 1, y: 0, duration: 0.6, stagger: 0.2, delay: 0.25, ease: 'power2.out'
+        opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.25, ease: 'power2.out'
       });
       if (cta) {
         gsap.to(cta, {
-          opacity: 1, y: 0, duration: 0.5, delay: 0.9, ease: 'power2.out'
+          opacity: 1, y: 0, duration: 0.6, delay: 0.9, ease: 'power2.out'
         });
       }
     }
@@ -1210,7 +1210,7 @@
       once: true,
       onEnter: function() {
         gsap.to(splitHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(panels, { opacity: 1, y: 0, duration: 0.6, stagger: 0.2, delay: 0.2, ease: 'power2.out' });
+        gsap.to(panels, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'power2.out' });
       }
     });
   }
@@ -1230,8 +1230,8 @@
       once: true,
       onEnter: function() {
         gsap.to(compHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        if (compOld) gsap.to(compOld, { opacity: 1, x: 0, duration: 0.7, delay: 0.2, ease: 'power2.out' });
-        if (compGrouped) gsap.to(compGrouped, { opacity: 1, x: 0, duration: 0.7, delay: 0.35, ease: 'power2.out' });
+        if (compOld) gsap.to(compOld, { opacity: 1, x: 0, duration: 0.8, delay: 0.2, ease: 'expo.out' });
+        if (compGrouped) gsap.to(compGrouped, { opacity: 1, x: 0, duration: 0.8, delay: 0.35, ease: 'expo.out' });
       }
     });
   }
@@ -1256,7 +1256,7 @@
       once: true,
       onEnter: function() {
         gsap.to(diffHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
-        gsap.to(diffCards, { opacity: 1, y: 0, rotation: 0, duration: 0.7, stagger: 0.15, delay: 0.2, ease: 'power2.out' });
+        gsap.to(diffCards, { opacity: 1, y: 0, rotation: 0, duration: 0.8, stagger: 0.12, delay: 0.2, ease: 'expo.out' });
       }
     });
   }
@@ -1279,7 +1279,7 @@
       once: true,
       onEnter: function() {
         gsap.to(csHeaderEls, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: 'power2.out' });
-        gsap.to(csCards, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, delay: 0.2, ease: 'power2.out' });
+        gsap.to(csCards, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.2, ease: 'power2.out' });
       }
     });
   }
@@ -1296,7 +1296,7 @@
       once: true,
       onEnter: function() {
         gsap.to(featHeadline, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-        gsap.to(featTiles, { opacity: 1, y: 0, duration: 0.5, stagger: 0.08, delay: 0.15, ease: 'power2.out' });
+        gsap.to(featTiles, { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, delay: 0.15, ease: 'power2.out' });
       }
     });
   }
@@ -1310,7 +1310,7 @@
       start: 'top 75%',
       once: true,
       onEnter: function() {
-        gsap.to(ctaBlocks, { opacity: 1, y: 0, duration: 0.7, stagger: 0.15, ease: 'power2.out' });
+        gsap.to(ctaBlocks, { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out' });
       }
     });
   }
