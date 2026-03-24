@@ -691,8 +691,8 @@
   var line = document.querySelector('.pillars__line');
   var steps = document.querySelectorAll('.pillars__step');
   var stepsContainer = document.querySelector('.pillars__steps');
-  if (!masks.length) return;
 
+  if (masks.length) {
   // Start hidden — steps begin off-screen to the right
   gsap.set(steps, { xPercent: 120, opacity: 0 });
   gsap.set(stepsContainer, { opacity: 1 });
@@ -740,6 +740,7 @@
       }
     }
   });
+  } // end if (masks.length)
 
   // --- Step cards click → scroll to corresponding detail card ---
   var stepCards = document.querySelectorAll('.pillars__step');
