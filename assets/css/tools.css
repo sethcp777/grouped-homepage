@@ -1253,12 +1253,34 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--text-primary);
   margin-bottom: 20px;
 }
+.tools-stage__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 24px auto 0;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.tools-stage__bullets li {
+  font-size: clamp(0.95rem, 1.3vw, 1.1rem);
+  line-height: 1.5;
+  color: var(--text-primary);
+  padding-left: 20px;
+  position: relative;
+}
+.tools-stage__bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
 .tools-stage__sub {
   font-size: clamp(1rem, 1.4vw, 1.15rem);
   color: var(--text-secondary);
   line-height: 1.7;
   max-width: 560px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 
 /* --- Feature Cards --- */
@@ -1892,6 +1914,39 @@ a.nav-link:hover .nav-link__label::after {
 }
 
 /* --- Mockup 6: Fan Profiling (progressive profile) --- */
+.mockup-momentum {
+  aspect-ratio: 5 / 4;
+  margin-bottom: 16px;
+  padding: 24px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+.mockup-momentum__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.mockup-momentum__chart {
+  flex: 1;
+  width: 100%;
+}
+.mockup-momentum__releases {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+}
+.mockup-momentum__releases span {
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
 .mockup-profile {
   aspect-ratio: 5 / 4; margin-bottom: 16px;
   padding: 16px;
@@ -2226,7 +2281,7 @@ a.nav-link:hover .nav-link__label::after {
   font-size: 0.9rem; color: var(--text-tertiary);
   line-height: 1.6; margin-bottom: 8px;
   text-decoration: line-through;
-  text-decoration-color: rgba(240,235,227,0.15);
+  text-decoration-color: rgba(196,138,58,0.60);
 }
 .tools-versus__block-new {
   font-size: 0.9rem; color: var(--text-secondary);
@@ -2240,10 +2295,11 @@ a.nav-link:hover .nav-link__label::after {
   border-bottom: 1px solid var(--border);
 }
 .tools-stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   text-align: center;
+  gap: 40px;
 }
 .tools-stat__number {
   font-family: 'GroupedFont', serif;
