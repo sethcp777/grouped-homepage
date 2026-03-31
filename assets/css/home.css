@@ -2484,6 +2484,7 @@ a.nav-link:hover .nav-link__label::after {
 }
 /* Reverse: visual on left, text on right */
 .pillar-card--reverse .pillar-card__visual { order: -1; }
+.pillar-card--reverse .pillar-card__watermark { left: auto; right: 0; }
 
 /* ---- Pillar Timeline Responsive ---- */
 @media (max-width: 900px) {
