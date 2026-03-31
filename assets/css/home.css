@@ -2442,6 +2442,31 @@ a.nav-link:hover .nav-link__label::after {
   color: var(--text-secondary);
   margin-bottom: 28px;
 }
+.pillar-card__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pillar-card__bullets li {
+  font-size: clamp(14px, 1.5vw, 16px);
+  line-height: 1.5;
+  color: var(--text-primary);
+  padding-left: 20px;
+  position: relative;
+}
+.pillar-card__bullets li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+}
+.pillar-card__bullets li strong {
+  color: var(--white);
+  font-weight: 700;
+}
 .pillar-card__text .benefit-points {
   display: flex;
   flex-direction: column;
