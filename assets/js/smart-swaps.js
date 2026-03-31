@@ -188,7 +188,7 @@
         { feature: 'Fan email + phone capture', grouped: '\u2713 Built-in, one step', status: 'yes', text: '\u2713 Available' },
         { feature: 'Pre-save integration', grouped: '\u2713 Native, one-step', status: 'yes', text: '\u2713 Available' },
         { feature: 'Owned group community', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
-        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Starts fresh each drop' },
+        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'yes', text: '\u2713 Available' },
         { feature: 'Push notifications', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
         { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'no', text: '\u2717 Paid only' }
       ]
@@ -197,23 +197,23 @@
       label: 'EVEN',
       subtitle: 'Direct-to-fan sales platform',
       rows: [
-        { feature: 'Fan capture without requiring payment', grouped: '\u2713 Free opt-in for fans', status: 'no', text: '\u2717 Fans must purchase to engage' },
+        { feature: 'Fan capture without requiring payment', grouped: '\u2713 Free opt-in for fans', status: 'no', text: '\u2717 Purchase required for core access' },
         { feature: 'Works for emerging artists (no existing fanbase required)', grouped: '\u2713 Built for growth', status: 'partial', text: '~ Best with existing fanbase' },
-        { feature: 'Owned group community layer', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
-        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Per-release only' },
+        { feature: 'Owned group community layer', grouped: '\u2713 Built-in', status: 'partial', text: '~ Limited chat feature' },
+        { feature: 'Release compounding (fans carry forward)', grouped: '\u2713 Automatic', status: 'partial', text: '~ Each release requires new purchase' },
         { feature: 'Pre-save integration', grouped: '\u2713 Native one-step', status: 'no', text: '\u2717 Not included' },
-        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'no', text: '\u2717 Revenue share on all sales' }
+        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'partial', text: '~ 20% rev share on all sales' }
       ]
     },
     linktree: {
       label: 'Linktree / Beacons',
       subtitle: 'Link-in-bio tools',
       rows: [
-        { feature: 'Fan email capture', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No' },
-        { feature: 'Phone number', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No' },
-        { feature: 'Pre-save integration', grouped: '\u2713 Native one-step', status: 'no', text: '\u2717 Redirect only' },
-        { feature: 'Fan relationship', grouped: '\u2713 Direct & owned', status: 'no', text: '\u2717 None' },
-        { feature: 'Data ownership', grouped: '\u2713 You own everything', status: 'no', text: '\u2717 Platform owns' },
+        { feature: 'Fan email capture', grouped: '\u2713 Built-in', status: 'partial', text: '~ Requires integrations or paid plan' },
+        { feature: 'Phone number capture', grouped: '\u2713 Built-in', status: 'partial', text: '~ Paid plans only' },
+        { feature: 'Pre-save integration', grouped: '\u2713 Native one-step', status: 'partial', text: '~ Redirect only' },
+        { feature: 'Fan relationship', grouped: '\u2713 Direct & owned', status: 'partial', text: '~ No music-specific CRM' },
+        { feature: 'Data ownership', grouped: '\u2713 You own everything', status: 'partial', text: '~ Platform claims ownership in ToS' },
         { feature: 'Release compounding', grouped: '\u2713 Fans carry forward', status: 'no', text: '\u2717 Starts from zero' }
       ]
     },
@@ -223,7 +223,7 @@
       rows: [
         { feature: 'Fan capture at point of discovery', grouped: '\u2713 Built-in via Swaps', status: 'no', text: '\u2717 Requires fans to seek you out' },
         { feature: 'Email + phone in one step', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 No contact capture' },
-        { feature: 'Algorithm-free reach', grouped: '\u2713 Yes', status: 'yes', text: '\u2713 Yes' },
+        { feature: 'Algorithm-free reach', grouped: '\u2713 Yes', status: 'partial', text: '~ Notifications throttled at scale' },
         { feature: 'Organized, low-noise fan space', grouped: '\u2713 Clean by design', status: 'no', text: '\u2717 Chaotic by default' },
         { feature: 'Works without an existing fanbase', grouped: '\u2713 Designed for growth', status: 'no', text: '\u2717 Requires fans who already know you' },
         { feature: 'Release compounding', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Manual, starts over each drop' }
@@ -232,13 +232,14 @@
     mailchimp: {
       label: 'Mailchimp',
       subtitle: 'Email marketing platform',
+      note: 'Pre-saves coming soon',
       rows: [
-        { feature: 'Phone + pre-save capture', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Email only' },
+        { feature: 'Phone + pre-save capture', grouped: '\u2713 Built-in', status: 'partial', text: '~ SMS is paid add-on; no pre-save' },
         { feature: 'Cost model', grouped: '\u2713 Per-send credits', status: 'no', text: '\u2717 Per-subscriber (costs grow as you do)' },
         { feature: 'Built for music releases', grouped: '\u2713 Purpose-built', status: 'no', text: '\u2717 Generic' },
         { feature: 'Fan compounding across releases', grouped: '\u2713 Automatic', status: 'no', text: '\u2717 Manual list management' },
         { feature: 'Push notifications', grouped: '\u2713 Built-in', status: 'no', text: '\u2717 Not included' },
-        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'partial', text: '~ Free up to 500 contacts only' }
+        { feature: 'Free to start', grouped: '\u2713 Free tier available', status: 'partial', text: '~ Free up to 250 contacts only' }
       ]
     }
   };
@@ -278,6 +279,17 @@
         groupedStatusEl.textContent = row.grouped;
       }
     });
+
+    // Show/hide note
+    var noteEl = document.getElementById('grouped-note');
+    if (noteEl) {
+      if (data.note) {
+        noteEl.textContent = data.note;
+        noteEl.style.display = 'block';
+      } else {
+        noteEl.style.display = 'none';
+      }
+    }
   }
 
   if (compareTabs.length && competitorCol) {
