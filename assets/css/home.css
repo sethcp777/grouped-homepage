@@ -3452,6 +3452,11 @@ a.nav-link:hover .nav-link__label::after {
 }
 .pillars-transition__link:hover { opacity: 0.8; }
 .pillars-transition__link svg { width: 16px; height: 16px; }
+@media (max-width: 768px) {
+  .pillar-card__visual { display: none; }
+  .pillar-card + .pillar-card { border-top: 1px solid rgba(240,235,227,0.08); }
+  .pillars-transition { padding: 24px 0 32px; border-top: 1px solid rgba(240,235,227,0.08); }
+}
 .benefit-card .btn-primary {
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
