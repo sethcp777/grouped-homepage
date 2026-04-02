@@ -3422,6 +3422,19 @@ a.nav-link:hover .nav-link__label::after {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
 }
+.pillars-transition__link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  transition: opacity 0.2s ease;
+}
+.pillars-transition__link:hover { opacity: 0.8; }
+.pillars-transition__link svg { width: 16px; height: 16px; }
 .benefit-card .btn-primary {
   transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
 }
