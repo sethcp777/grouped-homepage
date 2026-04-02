@@ -1214,6 +1214,10 @@ a.nav-link:hover .nav-link__label::after {
   border-color: var(--border-hover);
   box-shadow: var(--shadow-glow-soft);
 }
+.groups-pain__card-icon {
+  font-size: 2rem;
+  margin-bottom: 16px;
+}
 .groups-pain__card-stat {
   font-family: 'GroupedFont', serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);

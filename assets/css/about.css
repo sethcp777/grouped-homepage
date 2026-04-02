@@ -1643,9 +1643,10 @@ a.nav-link:hover .nav-link__label::after {
   border-bottom: 1px solid var(--border);
 }
 .about-stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 40px;
   text-align: center;
 }
 .about-stat__number {
