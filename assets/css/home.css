@@ -2013,6 +2013,23 @@ a.nav-link:hover .nav-link__label::after {
   position: relative;
   z-index: 1;
 }
+.hand-underline {
+  position: relative;
+  display: inline;
+}
+.hand-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'%3E%3Cpath d='M1 5.5c20-3 40-3 60-1s50 4 70 1 45-4 68-2' stroke='%23C48A3A' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  opacity: 0.7;
+}
+
 .what-we-are__body {
   font-size: clamp(16px, 1.5vw, 20px);
   line-height: 1.65;
@@ -3398,7 +3415,7 @@ a.nav-link:hover .nav-link__label::after {
 /* Pillars → Detail Cards Transition */
 .pillars-transition {
   text-align: center;
-  padding: 48px 0 16px;
+  padding: 48px 0 48px;
 }
 .pillars-transition__inner {
   display: flex;
